@@ -10,8 +10,6 @@ package presentacion;
  */
 public class formMenuPrincipal extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(formMenuPrincipal.class.getName());
-
     /**
      * Creates new form formMenuPrincipal
      */
