@@ -24,19 +24,12 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnVentaAlimento" min="-2" pref="240" max="-2" attributes="0"/>
-                          <Component id="btnGenerarReporte" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-                          <Component id="btnGestionarPrecios" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="114" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnVentaBoleto" min="-2" pref="240" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="btnVentaAlimento" min="-2" pref="240" max="-2" attributes="0"/>
+                  <Component id="btnGenerarReporte" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                  <Component id="btnGestionarPrecios" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                  <Component id="btnVentaBoleto" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="btnGestionarPromos" min="-2" pref="240" max="-2" attributes="0"/>
@@ -126,10 +119,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblVenderAlimento" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblEnviarPromociones" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="lblEnviarPromociones" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblVenderAlimento" min="-2" max="-2" attributes="0"/>
                   <Component id="lblEscanearBoleto" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
@@ -145,9 +136,9 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblGestionarPeliculas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblGestionarMembresias" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGestionarPeliculas" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>

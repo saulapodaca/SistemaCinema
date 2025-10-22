@@ -4,17 +4,30 @@
  */
 package presentacion;
 
+import dto.pelicula;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
 /**
  *
  * @author saula
  */
 public class panelSeleccionPeliculas extends javax.swing.JPanel {
 
+    
     /**
      * Creates new form panelSeleccionPeliculas
      */
     public panelSeleccionPeliculas() {
         initComponents();
+        cargarPeliculas();
+
     }
 
     /**
@@ -26,19 +39,78 @@ public class panelSeleccionPeliculas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buscador2 = new presentacion.utilerias.buscador();
+        panelPeliculas = new javax.swing.JPanel();
+
+        setBackground(new java.awt.Color(8, 17, 40));
+
+        panelPeliculas.setLayout(new java.awt.GridLayout(0, 3, 10, 10));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(buscador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(panelPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(buscador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(667, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cargarPeliculas() {
+        List<pelicula> peliculas = obtenerPeliculas();
+        panelPeliculas.setLayout(new java.awt.GridLayout(0, 3, 15, 15));
+        //por cada pelicula carga una nueva card que se agrega al panel de peliculas
+        for (pelicula p : peliculas) {
+            JPanel card = new JPanel(new BorderLayout());
+
+            //obtiene la imagen y hace un resize
+            ImageIcon img = new ImageIcon(p.getRutaImagen());
+            JLabel lblImg = new JLabel(new ImageIcon(
+                    img.getImage().getScaledInstance(150, 200, java.awt.Image.SCALE_SMOOTH)
+            ));
+
+            //obtiene el texto y lo pone 
+            JLabel lblTitulo = new JLabel(p.getTitulo(), SwingConstants.CENTER);
+            lblTitulo.setForeground(Color.WHITE);
+
+            card.add(lblImg, BorderLayout.CENTER);
+            card.add(lblTitulo, BorderLayout.SOUTH);
+
+            panelPeliculas.add(card);
+        }
+
+        // 4. Refrescar el panel
+        panelPeliculas.revalidate();
+        panelPeliculas.repaint();
+
+    }
+    
+    //hardcode
+    private List<pelicula> obtenerPeliculas() {
+        return Arrays.asList(
+                new pelicula("Spiderman", "src/imagenes/spiderman.jpg"),
+                new pelicula("Batman", "src/imagenes/spiderman.jpg"),
+                new pelicula("Ironman", "src/imagenes/spiderman.jpg")
+        );
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private presentacion.utilerias.buscador buscador2;
+    private javax.swing.JPanel panelPeliculas;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,7 +6,9 @@ presentacion\panelOpcionesMenuGerente$8.class
 presentacion\panelOpcionesMenuGerente$10.class
 presentacion\panelOpcionesMenuGerente$5.class
 presentacion\panelInformacionEmpleado.class
+presentacion\utilerias\buscador.class
 presentacion\panelOpcionesMenuGerente$2.class
+presentacion\utilerias\buscador$1.class
 presentacion\panelOpcionesMenuGerente$7.class
 presentacion\panelOpcionesMenuGerente$12.class
 presentacion\panelOpcionesMenuGerente$9.class
@@ -14,4 +16,5 @@ presentacion\formMenuPrincipal.class
 presentacion\panelInformacionEmpleado$1.class
 presentacion\panelOpcionesMenuGerente$4.class
 presentacion\panelOpcionesMenuGerente$11.class
+presentacion\panelSeleccionPeliculas.class
 presentacion\panelOpcionesMenuGerente$6.class
