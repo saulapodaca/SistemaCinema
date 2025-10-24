@@ -8,12 +8,12 @@ package presentacion;
  *
  * @author saula
  */
-public class formMenuPrincipal extends javax.swing.JFrame {
+public class FormPrincipal extends javax.swing.JFrame {
     
     /**
      * Creates new form formMenuPrincipal
      */
-    public formMenuPrincipal() {
+    public FormPrincipal() {
         initComponents();
     }
 
@@ -26,18 +26,19 @@ public class formMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelInformacionEmpleado1 = new presentacion.panelInformacionEmpleado();
-        panelOpcionesMenuGerente1 = new presentacion.panelOpcionesMenuGerente();
+        panelInformacionEmpleado1 = new presentacion.PanelInformacionEmpleado();
+        panelOpcionesMenuGerente1 = new presentacion.PanelOpcionesMenuGerente();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(8, 17, 40));
         getContentPane().setLayout(new java.awt.GridBagLayout());
-
-        panelInformacionEmpleado1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(18, 31, 55), 1, true));
         getContentPane().add(panelInformacionEmpleado1, new java.awt.GridBagConstraints());
         getContentPane().add(panelOpcionesMenuGerente1, new java.awt.GridBagConstraints());
+
+        jMenuBar1.setBackground(new java.awt.Color(8, 17, 40));
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -55,7 +56,7 @@ public class formMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private presentacion.panelInformacionEmpleado panelInformacionEmpleado1;
-    private presentacion.panelOpcionesMenuGerente panelOpcionesMenuGerente1;
+    private presentacion.PanelInformacionEmpleado panelInformacionEmpleado1;
+    private presentacion.PanelOpcionesMenuGerente panelOpcionesMenuGerente1;
     // End of variables declaration//GEN-END:variables
 }

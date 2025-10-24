@@ -8,12 +8,12 @@ package presentacion;
  *
  * @author saula
  */
-public class panelInformacionEmpleado extends javax.swing.JPanel {
+public class PanelInformacionEmpleado extends javax.swing.JPanel {
 
     /**
      * Creates new form panelInformacionEmpleadoBien
      */
-    public panelInformacionEmpleado() {
+    public PanelInformacionEmpleado() {
         initComponents();
     }
 
@@ -38,7 +38,6 @@ public class panelInformacionEmpleado extends javax.swing.JPanel {
         lblNombreSucursal = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(8, 17, 40));
-        setBorder(javax.swing.BorderFactory.createLineBorder(null));
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoCine3.png"))); // NOI18N
 
@@ -135,7 +134,7 @@ public class panelInformacionEmpleado extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNombreSucursal)
                     .addComponent(lblSucursal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(lblFecha)
@@ -148,7 +147,7 @@ public class panelInformacionEmpleado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-        // TODO add your handling code here:
+        ControlPantallas.getInstance().abrirMenuPrincipal();
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
 
     private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
