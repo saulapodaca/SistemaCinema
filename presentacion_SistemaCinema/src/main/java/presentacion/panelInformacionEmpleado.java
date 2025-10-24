@@ -11,7 +11,7 @@ package presentacion;
 public class PanelInformacionEmpleado extends javax.swing.JPanel {
 
     /**
-     * Creates new form panelInformacionEmpleadoBien-
+     * Creates new form panelInformacionEmpleadoBien
      */
     public PanelInformacionEmpleado() {
         initComponents();
