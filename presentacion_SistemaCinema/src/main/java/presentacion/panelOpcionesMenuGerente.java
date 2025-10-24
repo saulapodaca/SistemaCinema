@@ -11,7 +11,7 @@ package presentacion;
 public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
 
     /**
-     * Creates new form panelOpcionesMenu
+     * Creates new form panelOpcionesMenu-
      */
     public PanelOpcionesMenuGerente() {
         initComponents();

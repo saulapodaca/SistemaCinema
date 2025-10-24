@@ -21,7 +21,7 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
     private List<JLabel> etiquetasTitulo;
 
     /**
-     * Creates new form panelSeleccionPeliculas
+     * Creates new form panelSeleccionPeliculas-
      */
     public PanelSeleccionPeliculas() {
         initComponents();
