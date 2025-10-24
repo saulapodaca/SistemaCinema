@@ -1,33 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
 
 import dto.pelicula;
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Image;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
  *
  * @author saula
  */
-public class panelSeleccionPeliculas extends javax.swing.JPanel {
+public class PanelSeleccionPeliculas extends javax.swing.JPanel {
 
-    
+    private List<JLabel> etiquetasImagenes;
+    private List<JLabel> etiquetasTitulo;
+
     /**
      * Creates new form panelSeleccionPeliculas
      */
-    public panelSeleccionPeliculas() {
+    public PanelSeleccionPeliculas() {
         initComponents();
+        inicializarReferencias();
         cargarPeliculas();
-
     }
 
     /**
@@ -41,10 +40,228 @@ public class panelSeleccionPeliculas extends javax.swing.JPanel {
 
         buscador2 = new presentacion.utilerias.buscador();
         panelPeliculas = new javax.swing.JPanel();
+        pnlPeli1 = new javax.swing.JPanel();
+        pnlInfoPeli1 = new javax.swing.JPanel();
+        lblTituloPeli1 = new javax.swing.JLabel();
+        lblImagenPeli1 = new javax.swing.JLabel();
+        pnlPeli2 = new javax.swing.JPanel();
+        pnlInfoPeli2 = new javax.swing.JPanel();
+        lblTituloPeli2 = new javax.swing.JLabel();
+        lblImagenPeli2 = new javax.swing.JLabel();
+        pnlPeli3 = new javax.swing.JPanel();
+        pnlInfoPeli3 = new javax.swing.JPanel();
+        lblTituloPeli3 = new javax.swing.JLabel();
+        lblImagenPeli3 = new javax.swing.JLabel();
+        pnlPeli4 = new javax.swing.JPanel();
+        pnlInfoPeli4 = new javax.swing.JPanel();
+        lblTituloPeli4 = new javax.swing.JLabel();
+        lblImagenPeli4 = new javax.swing.JLabel();
+        pnlPeli5 = new javax.swing.JPanel();
+        pnlInfoPeli5 = new javax.swing.JPanel();
+        lblTituloPeli5 = new javax.swing.JLabel();
+        lblImagenPeli5 = new javax.swing.JLabel();
+        pnlPeli6 = new javax.swing.JPanel();
+        pnlInfoPeli6 = new javax.swing.JPanel();
+        lblTituloPeli6 = new javax.swing.JLabel();
+        lblImagenPeli6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(8, 17, 40));
 
+        panelPeliculas.setBackground(new java.awt.Color(8, 17, 40));
         panelPeliculas.setLayout(new java.awt.GridLayout(0, 3, 10, 10));
+
+        pnlPeli1.setBackground(new java.awt.Color(8, 17, 40));
+        pnlPeli1.setLayout(new java.awt.GridBagLayout());
+
+        pnlInfoPeli1.setBackground(new java.awt.Color(8, 17, 40));
+        pnlInfoPeli1.setPreferredSize(new java.awt.Dimension(165, 250));
+        pnlInfoPeli1.setLayout(new java.awt.BorderLayout());
+
+        lblTituloPeli1.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        pnlInfoPeli1.add(lblTituloPeli1, java.awt.BorderLayout.PAGE_END);
+
+        lblImagenPeli1.setText("jLabel1");
+        pnlInfoPeli1.add(lblImagenPeli1, java.awt.BorderLayout.CENTER);
+
+        pnlPeli1.add(pnlInfoPeli1, new java.awt.GridBagConstraints());
+
+        panelPeliculas.add(pnlPeli1);
+
+        pnlPeli2.setBackground(new java.awt.Color(8, 17, 40));
+
+        pnlInfoPeli2.setBackground(new java.awt.Color(8, 17, 40));
+        pnlInfoPeli2.setPreferredSize(new java.awt.Dimension(165, 250));
+        pnlInfoPeli2.setLayout(new java.awt.BorderLayout());
+
+        lblTituloPeli2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblTituloPeli2.setText("g");
+        pnlInfoPeli2.add(lblTituloPeli2, java.awt.BorderLayout.PAGE_END);
+
+        lblImagenPeli2.setText("jLabel1");
+        pnlInfoPeli2.add(lblImagenPeli2, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout pnlPeli2Layout = new javax.swing.GroupLayout(pnlPeli2);
+        pnlPeli2.setLayout(pnlPeli2Layout);
+        pnlPeli2Layout.setHorizontalGroup(
+            pnlPeli2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 275, Short.MAX_VALUE)
+            .addGroup(pnlPeli2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPeli2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlInfoPeli2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        pnlPeli2Layout.setVerticalGroup(
+            pnlPeli2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 290, Short.MAX_VALUE)
+            .addGroup(pnlPeli2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPeli2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlInfoPeli2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        panelPeliculas.add(pnlPeli2);
+
+        pnlPeli3.setBackground(new java.awt.Color(8, 17, 40));
+
+        pnlInfoPeli3.setBackground(new java.awt.Color(8, 17, 40));
+        pnlInfoPeli3.setPreferredSize(new java.awt.Dimension(165, 250));
+        pnlInfoPeli3.setLayout(new java.awt.BorderLayout());
+
+        lblTituloPeli3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        pnlInfoPeli3.add(lblTituloPeli3, java.awt.BorderLayout.PAGE_END);
+
+        lblImagenPeli3.setText("jLabel1");
+        pnlInfoPeli3.add(lblImagenPeli3, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout pnlPeli3Layout = new javax.swing.GroupLayout(pnlPeli3);
+        pnlPeli3.setLayout(pnlPeli3Layout);
+        pnlPeli3Layout.setHorizontalGroup(
+            pnlPeli3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 275, Short.MAX_VALUE)
+            .addGroup(pnlPeli3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPeli3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlInfoPeli3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        pnlPeli3Layout.setVerticalGroup(
+            pnlPeli3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 290, Short.MAX_VALUE)
+            .addGroup(pnlPeli3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPeli3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlInfoPeli3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        panelPeliculas.add(pnlPeli3);
+
+        pnlPeli4.setBackground(new java.awt.Color(8, 17, 40));
+
+        pnlInfoPeli4.setBackground(new java.awt.Color(8, 17, 40));
+        pnlInfoPeli4.setPreferredSize(new java.awt.Dimension(165, 250));
+        pnlInfoPeli4.setLayout(new java.awt.BorderLayout());
+
+        lblTituloPeli4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        pnlInfoPeli4.add(lblTituloPeli4, java.awt.BorderLayout.PAGE_END);
+
+        lblImagenPeli4.setText("jLabel1");
+        pnlInfoPeli4.add(lblImagenPeli4, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout pnlPeli4Layout = new javax.swing.GroupLayout(pnlPeli4);
+        pnlPeli4.setLayout(pnlPeli4Layout);
+        pnlPeli4Layout.setHorizontalGroup(
+            pnlPeli4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 275, Short.MAX_VALUE)
+            .addGroup(pnlPeli4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPeli4Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlInfoPeli4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        pnlPeli4Layout.setVerticalGroup(
+            pnlPeli4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 290, Short.MAX_VALUE)
+            .addGroup(pnlPeli4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPeli4Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlInfoPeli4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        panelPeliculas.add(pnlPeli4);
+
+        pnlPeli5.setBackground(new java.awt.Color(8, 17, 40));
+
+        pnlInfoPeli5.setBackground(new java.awt.Color(8, 17, 40));
+        pnlInfoPeli5.setPreferredSize(new java.awt.Dimension(165, 250));
+        pnlInfoPeli5.setLayout(new java.awt.BorderLayout());
+
+        lblTituloPeli5.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        pnlInfoPeli5.add(lblTituloPeli5, java.awt.BorderLayout.PAGE_END);
+
+        lblImagenPeli5.setText("jLabel1");
+        pnlInfoPeli5.add(lblImagenPeli5, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout pnlPeli5Layout = new javax.swing.GroupLayout(pnlPeli5);
+        pnlPeli5.setLayout(pnlPeli5Layout);
+        pnlPeli5Layout.setHorizontalGroup(
+            pnlPeli5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 275, Short.MAX_VALUE)
+            .addGroup(pnlPeli5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPeli5Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlInfoPeli5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        pnlPeli5Layout.setVerticalGroup(
+            pnlPeli5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 290, Short.MAX_VALUE)
+            .addGroup(pnlPeli5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPeli5Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlInfoPeli5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        panelPeliculas.add(pnlPeli5);
+
+        pnlPeli6.setBackground(new java.awt.Color(8, 17, 40));
+
+        pnlInfoPeli6.setBackground(new java.awt.Color(8, 17, 40));
+        pnlInfoPeli6.setPreferredSize(new java.awt.Dimension(165, 250));
+        pnlInfoPeli6.setLayout(new java.awt.BorderLayout());
+
+        lblTituloPeli6.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        pnlInfoPeli6.add(lblTituloPeli6, java.awt.BorderLayout.PAGE_END);
+
+        lblImagenPeli6.setText("jLabel1");
+        pnlInfoPeli6.add(lblImagenPeli6, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout pnlPeli6Layout = new javax.swing.GroupLayout(pnlPeli6);
+        pnlPeli6.setLayout(pnlPeli6Layout);
+        pnlPeli6Layout.setHorizontalGroup(
+            pnlPeli6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 275, Short.MAX_VALUE)
+            .addGroup(pnlPeli6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPeli6Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlInfoPeli6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        pnlPeli6Layout.setVerticalGroup(
+            pnlPeli6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 290, Short.MAX_VALUE)
+            .addGroup(pnlPeli6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPeli6Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlInfoPeli6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        panelPeliculas.add(pnlPeli6);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -53,12 +270,12 @@ public class panelSeleccionPeliculas extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(197, 197, 197)
-                        .addComponent(buscador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
-                        .addComponent(panelPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(269, Short.MAX_VALUE))
+                        .addComponent(panelPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 846, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(233, 233, 233)
+                        .addComponent(buscador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -66,51 +283,152 @@ public class panelSeleccionPeliculas extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addComponent(buscador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(panelPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(667, Short.MAX_VALUE))
+                .addComponent(panelPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(81, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método que se encarga de cargar la pantalla con las películas
+     */
     private void cargarPeliculas() {
+        //TO DO: AQUÍ ES DONDE NOS COMUNICAMOS AL CONTROL PARA OBTENER LAS PELICULAS DEL SUBSISTEMA DE GESTION DE PELICULAS
         List<pelicula> peliculas = obtenerPeliculas();
-        panelPeliculas.setLayout(new java.awt.GridLayout(0, 3, 15, 15));
-        //por cada pelicula carga una nueva card que se agrega al panel de peliculas
-        for (pelicula p : peliculas) {
-            JPanel card = new JPanel(new BorderLayout());
 
-            //obtiene la imagen y hace un resize
-            ImageIcon img = new ImageIcon(p.getRutaImagen());
-            JLabel lblImg = new JLabel(new ImageIcon(
-                    img.getImage().getScaledInstance(150, 200, java.awt.Image.SCALE_SMOOTH)
-            ));
+        for (int i = 0; i < etiquetasImagenes.size(); i++) {
+            JLabel lblImagen = etiquetasImagenes.get(i);
+            JLabel lblTitulo = etiquetasTitulo.get(i);
 
-            //obtiene el texto y lo pone 
-            JLabel lblTitulo = new JLabel(p.getTitulo(), SwingConstants.CENTER);
-            lblTitulo.setForeground(Color.WHITE);
+            limpiarEtiquetas(lblImagen, lblTitulo);
 
-            card.add(lblImg, BorderLayout.CENTER);
-            card.add(lblTitulo, BorderLayout.SOUTH);
-
-            panelPeliculas.add(card);
+            if (i < peliculas.size()) {
+                pelicula peli = peliculas.get(i);
+                mostrarPeliculaEnEtiqueta(peli, lblImagen, lblTitulo);
+            }
         }
-
-        // 4. Refrescar el panel
-        panelPeliculas.revalidate();
-        panelPeliculas.repaint();
-
     }
-    
-    //hardcode
-    private List<pelicula> obtenerPeliculas() {
-        return Arrays.asList(
-                new pelicula("Spiderman", "src/imagenes/spiderman.jpg"),
-                new pelicula("Batman", "src/imagenes/spiderman.jpg"),
-                new pelicula("Ironman", "src/imagenes/spiderman.jpg")
+
+    /**
+     * Método que inicializa las referencias de dónde se mostrar la información
+     * de la película
+     */
+    private void inicializarReferencias() {
+        etiquetasImagenes = List.of(
+                lblImagenPeli1, lblImagenPeli2, lblImagenPeli3,
+                lblImagenPeli4, lblImagenPeli5, lblImagenPeli6
+        );
+
+        etiquetasTitulo = List.of(
+                lblTituloPeli1, lblTituloPeli2, lblTituloPeli3,
+                lblTituloPeli4, lblTituloPeli5, lblTituloPeli6
         );
     }
 
+    //hardcode
+    private List<pelicula> obtenerPeliculas() {
+        return Arrays.asList(
+                new pelicula("Spiderman", "/blackphone.png"),
+                new pelicula("Batman", "/spiderman.png"),
+                new pelicula("Ironman", "/spiderman.png"),
+                new pelicula("Ironman", "/spiderman.png"),
+                new pelicula("Ironman", "/spiderman.png")
+        );
+    }
+
+    /**
+     * Método para limpiar las etiquetas dónde irá la información de las peliculas
+     * @param lblImagen etiqueta dónde va la imagen de la película
+     * @param lblTitulo etiqueta donde va el título de la película
+     */
+    private void limpiarEtiquetas(JLabel lblImagen, JLabel lblTitulo) {
+        lblImagen.setIcon(null);
+        lblImagen.setText("");
+        lblTitulo.setText("");
+    }
+    
+    /**
+     * Configura el título, imagen y eventos del click sobre una película
+     * @param peli la dto de la película a configurar
+     * @param lblImagen etiqueta en dónde se configurará la imagen
+     * @param lblTitulo etiqueta en dónde se configurará el título
+     */
+    private void mostrarPeliculaEnEtiqueta(pelicula peli, JLabel lblImagen, JLabel lblTitulo) {
+        configurarTitulo(lblTitulo, peli.getTitulo());
+        configurarImagen(lblImagen, peli.getRutaImagen());
+        configurarEventoClick(lblImagen, peli);
+    }
+    
+    /**
+     * Formatea el título de las películas en las etiquetas
+     * @param lblTitulo etiqueta dónde va el título de la película
+     * @param titulo el título que se pondrá en la etiqueta
+     */
+    private void configurarTitulo(JLabel lblTitulo, String titulo) {
+        lblTitulo.setText(titulo.toUpperCase());
+        lblTitulo.setForeground(new Color(204, 204, 204));
+    }
+
+    /**
+     * Método que carga y escala la imagen de las guardadas en recursos
+     * @param lblImagen etiqueta dónde va la imagen de la película
+     * @param rutaImagen path del nombre del archivo de la imagen
+     */
+    private void configurarImagen(JLabel lblImagen, String rutaImagen) {
+        lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
+        lblImagen.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        URL url = getClass().getResource(rutaImagen);
+        if (url != null) {
+            ImageIcon icon = new ImageIcon(url);
+            Image img = icon.getImage().getScaledInstance(165, 229, Image.SCALE_SMOOTH);
+            lblImagen.setIcon(new ImageIcon(img));
+        } else {
+            lblImagen.setText("🎬");
+            lblImagen.setForeground(new Color(204, 204, 204));
+        }
+    }
+
+    /**
+     * Asocia evento de los clicks sobre la imagen de la película electa
+     * @param lblImagen etiqueta de la película que es de donde escuchará el click
+     * @param peli se envía el dto para posteriores configuraciones
+     * 
+     * TO DO: NO ESTÁ COMPLETO, DEBERÍA ABRIR LAS FUNCIONES DE AQUÍ
+     */
+    private void configurarEventoClick(JLabel lblImagen, pelicula peli) {
+        lblImagen.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                System.out.println("Seleccionaste: " + peli.getTitulo());
+            }
+        });
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private presentacion.utilerias.buscador buscador2;
+    private javax.swing.JLabel lblImagenPeli1;
+    private javax.swing.JLabel lblImagenPeli2;
+    private javax.swing.JLabel lblImagenPeli3;
+    private javax.swing.JLabel lblImagenPeli4;
+    private javax.swing.JLabel lblImagenPeli5;
+    private javax.swing.JLabel lblImagenPeli6;
+    private javax.swing.JLabel lblTituloPeli1;
+    private javax.swing.JLabel lblTituloPeli2;
+    private javax.swing.JLabel lblTituloPeli3;
+    private javax.swing.JLabel lblTituloPeli4;
+    private javax.swing.JLabel lblTituloPeli5;
+    private javax.swing.JLabel lblTituloPeli6;
     private javax.swing.JPanel panelPeliculas;
+    private javax.swing.JPanel pnlInfoPeli1;
+    private javax.swing.JPanel pnlInfoPeli2;
+    private javax.swing.JPanel pnlInfoPeli3;
+    private javax.swing.JPanel pnlInfoPeli4;
+    private javax.swing.JPanel pnlInfoPeli5;
+    private javax.swing.JPanel pnlInfoPeli6;
+    private javax.swing.JPanel pnlPeli1;
+    private javax.swing.JPanel pnlPeli2;
+    private javax.swing.JPanel pnlPeli3;
+    private javax.swing.JPanel pnlPeli4;
+    private javax.swing.JPanel pnlPeli5;
+    private javax.swing.JPanel pnlPeli6;
     // End of variables declaration//GEN-END:variables
 }
