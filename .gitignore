@@ -1,1 +1,47 @@
-/dto_negocios/target/
+# ============================================
+# 🧠 ARCHIVOS A IGNORAR EN PROYECTOS MAVEN / NETBEANS
+# ============================================
+
+# 🧱 Maven
+target/
+*/target/
+
+# NetBeans
+nbproject/private/
+build/
+dist/
+
+# Configs locales
+*.iml
+*.ipr
+*.iws
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs y reportes
+*.log
+*.lst
+
+# IDEs
+/.idea/
+.vscode/
+*.swp
+*~
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# OneDrive temporales
+~$*
+*.tmp
+
+# ============================================
+# ✅ Permitir código fuente y configuraciones Maven
+# ============================================
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
