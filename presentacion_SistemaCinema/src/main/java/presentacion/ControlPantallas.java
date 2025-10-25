@@ -1,8 +1,13 @@
 package presentacion;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
+import dto.FuncionDTO;
 import dto.PeliculaDTO;
+import dto.SalaDTO;
+import dto.SeleccionarFuncionDTO;
 import java.awt.BorderLayout;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -76,7 +81,13 @@ public class ControlPantallas {
         eliminarPanelAnterior(panelAnterior);
 
         //TODO: OBTENER LAS FUNCIONES Y MANDARLAS
-        JPanel panelNuevo = new PanelSeleccionFuncion(pelicula);
+        JPanel panelNuevo = new PanelSeleccionFuncion(obtenerFunciones());
+        agregarPanelNuevo(panelNuevo);
+    }
+    
+    public void abrirSeleccionAsientos(JPanel panelAnterior, SeleccionarFuncionDTO funcion){
+        eliminarPanelAnterior(panelAnterior);
+        JPanel panelNuevo = new PanelSeleccionAsientos(obtenerFuncionPelicula());
         agregarPanelNuevo(panelNuevo);
     }
 
@@ -88,5 +99,30 @@ public class ControlPantallas {
 
     private void eliminarPanelAnterior(JPanel panelAnterior) {
         this.formPrincipal.getContentPane().remove(panelAnterior);
+    }
+    
+    
+    //harcode
+    private List<SeleccionarFuncionDTO> obtenerFunciones(){
+        return Arrays.asList(
+                new SeleccionarFuncionDTO(
+                        new PeliculaDTO("Spiderman", "/spiderman.png", "180min", "Doblada"), 
+                        new SalaDTO("Sala 1", 5, 5), "12:30", "Sala Tradicional"),
+                new SeleccionarFuncionDTO(
+                        new PeliculaDTO("Spiderman", "/spiderman.png", "180min", "Doblada"), 
+                        new SalaDTO("Sala 2", 5, 5), "10:00", "Sala 3D"),
+                new SeleccionarFuncionDTO(
+                        new PeliculaDTO("Spiderman", "/spiderman.png", "180min", "Doblada"), 
+                        new SalaDTO("Sala 3", 5, 5), "15:00", "Sala Tradicional"),
+                new SeleccionarFuncionDTO(
+                        new PeliculaDTO("Spiderman", "/spiderman.png", "180min", "Doblada"), 
+                        new SalaDTO("Sala 1", 5, 5), "18:15", "Sala 3D")
+        );
+    }
+    
+    private FuncionDTO obtenerFuncionPelicula(){
+        return new FuncionDTO(new SalaDTO("Sala 1", 10, 7), 
+                new PeliculaDTO("Spiderman", "/spiderman.png", "180", "Doblado"),
+                "10:30", "Sala 3D");
     }
 }
