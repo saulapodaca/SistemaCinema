@@ -8,13 +8,13 @@ package presentacion.utilerias;
  *
  * @author saula
  */
-public class buscador extends javax.swing.JPanel {
+public class PanelBuscador extends javax.swing.JPanel {
 
     private final String TEXTO_DEFAULT = "BUSCAR...";
     /**
      * Creates new form buscador
      */
-    public buscador() {
+    public PanelBuscador() {
         initComponents();
     }
 
@@ -28,7 +28,7 @@ public class buscador extends javax.swing.JPanel {
     private void initComponents() {
 
         txtBuscador = new javax.swing.JTextPane();
-        jLabel1 = new javax.swing.JLabel();
+        lblLupa = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(18, 31, 55));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 65, 85), 4, true));
@@ -47,7 +47,7 @@ public class buscador extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lupitaBuscador.png"))); // NOI18N
+        lblLupa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lupitaBuscador.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -57,18 +57,18 @@ public class buscador extends javax.swing.JPanel {
                 .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblLupa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblLupa))
+                    .addComponent(txtBuscador))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -87,7 +87,7 @@ public class buscador extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblLupa;
     private javax.swing.JTextPane txtBuscador;
     // End of variables declaration//GEN-END:variables
 }
