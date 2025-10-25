@@ -1,11 +1,9 @@
 package presentacion;
 
-import dto.FuncionDTO;
-import dto.PeliculaDTO;
+import dto.SeleccionarFuncionDTO;
 import java.awt.Color;
 import java.awt.Image;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -17,20 +15,23 @@ import javax.swing.SwingConstants;
  * @author saula
  */
 public class PanelSeleccionFuncion extends javax.swing.JPanel {
-    
+
     private List<JLabel> etiquetasNombreSala;
     private List<JLabel> etiquetasHoraFuncion;
     private List<JLabel> etiquetasTipoSala;
     private List<JPanel> panelesFunciones;
-    
+    private List<SeleccionarFuncionDTO> funciones;
+
     /**
      * Creates new form PanelSeleccionFuncion
-     * @param pelicula
+     *
+     * @param funciones
      */
-    public PanelSeleccionFuncion(PeliculaDTO pelicula) {
+    public PanelSeleccionFuncion(List<SeleccionarFuncionDTO> funciones) {
+        this.funciones = funciones;
         initComponents();
         inicializarReferencias();
-        cargarInformacionPelicula(pelicula);
+        cargarInformacionPelicula(funciones.get(0));
         cargarFunciones();
     }
 
@@ -363,7 +364,8 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
     );
     }// </editor-fold>//GEN-END:initComponents
     /**
-     *Al picarle al botón volver mandará a la pantalla anterior
+     * Al picarle al botón volver mandará a la pantalla anterior
+     *
      * @param evt el evento que hará
      */
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
@@ -372,13 +374,13 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
 
     /**
      * Método que se encargará de cargar la información de la película
-     * 
+     *
      * @param pelicula película a mostrar
      */
-    private void cargarInformacionPelicula(PeliculaDTO pelicula) {
-        configurarImagen(pelicula.getRutaImagen());
-        configurarTitulo(pelicula.getTitulo());
-        configurarInformacionPelicula(pelicula.getDuracion(), pelicula.getIdioma());
+    private void cargarInformacionPelicula(SeleccionarFuncionDTO funcion) {
+        configurarImagen(funcion.getPelicula().getRutaImagen());
+        configurarTitulo(funcion.getPelicula().getTitulo());
+        configurarInformacionPelicula(funcion.getPelicula().getDuracion(), funcion.getPelicula().getIdioma());
     }
 
     /**
@@ -401,13 +403,13 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
             lblImagen.setForeground(new Color(204, 204, 204));
         }
     }
-    
+
     /**
      * Formatea el título de la película en la etiqueta
-     * 
+     *
      * @param titulo el título que se pondrá en la etiqueta
      */
-    private void configurarTitulo(String titulo){
+    private void configurarTitulo(String titulo) {
         lblTituloPelicula.setText(titulo.toUpperCase());
         lblTituloPelicula.setForeground(new Color(204, 204, 204));
     }
@@ -429,7 +431,6 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
      * Método que se encarga de cargar la pantalla con las funciones
      */
     private void cargarFunciones() {
-        List<FuncionDTO> funciones = obtenerListaFunciones();
 
         for (int i = 0; i < etiquetasNombreSala.size(); i++) {
             JLabel lblNombreSala = etiquetasNombreSala.get(i);
@@ -439,8 +440,8 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
 
             limpiarEtiquetas(lblNombreSala, lblHoraFuncion, lblTipoSala);
 
-            if (i < funciones.size()) {
-                FuncionDTO funcion = funciones.get(i);
+            if (i < this.funciones.size()) {
+                SeleccionarFuncionDTO funcion = this.funciones.get(i);
                 mostrarFuncionEtiqueta(funcion, lblNombreSala, lblHoraFuncion, lblTipoSala, pnlFuncion);
 
             }
@@ -462,8 +463,8 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
      * @param panelFuncion panel en dónde se configurará el evento del click
      * para la elección de función
      */
-    private void mostrarFuncionEtiqueta(FuncionDTO funcion, JLabel lblNombreSala, JLabel lblHoraFuncion, JLabel lblTipoSala, JPanel panelFuncion) {
-        configurarNombreSala(lblNombreSala, funcion.getNombreSala());
+    private void mostrarFuncionEtiqueta(SeleccionarFuncionDTO funcion, JLabel lblNombreSala, JLabel lblHoraFuncion, JLabel lblTipoSala, JPanel panelFuncion) {
+        configurarNombreSala(lblNombreSala, funcion.getSala().getNombre());
         configurarHoraFuncion(lblHoraFuncion, funcion.getHoraFuncion());
         configurarTipoSala(lblTipoSala, funcion.getTipoSala());
         configurarEventoClick(panelFuncion, funcion);
@@ -510,11 +511,11 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
      * @param funcion se envía el DTO de la función para su posterior elección
      * de asientos
      */
-    private void configurarEventoClick(JPanel panelFuncion, FuncionDTO funcion) {
+    private void configurarEventoClick(JPanel panelFuncion, SeleccionarFuncionDTO funcion) {
         panelFuncion.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                System.out.println("Funcion electa es" + funcion.toString());
+                ControlPantallas.getInstance().abrirSeleccionAsientos(PanelSeleccionFuncion.this, funcion);
             }
         });
     }
@@ -523,7 +524,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
      * Método que inicializa las referencias de dónde se va a mostrar la
      * información de las funciones
      */
-    private void inicializarReferencias(){
+    private void inicializarReferencias() {
         etiquetasNombreSala = List.of(
                 lblNombreSalaFuncion1, lblNombreSalaFuncion2,
                 lblNombreSalaFuncion3, lblNombreSalaFuncion4
@@ -541,7 +542,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
                 pnlFuncion3, pnlFuncion4
         );
     }
-    
+
     /**
      * Método para limpiar las etiquetas dónde irá la información de la película
      * y sus funciones
@@ -554,16 +555,6 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
         lblNombreSala.setText("");
         lblHoraFuncion.setText("");
         lblTipoSala.setText("");
-    }
-    
-    //hardcode
-    private List<FuncionDTO> obtenerListaFunciones(){
-        return Arrays.asList(
-                new FuncionDTO("Sala 1", "12:30", "Sala Tradicional"),
-                new FuncionDTO("Sala 2", "09:30", "Sala 3D"),
-                new FuncionDTO("Sala 2", "12:00", "Sala Max"),
-                new FuncionDTO("Sala 4", "10:25", "Sala Tradicional")
-        );
     }
 
 
