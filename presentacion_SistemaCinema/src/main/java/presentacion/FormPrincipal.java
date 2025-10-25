@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package presentacion;
 
 /**
@@ -27,16 +23,15 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         panelInformacionEmpleado1 = new presentacion.PanelInformacionEmpleado();
-        panelOpcionesMenuGerente1 = new presentacion.PanelOpcionesMenuGerente();
+        panelOpcionesMenuGerente2 = new presentacion.PanelOpcionesMenuGerente();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(8, 17, 40));
-        getContentPane().setLayout(new java.awt.GridBagLayout());
-        getContentPane().add(panelInformacionEmpleado1, new java.awt.GridBagConstraints());
-        getContentPane().add(panelOpcionesMenuGerente1, new java.awt.GridBagConstraints());
+        getContentPane().add(panelInformacionEmpleado1, java.awt.BorderLayout.LINE_START);
+        getContentPane().add(panelOpcionesMenuGerente2, java.awt.BorderLayout.CENTER);
 
         jMenuBar1.setBackground(new java.awt.Color(8, 17, 40));
 
@@ -57,6 +52,6 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private presentacion.PanelInformacionEmpleado panelInformacionEmpleado1;
-    private presentacion.PanelOpcionesMenuGerente panelOpcionesMenuGerente1;
+    private presentacion.PanelOpcionesMenuGerente panelOpcionesMenuGerente2;
     // End of variables declaration//GEN-END:variables
 }

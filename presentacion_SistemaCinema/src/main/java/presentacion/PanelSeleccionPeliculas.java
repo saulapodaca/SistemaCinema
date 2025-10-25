@@ -1,6 +1,6 @@
 package presentacion;
 
-import dto.pelicula;
+import dto.PeliculaDTO;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
@@ -21,7 +21,7 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
     private List<JLabel> etiquetasTitulo;
 
     /**
-     * Creates new form panelSeleccionPeliculas-
+     * Creates new form panelSeleccionPeliculas
      */
     public PanelSeleccionPeliculas() {
         initComponents();
@@ -38,7 +38,6 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buscador2 = new presentacion.utilerias.buscador();
         panelPeliculas = new javax.swing.JPanel();
         pnlPeli1 = new javax.swing.JPanel();
         pnlInfoPeli1 = new javax.swing.JPanel();
@@ -64,8 +63,11 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
         pnlInfoPeli6 = new javax.swing.JPanel();
         lblTituloPeli6 = new javax.swing.JLabel();
         lblImagenPeli6 = new javax.swing.JLabel();
+        panelBuscador1 = new presentacion.utilerias.PanelBuscador();
+        panelPaginacion1 = new presentacion.utilerias.PanelPaginacion();
 
         setBackground(new java.awt.Color(8, 17, 40));
+        setToolTipText("");
 
         panelPeliculas.setBackground(new java.awt.Color(8, 17, 40));
         panelPeliculas.setLayout(new java.awt.GridLayout(0, 3, 10, 10));
@@ -267,24 +269,30 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 68, Short.MAX_VALUE)
+                .addComponent(panelPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 846, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(panelPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 846, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(224, 224, 224)
+                        .addComponent(panelBuscador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(233, 233, 233)
-                        .addComponent(buscador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(70, Short.MAX_VALUE))
+                        .addGap(169, 169, 169)
+                        .addComponent(panelPaginacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(buscador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(16, 16, 16)
+                .addComponent(panelBuscador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelPaginacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -293,7 +301,7 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
      */
     private void cargarPeliculas() {
         //TO DO: AQUÍ ES DONDE NOS COMUNICAMOS AL CONTROL PARA OBTENER LAS PELICULAS DEL SUBSISTEMA DE GESTION DE PELICULAS
-        List<pelicula> peliculas = obtenerPeliculas();
+        List<PeliculaDTO> peliculas = obtenerPeliculas();
 
         for (int i = 0; i < etiquetasImagenes.size(); i++) {
             JLabel lblImagen = etiquetasImagenes.get(i);
@@ -302,7 +310,7 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
             limpiarEtiquetas(lblImagen, lblTitulo);
 
             if (i < peliculas.size()) {
-                pelicula peli = peliculas.get(i);
+                PeliculaDTO peli = peliculas.get(i);
                 mostrarPeliculaEnEtiqueta(peli, lblImagen, lblTitulo);
             }
         }
@@ -325,18 +333,19 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
     }
 
     //hardcode
-    private List<pelicula> obtenerPeliculas() {
+    private List<PeliculaDTO> obtenerPeliculas() {
         return Arrays.asList(
-                new pelicula("Spiderman", "/blackphone.png"),
-                new pelicula("Batman", "/spiderman.png"),
-                new pelicula("Ironman", "/spiderman.png"),
-                new pelicula("Ironman", "/spiderman.png"),
-                new pelicula("Ironman", "/spiderman.png")
+                new PeliculaDTO("Spiderman", "/blackphone.png", "200min", "Doblada"),
+                new PeliculaDTO("Batman", "/spiderman.png", "180min", "Español"),
+                new PeliculaDTO("Ironman", "/spiderman.png", "250min", "Subtitulada"),
+                new PeliculaDTO("Ironman", "/spiderman.png", "250min", "Subtitulada")
         );
     }
 
     /**
-     * Método para limpiar las etiquetas dónde irá la información de las peliculas
+     * Método para limpiar las etiquetas dónde irá la información de las
+     * peliculas
+     *
      * @param lblImagen etiqueta dónde va la imagen de la película
      * @param lblTitulo etiqueta donde va el título de la película
      */
@@ -345,21 +354,23 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
         lblImagen.setText("");
         lblTitulo.setText("");
     }
-    
+
     /**
      * Configura el título, imagen y eventos del click sobre una película
+     *
      * @param peli la dto de la película a configurar
      * @param lblImagen etiqueta en dónde se configurará la imagen
      * @param lblTitulo etiqueta en dónde se configurará el título
      */
-    private void mostrarPeliculaEnEtiqueta(pelicula peli, JLabel lblImagen, JLabel lblTitulo) {
+    private void mostrarPeliculaEnEtiqueta(PeliculaDTO peli, JLabel lblImagen, JLabel lblTitulo) {
         configurarTitulo(lblTitulo, peli.getTitulo());
         configurarImagen(lblImagen, peli.getRutaImagen());
         configurarEventoClick(lblImagen, peli);
     }
-    
+
     /**
      * Formatea el título de las películas en las etiquetas
+     *
      * @param lblTitulo etiqueta dónde va el título de la película
      * @param titulo el título que se pondrá en la etiqueta
      */
@@ -369,7 +380,8 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
     }
 
     /**
-     * Método que carga y escala la imagen de las guardadas en recursos
+     * Carga y escala la imagen de las guardadas en recursos
+     *
      * @param lblImagen etiqueta dónde va la imagen de la película
      * @param rutaImagen path del nombre del archivo de la imagen
      */
@@ -390,21 +402,20 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
 
     /**
      * Asocia evento de los clicks sobre la imagen de la película electa
-     * @param lblImagen etiqueta de la película que es de donde escuchará el click
+     *
+     * @param lblImagen etiqueta de la película que es de donde escuchará el
+     * click
      * @param peli se envía el dto para posteriores configuraciones
-     * 
-     * TO DO: NO ESTÁ COMPLETO, DEBERÍA ABRIR LAS FUNCIONES DE AQUÍ
      */
-    private void configurarEventoClick(JLabel lblImagen, pelicula peli) {
+    private void configurarEventoClick(JLabel lblImagen, PeliculaDTO peli) {
         lblImagen.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                System.out.println("Seleccionaste: " + peli.getTitulo());
+                ControlPantallas.getInstance().abrirSeleccionFunciones(PanelSeleccionPeliculas.this,peli);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private presentacion.utilerias.buscador buscador2;
     private javax.swing.JLabel lblImagenPeli1;
     private javax.swing.JLabel lblImagenPeli2;
     private javax.swing.JLabel lblImagenPeli3;
@@ -417,6 +428,8 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
     private javax.swing.JLabel lblTituloPeli4;
     private javax.swing.JLabel lblTituloPeli5;
     private javax.swing.JLabel lblTituloPeli6;
+    private presentacion.utilerias.PanelBuscador panelBuscador1;
+    private presentacion.utilerias.PanelPaginacion panelPaginacion1;
     private javax.swing.JPanel panelPeliculas;
     private javax.swing.JPanel pnlInfoPeli1;
     private javax.swing.JPanel pnlInfoPeli2;

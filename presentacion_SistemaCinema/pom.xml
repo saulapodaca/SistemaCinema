@@ -26,6 +26,11 @@
             <artifactId>dto_negocios</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>unknown.binary</groupId>
+            <artifactId>DateChooser</artifactId>
+            <version>SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.release>24</maven.compiler.release>
