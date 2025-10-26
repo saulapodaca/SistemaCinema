@@ -162,39 +162,50 @@ public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
         });
 
         lblVenderBoleto.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblVenderBoleto.setForeground(new java.awt.Color(255, 255, 255));
         lblVenderBoleto.setText("VENDER BOLETO");
 
         lblReagendarBoleto.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblReagendarBoleto.setForeground(new java.awt.Color(255, 255, 255));
         lblReagendarBoleto.setText("REAGENDAR BOLETO");
 
         lblReembolsarBoleto.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblReembolsarBoleto.setForeground(new java.awt.Color(255, 255, 255));
         lblReembolsarBoleto.setText("REEMBOLSAR BOLETO");
 
         lblVenderAlimento.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblVenderAlimento.setForeground(new java.awt.Color(255, 255, 255));
         lblVenderAlimento.setText("VENDER ALIMENTO");
 
         lblEnviarPromociones.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblEnviarPromociones.setForeground(new java.awt.Color(255, 255, 255));
         lblEnviarPromociones.setText("ENVIAR PROMOCIONES");
 
         lblEscanearBoleto.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblEscanearBoleto.setForeground(new java.awt.Color(255, 255, 255));
         lblEscanearBoleto.setText("ESCANEAR BOLETO");
 
         lblGenerarReportes.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         lblGenerarReportes.setText("GENERAR REPORTES");
 
         lblGestionarPeliculas.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblGestionarPeliculas.setForeground(new java.awt.Color(255, 255, 255));
         lblGestionarPeliculas.setText("GESTIONAR PELICULAS");
 
         lblGestionarMembresias.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblGestionarMembresias.setForeground(new java.awt.Color(255, 255, 255));
         lblGestionarMembresias.setText("GESTIONAR MEMBRESÍAS");
 
         lblGestionarPrecios.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblGestionarPrecios.setForeground(new java.awt.Color(255, 255, 255));
         lblGestionarPrecios.setText("GESTIONAR PRECIOS");
 
         lblGestionarPromociones.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblGestionarPromociones.setForeground(new java.awt.Color(255, 255, 255));
         lblGestionarPromociones.setText("GESTIONAR PROMOCIONES");
 
         lblGestionarEmpleados.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblGestionarEmpleados.setForeground(new java.awt.Color(255, 255, 255));
         lblGestionarEmpleados.setText("GESTIONAR EMPLEADOS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -208,11 +219,11 @@ public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
                     .addComponent(btnGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGestionarPrecios, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVentaBoleto, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnGestionarPromos, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78))
+                        .addGap(75, 75, 75))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnGestionarPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,15 +239,15 @@ public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(95, 95, 95)
                 .addComponent(lblVenderBoleto)
-                .addGap(216, 216, 216)
-                .addComponent(lblReagendarBoleto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblReagendarBoleto)
+                .addGap(158, 158, 158)
                 .addComponent(lblReembolsarBoleto)
                 .addGap(74, 74, 74))
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addComponent(lblVenderAlimento)
-                .addGap(193, 193, 193)
+                .addGap(161, 161, 161)
                 .addComponent(lblEnviarPromociones)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblEscanearBoleto)
@@ -244,24 +255,24 @@ public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(84, 84, 84)
                 .addComponent(lblGenerarReportes)
-                .addGap(190, 190, 190)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblGestionarPeliculas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addGap(121, 121, 121)
                 .addComponent(lblGestionarMembresias)
                 .addGap(65, 65, 65))
             .addGroup(layout.createSequentialGroup()
                 .addGap(78, 78, 78)
                 .addComponent(lblGestionarPrecios)
-                .addGap(168, 168, 168)
-                .addComponent(lblGestionarPromociones)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblGestionarPromociones)
+                .addGap(121, 121, 121)
                 .addComponent(lblGestionarEmpleados)
                 .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 3, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnReembolsarBoleto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -277,15 +288,16 @@ public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
                         .addComponent(btnVentaAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnReagendarBoleto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblReagendarBoleto)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEnviarPromociones, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEnviarPromociones)
                     .addComponent(lblVenderAlimento)
-                    .addComponent(lblEscanearBoleto))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblEscanearBoleto)
+                        .addComponent(lblEnviarPromociones)))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -23,35 +23,19 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         panelInformacionEmpleado1 = new presentacion.PanelInformacionEmpleado();
-        panelOpcionesMenuGerente2 = new presentacion.PanelOpcionesMenuGerente();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        panelOpcionesMenuGerente1 = new presentacion.PanelOpcionesMenuGerente();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(8, 17, 40));
-        getContentPane().add(panelInformacionEmpleado1, java.awt.BorderLayout.LINE_START);
-        getContentPane().add(panelOpcionesMenuGerente2, java.awt.BorderLayout.CENTER);
-
-        jMenuBar1.setBackground(new java.awt.Color(8, 17, 40));
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        getContentPane().add(panelInformacionEmpleado1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(panelOpcionesMenuGerente1, java.awt.BorderLayout.LINE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private presentacion.PanelInformacionEmpleado panelInformacionEmpleado1;
-    private presentacion.PanelOpcionesMenuGerente panelOpcionesMenuGerente2;
+    private presentacion.PanelOpcionesMenuGerente panelOpcionesMenuGerente1;
     // End of variables declaration//GEN-END:variables
 }

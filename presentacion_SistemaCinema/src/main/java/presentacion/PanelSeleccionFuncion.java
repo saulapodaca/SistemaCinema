@@ -341,7 +341,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
                     .addGap(4, 4, 4)
                     .addComponent(lblIdioma))
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(40, 40, 40)
+                    .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pnlImagenPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
