@@ -1,6 +1,7 @@
 package presentacion;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
+import dto.AsientoDTO;
 import dto.FuncionDTO;
 import dto.PeliculaDTO;
 import dto.SalaDTO;
@@ -90,6 +91,12 @@ public class ControlPantallas {
         JPanel panelNuevo = new PanelSeleccionAsientos(obtenerFuncionPelicula());
         agregarPanelNuevo(panelNuevo);
     }
+    
+    public void abrirInformacionPago(JPanel panelAnterior, List<AsientoDTO> asientos, FuncionDTO funcion){
+        eliminarPanelAnterior(panelAnterior);
+        JPanel panelNuevo = new PanelInformacionPago();
+        agregarPanelNuevo(panelNuevo);
+    }
 
     private void agregarPanelNuevo(JPanel panelNuevo) {
         this.formPrincipal.getContentPane().add(panelNuevo, BorderLayout.CENTER);
@@ -121,7 +128,7 @@ public class ControlPantallas {
     }
     
     private FuncionDTO obtenerFuncionPelicula(){
-        return new FuncionDTO(new SalaDTO("Sala 1", 10, 7), 
+        return new FuncionDTO(new SalaDTO("Sala 1", 7, 10), 
                 new PeliculaDTO("Spiderman", "/spiderman.png", "180", "Doblado"),
                 "10:30", "Sala 3D");
     }

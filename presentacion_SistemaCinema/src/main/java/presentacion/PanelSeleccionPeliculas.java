@@ -375,6 +375,7 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
      * @param titulo el título que se pondrá en la etiqueta
      */
     private void configurarTitulo(JLabel lblTitulo, String titulo) {
+        lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitulo.setText(titulo.toUpperCase());
         lblTitulo.setForeground(new Color(204, 204, 204));
     }
