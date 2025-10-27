@@ -4,17 +4,29 @@
  */
 package presentacion;
 
+import dto.AsientoDTO;
+import dto.FuncionDTO;
+import dto.SeleccionarFuncionDTO;
+import java.awt.Color;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JLabel;
+
 /**
  *
  * @author saula
  */
 public class PanelInformacionPago extends javax.swing.JPanel {
 
+    private FuncionDTO funcion;
+    private final String TEXTO_CB_DESCUENTO_DEFAULT = "ELIGE UN DESCUENTO...";
     /**
      * Creates new form PanelInformacionPago
      */
-    public PanelInformacionPago() {
+    public PanelInformacionPago(List<AsientoDTO> asientos, FuncionDTO funcion) {
+        this.funcion = funcion;
         initComponents();
+        cargarInformacion(asientos, funcion);
     }
 
     /**
@@ -26,19 +38,546 @@ public class PanelInformacionPago extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bgDescuentos = new javax.swing.ButtonGroup();
+        bgFormaPago = new javax.swing.ButtonGroup();
+        pnlInformacionPago = new javax.swing.JPanel();
+        lblTituloPelicula = new javax.swing.JLabel();
+        lblNombreSala = new javax.swing.JLabel();
+        lblTipoSala = new javax.swing.JLabel();
+        lblFechaFuncion = new javax.swing.JLabel();
+        lblHoraFuncion = new javax.swing.JLabel();
+        tituloSubtotal = new javax.swing.JLabel();
+        tituloDescuento = new javax.swing.JLabel();
+        lblDescuento = new javax.swing.JLabel();
+        lblSubtotalPrecio = new javax.swing.JLabel();
+        separador = new javax.swing.JSeparator();
+        tituloTotal = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
+        lblAsientos = new javax.swing.JLabel();
+        pnlMembresia = new javax.swing.JPanel();
+        tituloVerificarMembresia = new javax.swing.JLabel();
+        txtMembresia = new javax.swing.JTextField();
+        btnVerificarMembresia = new javax.swing.JButton();
+        pnlDescuentos = new javax.swing.JPanel();
+        tituloDescuentos = new javax.swing.JLabel();
+        rbSeleccionarDescuento = new javax.swing.JRadioButton();
+        cbDescuentos = new javax.swing.JComboBox<>();
+        rbCanjearCupon = new javax.swing.JRadioButton();
+        txtCupon = new javax.swing.JTextField();
+        btnAplicarDescuento = new javax.swing.JButton();
+        pnlFormaPago = new javax.swing.JPanel();
+        tituloFormaPago = new javax.swing.JLabel();
+        rbTarjeta = new javax.swing.JRadioButton();
+        rbEfectivo = new javax.swing.JRadioButton();
+        imgEfectivo = new javax.swing.JLabel();
+        imgTarjeta = new javax.swing.JLabel();
+        btnVolver = new javax.swing.JButton();
+        btnConfirmarPago = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(8, 17, 40));
+
+        pnlInformacionPago.setBackground(new java.awt.Color(18, 26, 60));
+
+        lblTituloPelicula.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
+        lblTituloPelicula.setForeground(new java.awt.Color(255, 255, 255));
+        lblTituloPelicula.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTituloPelicula.setText("TITULO DE LA PELÍCULA ");
+
+        lblNombreSala.setFont(new java.awt.Font("Comic Sans MS", 1, 16)); // NOI18N
+        lblNombreSala.setForeground(new java.awt.Color(148, 163, 184));
+        lblNombreSala.setText("SALA 1");
+
+        lblTipoSala.setFont(new java.awt.Font("Comic Sans MS", 1, 16)); // NOI18N
+        lblTipoSala.setForeground(new java.awt.Color(148, 163, 184));
+        lblTipoSala.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTipoSala.setText("SALA TRADICIONAL");
+
+        lblFechaFuncion.setFont(new java.awt.Font("Comic Sans MS", 1, 16)); // NOI18N
+        lblFechaFuncion.setForeground(new java.awt.Color(148, 163, 184));
+        lblFechaFuncion.setText("05/09/25");
+
+        lblHoraFuncion.setFont(new java.awt.Font("Comic Sans MS", 1, 16)); // NOI18N
+        lblHoraFuncion.setForeground(new java.awt.Color(148, 163, 184));
+        lblHoraFuncion.setText("00:00");
+
+        tituloSubtotal.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        tituloSubtotal.setForeground(new java.awt.Color(255, 255, 255));
+        tituloSubtotal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        tituloSubtotal.setText("SUBTOTAL:");
+
+        tituloDescuento.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        tituloDescuento.setForeground(new java.awt.Color(255, 255, 255));
+        tituloDescuento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        tituloDescuento.setText("DESCUENTO:");
+
+        lblDescuento.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        lblDescuento.setForeground(new java.awt.Color(255, 255, 255));
+        lblDescuento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDescuento.setText("$00.00");
+
+        lblSubtotalPrecio.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        lblSubtotalPrecio.setForeground(new java.awt.Color(255, 255, 255));
+        lblSubtotalPrecio.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSubtotalPrecio.setText("$00.00");
+
+        separador.setBackground(new java.awt.Color(255, 255, 255));
+
+        tituloTotal.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        tituloTotal.setForeground(new java.awt.Color(255, 255, 255));
+        tituloTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        tituloTotal.setText("TOTAL:");
+
+        lblTotal.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(255, 255, 255));
+        lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblTotal.setText("$00.00");
+
+        lblAsientos.setFont(new java.awt.Font("Comic Sans MS", 1, 16)); // NOI18N
+        lblAsientos.setForeground(new java.awt.Color(148, 163, 184));
+        lblAsientos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAsientos.setText("ASIENTOS SELECCIONADOS");
+
+        javax.swing.GroupLayout pnlInformacionPagoLayout = new javax.swing.GroupLayout(pnlInformacionPago);
+        pnlInformacionPago.setLayout(pnlInformacionPagoLayout);
+        pnlInformacionPagoLayout.setHorizontalGroup(
+            pnlInformacionPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblTituloPelicula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnlInformacionPagoLayout.createSequentialGroup()
+                .addGroup(pnlInformacionPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInformacionPagoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlInformacionPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlInformacionPagoLayout.createSequentialGroup()
+                                .addComponent(lblNombreSala)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblTipoSala, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlInformacionPagoLayout.createSequentialGroup()
+                                .addComponent(tituloDescuento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblDescuento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlInformacionPagoLayout.createSequentialGroup()
+                                .addComponent(lblFechaFuncion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblHoraFuncion)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlInformacionPagoLayout.createSequentialGroup()
+                                .addComponent(tituloSubtotal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblSubtotalPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(pnlInformacionPagoLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(pnlInformacionPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlInformacionPagoLayout.createSequentialGroup()
+                                .addComponent(tituloTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblAsientos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 26, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        pnlInformacionPagoLayout.setVerticalGroup(
+            pnlInformacionPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInformacionPagoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTituloPelicula)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlInformacionPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombreSala)
+                    .addComponent(lblTipoSala))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlInformacionPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFechaFuncion)
+                    .addComponent(lblHoraFuncion))
+                .addGap(18, 18, 18)
+                .addGroup(pnlInformacionPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tituloSubtotal)
+                    .addComponent(lblSubtotalPrecio))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlInformacionPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tituloDescuento)
+                    .addComponent(lblDescuento))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlInformacionPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tituloTotal)
+                    .addComponent(lblTotal))
+                .addGap(18, 18, 18)
+                .addComponent(lblAsientos)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        pnlMembresia.setBackground(new java.awt.Color(18, 26, 60));
+
+        tituloVerificarMembresia.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
+        tituloVerificarMembresia.setForeground(new java.awt.Color(255, 255, 255));
+        tituloVerificarMembresia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloVerificarMembresia.setText("VERIFICAR MEMBRESÍA");
+
+        txtMembresia.setBackground(new java.awt.Color(31, 41, 55));
+        txtMembresia.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        txtMembresia.setForeground(new java.awt.Color(148, 163, 184));
+        txtMembresia.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtMembresia.setCaretColor(new java.awt.Color(51, 65, 85));
+
+        btnVerificarMembresia.setBackground(new java.awt.Color(37, 99, 235));
+        btnVerificarMembresia.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
+        btnVerificarMembresia.setForeground(new java.awt.Color(18, 31, 55));
+        btnVerificarMembresia.setText("VERIFICAR");
+        btnVerificarMembresia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarMembresiaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlMembresiaLayout = new javax.swing.GroupLayout(pnlMembresia);
+        pnlMembresia.setLayout(pnlMembresiaLayout);
+        pnlMembresiaLayout.setHorizontalGroup(
+            pnlMembresiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMembresiaLayout.createSequentialGroup()
+                .addGroup(pnlMembresiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlMembresiaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(tituloVerificarMembresia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlMembresiaLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(txtMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(pnlMembresiaLayout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(btnVerificarMembresia)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlMembresiaLayout.setVerticalGroup(
+            pnlMembresiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMembresiaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tituloVerificarMembresia)
+                .addGap(18, 18, 18)
+                .addComponent(txtMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnVerificarMembresia)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnlDescuentos.setBackground(new java.awt.Color(18, 26, 60));
+
+        tituloDescuentos.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
+        tituloDescuentos.setForeground(new java.awt.Color(255, 255, 255));
+        tituloDescuentos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloDescuentos.setText("DESCUENTOS");
+
+        rbSeleccionarDescuento.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        rbSeleccionarDescuento.setForeground(new java.awt.Color(255, 255, 255));
+        rbSeleccionarDescuento.setText("SELECCIONAR DESCUENTO");
+        rbSeleccionarDescuento.setContentAreaFilled(false);
+        rbSeleccionarDescuento.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        rbSeleccionarDescuento.setFocusPainted(false);
+        rbSeleccionarDescuento.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        cbDescuentos.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        cbDescuentos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        rbCanjearCupon.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        rbCanjearCupon.setForeground(new java.awt.Color(255, 255, 255));
+        rbCanjearCupon.setText("CANJEAR CUPÓN");
+        rbCanjearCupon.setContentAreaFilled(false);
+        rbCanjearCupon.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        rbCanjearCupon.setFocusPainted(false);
+        rbCanjearCupon.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        txtCupon.setBackground(new java.awt.Color(31, 41, 55));
+        txtCupon.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        txtCupon.setForeground(new java.awt.Color(148, 163, 184));
+        txtCupon.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtCupon.setCaretColor(new java.awt.Color(51, 65, 85));
+
+        btnAplicarDescuento.setBackground(new java.awt.Color(37, 99, 235));
+        btnAplicarDescuento.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
+        btnAplicarDescuento.setForeground(new java.awt.Color(18, 31, 55));
+        btnAplicarDescuento.setText("APLICAR");
+        btnAplicarDescuento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAplicarDescuentoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlDescuentosLayout = new javax.swing.GroupLayout(pnlDescuentos);
+        pnlDescuentos.setLayout(pnlDescuentosLayout);
+        pnlDescuentosLayout.setHorizontalGroup(
+            pnlDescuentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDescuentosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlDescuentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tituloDescuentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rbSeleccionarDescuento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbDescuentos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rbCanjearCupon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCupon))
+                .addContainerGap())
+            .addGroup(pnlDescuentosLayout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(btnAplicarDescuento)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlDescuentosLayout.setVerticalGroup(
+            pnlDescuentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDescuentosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tituloDescuentos)
+                .addGap(18, 18, 18)
+                .addComponent(rbSeleccionarDescuento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbDescuentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(rbCanjearCupon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCupon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAplicarDescuento)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnlFormaPago.setBackground(new java.awt.Color(18, 26, 60));
+
+        tituloFormaPago.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
+        tituloFormaPago.setForeground(new java.awt.Color(255, 255, 255));
+        tituloFormaPago.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloFormaPago.setText("ESCOGER FORMA DE PAGO");
+
+        rbTarjeta.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        rbTarjeta.setForeground(new java.awt.Color(255, 255, 255));
+        rbTarjeta.setText("TARJETA");
+        rbTarjeta.setContentAreaFilled(false);
+        rbTarjeta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        rbTarjeta.setFocusPainted(false);
+        rbTarjeta.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        rbEfectivo.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        rbEfectivo.setForeground(new java.awt.Color(255, 255, 255));
+        rbEfectivo.setText("EFECTIVO");
+        rbEfectivo.setContentAreaFilled(false);
+        rbEfectivo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        rbEfectivo.setFocusPainted(false);
+        rbEfectivo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        imgEfectivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/efectivo.png"))); // NOI18N
+
+        imgTarjeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tarjeta.png"))); // NOI18N
+
+        javax.swing.GroupLayout pnlFormaPagoLayout = new javax.swing.GroupLayout(pnlFormaPago);
+        pnlFormaPago.setLayout(pnlFormaPagoLayout);
+        pnlFormaPagoLayout.setHorizontalGroup(
+            pnlFormaPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFormaPagoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tituloFormaPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormaPagoLayout.createSequentialGroup()
+                .addGap(0, 40, Short.MAX_VALUE)
+                .addGroup(pnlFormaPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbEfectivo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(imgEfectivo, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(pnlFormaPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbTarjeta)
+                    .addGroup(pnlFormaPagoLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(imgTarjeta)))
+                .addGap(40, 40, 40))
+        );
+        pnlFormaPagoLayout.setVerticalGroup(
+            pnlFormaPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFormaPagoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tituloFormaPago)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(pnlFormaPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imgEfectivo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imgTarjeta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlFormaPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbTarjeta)
+                    .addComponent(rbEfectivo))
+                .addContainerGap())
+        );
+
+        btnVolver.setBackground(new java.awt.Color(37, 99, 235));
+        btnVolver.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(26, 51, 83));
+        btnVolver.setText("VOLVER");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+
+        btnConfirmarPago.setBackground(new java.awt.Color(37, 99, 235));
+        btnConfirmarPago.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        btnConfirmarPago.setForeground(new java.awt.Color(26, 51, 83));
+        btnConfirmarPago.setText("CONFIRMAR PAGO");
+        btnConfirmarPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarPagoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnConfirmarPago))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnlMembresia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnlInformacionPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnlDescuentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnlFormaPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlDescuentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlInformacionPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlMembresia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlFormaPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfirmarPago, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        //cambiar esto es solo para el flujo mock
+        ControlPantallas.getInstance().abrirSeleccionAsientos(this, new SeleccionarFuncionDTO(funcion.getPelicula(), funcion.getSala(), funcion.getHoraFuncion(), funcion.getTipoSala()));
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnConfirmarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPagoActionPerformed
+        String tipoPago;
+        if (rbEfectivo.isSelected()){
+            tipoPago = "Efectivo";
+        } else {
+            tipoPago = "Tarjeta";
+        }
+        //control mandar la venta
+    }//GEN-LAST:event_btnConfirmarPagoActionPerformed
+
+    private void btnVerificarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarMembresiaActionPerformed
+        String numeroMembresia = txtMembresia.getText().trim();
+        //control mandar a buscar y verificar membresia
+    }//GEN-LAST:event_btnVerificarMembresiaActionPerformed
+
+    private void btnAplicarDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarDescuentoActionPerformed
+        String codigoDescuento;
+        if (rbSeleccionarDescuento.isSelected()){
+            //cambiarlo por obtener el objeto y luego su id
+            codigoDescuento = cbDescuentos.getSelectedItem().toString();
+        } else if (rbCanjearCupon.isSelected()){
+            codigoDescuento = txtCupon.getText();
+        }
+        //control buscar y validar descuentos
+    }//GEN-LAST:event_btnAplicarDescuentoActionPerformed
+
+    private void configurarPanelDescuentos(){
+        bgDescuentos.add(rbSeleccionarDescuento);
+        bgDescuentos.add(rbCanjearCupon);
+        //aqui cargar el combo box de los descuentos
+    }        
+    
+    private void configurarPanelFormaPago(){
+        bgFormaPago.add(rbEfectivo);
+        bgFormaPago.add(rbTarjeta);
+        rbEfectivo.setSelected(true);
+    }
+    
+    private void cargarInformacion(List<AsientoDTO> asientos, FuncionDTO funcion){
+        cargarInformacionVenta(asientos, funcion);
+        configurarPanelDescuentos();
+        configurarPanelFormaPago();
+    }
+    
+    private void cargarInformacionVenta(List<AsientoDTO> asientos, FuncionDTO funcion){
+        configurarTituloPelicula(funcion.getPelicula().getTitulo());
+        configurarInformacionFuncion(lblNombreSala, funcion.getSala().getNombre());
+        configurarInformacionFuncion(lblTipoSala, funcion.getTipoSala());
+        configurarInformacionFuncion(lblFechaFuncion, funcion.getFecha().toString());
+        configurarInformacionFuncion(lblHoraFuncion, funcion.getHoraFuncion());
+        configurarInformacionFuncion(lblAsientos, asientos.toString());
+        configurarPrecios();
+    }
+    
+    private void configurarTituloPelicula(String titulo){
+        lblTituloPelicula.setText(titulo);
+        lblTituloPelicula.setForeground(Color.WHITE);
+    }
+    
+    private void configurarInformacionFuncion(JLabel etiqueta, String texto){
+        etiqueta.setText(texto);
+        etiqueta.setForeground(new Color(148,163,184));
+    }
+    
+    private void configurarPrecios(){
+        lblSubtotalPrecio.setText("$280.00");
+        lblDescuento.setText("$50.00");
+        lblTotal.setText("$230.00");
+    }
+    
+    private void configurarFecha(Date fecha){
+      
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgDescuentos;
+    private javax.swing.ButtonGroup bgFormaPago;
+    private javax.swing.JButton btnAplicarDescuento;
+    private javax.swing.JButton btnConfirmarPago;
+    private javax.swing.JButton btnVerificarMembresia;
+    private javax.swing.JButton btnVolver;
+    private javax.swing.JComboBox<String> cbDescuentos;
+    private javax.swing.JLabel imgEfectivo;
+    private javax.swing.JLabel imgTarjeta;
+    private javax.swing.JLabel lblAsientos;
+    private javax.swing.JLabel lblDescuento;
+    private javax.swing.JLabel lblFechaFuncion;
+    private javax.swing.JLabel lblHoraFuncion;
+    private javax.swing.JLabel lblNombreSala;
+    private javax.swing.JLabel lblSubtotalPrecio;
+    private javax.swing.JLabel lblTipoSala;
+    private javax.swing.JLabel lblTituloPelicula;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JPanel pnlDescuentos;
+    private javax.swing.JPanel pnlFormaPago;
+    private javax.swing.JPanel pnlInformacionPago;
+    private javax.swing.JPanel pnlMembresia;
+    private javax.swing.JRadioButton rbCanjearCupon;
+    private javax.swing.JRadioButton rbEfectivo;
+    private javax.swing.JRadioButton rbSeleccionarDescuento;
+    private javax.swing.JRadioButton rbTarjeta;
+    private javax.swing.JSeparator separador;
+    private javax.swing.JLabel tituloDescuento;
+    private javax.swing.JLabel tituloDescuentos;
+    private javax.swing.JLabel tituloFormaPago;
+    private javax.swing.JLabel tituloSubtotal;
+    private javax.swing.JLabel tituloTotal;
+    private javax.swing.JLabel tituloVerificarMembresia;
+    private javax.swing.JTextField txtCupon;
+    private javax.swing.JTextField txtMembresia;
     // End of variables declaration//GEN-END:variables
 }
