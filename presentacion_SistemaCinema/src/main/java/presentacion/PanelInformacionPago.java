@@ -538,10 +538,6 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         lblDescuento.setText("$50.00");
         lblTotal.setText("$230.00");
     }
-    
-    private void configurarFecha(Date fecha){
-      
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgDescuentos;
