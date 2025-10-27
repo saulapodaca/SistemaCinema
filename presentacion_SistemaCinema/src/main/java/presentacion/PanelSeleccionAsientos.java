@@ -252,7 +252,7 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        ControlPantallas.getInstance().abrirInformacionPago(pnlContenedor, obtenerAsientosSeleccionados(), funcion);
+        ControlPantallas.getInstance().abrirInformacionPago(this, obtenerAsientosSeleccionados(), funcion);
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void configurarMapaAsientos(SalaDTO sala) {

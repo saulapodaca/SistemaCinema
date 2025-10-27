@@ -8,6 +8,7 @@ import dto.SalaDTO;
 import dto.SeleccionarFuncionDTO;
 import java.awt.BorderLayout;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JPanel;
 
@@ -94,9 +95,10 @@ public class ControlPantallas {
     
     public void abrirInformacionPago(JPanel panelAnterior, List<AsientoDTO> asientos, FuncionDTO funcion){
         eliminarPanelAnterior(panelAnterior);
-        JPanel panelNuevo = new PanelInformacionPago();
+        JPanel panelNuevo = new PanelInformacionPago(asientos, funcion);
         agregarPanelNuevo(panelNuevo);
     }
+    
 
     private void agregarPanelNuevo(JPanel panelNuevo) {
         this.formPrincipal.getContentPane().add(panelNuevo, BorderLayout.CENTER);
@@ -130,6 +132,6 @@ public class ControlPantallas {
     private FuncionDTO obtenerFuncionPelicula(){
         return new FuncionDTO(new SalaDTO("Sala 1", 7, 10), 
                 new PeliculaDTO("Spiderman", "/spiderman.png", "180", "Doblado"),
-                "10:30", "Sala 3D");
+                "10:30", "Sala 3D", new Date());
     }
 }

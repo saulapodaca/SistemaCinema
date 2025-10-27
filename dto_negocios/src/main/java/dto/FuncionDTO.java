@@ -3,6 +3,7 @@ package dto;
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class FuncionDTO {
@@ -14,13 +15,15 @@ public class FuncionDTO {
     private String horaFuncion;
     private String tipoSala;
     private List<AsientoDTO> asientos;
+    private Date fecha;
 
-    public FuncionDTO(SalaDTO sala, PeliculaDTO pelicula, String horaFuncion, String tipoSala) {
+    public FuncionDTO(SalaDTO sala, PeliculaDTO pelicula, String horaFuncion, String tipoSala, Date fecha) {
         this.sala = sala;
         this.pelicula = pelicula;
         this.horaFuncion = horaFuncion;
         this.tipoSala = tipoSala;
         this.asientos = new ArrayList<>();
+        this.fecha = fecha;
         
         for (int f = 0; f < sala.getFilas(); f++){
             for (int c = 0; c < sala.getColumnas(); c++){
@@ -51,6 +54,10 @@ public class FuncionDTO {
 
     public void setAsientos(List<AsientoDTO> asientos) {
         this.asientos = asientos;
+    }
+    
+    public Date getFecha(){
+        return fecha;
     }
 
 }
