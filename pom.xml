@@ -8,6 +8,8 @@
     <modules>
         <module>presentacion_SistemaCinema</module>
         <module>dto_negocios</module>
+        <module>negocios_VenderBoleto</module>
+        <module>negocios_GestorEmpleados</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

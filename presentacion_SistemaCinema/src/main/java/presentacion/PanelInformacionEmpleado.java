@@ -1,20 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package presentacion;
+
+import dto.EmpleadoDTO;
+import java.awt.Color;
+import java.awt.Image;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.Timer;
+import presentacion.utilerias.GestorSesion;
 
 /**
  *
  * @author saula
  */
 public class PanelInformacionEmpleado extends javax.swing.JPanel {
-
+    
     /**
      * Creates new form panelInformacionEmpleadoBien
      */
     public PanelInformacionEmpleado() {
         initComponents();
+        cargarPanel();
     }
 
     /**
@@ -42,6 +53,7 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoCine3.png"))); // NOI18N
 
         lblFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenDefault1.png"))); // NOI18N
+        lblFoto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         lblCerrarSesion.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblCerrarSesion.setForeground(new java.awt.Color(148, 163, 184));
@@ -93,10 +105,7 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(lblLogo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
+                        .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblFoto)
                             .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
@@ -118,14 +127,17 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(136, 136, 136)
                         .addComponent(lblHora)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 161, Short.MAX_VALUE)
+                .addComponent(lblLogo)
+                .addGap(155, 155, 155))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(lblLogo)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addComponent(lblFoto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblNombreEmpleado)
@@ -155,6 +167,52 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_lblCerrarSesionMouseClicked
 
+    private void cargarPanel(){
+        cargarInformacionEmpleado();
+        mostrarFecha();
+        iniciarReloj();
+    }
+    
+    private void mostrarFecha(){
+        LocalDate hoy = LocalDate.now();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
+        lblFecha.setText(hoy.format(formato));
+    }
+    
+    private void iniciarReloj(){
+         Timer timer = new Timer(1000, e -> {
+            LocalTime hora = LocalTime.now();
+            DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
+            lblHora.setText(hora.format(formatoHora));
+        });
+        timer.start();
+    }
+    
+    private void cargarInformacionEmpleado(){
+        EmpleadoDTO empleado = GestorSesion.getUsuario();
+        configurarImagen(empleado.getUrlFoto());
+        configurarInformacion(lblNombreEmpleado, empleado.getNombres()+" "+empleado.getApellidoMaterno());
+        configurarInformacion(lblPuestoEmpleado, empleado.getOcupacion());
+        configurarInformacion(lblNombreSucursal, empleado.getSucursal());
+    }
+
+    private void configurarInformacion(JLabel etiqueta, String texto){
+        etiqueta.setText(texto.toUpperCase());
+        etiqueta.setForeground(Color.WHITE);
+    }
+    
+    private void configurarImagen(String urlImagen) {
+        lblFoto.setText("");
+        lblFoto.setHorizontalAlignment(SwingConstants.CENTER);
+
+        URL url = getClass().getResource(urlImagen);
+        if (url != null) {
+            ImageIcon icon = new ImageIcon(url);
+            Image img = icon.getImage().getScaledInstance(165, 229, Image.SCALE_SMOOTH);
+            lblFoto.setIcon(new ImageIcon(img));
+        } else {
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenuPrincipal;
