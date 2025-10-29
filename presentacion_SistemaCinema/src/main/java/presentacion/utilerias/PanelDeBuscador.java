@@ -10,14 +10,14 @@ import java.util.function.Consumer;
  *
  * @author saula
  */
-public class PanelBuscador extends javax.swing.JPanel {
+public class PanelDeBuscador extends javax.swing.JPanel {
 
     private final String TEXTO_DEFAULT = "BUSCAR...";
     private Consumer<String> onBusquedaChange;
     /**
      * Creates new form buscador
      */
-    public PanelBuscador() {
+    public PanelDeBuscador() {
         initComponents();
         inicializarEventos();
     }

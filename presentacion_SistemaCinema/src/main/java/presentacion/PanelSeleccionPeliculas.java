@@ -68,7 +68,7 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
         pnlInfoPeli6 = new javax.swing.JPanel();
         lblTituloPeli6 = new javax.swing.JLabel();
         lblImagenPeli6 = new javax.swing.JLabel();
-        panelBuscador1 = new presentacion.utilerias.PanelBuscador();
+        panelBuscador1 = new presentacion.utilerias.PanelDeBuscador();
         panelPaginacion1 = new presentacion.utilerias.PanelPaginacion();
 
         setBackground(new java.awt.Color(8, 17, 40));
@@ -435,7 +435,7 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
     private javax.swing.JLabel lblTituloPeli4;
     private javax.swing.JLabel lblTituloPeli5;
     private javax.swing.JLabel lblTituloPeli6;
-    private presentacion.utilerias.PanelBuscador panelBuscador1;
+    private presentacion.utilerias.PanelDeBuscador panelBuscador1;
     private presentacion.utilerias.PanelPaginacion panelPaginacion1;
     private javax.swing.JPanel panelPeliculas;
     private javax.swing.JPanel pnlInfoPeli1;
