@@ -10,11 +10,16 @@ package presentacion.utilerias;
  */
 public class PanelPaginacion extends javax.swing.JPanel {
 
+    private int paginaActual = 1;
+    private int tamanoPagina = 6; // por defecto
+    private Runnable onPaginaChange;
+    
     /**
      * Creates new form PanelPaginacion
      */
     public PanelPaginacion() {
         initComponents();
+        actualizarLabel();
     }
 
     /**
@@ -26,30 +31,30 @@ public class PanelPaginacion extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
+        lblNumeroPagina = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(8, 17, 40));
 
-        jButton1.setBackground(new java.awt.Color(37, 99, 235));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flechaIzquierda.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAtras.setBackground(new java.awt.Color(37, 99, 235));
+        btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flechaIzquierda.png"))); // NOI18N
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAtrasActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(37, 99, 235));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flechaDerecha.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSiguiente.setBackground(new java.awt.Color(37, 99, 235));
+        btnSiguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/flechaDerecha.png"))); // NOI18N
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSiguienteActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jLabel1.setText("Página 0");
+        lblNumeroPagina.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        lblNumeroPagina.setText("Página 0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -57,11 +62,11 @@ public class PanelPaginacion extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(btnAtras)
                 .addGap(208, 208, 208)
-                .addComponent(jLabel1)
+                .addComponent(lblNumeroPagina)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btnSiguiente)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -69,28 +74,60 @@ public class PanelPaginacion extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btnSiguiente)
+                    .addComponent(btnAtras))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(lblNumeroPagina)
                 .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        if (paginaActual > 1) { // no ir a páginas negativas
+            paginaActual--;
+            actualizarLabel();
+            notificarCambio();
+        }
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        paginaActual++;
+        actualizarLabel();
+        notificarCambio();
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
+    public int getPaginaActual() {
+        return paginaActual;
+    }
+
+    public int getTamanoPagina() {
+        return tamanoPagina;
+    }
+
+    public void setTamanoPagina(int tamanoPagina) {
+        this.tamanoPagina = tamanoPagina;
+    }
+
+    public void setOnPaginaChange(Runnable listener) {
+        this.onPaginaChange = listener;
+    }
+
+    private void actualizarLabel() {
+        lblNumeroPagina.setText("Página " + paginaActual);
+    }
+
+    private void notificarCambio() {
+        if (onPaginaChange != null) {
+            onPaginaChange.run();
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnSiguiente;
+    private javax.swing.JLabel lblNumeroPagina;
     // End of variables declaration//GEN-END:variables
 }
