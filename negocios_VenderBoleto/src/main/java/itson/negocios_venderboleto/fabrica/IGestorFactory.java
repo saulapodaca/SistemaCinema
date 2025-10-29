@@ -1,0 +1,32 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
+package itson.negocios_venderboleto.fabrica;
+
+import itson.negocios_correoelectronico.ICorreoElectronico;
+import itson.negocios_generadorqr.IGeneradorQR;
+import itson.negocios_gestorasientos.IGestorAsientos;
+import itson.negocios_gestorboletos.IGestorBoletos;
+import itson.negocios_gestorempleados.IGestorEmpleados;
+import itson.negocios_gestorfunciones.IGestorFunciones;
+import itson.negocios_gestormembresias.IGestorMembresias;
+import itson.negocios_gestorpeliculas.IGestorPeliculas;
+import itson.negocios_gestorventas.IGestorVentas;
+
+/**
+ *
+ * @author saula
+ */
+public interface IGestorFactory {
+    IGestorPeliculas crearGestorPeliculas();
+    IGestorFunciones crearGestorFunciones();
+    IGestorAsientos crearGestorAsientos();
+    IGestorEmpleados crearGestorEmpleados();
+    IGestorMembresias crearGestorMembresias();
+    IGestorVentas crearGestorVentas();
+    IGestorBoletos crearGestorBoletos();
+    IGeneradorQR crearGeneradorQR();
+    ICorreoElectronico crearCorreoElectronico();
+    
+}
