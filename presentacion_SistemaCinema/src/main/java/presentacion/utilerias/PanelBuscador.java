@@ -4,6 +4,8 @@
  */
 package presentacion.utilerias;
 
+import java.util.function.Consumer;
+
 /**
  *
  * @author saula
@@ -11,11 +13,13 @@ package presentacion.utilerias;
 public class PanelBuscador extends javax.swing.JPanel {
 
     private final String TEXTO_DEFAULT = "BUSCAR...";
+    private Consumer<String> onBusquedaChange;
     /**
      * Creates new form buscador
      */
     public PanelBuscador() {
         initComponents();
+        inicializarEventos();
     }
 
     /**
@@ -84,7 +88,38 @@ public class PanelBuscador extends javax.swing.JPanel {
             txtBuscador.setText("");
         }
     }//GEN-LAST:event_txtBuscadorFocusGained
+    public void setOnBusquedaChange(java.util.function.Consumer<String> listener) {
+        this.onBusquedaChange = listener;
+    }
 
+    public String getTextoBusqueda() {
+        return txtBuscador.getText().trim();
+    }
+
+    private void inicializarEventos() {
+        txtBuscador.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                notificarCambio();
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                notificarCambio();
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                notificarCambio();
+            }
+        });
+    }
+
+    private void notificarCambio() {
+        if (onBusquedaChange != null) {
+            onBusquedaChange.accept(getTextoBusqueda());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblLupa;
