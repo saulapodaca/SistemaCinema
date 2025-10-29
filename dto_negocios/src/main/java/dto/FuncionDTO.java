@@ -8,9 +8,7 @@ import java.util.List;
 
 public class FuncionDTO {
 
-    //cambiar cuando tengamos dominio
     private SalaDTO sala;
-    //cambiar cuando tengamos dominio
     private PeliculaDTO pelicula;
     private String horaFuncion;
     private String tipoSala;
