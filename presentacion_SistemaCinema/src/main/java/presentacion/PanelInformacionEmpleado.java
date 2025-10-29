@@ -1,5 +1,6 @@
 package presentacion;
 
+import presentacion.controles.ControlPantallas;
 import dto.EmpleadoDTO;
 import java.awt.Color;
 import java.awt.Image;
@@ -52,6 +53,7 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoCine3.png"))); // NOI18N
 
+        lblFoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenDefault1.png"))); // NOI18N
         lblFoto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -84,10 +86,12 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
 
         lblNombreEmpleado.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         lblNombreEmpleado.setForeground(new java.awt.Color(241, 245, 249));
+        lblNombreEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNombreEmpleado.setText("SAUL APODACA");
 
         lblPuestoEmpleado.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         lblPuestoEmpleado.setForeground(new java.awt.Color(241, 245, 249));
+        lblPuestoEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPuestoEmpleado.setText("GERENTE");
 
         lblSucursal.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
@@ -96,42 +100,42 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
 
         lblNombreSucursal.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         lblNombreSucursal.setForeground(new java.awt.Color(241, 245, 249));
+        lblNombreSucursal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblNombreSucursal.setText("NAINARI");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 161, Short.MAX_VALUE)
+                .addComponent(lblLogo)
+                .addGap(155, 155, 155))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblFoto)
-                            .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                            .addComponent(lblFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(lblNombreEmpleado))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(102, 102, 102)
                         .addComponent(lblSucursal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNombreSucursal))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(lblPuestoEmpleado))
+                        .addComponent(lblNombreSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addComponent(lblCerrarSesion))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(136, 136, 136)
                         .addComponent(lblHora)))
-                .addContainerGap(70, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 161, Short.MAX_VALUE)
-                .addComponent(lblLogo)
-                .addGap(155, 155, 155))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombreEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPuestoEmpleado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblFoto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

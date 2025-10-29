@@ -4,11 +4,10 @@
  */
 package presentacion;
 
+import presentacion.controles.ControlPantallas;
 import dto.AsientoDTO;
 import dto.FuncionDTO;
-import dto.SeleccionarFuncionDTO;
 import java.awt.Color;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -466,7 +465,7 @@ public class PanelInformacionPago extends javax.swing.JPanel {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         //cambiar esto es solo para el flujo mock
-        ControlPantallas.getInstance().abrirSeleccionAsientos(this, new SeleccionarFuncionDTO(funcion.getPelicula(), funcion.getSala(), funcion.getHoraFuncion(), funcion.getTipoSala()));
+        ControlPantallas.getInstance().abrirSeleccionAsientos(this, funcion);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnConfirmarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPagoActionPerformed
