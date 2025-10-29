@@ -4,6 +4,8 @@
  */
 package presentacion;
 
+import presentacion.controles.ControlPantallas;
+
 /**
  *
  * @author saula
@@ -186,6 +188,7 @@ public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
         lblEscanearBoleto.setText("ESCANEAR BOLETO");
 
         lblGenerarReportes.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblGenerarReportes.setForeground(new java.awt.Color(255, 255, 255));
         lblGenerarReportes.setText("GENERAR REPORTES");
 
         lblGestionarPeliculas.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N

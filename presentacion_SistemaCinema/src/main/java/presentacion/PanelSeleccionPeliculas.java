@@ -1,15 +1,17 @@
 package presentacion;
 
+import dto.FiltroDTO;
+import presentacion.controles.ControlPantallas;
 import dto.PeliculaDTO;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import presentacion.controles.ControlNegocio;
 
 /**
  *
@@ -26,7 +28,10 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
     public PanelSeleccionPeliculas() {
         initComponents();
         inicializarReferencias();
-        cargarPeliculas();
+        panelBuscador1.setOnBusquedaChange((texto) -> {
+            actualizarCartelera();
+        });
+        actualizarCartelera();
     }
 
     /**
@@ -299,9 +304,8 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
     /**
      * Método que se encarga de cargar la pantalla con las películas
      */
-    private void cargarPeliculas() {
+    private void cargarPeliculas(List<PeliculaDTO> peliculas) {
         //TO DO: AQUÍ ES DONDE NOS COMUNICAMOS AL CONTROL PARA OBTENER LAS PELICULAS DEL SUBSISTEMA DE GESTION DE PELICULAS
-        List<PeliculaDTO> peliculas = obtenerPeliculas();
 
         for (int i = 0; i < etiquetasImagenes.size(); i++) {
             JLabel lblImagen = etiquetasImagenes.get(i);
@@ -329,16 +333,6 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
         etiquetasTitulo = List.of(
                 lblTituloPeli1, lblTituloPeli2, lblTituloPeli3,
                 lblTituloPeli4, lblTituloPeli5, lblTituloPeli6
-        );
-    }
-
-    //hardcode
-    private List<PeliculaDTO> obtenerPeliculas() {
-        return Arrays.asList(
-                new PeliculaDTO("Spiderman", "/blackphone.png", "200min", "Doblada"),
-                new PeliculaDTO("Batman", "/spiderman.png", "180min", "Español"),
-                new PeliculaDTO("Ironman", "/spiderman.png", "250min", "Subtitulada"),
-                new PeliculaDTO("Ironman", "/spiderman.png", "250min", "Subtitulada")
         );
     }
 
@@ -407,14 +401,26 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
      * click
      * @param peli se envía el dto para posteriores configuraciones
      */
-    private void configurarEventoClick(JLabel lblImagen, PeliculaDTO peli) {
+    private void configurarEventoClick(JLabel lblImagen, PeliculaDTO pelicula) {
         lblImagen.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                ControlPantallas.getInstance().abrirSeleccionFunciones(PanelSeleccionPeliculas.this,peli);
+                ControlPantallas.getInstance().abrirSeleccionFunciones(PanelSeleccionPeliculas.this, pelicula);
             }
         });
     }
+
+    private void actualizarCartelera() {
+        String busqueda = panelBuscador1.getTextoBusqueda();
+        int pagina = panelPaginacion1.getPaginaActual();  
+        int tamano = panelPaginacion1.getTamanoPagina();     
+
+        FiltroDTO filtro = new FiltroDTO(pagina, tamano, busqueda);
+
+        List<PeliculaDTO> peliculas = ControlNegocio.getInstance().obtenerCartelera(filtro);
+        cargarPeliculas(peliculas);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblImagenPeli1;
     private javax.swing.JLabel lblImagenPeli2;

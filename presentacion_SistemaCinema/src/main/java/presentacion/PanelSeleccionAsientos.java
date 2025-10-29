@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import presentacion.controles.ControlPantallas;
 import dto.AsientoDTO;
 import dto.FuncionDTO;
 import dto.SalaDTO;

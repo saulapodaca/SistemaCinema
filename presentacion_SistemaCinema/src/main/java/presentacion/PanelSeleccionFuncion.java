@@ -1,9 +1,11 @@
 package presentacion;
 
-import dto.SeleccionarFuncionDTO;
+import presentacion.controles.ControlPantallas;
+import dto.FuncionDTO;
 import java.awt.Color;
 import java.awt.Image;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -20,14 +22,14 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
     private List<JLabel> etiquetasHoraFuncion;
     private List<JLabel> etiquetasTipoSala;
     private List<JPanel> panelesFunciones;
-    private List<SeleccionarFuncionDTO> funciones;
+    private List<FuncionDTO> funciones;
 
     /**
      * Creates new form PanelSeleccionFuncion
      *
      * @param funciones
      */
-    public PanelSeleccionFuncion(List<SeleccionarFuncionDTO> funciones) {
+    public PanelSeleccionFuncion(List<FuncionDTO> funciones) {
         this.funciones = funciones;
         initComponents();
         inicializarReferencias();
@@ -54,7 +56,6 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
         lblTituloPelicula = new javax.swing.JLabel();
         lblDuracion = new javax.swing.JLabel();
         lblIdioma = new javax.swing.JLabel();
-        datePicker = new datechooser.beans.DateChooserCombo();
         btnVolver = new javax.swing.JButton();
         pnlFuncion2 = new javax.swing.JPanel();
         lblNombreSalaFuncion2 = new javax.swing.JLabel();
@@ -68,6 +69,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
         lblNombreSalaFuncion4 = new javax.swing.JLabel();
         lblHoraFuncion4 = new javax.swing.JLabel();
         lblTipoSalaFuncion4 = new javax.swing.JLabel();
+        dateChooser = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(8, 17, 40));
 
@@ -127,241 +129,199 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
         lblIdioma.setForeground(new java.awt.Color(148, 163, 184));
         lblIdioma.setText("IDIOMA");
 
-        datePicker.setCurrentView(new datechooser.view.appearance.AppearancesList("Swing",
-            new datechooser.view.appearance.ViewAppearance("custom",
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(204, 204, 204),
-                    new java.awt.Color(0, 0, 255),
-                    false,
-                    true,
-                    new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(204, 204, 204),
-                    new java.awt.Color(0, 0, 255),
-                    true,
-                    true,
-                    new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(0, 0, 255),
-                    new java.awt.Color(0, 0, 255),
-                    false,
-                    true,
-                    new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(128, 128, 128),
-                    new java.awt.Color(0, 0, 255),
-                    false,
-                    true,
-                    new datechooser.view.appearance.swing.LabelPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(204, 204, 204),
-                    new java.awt.Color(0, 0, 255),
-                    false,
-                    true,
-                    new datechooser.view.appearance.swing.LabelPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12),
-                    new java.awt.Color(204, 204, 204),
-                    new java.awt.Color(255, 0, 0),
-                    false,
-                    false,
-                    new datechooser.view.appearance.swing.ButtonPainter()),
-                (datechooser.view.BackRenderer)null,
-                false,
-                true)));
-    datePicker.setFieldFont(new java.awt.Font("Comic Sans MS", java.awt.Font.BOLD, 12));
+        btnVolver.setBackground(new java.awt.Color(37, 99, 235));
+        btnVolver.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(26, 51, 83));
+        btnVolver.setText("VOLVER");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
 
-    btnVolver.setBackground(new java.awt.Color(37, 99, 235));
-    btnVolver.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-    btnVolver.setForeground(new java.awt.Color(26, 51, 83));
-    btnVolver.setText("VOLVER");
-    btnVolver.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnVolverActionPerformed(evt);
-        }
-    });
+        pnlFuncion2.setBackground(new java.awt.Color(18, 31, 55));
+        pnlFuncion2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 65, 85), 3, true));
 
-    pnlFuncion2.setBackground(new java.awt.Color(18, 31, 55));
-    pnlFuncion2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 65, 85), 3, true));
+        lblNombreSalaFuncion2.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        lblNombreSalaFuncion2.setText("SALA 1");
 
-    lblNombreSalaFuncion2.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-    lblNombreSalaFuncion2.setText("SALA 1");
+        lblHoraFuncion2.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
+        lblHoraFuncion2.setText("00:00");
 
-    lblHoraFuncion2.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
-    lblHoraFuncion2.setText("00:00");
+        lblTipoSalaFuncion2.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        lblTipoSalaFuncion2.setForeground(new java.awt.Color(148, 163, 184));
+        lblTipoSalaFuncion2.setText("SALA TRADICIONAL");
 
-    lblTipoSalaFuncion2.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-    lblTipoSalaFuncion2.setForeground(new java.awt.Color(148, 163, 184));
-    lblTipoSalaFuncion2.setText("SALA TRADICIONAL");
-
-    javax.swing.GroupLayout pnlFuncion2Layout = new javax.swing.GroupLayout(pnlFuncion2);
-    pnlFuncion2.setLayout(pnlFuncion2Layout);
-    pnlFuncion2Layout.setHorizontalGroup(
-        pnlFuncion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(pnlFuncion2Layout.createSequentialGroup()
-            .addGap(30, 30, 30)
-            .addComponent(lblNombreSalaFuncion2)
-            .addGap(272, 272, 272)
-            .addComponent(lblHoraFuncion2)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lblTipoSalaFuncion2)
-            .addGap(18, 18, 18))
-    );
-    pnlFuncion2Layout.setVerticalGroup(
-        pnlFuncion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFuncion2Layout.createSequentialGroup()
-            .addContainerGap(23, Short.MAX_VALUE)
-            .addGroup(pnlFuncion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlFuncion2Layout = new javax.swing.GroupLayout(pnlFuncion2);
+        pnlFuncion2.setLayout(pnlFuncion2Layout);
+        pnlFuncion2Layout.setHorizontalGroup(
+            pnlFuncion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFuncion2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addComponent(lblNombreSalaFuncion2)
-                .addComponent(lblHoraFuncion2))
-            .addContainerGap())
-        .addGroup(pnlFuncion2Layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(lblTipoSalaFuncion2)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    );
+                .addGap(272, 272, 272)
+                .addComponent(lblHoraFuncion2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTipoSalaFuncion2)
+                .addGap(18, 18, 18))
+        );
+        pnlFuncion2Layout.setVerticalGroup(
+            pnlFuncion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFuncion2Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(pnlFuncion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombreSalaFuncion2)
+                    .addComponent(lblHoraFuncion2))
+                .addContainerGap())
+            .addGroup(pnlFuncion2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTipoSalaFuncion2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-    pnlFuncion3.setBackground(new java.awt.Color(18, 31, 55));
-    pnlFuncion3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 65, 85), 3, true));
+        pnlFuncion3.setBackground(new java.awt.Color(18, 31, 55));
+        pnlFuncion3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 65, 85), 3, true));
 
-    lblNombreSalaFuncion3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-    lblNombreSalaFuncion3.setText("SALA 1");
+        lblNombreSalaFuncion3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        lblNombreSalaFuncion3.setText("SALA 1");
 
-    lblHoraFuncion3.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
-    lblHoraFuncion3.setText("00:00");
+        lblHoraFuncion3.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
+        lblHoraFuncion3.setText("00:00");
 
-    lblTipoSalaFuncion3.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-    lblTipoSalaFuncion3.setForeground(new java.awt.Color(148, 163, 184));
-    lblTipoSalaFuncion3.setText("SALA TRADICIONAL");
+        lblTipoSalaFuncion3.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        lblTipoSalaFuncion3.setForeground(new java.awt.Color(148, 163, 184));
+        lblTipoSalaFuncion3.setText("SALA TRADICIONAL");
 
-    javax.swing.GroupLayout pnlFuncion3Layout = new javax.swing.GroupLayout(pnlFuncion3);
-    pnlFuncion3.setLayout(pnlFuncion3Layout);
-    pnlFuncion3Layout.setHorizontalGroup(
-        pnlFuncion3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(pnlFuncion3Layout.createSequentialGroup()
-            .addGap(30, 30, 30)
-            .addComponent(lblNombreSalaFuncion3)
-            .addGap(272, 272, 272)
-            .addComponent(lblHoraFuncion3)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lblTipoSalaFuncion3)
-            .addGap(18, 18, 18))
-    );
-    pnlFuncion3Layout.setVerticalGroup(
-        pnlFuncion3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFuncion3Layout.createSequentialGroup()
-            .addContainerGap(23, Short.MAX_VALUE)
-            .addGroup(pnlFuncion3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlFuncion3Layout = new javax.swing.GroupLayout(pnlFuncion3);
+        pnlFuncion3.setLayout(pnlFuncion3Layout);
+        pnlFuncion3Layout.setHorizontalGroup(
+            pnlFuncion3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFuncion3Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addComponent(lblNombreSalaFuncion3)
-                .addComponent(lblHoraFuncion3))
-            .addContainerGap())
-        .addGroup(pnlFuncion3Layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(lblTipoSalaFuncion3)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    );
+                .addGap(272, 272, 272)
+                .addComponent(lblHoraFuncion3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTipoSalaFuncion3)
+                .addGap(18, 18, 18))
+        );
+        pnlFuncion3Layout.setVerticalGroup(
+            pnlFuncion3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFuncion3Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(pnlFuncion3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombreSalaFuncion3)
+                    .addComponent(lblHoraFuncion3))
+                .addContainerGap())
+            .addGroup(pnlFuncion3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTipoSalaFuncion3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-    pnlFuncion4.setBackground(new java.awt.Color(18, 31, 55));
-    pnlFuncion4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 65, 85), 3, true));
+        pnlFuncion4.setBackground(new java.awt.Color(18, 31, 55));
+        pnlFuncion4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 65, 85), 3, true));
 
-    lblNombreSalaFuncion4.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-    lblNombreSalaFuncion4.setText("SALA 1");
+        lblNombreSalaFuncion4.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        lblNombreSalaFuncion4.setText("SALA 1");
 
-    lblHoraFuncion4.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
-    lblHoraFuncion4.setText("00:00");
+        lblHoraFuncion4.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
+        lblHoraFuncion4.setText("00:00");
 
-    lblTipoSalaFuncion4.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-    lblTipoSalaFuncion4.setForeground(new java.awt.Color(148, 163, 184));
-    lblTipoSalaFuncion4.setText("SALA TRADICIONAL");
+        lblTipoSalaFuncion4.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        lblTipoSalaFuncion4.setForeground(new java.awt.Color(148, 163, 184));
+        lblTipoSalaFuncion4.setText("SALA TRADICIONAL");
 
-    javax.swing.GroupLayout pnlFuncion4Layout = new javax.swing.GroupLayout(pnlFuncion4);
-    pnlFuncion4.setLayout(pnlFuncion4Layout);
-    pnlFuncion4Layout.setHorizontalGroup(
-        pnlFuncion4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(pnlFuncion4Layout.createSequentialGroup()
-            .addGap(30, 30, 30)
-            .addComponent(lblNombreSalaFuncion4)
-            .addGap(272, 272, 272)
-            .addComponent(lblHoraFuncion4)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lblTipoSalaFuncion4)
-            .addGap(18, 18, 18))
-    );
-    pnlFuncion4Layout.setVerticalGroup(
-        pnlFuncion4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFuncion4Layout.createSequentialGroup()
-            .addContainerGap(23, Short.MAX_VALUE)
-            .addGroup(pnlFuncion4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlFuncion4Layout = new javax.swing.GroupLayout(pnlFuncion4);
+        pnlFuncion4.setLayout(pnlFuncion4Layout);
+        pnlFuncion4Layout.setHorizontalGroup(
+            pnlFuncion4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFuncion4Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addComponent(lblNombreSalaFuncion4)
-                .addComponent(lblHoraFuncion4))
-            .addContainerGap())
-        .addGroup(pnlFuncion4Layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(lblTipoSalaFuncion4)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    );
+                .addGap(272, 272, 272)
+                .addComponent(lblHoraFuncion4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTipoSalaFuncion4)
+                .addGap(18, 18, 18))
+        );
+        pnlFuncion4Layout.setVerticalGroup(
+            pnlFuncion4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFuncion4Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(pnlFuncion4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombreSalaFuncion4)
+                    .addComponent(lblHoraFuncion4))
+                .addContainerGap())
+            .addGroup(pnlFuncion4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTipoSalaFuncion4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-    this.setLayout(layout);
-    layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-            .addGap(50, 50, 50)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(pnlImagenPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblIdioma)
-                                .addComponent(lblDuracion)
-                                .addComponent(lblTituloPelicula)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelPaginacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(pnlFuncion4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnlFuncion3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnlFuncion2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnlFuncion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addContainerGap(56, Short.MAX_VALUE))
-    );
-    layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(93, 93, 93)
-                    .addComponent(lblTituloPelicula)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(lblDuracion)
-                    .addGap(4, 4, 4)
-                    .addComponent(lblIdioma))
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(pnlImagenPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGap(18, 18, 18)
-            .addComponent(pnlFuncion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
-            .addComponent(pnlFuncion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
-            .addComponent(pnlFuncion3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
-            .addComponent(pnlFuncion4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(15, 15, 15))
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(panelPaginacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-    );
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnlImagenPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblIdioma)
+                                    .addComponent(lblDuracion)
+                                    .addComponent(lblTituloPelicula))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 387, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelPaginacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlFuncion4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlFuncion3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlFuncion2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlFuncion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(lblTituloPelicula)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblDuracion)
+                        .addGap(4, 4, 4)
+                        .addComponent(lblIdioma))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlImagenPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(pnlFuncion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pnlFuncion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pnlFuncion3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pnlFuncion4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(15, 15, 15))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panelPaginacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
     }// </editor-fold>//GEN-END:initComponents
     /**
      * Al picarle al botón volver mandará a la pantalla anterior
@@ -377,7 +337,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
      *
      * @param pelicula película a mostrar
      */
-    private void cargarInformacionPelicula(SeleccionarFuncionDTO funcion) {
+    private void cargarInformacionPelicula(FuncionDTO funcion) {
         configurarImagen(funcion.getPelicula().getRutaImagen());
         configurarTitulo(funcion.getPelicula().getTitulo());
         configurarInformacionPelicula(funcion.getPelicula().getDuracion(), funcion.getPelicula().getIdioma());
@@ -441,7 +401,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
             limpiarEtiquetas(lblNombreSala, lblHoraFuncion, lblTipoSala);
 
             if (i < this.funciones.size()) {
-                SeleccionarFuncionDTO funcion = this.funciones.get(i);
+                FuncionDTO funcion = this.funciones.get(i);
                 mostrarFuncionEtiqueta(funcion, lblNombreSala, lblHoraFuncion, lblTipoSala, pnlFuncion);
 
             }
@@ -463,7 +423,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
      * @param panelFuncion panel en dónde se configurará el evento del click
      * para la elección de función
      */
-    private void mostrarFuncionEtiqueta(SeleccionarFuncionDTO funcion, JLabel lblNombreSala, JLabel lblHoraFuncion, JLabel lblTipoSala, JPanel panelFuncion) {
+    private void mostrarFuncionEtiqueta(FuncionDTO funcion, JLabel lblNombreSala, JLabel lblHoraFuncion, JLabel lblTipoSala, JPanel panelFuncion) {
         configurarNombreSala(lblNombreSala, funcion.getSala().getNombre());
         configurarHoraFuncion(lblHoraFuncion, funcion.getHoraFuncion());
         configurarTipoSala(lblTipoSala, funcion.getTipoSala());
@@ -511,7 +471,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
      * @param funcion se envía el DTO de la función para su posterior elección
      * de asientos
      */
-    private void configurarEventoClick(JPanel panelFuncion, SeleccionarFuncionDTO funcion) {
+    private void configurarEventoClick(JPanel panelFuncion, FuncionDTO funcion) {
         panelFuncion.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -541,6 +501,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
                 pnlFuncion1, pnlFuncion2,
                 pnlFuncion3, pnlFuncion4
         );
+        dateChooser.setDate(new Date());
     }
 
     /**
@@ -560,7 +521,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVolver;
-    private datechooser.beans.DateChooserCombo datePicker;
+    private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JLabel lblDuracion;
     private javax.swing.JLabel lblHoraFuncion1;
     private javax.swing.JLabel lblHoraFuncion2;
