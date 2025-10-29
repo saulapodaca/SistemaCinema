@@ -15,7 +15,7 @@ public class GestorFunciones implements IGestorFunciones {
     public List<FuncionDTO> obtenerFuncionesPorPelícula(PeliculaDTO pelicula, Date fecha) {
         return Arrays.asList(
                 new FuncionDTO(
-                        new SalaDTO("Sala 1", 5, 5),
+                        new SalaDTO("Sala 1", 7, 10),
                         pelicula,
                         "12:30",
                         "Sala Tradicional",
@@ -29,7 +29,7 @@ public class GestorFunciones implements IGestorFunciones {
                         new Date()
                 ),
                 new FuncionDTO(
-                        new SalaDTO("Sala 3", 5, 5),
+                        new SalaDTO("Sala 3", 7, 7),
                         pelicula,
                         "15:00",
                         "Sala Tradicional",
