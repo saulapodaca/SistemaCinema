@@ -47,4 +47,8 @@ public class PromocionDTO {
         return descripcion;
     }
    
+    @Override
+    public String toString(){
+        return this.nombre;
+    }
 }
