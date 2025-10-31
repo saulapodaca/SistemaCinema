@@ -5,8 +5,6 @@
 package itson.negocios_gestormembresias;
 
 import dto.MembresiaDTO;
-import dto.PromocionDTO;
-import java.util.List;
 
 /**
  *
@@ -14,5 +12,4 @@ import java.util.List;
  */
 public interface IGestorMembresias {
     MembresiaDTO buscarMembresia (String codigoMembresia);
-    List<PromocionDTO> obtenerPromociones(String codigoMembresia);
 }
