@@ -43,7 +43,7 @@ public class GestorVentas implements IGestorVentas {
                 new AsientoDTO(0, 1, AsientoDTO.Estado.OCUPADO)
         );
 
-        EmpleadoDTO empleado = new EmpleadoDTO(
+        EmpleadoDTO empleado = new EmpleadoDTO( "1",
                 "Saul",
                 "Apoadca",
                 "Nainari",
@@ -51,7 +51,7 @@ public class GestorVentas implements IGestorVentas {
                 "/fotoDefault.png"
         );
 
-        double costo = asientosSeleccionados.size() * 100.0; // mock precio unitario
+        double costo = asientosSeleccionados.size() * 100.0;
         VentaDTO venta = new VentaDTO();
         return venta;
     }

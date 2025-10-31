@@ -141,9 +141,9 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblLogo)
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFoto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(34, 34, 34)
                 .addComponent(lblNombreEmpleado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPuestoEmpleado)
@@ -195,7 +195,7 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
     private void cargarInformacionEmpleado(){
         EmpleadoDTO empleado = GestorSesion.getUsuario();
         configurarImagen(empleado.getUrlFoto());
-        configurarInformacion(lblNombreEmpleado, empleado.getNombres()+" "+empleado.getApellidoMaterno());
+        configurarInformacion(lblNombreEmpleado, empleado.getNombres()+" "+empleado.getApellidoPaterno());
         configurarInformacion(lblPuestoEmpleado, empleado.getOcupacion());
         configurarInformacion(lblNombreSucursal, empleado.getSucursal());
     }
@@ -214,7 +214,6 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
             ImageIcon icon = new ImageIcon(url);
             Image img = icon.getImage().getScaledInstance(165, 229, Image.SCALE_SMOOTH);
             lblFoto.setIcon(new ImageIcon(img));
-        } else {
         }
     }
 

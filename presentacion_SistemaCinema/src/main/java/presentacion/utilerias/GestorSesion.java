@@ -3,14 +3,14 @@ package presentacion.utilerias;
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
 
 import dto.EmpleadoDTO;
+import presentacion.controles.ControlNegocio;
 
 public class GestorSesion {
 
     /**
      * El empleado en sesion
      */
-    private static EmpleadoDTO usuario = new EmpleadoDTO("Saul", "Apodaca", "Baldenegro", 
-            "Nainari", "Gerente", "/spiderman.png");
+    private static EmpleadoDTO usuario = ControlNegocio.getInstance().getEmpleadoActual("1");
 
     /**
      * Método para obtener el usuario

@@ -4,6 +4,7 @@ package dto;
 
 public class EmpleadoDTO {
 
+    private String id;
     private String nombres;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -11,7 +12,8 @@ public class EmpleadoDTO {
     private String ocupacion;
     private String urlFoto;
 
-    public EmpleadoDTO(String nombres, String apellidoPaterno, String apellidoMaterno, String sucursal, String ocupacion, String urlFoto) {
+    public EmpleadoDTO(String id, String nombres, String apellidoPaterno, String apellidoMaterno, String sucursal, String ocupacion, String urlFoto) {
+        this.id = id;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -20,7 +22,8 @@ public class EmpleadoDTO {
         this.urlFoto = urlFoto;
     }
 
-    public EmpleadoDTO(String nombres, String apellidoPaterno, String sucursal, String ocupacion, String urlFoto) {
+    public EmpleadoDTO(String id, String nombres, String apellidoPaterno, String sucursal, String ocupacion, String urlFoto) {
+        this.id = id;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
         this.sucursal = sucursal;
@@ -28,6 +31,10 @@ public class EmpleadoDTO {
         this.urlFoto = urlFoto;
     }
 
+    public String getId(){
+        return id;
+    }
+    
     public String getNombres() {
         return nombres;
     }

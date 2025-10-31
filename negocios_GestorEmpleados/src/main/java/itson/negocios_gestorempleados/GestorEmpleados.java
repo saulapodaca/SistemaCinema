@@ -4,12 +4,11 @@ package itson.negocios_gestorempleados;
 
 import dto.EmpleadoDTO;
 
-
-public class GestorEmpleados implements IGestorEmpleados{
+public class GestorEmpleados implements IGestorEmpleados {
 
     @Override
-    public EmpleadoDTO obtenerSesion() {
-        return new EmpleadoDTO("Saul", "Apodaca", "Nainari", "Gerente", "/fotoDefault.png");
+    public EmpleadoDTO obtenerSesion(String idEmpleado) {
+        return new EmpleadoDTO(idEmpleado, "Saul", "Apodaca", "Nainari", "Gerente", "/fotoDefault.png");
     }
 
 }
