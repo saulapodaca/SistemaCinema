@@ -10,10 +10,13 @@ import dto.FuncionDTO;
 import dto.SalaDTO;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
 import presentacion.utilerias.PintorAsientos;
 
 /**
@@ -38,6 +41,7 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
         botones = new JToggleButton[sala.getFilas()][sala.getColumnas()];
         inicializarAsientos();
         configurarInformacionFuncion();
+        cargarNumerosFilas(funcion.getSala().getFilas());
     }
 
     /**
@@ -58,6 +62,7 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
         pnlPantalla = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         pnlMapaAsientos = new javax.swing.JPanel();
+        pnlNumerosFilas = new javax.swing.JPanel();
         pnlSimbología = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -97,7 +102,7 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
                     .addGroup(pnlFuncionLayout.createSequentialGroup()
                         .addComponent(lblNombreSalaFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblNombrePelicula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblNombrePelicula, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblTipoSalaFuncion)))
                 .addContainerGap())
@@ -132,7 +137,6 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
 
         pnlMapaAsientos.setBackground(new java.awt.Color(18, 26, 60));
         pnlMapaAsientos.setMaximumSize(null);
-        pnlMapaAsientos.setMinimumSize(null);
 
         javax.swing.GroupLayout pnlMapaAsientosLayout = new javax.swing.GroupLayout(pnlMapaAsientos);
         pnlMapaAsientos.setLayout(pnlMapaAsientosLayout);
@@ -145,12 +149,27 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
             .addGap(0, 378, Short.MAX_VALUE)
         );
 
+        pnlNumerosFilas.setBackground(new java.awt.Color(18, 26, 60));
+
+        javax.swing.GroupLayout pnlNumerosFilasLayout = new javax.swing.GroupLayout(pnlNumerosFilas);
+        pnlNumerosFilas.setLayout(pnlNumerosFilasLayout);
+        pnlNumerosFilasLayout.setHorizontalGroup(
+            pnlNumerosFilasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        pnlNumerosFilasLayout.setVerticalGroup(
+            pnlNumerosFilasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnlContenedorLayout = new javax.swing.GroupLayout(pnlContenedor);
         pnlContenedor.setLayout(pnlContenedorLayout);
         pnlContenedorLayout.setHorizontalGroup(
             pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContenedorLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(pnlNumerosFilas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(pnlMapaAsientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlPantalla, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
@@ -162,8 +181,10 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(pnlPantalla, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnlMapaAsientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGroup(pnlContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlNumerosFilas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlMapaAsientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
 
         pnlSimbología.setBackground(new java.awt.Color(18, 26, 60));
@@ -225,7 +246,7 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pnlContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnSiguiente, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                             .addComponent(pnlSimbología, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -253,7 +274,17 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        ControlPantallas.getInstance().abrirInformacionPago(this, obtenerAsientosSeleccionados(), funcion);
+        List<AsientoDTO> asientosSeleccionados = obtenerAsientosSeleccionados();
+
+    if (asientosSeleccionados == null || asientosSeleccionados.isEmpty()) {
+        JOptionPane.showMessageDialog(this,
+                "Debes seleccionar al menos un asiento para continuar.",
+                "Aviso",
+                JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+        
+        ControlPantallas.getInstance().abrirInformacionPago(this, asientosSeleccionados, funcion);
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void configurarMapaAsientos(SalaDTO sala) {
@@ -311,6 +342,9 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
         JToggleButton btn = new JToggleButton("");
         btn.setPreferredSize(new Dimension(50, 50));
         btn.setSize(new Dimension(50, 50));
+        btn.setText(String.valueOf(asiento.getColumna() + 1));
+        btn.setForeground(Color.WHITE);
+        btn.setHorizontalTextPosition(SwingConstants.CENTER);
         PintorAsientos.aplicarEstilo(btn, asiento.getEstado());
 
         configurarEventoSeleccion(btn);
@@ -334,7 +368,25 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
                     return b.isSelected();
                 }).toList();
     }
-    
+
+    private void cargarNumerosFilas(int cantidadFilas) {
+        pnlNumerosFilas.removeAll();
+        pnlNumerosFilas.setLayout(new GridLayout(cantidadFilas, 1, 0, 10));
+
+        char letra = (char) ('A');
+        for (int i = 1; i <= cantidadFilas; i++) {
+            JLabel lblNumero = new JLabel(String.valueOf(letra), SwingConstants.CENTER);
+            lblNumero.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+            lblNumero.setForeground(Color.WHITE);
+            lblNumero.setHorizontalAlignment(SwingConstants.CENTER);
+            pnlNumerosFilas.add(lblNumero);
+            letra = (char) ( 'A' + i);
+        }
+
+        pnlNumerosFilas.revalidate();
+        pnlNumerosFilas.repaint();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton btnVolver;
@@ -349,6 +401,7 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
     private javax.swing.JPanel pnlContenedor;
     private javax.swing.JPanel pnlFuncion;
     private javax.swing.JPanel pnlMapaAsientos;
+    private javax.swing.JPanel pnlNumerosFilas;
     private javax.swing.JPanel pnlPantalla;
     private javax.swing.JPanel pnlSimbología;
     // End of variables declaration//GEN-END:variables

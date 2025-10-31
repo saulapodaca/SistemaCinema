@@ -480,12 +480,20 @@ public class PanelInformacionPago extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnConfirmarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPagoActionPerformed
-        String tipoPago = obtenerTipoPago();
-        PromocionDTO promo = obtenerPromocionSeleccionada();
+        String tipoPago = rbEfectivo.isSelected() ? "Efectivo" : "Tarjeta";
+
+        PromocionDTO promo = null;
+        if (rbSeleccionarDescuento.isSelected()) {
+            promo = (PromocionDTO) cbDescuentos.getSelectedItem();
+        }
+
         DetallePrecioDTO detalle = ControlNegocio.getInstance().calcularPrecios(asientos, promo);
         VentaDTO venta = crearVenta(tipoPago, promo, detalle);
 
-        procesarVenta(venta, detalle);
+        BoletoDTO boleto = procesarVenta(venta, detalle);
+        if (boleto != null) {
+            ControlPantallas.getInstance().abrirInformacionBoleto(this, boleto);
+        }
     }//GEN-LAST:event_btnConfirmarPagoActionPerformed
 
     private void btnVerificarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarMembresiaActionPerformed
@@ -608,17 +616,19 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         return venta;
     }
  
-    private void procesarVenta(VentaDTO venta, DetallePrecioDTO detalle) {
+    private BoletoDTO procesarVenta(VentaDTO venta, DetallePrecioDTO detalle) {
         BoletoDTO boleto = ControlNegocio.getInstance().registrarVenta(venta);
 
         if (boleto != null) {
             JOptionPane.showMessageDialog(this,
                     "¡Compra realizada con éxito!\nTotal pagado: " + detalle.getTotal());
+            return boleto;
         } else {
             JOptionPane.showMessageDialog(this,
                     "Error al procesar la venta.",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
+        return null;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
