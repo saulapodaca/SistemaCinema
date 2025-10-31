@@ -10,6 +10,15 @@
         <module>dto_negocios</module>
         <module>negocios_VenderBoleto</module>
         <module>negocios_GestorEmpleados</module>
+        <module>negocios_GestorPromociones</module>
+        <module>negocios_GestorVentas</module>
+        <module>negocios_GestorPeliculas</module>
+        <module>negocios_GestorMembresias</module>
+        <module>negocios_CorreoElectronico</module>
+        <module>negocios_GeneradorQR</module>
+        <module>negocios_GestorAsientos</module>
+        <module>negocios_GestorBoletos</module>
+        <module>negocios_GestorFunciones</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -4,6 +4,7 @@ package itson.negocios_venderboleto.fachada;
 
 import dto.AsientoDTO;
 import dto.BoletoDTO;
+import dto.DetallePrecioDTO;
 import dto.EmpleadoDTO;
 import dto.FiltroDTO;
 import dto.FuncionDTO;
@@ -16,6 +17,7 @@ import itson.negocios_gestorempleados.IGestorEmpleados;
 import itson.negocios_gestorfunciones.IGestorFunciones;
 import itson.negocios_gestormembresias.IGestorMembresias;
 import itson.negocios_gestorpeliculas.IGestorPeliculas;
+import itson.negocios_gestorpromociones.IGestorPromociones;
 import itson.negocios_gestorventas.IGestorVentas;
 import itson.negocios_venderboleto.IVentaBoleto;
 import itson.negocios_venderboleto.VentaBoleto;
@@ -32,6 +34,7 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     private final IGestorEmpleados gestorEmpleados;
     private final IGestorMembresias gestorMembresias;
     private final IGestorVentas gestorVentas;
+    private final IGestorPromociones gestorPromociones;
 
     public VentaBoletoFacade(GestorFactory factory) {
         this.gestorPeliculas = factory.crearGestorPeliculas();
@@ -40,6 +43,7 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
         this.gestorEmpleados = factory.crearGestorEmpleados();
         this.gestorMembresias = factory.crearGestorMembresias();
         this.gestorVentas = factory.crearGestorVentas();
+        this.gestorPromociones = factory.crearGestorPromociones();
 
         IVentaBoleto venta = new VentaBoleto(
                 gestorVentas,
@@ -52,8 +56,8 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     }
 
     @Override
-    public BoletoDTO venderBoleto(FuncionDTO funcion, List<AsientoDTO> asientosSeleccionados, EmpleadoDTO empleado, MembresiaDTO membresia, PromocionDTO promoSeleccionada) {
-        return ventaBoleto.venderBoleto(funcion, asientosSeleccionados, empleado, membresia, promoSeleccionada);
+    public BoletoDTO venderBoleto(VentaDTO venta) {
+        return ventaBoleto.venderBoleto(venta);
     }
 
     @Override
@@ -83,7 +87,12 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
 
     @Override
     public List<PromocionDTO> listarPromocionesMembresia(MembresiaDTO membresia) {
-        return gestorMembresias.obtenerPromociones(membresia.getCodigoMembresia());
+        return gestorPromociones.obtenerPromocionesMembresia(membresia.getCodigoMembresia());
+    }
+    
+    @Override
+    public List<PromocionDTO> listarPromocionesGenerales(){
+        return gestorPromociones.obtenerPromocionesGenerales();
     }
 
     @Override
@@ -95,5 +104,19 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     public VentaDTO obtenerVentaPorId(String idVenta) {
         return gestorVentas.obtenerVentaPorID(idVenta);
     }
+    
+    @Override
+    public DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo){
+        return gestorVentas.calcularPrecios(asientos, promo);
+    }
+    
+    @Override
+    public PromocionDTO obtenerPromocionPorNombre(String nombrePromo){
+        return gestorPromociones.obtenerPromocionPorNombre(nombrePromo);
+    }
 
+    @Override
+    public PromocionDTO validarCupon(String codigoCupon){
+        return gestorPromociones.validarCupon(codigoCupon);
+    }
 }

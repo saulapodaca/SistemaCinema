@@ -4,17 +4,20 @@ package presentacion.controles;
 
 import dto.AsientoDTO;
 import dto.BoletoDTO;
+import dto.DetallePrecioDTO;
 import dto.EmpleadoDTO;
 import dto.FiltroDTO;
 import dto.FuncionDTO;
 import dto.MembresiaDTO;
 import dto.PeliculaDTO;
 import dto.PromocionDTO;
+import dto.VentaDTO;
 import itson.negocios_venderboleto.fabrica.GestorFactory;
 import itson.negocios_venderboleto.fachada.IVentaBoletoFacade;
 import itson.negocios_venderboleto.fachada.VentaBoletoFacade;
 import java.util.Date;
 import java.util.List;
+import presentacion.utilerias.GestorSesion;
 
 
 public class ControlNegocio {
@@ -45,16 +48,40 @@ public class ControlNegocio {
     public List<AsientoDTO> obtenerAsientos(FuncionDTO funcion) {
         return facade.obtenerAsientos(funcion);
     }
+    
+    public List<PromocionDTO> obtenerPromocionesMembresia (MembresiaDTO membresia){
+        return facade.listarPromocionesMembresia(membresia);
+    }
+    
+    public List<PromocionDTO> obtenerPromocionesGenerales(){
+        return facade.listarPromocionesGenerales();
+    }
+    
+    public MembresiaDTO buscarMembresia(String codigoMembresia){
+        return facade.verificarMembresia(codigoMembresia);
+    }
 
-    public BoletoDTO vender(FuncionDTO funcion,
-            List<AsientoDTO> asientos,
-            EmpleadoDTO empleado,
-            MembresiaDTO membresia,
-            PromocionDTO promo) {
-        return facade.venderBoleto(funcion, asientos, empleado, membresia, promo);
+    public BoletoDTO registrarVenta(VentaDTO venta) {
+        return facade.venderBoleto(venta);
     }
     
     public void mandarCorreo(BoletoDTO boleto, String correo){
         facade.mandarBoletoCorreo(boleto, correo);
+    }
+
+    public DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo){
+        return facade.calcularPrecios(asientos, promo);
+    }
+    
+    public PromocionDTO obtenerPromocionPorNombre(String nombrePromo){
+        return facade.obtenerPromocionPorNombre(nombrePromo);
+    }
+    
+    public PromocionDTO validarCupon(String codigoCupon){
+        return facade.validarCupon(codigoCupon);
+    }
+    
+    public EmpleadoDTO getEmpleadoActual(){
+        return GestorSesion.getUsuario();
     }
 }

@@ -12,6 +12,7 @@ import itson.negocios_gestorempleados.IGestorEmpleados;
 import itson.negocios_gestorfunciones.IGestorFunciones;
 import itson.negocios_gestormembresias.IGestorMembresias;
 import itson.negocios_gestorpeliculas.IGestorPeliculas;
+import itson.negocios_gestorpromociones.IGestorPromociones;
 import itson.negocios_gestorventas.IGestorVentas;
 
 /**
@@ -28,5 +29,5 @@ public interface IGestorFactory {
     IGestorBoletos crearGestorBoletos();
     IGeneradorQR crearGeneradorQR();
     ICorreoElectronico crearCorreoElectronico();
-    
+    IGestorPromociones crearGestorPromociones();
 }

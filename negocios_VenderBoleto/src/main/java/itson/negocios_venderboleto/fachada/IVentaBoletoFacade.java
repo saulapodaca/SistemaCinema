@@ -6,6 +6,7 @@ package itson.negocios_venderboleto.fachada;
 
 import dto.AsientoDTO;
 import dto.BoletoDTO;
+import dto.DetallePrecioDTO;
 import dto.EmpleadoDTO;
 import dto.FiltroDTO;
 import dto.FuncionDTO;
@@ -22,11 +23,7 @@ import java.util.List;
  */
 public interface IVentaBoletoFacade {
 
-    BoletoDTO venderBoleto(FuncionDTO funcion,
-            List<AsientoDTO> asientosSeleccionados,
-            EmpleadoDTO empleado,
-            MembresiaDTO membresia,
-            PromocionDTO promoSeleccionada);
+    BoletoDTO venderBoleto(VentaDTO venta);
 
     void mandarBoletoCorreo(BoletoDTO boleto, String correo);
 
@@ -39,8 +36,16 @@ public interface IVentaBoletoFacade {
     EmpleadoDTO obtenerEmpleadoSesion(String idEmpleado);
 
     List<PromocionDTO> listarPromocionesMembresia(MembresiaDTO membresia);
+    
+    List<PromocionDTO> listarPromocionesGenerales();
 
     MembresiaDTO verificarMembresia(String codigo);
     
     VentaDTO obtenerVentaPorId(String idVenta);
+    
+    DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo); 
+    
+    PromocionDTO obtenerPromocionPorNombre(String nombrePromo);
+    
+    PromocionDTO validarCupon(String codigoCupon);
 }

@@ -6,10 +6,19 @@ package presentacion;
 
 import presentacion.controles.ControlPantallas;
 import dto.AsientoDTO;
+import dto.BoletoDTO;
+import dto.DetallePrecioDTO;
 import dto.FuncionDTO;
+import dto.MembresiaDTO;
+import dto.PromocionDTO;
+import dto.VentaDTO;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import presentacion.controles.ControlNegocio;
 
 /**
  *
@@ -18,12 +27,15 @@ import javax.swing.JLabel;
 public class PanelInformacionPago extends javax.swing.JPanel {
 
     private FuncionDTO funcion;
-    private final String TEXTO_CB_DESCUENTO_DEFAULT = "ELIGE UN DESCUENTO...";
+    private List<AsientoDTO> asientos;
     /**
      * Creates new form PanelInformacionPago
+     * @param asientos
+     * @param funcion
      */
     public PanelInformacionPago(List<AsientoDTO> asientos, FuncionDTO funcion) {
         this.funcion = funcion;
+        this.asientos = asientos;
         initComponents();
         cargarInformacion(asientos, funcion);
     }
@@ -277,7 +289,7 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         rbSeleccionarDescuento.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         cbDescuentos.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        cbDescuentos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbDescuentos.setModel(new javax.swing.DefaultComboBoxModel<>());
 
         rbCanjearCupon.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         rbCanjearCupon.setForeground(new java.awt.Color(255, 255, 255));
@@ -464,41 +476,57 @@ public class PanelInformacionPago extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        //cambiar esto es solo para el flujo mock
         ControlPantallas.getInstance().abrirSeleccionAsientos(this, funcion);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnConfirmarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPagoActionPerformed
-        String tipoPago;
-        if (rbEfectivo.isSelected()){
-            tipoPago = "Efectivo";
-        } else {
-            tipoPago = "Tarjeta";
-        }
-        //control mandar la venta
+        String tipoPago = obtenerTipoPago();
+        PromocionDTO promo = obtenerPromocionSeleccionada();
+        DetallePrecioDTO detalle = ControlNegocio.getInstance().calcularPrecios(asientos, promo);
+        VentaDTO venta = crearVenta(tipoPago, promo, detalle);
+
+        procesarVenta(venta, detalle);
     }//GEN-LAST:event_btnConfirmarPagoActionPerformed
 
     private void btnVerificarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarMembresiaActionPerformed
-        String numeroMembresia = txtMembresia.getText().trim();
-        //control mandar a buscar y verificar membresia
+        MembresiaDTO membresia = ControlNegocio.getInstance()
+                .buscarMembresia(txtMembresia.getText().trim());
+        actualizarDescuentos(membresia);
+
+        PromocionDTO promo = (PromocionDTO) cbDescuentos.getSelectedItem();
+        configurarPrecios(asientos, promo);
     }//GEN-LAST:event_btnVerificarMembresiaActionPerformed
 
     private void btnAplicarDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarDescuentoActionPerformed
-        String codigoDescuento;
-        if (rbSeleccionarDescuento.isSelected()){
-            //cambiarlo por obtener el objeto y luego su id
-            codigoDescuento = cbDescuentos.getSelectedItem().toString();
-        } else if (rbCanjearCupon.isSelected()){
-            codigoDescuento = txtCupon.getText();
+        PromocionDTO promo = null;
+
+        if (rbSeleccionarDescuento.isSelected()) {
+            promo = (PromocionDTO) cbDescuentos.getSelectedItem();
+        } else if (rbCanjearCupon.isSelected()) {
+            String codigo = txtCupon.getText().trim();
+            promo = ControlNegocio.getInstance().validarCupon(codigo);
         }
-        //control buscar y validar descuentos
+
+        configurarPrecios(asientos, promo);
     }//GEN-LAST:event_btnAplicarDescuentoActionPerformed
 
-    private void configurarPanelDescuentos(){
+    private void actualizarDescuentos(MembresiaDTO membresia) {
+        cbDescuentos.removeAllItems();
+        List<PromocionDTO> promociones = ControlNegocio.getInstance().obtenerPromocionesMembresia(membresia);
+        for (PromocionDTO promo : promociones) {
+            cbDescuentos.addItem(promo);
+        }
+    }
+
+    private void configurarPanelDescuentos() {
         bgDescuentos.add(rbSeleccionarDescuento);
         bgDescuentos.add(rbCanjearCupon);
-        //aqui cargar el combo box de los descuentos
-    }        
+        cbDescuentos.removeAllItems();
+        List<PromocionDTO> promociones = ControlNegocio.getInstance().obtenerPromocionesGenerales();
+        for (PromocionDTO promo : promociones) {
+            cbDescuentos.addItem(promo);
+        }
+    }
     
     private void configurarPanelFormaPago(){
         bgFormaPago.add(rbEfectivo);
@@ -510,6 +538,7 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         cargarInformacionVenta(asientos, funcion);
         configurarPanelDescuentos();
         configurarPanelFormaPago();
+        configurarFechaFuncion(funcion.getFecha());
     }
     
     private void cargarInformacionVenta(List<AsientoDTO> asientos, FuncionDTO funcion){
@@ -519,7 +548,7 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         configurarInformacionFuncion(lblFechaFuncion, funcion.getFecha().toString());
         configurarInformacionFuncion(lblHoraFuncion, funcion.getHoraFuncion());
         configurarInformacionFuncion(lblAsientos, asientos.toString());
-        configurarPrecios();
+        configurarPrecios(asientos, null);
     }
     
     private void configurarTituloPelicula(String titulo){
@@ -529,13 +558,67 @@ public class PanelInformacionPago extends javax.swing.JPanel {
     
     private void configurarInformacionFuncion(JLabel etiqueta, String texto){
         etiqueta.setText(texto);
-        etiqueta.setForeground(new Color(148,163,184));
+        etiqueta.setForeground(new Color(148, 163, 184));
     }
-    
-    private void configurarPrecios(){
-        lblSubtotalPrecio.setText("$280.00");
-        lblDescuento.setText("$50.00");
-        lblTotal.setText("$230.00");
+
+    private void configurarPrecios(List<AsientoDTO> asientos, PromocionDTO promo) {
+        DetallePrecioDTO detalle = ControlNegocio.getInstance().calcularPrecios(asientos, promo);
+        lblSubtotalPrecio.setText(String.format("$%.2f", detalle.getSubtotal()));
+        lblDescuento.setText(String.format("$%.2f", detalle.getDescuento()));
+        lblTotal.setText(String.format("$%.2f", detalle.getTotal()));   
+    }
+
+    private void configurarFechaFuncion(Date fecha) {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yy");
+        String fechaFormateada = formatoFecha.format(fecha);
+
+        lblFechaFuncion.setText(fechaFormateada);
+    }
+
+    private String obtenerTipoPago() {
+        if (rbEfectivo.isSelected()) {
+            return "Efectivo";
+        } else {
+            return "Tarjeta";
+        }
+    }
+
+    private PromocionDTO obtenerPromocionSeleccionada() {
+        PromocionDTO promo = null;
+        if (rbSeleccionarDescuento.isSelected() && cbDescuentos.getSelectedIndex() > 0) {
+            promo = (PromocionDTO) cbDescuentos.getSelectedItem();
+        } else if (rbCanjearCupon.isSelected()) {
+            String codigo = txtCupon.getText().trim();
+            promo = ControlNegocio.getInstance().validarCupon(codigo);
+        }
+        return promo;
+    }
+
+    private VentaDTO crearVenta(String tipoPago, PromocionDTO promo, DetallePrecioDTO detalle) {
+        VentaDTO venta = new VentaDTO();
+        venta.setFuncion(funcion);
+        venta.setAsientos(asientos);
+        venta.setEmpleado(ControlNegocio.getInstance().getEmpleadoActual());
+        venta.setPromocion(promo);
+        venta.setSubtotal(detalle.getSubtotal());
+        venta.setDescuento(detalle.getDescuento());
+        venta.setTotal(detalle.getTotal());
+        venta.setFecha(new Date());
+        venta.setFormaPago(tipoPago);
+        return venta;
+    }
+ 
+    private void procesarVenta(VentaDTO venta, DetallePrecioDTO detalle) {
+        BoletoDTO boleto = ControlNegocio.getInstance().registrarVenta(venta);
+
+        if (boleto != null) {
+            JOptionPane.showMessageDialog(this,
+                    "¡Compra realizada con éxito!\nTotal pagado: " + detalle.getTotal());
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Error al procesar la venta.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -545,7 +628,7 @@ public class PanelInformacionPago extends javax.swing.JPanel {
     private javax.swing.JButton btnConfirmarPago;
     private javax.swing.JButton btnVerificarMembresia;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JComboBox<String> cbDescuentos;
+    private javax.swing.JComboBox<PromocionDTO> cbDescuentos;
     private javax.swing.JLabel imgEfectivo;
     private javax.swing.JLabel imgTarjeta;
     private javax.swing.JLabel lblAsientos;
