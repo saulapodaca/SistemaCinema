@@ -5,9 +5,7 @@
 package itson.negocios_gestorventas;
 
 import dto.AsientoDTO;
-import dto.EmpleadoDTO;
-import dto.FuncionDTO;
-import dto.MembresiaDTO;
+import dto.DetallePrecioDTO;
 import dto.PromocionDTO;
 import dto.VentaDTO;
 import java.util.List;
@@ -18,11 +16,9 @@ import java.util.List;
  */
 public interface IGestorVentas {
 
-    VentaDTO registrarVenta(FuncionDTO funcion,
-            List<AsientoDTO> asientos,
-            EmpleadoDTO empleado,
-            MembresiaDTO membresia,
-            PromocionDTO promoSeleccionada);
+    VentaDTO registrarVenta(VentaDTO venta);
     
     VentaDTO obtenerVentaPorID(String id);
+    
+    DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promoSeleccionada);
 }

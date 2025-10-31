@@ -3,30 +3,29 @@ package itson.negocios_gestorventas;
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
 
 import dto.AsientoDTO;
+import dto.DetallePrecioDTO;
 import dto.EmpleadoDTO;
 import dto.FuncionDTO;
-import dto.MembresiaDTO;
 import dto.PeliculaDTO;
 import dto.PromocionDTO;
 import dto.SalaDTO;
 import dto.VentaDTO;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 public class GestorVentas implements IGestorVentas {
 
     private final double PRECIO_BOLETO = 70.00;
 
     @Override
-    public VentaDTO registrarVenta(FuncionDTO funcion, List<AsientoDTO> asientos, EmpleadoDTO empleado, MembresiaDTO membresia, PromocionDTO promoSeleccionada) {
-        double costo = asientos.size() * PRECIO_BOLETO;
+    public VentaDTO registrarVenta(VentaDTO venta) {
+        double costo = venta.getAsientos().size() * PRECIO_BOLETO;
 
-        if (membresia != null && membresia.isActiva() && promoSeleccionada != null) {
-            costo = costo * (1 - promoSeleccionada.getDescuento());
+        if (venta.getPromocion() != null) {
+            costo = costo * (1 - venta.getPromocion().getDescuento());
         }
-
-        return new VentaDTO(UUID.randomUUID().toString(), funcion, asientos, empleado, costo);
+        venta.setTotal(costo);
+        return venta;
     }
 
     @Override
@@ -53,13 +52,19 @@ public class GestorVentas implements IGestorVentas {
         );
 
         double costo = asientosSeleccionados.size() * 100.0; // mock precio unitario
-        VentaDTO venta = new VentaDTO(
-                "VENTA0001",
-                funcion,
-                asientosSeleccionados,
-                empleado,
-                costo
-        );
+        VentaDTO venta = new VentaDTO();
         return venta;
+    }
+    
+    @Override
+    public DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo){
+        double subtotal = asientos.size()*PRECIO_BOLETO;
+        double descuento = 0;
+        if (promo != null){
+            descuento = subtotal*promo.getDescuento();
+        }
+        
+        double total = subtotal - descuento;
+        return new DetallePrecioDTO(subtotal, descuento, total);
     }
 }
