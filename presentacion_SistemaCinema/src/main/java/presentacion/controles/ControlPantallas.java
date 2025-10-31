@@ -2,6 +2,7 @@ package presentacion.controles;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
 import dto.AsientoDTO;
+import dto.BoletoDTO;
 import dto.FuncionDTO;
 import dto.PeliculaDTO;
 import dto.SalaDTO;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JPanel;
 import presentacion.FormPrincipal;
+import presentacion.PanelInformacionBoleto;
 import presentacion.PanelInformacionEmpleado;
 import presentacion.PanelInformacionPago;
 import presentacion.PanelOpcionesMenuGerente;
@@ -102,6 +104,12 @@ public class ControlPantallas {
     public void abrirInformacionPago(JPanel panelAnterior, List<AsientoDTO> asientos, FuncionDTO funcion){
         eliminarPanelAnterior(panelAnterior);
         JPanel panelNuevo = new PanelInformacionPago(asientos, funcion);
+        agregarPanelNuevo(panelNuevo);
+    }
+    
+    public void abrirInformacionBoleto(JPanel panelAnterior, BoletoDTO boleto){
+        eliminarPanelAnterior(panelAnterior);
+        JPanel panelNuevo = new PanelInformacionBoleto(boleto);
         agregarPanelNuevo(panelNuevo);
     }
     
