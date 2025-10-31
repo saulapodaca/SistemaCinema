@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 import presentacion.utilerias.PintorAsientos;
 
@@ -253,7 +254,17 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        ControlPantallas.getInstance().abrirInformacionPago(this, obtenerAsientosSeleccionados(), funcion);
+        List<AsientoDTO> asientosSeleccionados = obtenerAsientosSeleccionados();
+
+    if (asientosSeleccionados == null || asientosSeleccionados.isEmpty()) {
+        JOptionPane.showMessageDialog(this,
+                "Debes seleccionar al menos un asiento para continuar.",
+                "Aviso",
+                JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+        
+        ControlPantallas.getInstance().abrirInformacionPago(this, asientosSeleccionados, funcion);
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void configurarMapaAsientos(SalaDTO sala) {
