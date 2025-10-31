@@ -19,6 +19,7 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import presentacion.controles.ControlNegocio;
+import presentacion.utilerias.GestorSesion;
 
 /**
  *
@@ -583,30 +584,11 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         lblFechaFuncion.setText(fechaFormateada);
     }
 
-    private String obtenerTipoPago() {
-        if (rbEfectivo.isSelected()) {
-            return "Efectivo";
-        } else {
-            return "Tarjeta";
-        }
-    }
-
-    private PromocionDTO obtenerPromocionSeleccionada() {
-        PromocionDTO promo = null;
-        if (rbSeleccionarDescuento.isSelected() && cbDescuentos.getSelectedIndex() > 0) {
-            promo = (PromocionDTO) cbDescuentos.getSelectedItem();
-        } else if (rbCanjearCupon.isSelected()) {
-            String codigo = txtCupon.getText().trim();
-            promo = ControlNegocio.getInstance().validarCupon(codigo);
-        }
-        return promo;
-    }
-
     private VentaDTO crearVenta(String tipoPago, PromocionDTO promo, DetallePrecioDTO detalle) {
         VentaDTO venta = new VentaDTO();
         venta.setFuncion(funcion);
         venta.setAsientos(asientos);
-        venta.setEmpleado(ControlNegocio.getInstance().getEmpleadoActual());
+        venta.setEmpleado(ControlNegocio.getInstance().getEmpleadoActual(GestorSesion.getUsuario().getId()));
         venta.setPromocion(promo);
         venta.setSubtotal(detalle.getSubtotal());
         venta.setDescuento(detalle.getDescuento());

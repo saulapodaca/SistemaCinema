@@ -81,7 +81,8 @@ public class ControlNegocio {
         return facade.validarCupon(codigoCupon);
     }
     
-    public EmpleadoDTO getEmpleadoActual(){
-        return GestorSesion.getUsuario();
+    public EmpleadoDTO getEmpleadoActual(String idEmpleado){
+        return facade.obtenerEmpleadoSesion(idEmpleado);
     }
+    
 }

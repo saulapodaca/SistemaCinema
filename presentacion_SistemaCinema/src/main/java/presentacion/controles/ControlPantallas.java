@@ -82,15 +82,12 @@ public class ControlPantallas {
      */
     public void abrirSeleccionPeliculas(JPanel panelAnterior) {
         eliminarPanelAnterior(panelAnterior);
-
         JPanel panelNuevo = new PanelSeleccionPeliculas();
         agregarPanelNuevo(panelNuevo);
     }
 
     public void abrirSeleccionFunciones(JPanel panelAnterior, PeliculaDTO pelicula) {
         eliminarPanelAnterior(panelAnterior);
-
-        //TODO: OBTENER LAS FUNCIONES Y MANDARLAS
         JPanel panelNuevo = new PanelSeleccionFuncion(ControlNegocio.getInstance().obtenerFunciones(pelicula, new Date()));
         agregarPanelNuevo(panelNuevo);
     }

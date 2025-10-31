@@ -11,5 +11,5 @@ import dto.EmpleadoDTO;
  * @author saula
  */
 public interface IGestorEmpleados {
-    EmpleadoDTO obtenerSesion();
+    EmpleadoDTO obtenerSesion(String idEmpleado);
 }

@@ -82,7 +82,7 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
 
     @Override
     public EmpleadoDTO obtenerEmpleadoSesion(String idEmpleado) {
-        return gestorEmpleados.obtenerSesion();
+        return gestorEmpleados.obtenerSesion(idEmpleado);
     }
 
     @Override
