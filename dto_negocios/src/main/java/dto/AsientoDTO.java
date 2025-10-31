@@ -34,4 +34,9 @@ public class AsientoDTO {
         this.estado = estado;
     }
 
+    @Override
+    public String toString(){
+        String nombreAsiento = this.fila + "-" + this.columna;
+        return nombreAsiento;
+    }
 }
