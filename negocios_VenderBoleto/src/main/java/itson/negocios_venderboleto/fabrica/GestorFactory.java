@@ -18,6 +18,8 @@ import itson.negocios_gestormembresias.GestorMembresias;
 import itson.negocios_gestormembresias.IGestorMembresias;
 import itson.negocios_gestorpeliculas.GestorPeliculas;
 import itson.negocios_gestorpeliculas.IGestorPeliculas;
+import itson.negocios_gestorpromociones.GestorPromociones;
+import itson.negocios_gestorpromociones.IGestorPromociones;
 import itson.negocios_gestorventas.GestorVentas;
 import itson.negocios_gestorventas.IGestorVentas;
 
@@ -68,4 +70,8 @@ public class GestorFactory implements IGestorFactory {
         return new CorreoElectronico();
     }
 
+    @Override
+    public IGestorPromociones crearGestorPromociones(){
+        return new GestorPromociones();
+    }
 }

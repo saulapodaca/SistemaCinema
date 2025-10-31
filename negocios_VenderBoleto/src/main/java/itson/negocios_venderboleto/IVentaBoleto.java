@@ -1,12 +1,7 @@
 package itson.negocios_venderboleto;
 
-import dto.AsientoDTO;
 import dto.BoletoDTO;
-import dto.EmpleadoDTO;
-import dto.FuncionDTO;
-import dto.MembresiaDTO;
-import dto.PromocionDTO;
-import java.util.List;
+import dto.VentaDTO;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -19,11 +14,7 @@ import java.util.List;
  */
 public interface IVentaBoleto {
 
-    BoletoDTO venderBoleto(FuncionDTO funcion,
-            List<AsientoDTO> asientosSeleccionados,
-            EmpleadoDTO empleado,
-            MembresiaDTO membresia,
-            PromocionDTO promoSeleccionada);
+    BoletoDTO venderBoleto(VentaDTO venta);
 
     void mandarBoletoCorreo(BoletoDTO boleto, String correo);
 }
