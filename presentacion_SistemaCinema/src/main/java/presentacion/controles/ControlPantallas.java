@@ -5,9 +5,7 @@ import dto.AsientoDTO;
 import dto.BoletoDTO;
 import dto.FuncionDTO;
 import dto.PeliculaDTO;
-import dto.SalaDTO;
 import java.awt.BorderLayout;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JPanel;
@@ -88,7 +86,7 @@ public class ControlPantallas {
 
     public void abrirSeleccionFunciones(JPanel panelAnterior, PeliculaDTO pelicula) {
         eliminarPanelAnterior(panelAnterior);
-        JPanel panelNuevo = new PanelSeleccionFuncion(ControlNegocio.getInstance().obtenerFunciones(pelicula, new Date()));
+        JPanel panelNuevo = new PanelSeleccionFuncion(pelicula);
         agregarPanelNuevo(panelNuevo);
     }
     

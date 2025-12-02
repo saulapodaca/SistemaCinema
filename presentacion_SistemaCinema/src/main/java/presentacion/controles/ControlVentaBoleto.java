@@ -12,27 +12,31 @@ import dto.MembresiaDTO;
 import dto.PeliculaDTO;
 import dto.PromocionDTO;
 import dto.VentaDTO;
+import exceptions.EmpleadoNoEncontradoException;
+import exceptions.FuncionNoEncontradaException;
+import exceptions.PeliculaNoExistenteException;
+import exceptions.SalaNoExistenteException;
+import exceptions.SucursalNoExistenteException;
+import itson.negocios_generadorqr.exceptions.QRGeneradorException;
 import itson.negocios_venderboleto.fabrica.GestorFactory;
 import itson.negocios_venderboleto.fachada.IVentaBoletoFacade;
 import itson.negocios_venderboleto.fachada.VentaBoletoFacade;
-import java.util.Date;
 import java.util.List;
-import presentacion.utilerias.GestorSesion;
 
 
-public class ControlNegocio {
+public class ControlVentaBoleto {
     
-    private static ControlNegocio instance;
+    private static ControlVentaBoleto instance;
 
     private final IVentaBoletoFacade facade;
 
-    private ControlNegocio() {
+    private ControlVentaBoleto() {
         this.facade = new VentaBoletoFacade(new GestorFactory()); 
     }
     
-    public static ControlNegocio getInstance() {
+    public static ControlVentaBoleto getInstance() {
         if (instance == null) {
-            instance = new ControlNegocio();
+            instance = new ControlVentaBoleto();
         }
         return instance;
     }
@@ -41,11 +45,11 @@ public class ControlNegocio {
         return facade.obtenerPeliculas(filtro);
     }
 
-    public List<FuncionDTO> obtenerFunciones(PeliculaDTO pelicula, Date fecha) {
-        return facade.listarFunciones(pelicula, fecha);
+    public List<FuncionDTO> obtenerFunciones(PeliculaDTO pelicula, FiltroDTO filtro) throws FuncionNoEncontradaException{
+        return facade.listarFunciones(pelicula, filtro);
     }
 
-    public List<AsientoDTO> obtenerAsientos(FuncionDTO funcion) {
+    public List<AsientoDTO> obtenerAsientos(FuncionDTO funcion) throws FuncionNoEncontradaException, PeliculaNoExistenteException, SalaNoExistenteException{
         return facade.obtenerAsientos(funcion);
     }
     
@@ -61,7 +65,7 @@ public class ControlNegocio {
         return facade.verificarMembresia(codigoMembresia);
     }
 
-    public BoletoDTO registrarVenta(VentaDTO venta) {
+    public BoletoDTO registrarVenta(VentaDTO venta) throws QRGeneradorException {
         return facade.venderBoleto(venta);
     }
     
@@ -73,16 +77,12 @@ public class ControlNegocio {
         return facade.calcularPrecios(asientos, promo);
     }
     
-    public PromocionDTO obtenerPromocionPorNombre(String nombrePromo){
-        return facade.obtenerPromocionPorNombre(nombrePromo);
-    }
-    
     public PromocionDTO validarCupon(String codigoCupon){
         return facade.validarCupon(codigoCupon);
     }
     
-    public EmpleadoDTO getEmpleadoActual(String idEmpleado){
-        return facade.obtenerEmpleadoSesion(idEmpleado);
+    public EmpleadoDTO getEmpleadoActual(String idEmpleado) throws EmpleadoNoEncontradoException,SucursalNoExistenteException{
+        return facade.obtenerEmpleadoPorId(idEmpleado);
     }
     
 }

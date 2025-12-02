@@ -1,7 +1,7 @@
 package presentacion;
 
 import dto.BoletoDTO;
-import presentacion.controles.ControlNegocio;
+import presentacion.controles.ControlVentaBoleto;
 
 /**
  *
@@ -12,6 +12,7 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
     private BoletoDTO boleto;
     /**
      * Creates new form PanelInformacionBoleto
+     * @param boleto
      */
     public PanelInformacionBoleto(BoletoDTO boleto) {
         this.boleto = boleto;
@@ -139,15 +140,11 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarBoletoActionPerformed
-        ControlNegocio.getInstance().mandarCorreo(boleto, txtCorreo.getText().trim());
+        ControlVentaBoleto.getInstance().mandarCorreo(boleto, txtCorreo.getText().trim());
     }//GEN-LAST:event_btnEnviarBoletoActionPerformed
 
     private void cargarBoleto() {
-        lblTitulo.setText("BOLETO DE CINE");
-        lblFuncion.setText("Película: " + boleto.getVenta().getFuncion().getPelicula().getTitulo());
-        lblSala.setText("Sala: " + boleto.getVenta().getFuncion().getSala().getNombre());
-        lblAsientos.setText("Asientos: " + boleto.getVenta().getAsientos().toString());
-        lblTotal.setText(String.format("Total: $%.2f", boleto.getVenta().getTotal()));
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

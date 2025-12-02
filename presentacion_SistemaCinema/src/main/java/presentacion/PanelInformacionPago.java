@@ -12,13 +12,16 @@ import dto.FuncionDTO;
 import dto.MembresiaDTO;
 import dto.PromocionDTO;
 import dto.VentaDTO;
+import dto.enums.FormaPago;
+import itson.negocios_generadorqr.exceptions.QRGeneradorException;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import presentacion.controles.ControlNegocio;
+import presentacion.controles.ControlVentaBoleto;
 import presentacion.utilerias.GestorSesion;
 
 /**
@@ -481,24 +484,29 @@ public class PanelInformacionPago extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnConfirmarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPagoActionPerformed
-        String tipoPago = rbEfectivo.isSelected() ? "Efectivo" : "Tarjeta";
+        FormaPago tipoPago = rbEfectivo.isSelected() ? FormaPago.EFECTIVO : FormaPago.TARJETA;
 
         PromocionDTO promo = null;
         if (rbSeleccionarDescuento.isSelected()) {
             promo = (PromocionDTO) cbDescuentos.getSelectedItem();
         }
 
-        DetallePrecioDTO detalle = ControlNegocio.getInstance().calcularPrecios(asientos, promo);
+        DetallePrecioDTO detalle = ControlVentaBoleto.getInstance().calcularPrecios(asientos, promo);
         VentaDTO venta = crearVenta(tipoPago, promo, detalle);
 
-        BoletoDTO boleto = procesarVenta(venta, detalle);
-        if (boleto != null) {
-            ControlPantallas.getInstance().abrirInformacionBoleto(this, boleto);
+        BoletoDTO boleto;
+        try {
+            boleto = procesarVenta(venta, detalle);
+            if (boleto != null) {
+                ControlPantallas.getInstance().abrirInformacionBoleto(this, boleto);
+            }
+        } catch (QRGeneradorException ex) {
+            System.getLogger(PanelInformacionPago.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }//GEN-LAST:event_btnConfirmarPagoActionPerformed
 
     private void btnVerificarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarMembresiaActionPerformed
-        MembresiaDTO membresia = ControlNegocio.getInstance()
+        MembresiaDTO membresia = ControlVentaBoleto.getInstance()
                 .buscarMembresia(txtMembresia.getText().trim());
         actualizarDescuentos(membresia);
 
@@ -513,7 +521,7 @@ public class PanelInformacionPago extends javax.swing.JPanel {
             promo = (PromocionDTO) cbDescuentos.getSelectedItem();
         } else if (rbCanjearCupon.isSelected()) {
             String codigo = txtCupon.getText().trim();
-            promo = ControlNegocio.getInstance().validarCupon(codigo);
+            promo = ControlVentaBoleto.getInstance().validarCupon(codigo);
         }
 
         configurarPrecios(asientos, promo);
@@ -521,7 +529,7 @@ public class PanelInformacionPago extends javax.swing.JPanel {
 
     private void actualizarDescuentos(MembresiaDTO membresia) {
         cbDescuentos.removeAllItems();
-        List<PromocionDTO> promociones = ControlNegocio.getInstance().obtenerPromocionesMembresia(membresia);
+        List<PromocionDTO> promociones = ControlVentaBoleto.getInstance().obtenerPromocionesMembresia(membresia);
         for (PromocionDTO promo : promociones) {
             cbDescuentos.addItem(promo);
         }
@@ -531,7 +539,7 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         bgDescuentos.add(rbSeleccionarDescuento);
         bgDescuentos.add(rbCanjearCupon);
         cbDescuentos.removeAllItems();
-        List<PromocionDTO> promociones = ControlNegocio.getInstance().obtenerPromocionesGenerales();
+        List<PromocionDTO> promociones = ControlVentaBoleto.getInstance().obtenerPromocionesGenerales();
         for (PromocionDTO promo : promociones) {
             cbDescuentos.addItem(promo);
         }
@@ -547,15 +555,14 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         cargarInformacionVenta(asientos, funcion);
         configurarPanelDescuentos();
         configurarPanelFormaPago();
-        configurarFechaFuncion(funcion.getFecha());
+        configurarFechaFuncion(funcion.getFechaHora());
     }
     
     private void cargarInformacionVenta(List<AsientoDTO> asientos, FuncionDTO funcion){
         configurarTituloPelicula(funcion.getPelicula().getTitulo());
         configurarInformacionFuncion(lblNombreSala, funcion.getSala().getNombre());
         configurarInformacionFuncion(lblTipoSala, funcion.getTipoSala());
-        configurarInformacionFuncion(lblFechaFuncion, funcion.getFecha().toString());
-        configurarInformacionFuncion(lblHoraFuncion, funcion.getHoraFuncion());
+        configurarInformacionFuncion(lblFechaFuncion, funcion.getFechaHora().toString());
         configurarInformacionFuncion(lblAsientos, asientos.toString());
         configurarPrecios(asientos, null);
     }
@@ -571,35 +578,35 @@ public class PanelInformacionPago extends javax.swing.JPanel {
     }
 
     private void configurarPrecios(List<AsientoDTO> asientos, PromocionDTO promo) {
-        DetallePrecioDTO detalle = ControlNegocio.getInstance().calcularPrecios(asientos, promo);
+        DetallePrecioDTO detalle = ControlVentaBoleto.getInstance().calcularPrecios(asientos, promo);
         lblSubtotalPrecio.setText(String.format("$%.2f", detalle.getSubtotal()));
         lblDescuento.setText(String.format("$%.2f", detalle.getDescuento()));
         lblTotal.setText(String.format("$%.2f", detalle.getTotal()));   
     }
 
-    private void configurarFechaFuncion(Date fecha) {
+    private void configurarFechaFuncion(LocalDateTime fecha) {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yy");
         String fechaFormateada = formatoFecha.format(fecha);
 
         lblFechaFuncion.setText(fechaFormateada);
     }
 
-    private VentaDTO crearVenta(String tipoPago, PromocionDTO promo, DetallePrecioDTO detalle) {
+    private VentaDTO crearVenta(FormaPago tipoPago, PromocionDTO promo, DetallePrecioDTO detalle) {
         VentaDTO venta = new VentaDTO();
         venta.setFuncion(funcion);
         venta.setAsientos(asientos);
-        venta.setEmpleado(ControlNegocio.getInstance().getEmpleadoActual(GestorSesion.getUsuario().getId()));
-        venta.setPromocion(promo);
+        venta.setEmpleado(GestorSesion.getUsuario());
+        venta.setPromocionId(promo.getId());
         venta.setSubtotal(detalle.getSubtotal());
         venta.setDescuento(detalle.getDescuento());
         venta.setTotal(detalle.getTotal());
-        venta.setFecha(new Date());
+        venta.setFecha(LocalDate.now());
         venta.setFormaPago(tipoPago);
         return venta;
     }
  
-    private BoletoDTO procesarVenta(VentaDTO venta, DetallePrecioDTO detalle) {
-        BoletoDTO boleto = ControlNegocio.getInstance().registrarVenta(venta);
+    private BoletoDTO procesarVenta(VentaDTO venta, DetallePrecioDTO detalle) throws QRGeneradorException {
+        BoletoDTO boleto = ControlVentaBoleto.getInstance().registrarVenta(venta);
 
         if (boleto != null) {
             JOptionPane.showMessageDialog(this,

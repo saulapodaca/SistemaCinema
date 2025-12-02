@@ -2,6 +2,7 @@ package presentacion.utilerias;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
 import dto.AsientoDTO;
+import dto.enums.EstadoAsiento;
 import java.awt.Color;
 import java.awt.Image;
 import java.net.URL;
@@ -15,7 +16,7 @@ public class PintorAsientos {
     private static final String URL_ASIENTO_OCUPADO = "/asientoOcupado.png";
     private static final String URL_ASIENTO_SELECCIONADO = "/asientoSeleccionado.png";
     
-    public static void aplicarEstilo(JToggleButton boton, AsientoDTO.Estado estado) {
+    public static void aplicarEstilo(JToggleButton boton, EstadoAsiento estado) {
         configurarBoton(boton);
         switch (estado) {
             case DISPONIBLE -> {
@@ -42,7 +43,7 @@ public class PintorAsientos {
         if (seleccionado) {
             configurarImagenBoton(boton, URL_ASIENTO_SELECCIONADO);
         } else {
-            aplicarEstilo(boton, AsientoDTO.Estado.DISPONIBLE);
+            aplicarEstilo(boton, EstadoAsiento.DISPONIBLE);
         }
             boton.setEnabled(true);
     }
