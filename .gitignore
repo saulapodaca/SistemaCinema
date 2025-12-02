@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-/dto_negocios/target/
-=======
 # ============================================
 # 🧠 ARCHIVOS A IGNORAR EN PROYECTOS MAVEN / NETBEANS
 # ============================================
@@ -48,4 +45,4 @@ desktop.ini
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
->>>>>>> cu-vender-boleto
+/negocios_GeneradorQR/nbproject/
