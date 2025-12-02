@@ -8,6 +8,10 @@ import dto.AsientoDTO;
 import dto.DetallePrecioDTO;
 import dto.PromocionDTO;
 import dto.VentaDTO;
+import exceptions.EmpleadoNoEncontradoException;
+import exceptions.FuncionNoEncontradaException;
+import exceptions.SucursalNoExistenteException;
+import exceptions.VentaNoEncontradaException;
 import java.util.List;
 
 /**
@@ -16,9 +20,9 @@ import java.util.List;
  */
 public interface IGestorVentas {
 
-    VentaDTO registrarVenta(VentaDTO venta);
+    VentaDTO registrarVenta(VentaDTO venta) throws EmpleadoNoEncontradoException, Exception;
     
-    VentaDTO obtenerVentaPorID(String id);
+    VentaDTO obtenerVentaPorID(String id)throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException;
     
     DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promoSeleccionada);
 }
