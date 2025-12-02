@@ -2,22 +2,20 @@ package itson.negocios_gestorpeliculas;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
 
+import bos.PeliculaBO;
 import dto.FiltroDTO;
 import dto.PeliculaDTO;
-import java.util.Arrays;
+import interfaces.IPeliculaBO;
 import java.util.List;
 
 
 public class GestorPeliculas implements IGestorPeliculas{
-
+    
+    private final IPeliculaBO peliculaBo= PeliculaBO.getInstancia();
+    
     @Override
-    public List<PeliculaDTO> listarCartelera(FiltroDTO filtro) {
-                return Arrays.asList(
-                new PeliculaDTO("BOL001","Spiderman", "/blackphone.png", "200min", "Doblada"),
-                new PeliculaDTO("BOL002","Batman", "/spiderman.png", "180min", "Español"),
-                new PeliculaDTO("BOL003","Ironman", "/spiderman.png", "250min", "Subtitulada"),
-                new PeliculaDTO("BOL004","Ironman", "/spiderman.png", "250min", "Subtitulada")
-        );
+    public List<PeliculaDTO> obtenerPeliculas(FiltroDTO filtro) {
+        return peliculaBo.obtenerPeliculas(filtro);
     }
 
 }

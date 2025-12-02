@@ -13,6 +13,6 @@ import java.util.List;
  * @author saula
  */
 public interface IGestorPeliculas {
-    List<PeliculaDTO> listarCartelera(FiltroDTO filtro);
+    List<PeliculaDTO> obtenerPeliculas(FiltroDTO filtro);
     
 }
