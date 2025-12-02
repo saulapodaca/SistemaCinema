@@ -14,7 +14,13 @@ import dto.MembresiaDTO;
 import dto.PeliculaDTO;
 import dto.PromocionDTO;
 import dto.VentaDTO;
-import java.util.Date;
+import exceptions.EmpleadoNoEncontradoException;
+import exceptions.FuncionNoEncontradaException;
+import exceptions.PeliculaNoExistenteException;
+import exceptions.SalaNoExistenteException;
+import exceptions.SucursalNoExistenteException;
+import exceptions.VentaNoEncontradaException;
+import itson.negocios_generadorqr.exceptions.QRGeneradorException;
 import java.util.List;
 
 /**
@@ -23,17 +29,17 @@ import java.util.List;
  */
 public interface IVentaBoletoFacade {
 
-    BoletoDTO venderBoleto(VentaDTO venta);
+    BoletoDTO venderBoleto(VentaDTO venta) throws QRGeneradorException;
 
     void mandarBoletoCorreo(BoletoDTO boleto, String correo);
 
     List<PeliculaDTO> obtenerPeliculas(FiltroDTO filtro);
 
-    List<FuncionDTO> listarFunciones(PeliculaDTO pelicula, Date fecha);
+    List<FuncionDTO> listarFunciones(PeliculaDTO pelicula, FiltroDTO filtro) throws FuncionNoEncontradaException;
     
-    List<AsientoDTO> obtenerAsientos(FuncionDTO funcion);
+    List<AsientoDTO> obtenerAsientos(FuncionDTO funcion) throws FuncionNoEncontradaException, PeliculaNoExistenteException, SalaNoExistenteException;
 
-    EmpleadoDTO obtenerEmpleadoSesion(String idEmpleado);
+    EmpleadoDTO obtenerEmpleadoPorId(String idEmpleado) throws EmpleadoNoEncontradoException, SucursalNoExistenteException;
 
     List<PromocionDTO> listarPromocionesMembresia(MembresiaDTO membresia);
     
@@ -41,11 +47,9 @@ public interface IVentaBoletoFacade {
 
     MembresiaDTO verificarMembresia(String codigo);
     
-    VentaDTO obtenerVentaPorId(String idVenta);
+    VentaDTO obtenerVentaPorId(String idVenta) throws EmpleadoNoEncontradoException, FuncionNoEncontradaException, SucursalNoExistenteException, VentaNoEncontradaException;
     
-    DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo); 
-    
-    PromocionDTO obtenerPromocionPorNombre(String nombrePromo);
+    DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo);
     
     PromocionDTO validarCupon(String codigoCupon);
 }

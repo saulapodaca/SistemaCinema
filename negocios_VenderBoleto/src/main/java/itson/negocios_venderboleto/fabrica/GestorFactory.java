@@ -6,8 +6,6 @@ import itson.negocios_correoelectronico.CorreoElectronico;
 import itson.negocios_correoelectronico.ICorreoElectronico;
 import itson.negocios_generadorqr.GeneradorQR;
 import itson.negocios_generadorqr.IGeneradorQR;
-import itson.negocios_gestorasientos.GestorAsientos;
-import itson.negocios_gestorasientos.IGestorAsientos;
 import itson.negocios_gestorboletos.GestorBoletos;
 import itson.negocios_gestorboletos.IGestorBoletos;
 import itson.negocios_gestorempleados.GestorEmpleados;
@@ -33,11 +31,6 @@ public class GestorFactory implements IGestorFactory {
     @Override
     public IGestorFunciones crearGestorFunciones() {
         return new GestorFunciones();
-    }
-
-    @Override
-    public IGestorAsientos crearGestorAsientos() {
-        return new GestorAsientos();
     }
 
     @Override
