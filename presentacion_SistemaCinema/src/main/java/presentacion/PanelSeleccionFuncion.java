@@ -1,16 +1,24 @@
 package presentacion;
 
+import dto.FiltroDTO;
 import presentacion.controles.ControlPantallas;
 import dto.FuncionDTO;
+import dto.PeliculaDTO;
+import exceptions.FuncionNoEncontradaException;
 import java.awt.Color;
 import java.awt.Image;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import presentacion.controles.ControlVentaBoleto;
 
 /**
  *
@@ -22,18 +30,19 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
     private List<JLabel> etiquetasHoraFuncion;
     private List<JLabel> etiquetasTipoSala;
     private List<JPanel> panelesFunciones;
-    private List<FuncionDTO> funciones;
+    private PeliculaDTO pelicula;
+    private final int TAMANO_PAGINA = 4; 
 
     /**
      * Creates new form PanelSeleccionFuncion
      *
-     * @param funciones
+     * @param pelicula
      */
-    public PanelSeleccionFuncion(List<FuncionDTO> funciones) {
-        this.funciones = funciones;
+    public PanelSeleccionFuncion(PeliculaDTO pelicula) {
+        this.pelicula = pelicula;
         initComponents();
         inicializarReferencias();
-        cargarInformacionPelicula(funciones.get(0));
+        cargarInformacionPelicula(pelicula);
         cargarFunciones();
     }
 
@@ -259,6 +268,12 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        dateChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dateChooserPropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -332,15 +347,27 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
         ControlPantallas.getInstance().abrirSeleccionPeliculas(this);
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void dateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateChooserPropertyChange
+        if (!"date".equals(evt.getPropertyName())) {
+            return; // Ignorar otros cambios
+        }
+
+        if (dateChooser.getDate() == null) {
+            return; // No hay fecha seleccionada
+        }
+
+        cargarFunciones();
+    }//GEN-LAST:event_dateChooserPropertyChange
+
     /**
      * Método que se encargará de cargar la información de la película
      *
      * @param pelicula película a mostrar
      */
-    private void cargarInformacionPelicula(FuncionDTO funcion) {
-        configurarImagen(funcion.getPelicula().getRutaImagen());
-        configurarTitulo(funcion.getPelicula().getTitulo());
-        configurarInformacionPelicula(funcion.getPelicula().getDuracion(), funcion.getPelicula().getIdioma());
+    private void cargarInformacionPelicula(PeliculaDTO pelicula) {
+        configurarImagen(pelicula.getRutaImagen());
+        configurarTitulo(pelicula.getTitulo());
+        configurarInformacionPelicula(pelicula.getDuracion(), pelicula.getIdioma());
     }
 
     /**
@@ -353,7 +380,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
         lblImagen.setText("");
         lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
 
-        URL url = getClass().getResource(rutaImagen);
+        URL url = getClass().getResource("/ImagenesPeliculas/" + rutaImagen);
         if (url != null) {
             ImageIcon icon = new ImageIcon(url);
             Image img = icon.getImage().getScaledInstance(165, 229, Image.SCALE_SMOOTH);
@@ -391,21 +418,29 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
      * Método que se encarga de cargar la pantalla con las funciones
      */
     private void cargarFunciones() {
+        FiltroDTO filtro = new FiltroDTO();
+        filtro.setFecha(dateChooser.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        filtro.setPagina(panelPaginacion1.getPaginaActual());
+        filtro.setTamanoPagina(TAMANO_PAGINA);
+        try {
+            List<FuncionDTO> funciones = ControlVentaBoleto.getInstance().obtenerFunciones(pelicula, filtro);
+            for (int i = 0; i < etiquetasNombreSala.size(); i++) {
+                JLabel lblNombreSala = etiquetasNombreSala.get(i);
+                JLabel lblHoraFuncion = etiquetasHoraFuncion.get(i);
+                JLabel lblTipoSala = etiquetasTipoSala.get(i);
+                JPanel pnlFuncion = panelesFunciones.get(i);
 
-        for (int i = 0; i < etiquetasNombreSala.size(); i++) {
-            JLabel lblNombreSala = etiquetasNombreSala.get(i);
-            JLabel lblHoraFuncion = etiquetasHoraFuncion.get(i);
-            JLabel lblTipoSala = etiquetasTipoSala.get(i);
-            JPanel pnlFuncion = panelesFunciones.get(i);
+                limpiarEtiquetas(lblNombreSala, lblHoraFuncion, lblTipoSala);
 
-            limpiarEtiquetas(lblNombreSala, lblHoraFuncion, lblTipoSala);
+                if (i < funciones.size()) {
+                    FuncionDTO funcion = funciones.get(i);
+                    mostrarFuncionEtiqueta(funcion, lblNombreSala, lblHoraFuncion, lblTipoSala, pnlFuncion);
 
-            if (i < this.funciones.size()) {
-                FuncionDTO funcion = this.funciones.get(i);
-                mostrarFuncionEtiqueta(funcion, lblNombreSala, lblHoraFuncion, lblTipoSala, pnlFuncion);
-
+                }
             }
 
+        }catch (FuncionNoEncontradaException e){
+            JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -425,7 +460,12 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
      */
     private void mostrarFuncionEtiqueta(FuncionDTO funcion, JLabel lblNombreSala, JLabel lblHoraFuncion, JLabel lblTipoSala, JPanel panelFuncion) {
         configurarNombreSala(lblNombreSala, funcion.getSala().getNombre());
-        configurarHoraFuncion(lblHoraFuncion, funcion.getHoraFuncion());
+        
+        LocalDateTime fechaHora = funcion.getFechaHora();
+        String hora = fechaHora.toLocalTime()
+        .format(DateTimeFormatter.ofPattern("hh:mm a")); 
+        configurarHoraFuncion(lblHoraFuncion, hora);
+        
         configurarTipoSala(lblTipoSala, funcion.getTipoSala());
         configurarEventoClick(panelFuncion, funcion);
     }
@@ -517,7 +557,6 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
         lblHoraFuncion.setText("");
         lblTipoSala.setText("");
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVolver;

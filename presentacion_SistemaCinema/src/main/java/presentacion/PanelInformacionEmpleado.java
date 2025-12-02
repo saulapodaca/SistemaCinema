@@ -194,10 +194,10 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
     
     private void cargarInformacionEmpleado(){
         EmpleadoDTO empleado = GestorSesion.getUsuario();
-        configurarImagen(empleado.getUrlFoto());
+        configurarImagen(empleado.getRutaImagen());
         configurarInformacion(lblNombreEmpleado, empleado.getNombres()+" "+empleado.getApellidoPaterno());
-        configurarInformacion(lblPuestoEmpleado, empleado.getOcupacion());
-        configurarInformacion(lblNombreSucursal, empleado.getSucursal());
+        configurarInformacion(lblPuestoEmpleado, empleado.getPuesto());
+        configurarInformacion(lblNombreSucursal, empleado.getSucursal().getNombre());
     }
 
     private void configurarInformacion(JLabel etiqueta, String texto){

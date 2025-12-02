@@ -88,6 +88,7 @@ public class PanelDeBuscador extends javax.swing.JPanel {
             txtBuscador.setText("");
         }
     }//GEN-LAST:event_txtBuscadorFocusGained
+    
     public void setOnBusquedaChange(java.util.function.Consumer<String> listener) {
         this.onBusquedaChange = listener;
     }

@@ -48,4 +48,8 @@ desktop.ini
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+<<<<<<< HEAD
 >>>>>>> cu-vender-boleto
+=======
+/negocios_GeneradorQR/nbproject/
+>>>>>>> saul

@@ -11,7 +11,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import presentacion.controles.ControlNegocio;
+import presentacion.controles.ControlVentaBoleto;
 
 /**
  *
@@ -383,7 +383,7 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
         lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
         lblImagen.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        URL url = getClass().getResource(rutaImagen);
+        URL url = getClass().getResource("/ImagenesPeliculas/" + rutaImagen);
         if (url != null) {
             ImageIcon icon = new ImageIcon(url);
             Image img = icon.getImage().getScaledInstance(165, 229, Image.SCALE_SMOOTH);
@@ -417,7 +417,7 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
 
         FiltroDTO filtro = new FiltroDTO(pagina, tamano, busqueda);
 
-        List<PeliculaDTO> peliculas = ControlNegocio.getInstance().obtenerCartelera(filtro);
+        List<PeliculaDTO> peliculas = ControlVentaBoleto.getInstance().obtenerCartelera(filtro);
         cargarPeliculas(peliculas);
     }
 
