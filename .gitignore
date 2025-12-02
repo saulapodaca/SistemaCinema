@@ -45,3 +45,4 @@ desktop.ini
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+/negocios_GeneradorQR/nbproject/

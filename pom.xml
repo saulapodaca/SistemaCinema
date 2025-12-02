@@ -7,6 +7,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>dto_negocios</module>
+        <module>persistencia</module>
+        <module>objetosNegocio</module>
         <module>negocios_GestorEmpleados</module>
         <module>negocios_GestorPromociones</module>
         <module>negocios_GestorVentas</module>
@@ -14,7 +16,6 @@
         <module>negocios_GestorMembresias</module>
         <module>negocios_CorreoElectronico</module>
         <module>negocios_GeneradorQR</module>
-        <module>negocios_GestorAsientos</module>
         <module>negocios_GestorBoletos</module>
         <module>negocios_GestorFunciones</module>
         <module>negocios_VenderBoleto</module>
