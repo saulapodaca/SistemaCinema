@@ -22,20 +22,13 @@ public class FormPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelInformacionEmpleado1 = new presentacion.PanelInformacionEmpleado();
-        panelOpcionesMenuGerente1 = new presentacion.PanelOpcionesMenuGerente();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(8, 17, 40));
-        getContentPane().add(panelInformacionEmpleado1, java.awt.BorderLayout.CENTER);
-        getContentPane().add(panelOpcionesMenuGerente1, java.awt.BorderLayout.LINE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private presentacion.PanelInformacionEmpleado panelInformacionEmpleado1;
-    private presentacion.PanelOpcionesMenuGerente panelOpcionesMenuGerente1;
     // End of variables declaration//GEN-END:variables
 }

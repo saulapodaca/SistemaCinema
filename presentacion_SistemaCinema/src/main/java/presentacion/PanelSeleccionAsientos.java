@@ -12,6 +12,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -310,7 +312,12 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
         limpiarEtiquetas();
         aplicarInfoEtiqueta(lblNombrePelicula, funcion.getPelicula().getTitulo());
         aplicarInfoEtiqueta(lblNombreSalaFuncion, funcion.getSala().getNombre());
-        aplicarInfoEtiqueta(lblHoraFuncion, funcion.getHoraFuncion());
+        
+        LocalDateTime fechaHora = funcion.getFechaHora();
+        String hora = fechaHora.toLocalTime()
+        .format(DateTimeFormatter.ofPattern("hh:mm a")); 
+        aplicarInfoEtiqueta(lblHoraFuncion, hora);
+        
         aplicarInfoEtiqueta(lblTipoSalaFuncion, funcion.getTipoSala());
         lblTipoSalaFuncion.setForeground(new Color(148,163,184));
     }
