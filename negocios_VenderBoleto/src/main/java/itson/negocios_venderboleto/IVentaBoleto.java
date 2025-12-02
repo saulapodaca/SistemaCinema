@@ -2,19 +2,11 @@ package itson.negocios_venderboleto;
 
 import dto.BoletoDTO;
 import dto.VentaDTO;
+import itson.negocios_generadorqr.exceptions.QRGeneradorException;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
-
-/**
- *
- * @author saula
- */
 public interface IVentaBoleto {
 
-    BoletoDTO venderBoleto(VentaDTO venta);
+    public BoletoDTO venderBoleto(VentaDTO venta) throws QRGeneradorException, Exception;
 
     void mandarBoletoCorreo(BoletoDTO boleto, String correo);
 }

@@ -12,7 +12,13 @@ import dto.MembresiaDTO;
 import dto.PeliculaDTO;
 import dto.PromocionDTO;
 import dto.VentaDTO;
-import itson.negocios_gestorasientos.IGestorAsientos;
+import exceptions.EmpleadoNoEncontradoException;
+import exceptions.FuncionNoEncontradaException;
+import exceptions.PeliculaNoExistenteException;
+import exceptions.SalaNoExistenteException;
+import exceptions.SucursalNoExistenteException;
+import exceptions.VentaNoEncontradaException;
+import itson.negocios_generadorqr.exceptions.QRGeneradorException;
 import itson.negocios_gestorempleados.IGestorEmpleados;
 import itson.negocios_gestorfunciones.IGestorFunciones;
 import itson.negocios_gestormembresias.IGestorMembresias;
@@ -22,7 +28,6 @@ import itson.negocios_gestorventas.IGestorVentas;
 import itson.negocios_venderboleto.IVentaBoleto;
 import itson.negocios_venderboleto.VentaBoleto;
 import itson.negocios_venderboleto.fabrica.GestorFactory;
-import java.util.Date;
 import java.util.List;
 
 public class VentaBoletoFacade implements IVentaBoletoFacade {
@@ -30,7 +35,6 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     private final IVentaBoleto ventaBoleto;
     private final IGestorPeliculas gestorPeliculas;
     private final IGestorFunciones gestorFunciones;
-    private final IGestorAsientos gestorAsientos;
     private final IGestorEmpleados gestorEmpleados;
     private final IGestorMembresias gestorMembresias;
     private final IGestorVentas gestorVentas;
@@ -39,7 +43,6 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     public VentaBoletoFacade(GestorFactory factory) {
         this.gestorPeliculas = factory.crearGestorPeliculas();
         this.gestorFunciones = factory.crearGestorFunciones();
-        this.gestorAsientos = factory.crearGestorAsientos();
         this.gestorEmpleados = factory.crearGestorEmpleados();
         this.gestorMembresias = factory.crearGestorMembresias();
         this.gestorVentas = factory.crearGestorVentas();
@@ -48,7 +51,7 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
         IVentaBoleto venta = new VentaBoleto(
                 gestorVentas,
                 factory.crearGestorBoletos(),
-                gestorAsientos,
+                factory.crearGestorFunciones(),
                 factory.crearGeneradorQR(),
                 factory.crearCorreoElectronico()
         );
@@ -56,8 +59,14 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     }
 
     @Override
-    public BoletoDTO venderBoleto(VentaDTO venta) {
-        return ventaBoleto.venderBoleto(venta);
+    public BoletoDTO venderBoleto(VentaDTO venta) throws QRGeneradorException{
+        try {
+            return ventaBoleto.venderBoleto(venta);
+        } catch (QRGeneradorException e) {
+            throw new QRGeneradorException(e.getMessage());
+        } catch (Exception e) {
+            throw new QRGeneradorException(e.getMessage());
+        }
     }
 
     @Override
@@ -67,22 +76,22 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
 
     @Override
     public List<PeliculaDTO> obtenerPeliculas(FiltroDTO filtro) {
-        return gestorPeliculas.listarCartelera(filtro);
+        return gestorPeliculas.obtenerPeliculas(filtro);
     }
 
     @Override
-    public List<FuncionDTO> listarFunciones(PeliculaDTO pelicula, Date fecha) {
-        return gestorFunciones.obtenerFuncionesPorPelícula(pelicula, fecha);
+    public List<FuncionDTO> listarFunciones(PeliculaDTO pelicula, FiltroDTO filtro) throws FuncionNoEncontradaException{
+        return gestorFunciones.obtenerFuncionesPorPelícula(pelicula, filtro);
     }
 
     @Override
-    public List<AsientoDTO> obtenerAsientos(FuncionDTO funcion) {
-        return gestorAsientos.obtenerAsientos(funcion);
+    public List<AsientoDTO> obtenerAsientos(FuncionDTO funcion) throws FuncionNoEncontradaException, PeliculaNoExistenteException, SalaNoExistenteException{
+        return gestorFunciones.obtenerAsientos(funcion);
     }
 
     @Override
-    public EmpleadoDTO obtenerEmpleadoSesion(String idEmpleado) {
-        return gestorEmpleados.obtenerSesion(idEmpleado);
+    public EmpleadoDTO obtenerEmpleadoPorId(String idEmpleado) throws EmpleadoNoEncontradoException, SucursalNoExistenteException{
+        return gestorEmpleados.obtenerPorId(idEmpleado);
     }
 
     @Override
@@ -101,7 +110,7 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     }
 
     @Override
-    public VentaDTO obtenerVentaPorId(String idVenta) {
+    public VentaDTO obtenerVentaPorId(String idVenta) throws EmpleadoNoEncontradoException, FuncionNoEncontradaException, SucursalNoExistenteException, VentaNoEncontradaException{
         return gestorVentas.obtenerVentaPorID(idVenta);
     }
     
@@ -110,11 +119,6 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
         return gestorVentas.calcularPrecios(asientos, promo);
     }
     
-    @Override
-    public PromocionDTO obtenerPromocionPorNombre(String nombrePromo){
-        return gestorPromociones.obtenerPromocionPorNombre(nombrePromo);
-    }
-
     @Override
     public PromocionDTO validarCupon(String codigoCupon){
         return gestorPromociones.validarCupon(codigoCupon);

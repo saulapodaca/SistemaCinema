@@ -26,11 +26,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>negocios_GestorAsientos</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>negocios_GestorEmpleados</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -62,6 +57,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>negocios_GestorPromociones</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>objetosNegocio</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
