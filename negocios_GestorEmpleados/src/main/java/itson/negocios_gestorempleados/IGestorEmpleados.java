@@ -5,11 +5,17 @@
 package itson.negocios_gestorempleados;
 
 import dto.EmpleadoDTO;
+import dto.SesionDTO;
+import exceptions.EmpleadoNoEncontradoException;
+import exceptions.SesionEmpleadoNoExistenteException;
+import exceptions.SucursalNoExistenteException;
 
 /**
  *
  * @author saula
  */
 public interface IGestorEmpleados {
-    EmpleadoDTO obtenerSesion(String idEmpleado);
+    EmpleadoDTO obtenerSesionEmpleado (SesionDTO sesion) throws SesionEmpleadoNoExistenteException, SucursalNoExistenteException ;
+    
+    EmpleadoDTO obtenerPorId(String idEmpleado) throws EmpleadoNoEncontradoException, SucursalNoExistenteException ;
 }
