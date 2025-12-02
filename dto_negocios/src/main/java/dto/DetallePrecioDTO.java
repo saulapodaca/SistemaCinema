@@ -8,6 +8,9 @@ public class DetallePrecioDTO {
     private double descuento;
     private double total;
 
+    public DetallePrecioDTO() {
+    }
+
     public DetallePrecioDTO(double subtotal, double descuento, double total) {
         this.subtotal = subtotal;
         this.descuento = descuento;
@@ -18,11 +21,25 @@ public class DetallePrecioDTO {
         return subtotal;
     }
 
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
+
     public double getDescuento() {
         return descuento;
+    }
+
+    public void setDescuento(double descuento) {
+        this.descuento = descuento;
     }
 
     public double getTotal() {
         return total;
     }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    
 }

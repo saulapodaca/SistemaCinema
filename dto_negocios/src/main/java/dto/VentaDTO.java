@@ -2,36 +2,50 @@ package dto;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
 
-import java.util.Date;
+import dto.enums.FormaPago;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VentaDTO {
 
     private String id;
     private FuncionDTO funcion;
-    private List<AsientoDTO> asientos;
+    private List<AsientoDTO> asientos = new ArrayList<>();
     private EmpleadoDTO empleado;
-    private PromocionDTO promocion;
+    private String promocionId;
     private double subtotal;
     private double descuento;
     private double total;
-    private String formaPago;
-    private Date fecha;
+    private FormaPago formaPago;
+    private LocalDate fecha;
 
-    public VentaDTO(String id, FuncionDTO funcion, List<AsientoDTO> asientos, EmpleadoDTO empleado, PromocionDTO promocion, double subtotal, double descuento, double total, String formaPago) {
+    public VentaDTO() {
+    }
+
+    public VentaDTO(String id, FuncionDTO funcion, List<AsientoDTO> asientos, EmpleadoDTO empleado, String promocionId, double subtotal, double descuento, double total, FormaPago formaPago, LocalDate fecha) {
         this.id = id;
         this.funcion = funcion;
         this.asientos = asientos;
         this.empleado = empleado;
-        this.promocion = promocion;
+        this.promocionId = promocionId;
         this.subtotal = subtotal;
         this.descuento = descuento;
         this.total = total;
         this.formaPago = formaPago;
-        this.fecha = new Date();
+        this.fecha = fecha;
     }
 
-    public VentaDTO() {
+    public VentaDTO(FuncionDTO funcion, List<AsientoDTO> asientos, EmpleadoDTO empleado, String promocionId, double subtotal, double descuento, double total, FormaPago formaPago, LocalDate fecha) {
+        this.funcion = funcion;
+        this.asientos = asientos;
+        this.empleado = empleado;
+        this.promocionId = promocionId;
+        this.subtotal = subtotal;
+        this.descuento = descuento;
+        this.total = total;
+        this.formaPago = formaPago;
+        this.fecha = fecha;
     }
 
     public String getId() {
@@ -66,12 +80,12 @@ public class VentaDTO {
         this.empleado = empleado;
     }
 
-    public PromocionDTO getPromocion() {
-        return promocion;
+    public String getPromocionId() {
+        return promocionId;
     }
 
-    public void setPromocion(PromocionDTO promocion) {
-        this.promocion = promocion;
+    public void setPromocionId(String promocionId) {
+        this.promocionId = promocionId;
     }
 
     public double getSubtotal() {
@@ -98,19 +112,20 @@ public class VentaDTO {
         this.total = total;
     }
 
-    public String getFormaPago() {
+    public FormaPago getFormaPago() {
         return formaPago;
     }
 
-    public void setFormaPago(String formaPago) {
+    public void setFormaPago(FormaPago formaPago) {
         this.formaPago = formaPago;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
+
 }
