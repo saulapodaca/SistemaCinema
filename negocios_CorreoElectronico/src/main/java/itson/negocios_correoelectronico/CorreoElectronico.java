@@ -12,7 +12,7 @@ public class CorreoElectronico implements ICorreoElectronico {
         System.out.println("   Película: " + boleto.getVenta().getFuncion().getPelicula().getTitulo());
         System.out.println("   Asientos: " + boleto.getVenta().getAsientos().size());
         System.out.println("   Costo: $" + boleto.getVenta().getTotal());
-        System.out.println("   QR: " + boleto.getQr());
+        System.out.println("   QR: " + boleto.getRutaQr());
     }
 }
 
