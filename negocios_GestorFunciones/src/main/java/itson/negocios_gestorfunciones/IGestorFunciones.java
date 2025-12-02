@@ -4,9 +4,13 @@
  */
 package itson.negocios_gestorfunciones;
 
+import dto.AsientoDTO;
+import dto.FiltroDTO;
 import dto.FuncionDTO;
 import dto.PeliculaDTO;
-import java.util.Date;
+import exceptions.FuncionNoEncontradaException;
+import exceptions.PeliculaNoExistenteException;
+import exceptions.SalaNoExistenteException;
 import java.util.List;
 
 /**
@@ -14,5 +18,12 @@ import java.util.List;
  * @author saula
  */
 public interface IGestorFunciones {
-    List<FuncionDTO> obtenerFuncionesPorPelícula(PeliculaDTO pelicula, Date fecha);
+
+    List<FuncionDTO> obtenerFuncionesPorPelícula(PeliculaDTO pelicula, FiltroDTO filtro) throws FuncionNoEncontradaException;
+
+    List<AsientoDTO> obtenerAsientos(FuncionDTO funcion) throws FuncionNoEncontradaException, PeliculaNoExistenteException, SalaNoExistenteException;
+
+    void ocuparAsientos(FuncionDTO funcion, List<AsientoDTO> asientos) throws FuncionNoEncontradaException;
+
+    void liberarAsientos(FuncionDTO funcion, List<AsientoDTO> asientos) throws FuncionNoEncontradaException;
 }
