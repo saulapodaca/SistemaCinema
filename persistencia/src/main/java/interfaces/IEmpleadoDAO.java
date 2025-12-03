@@ -5,7 +5,6 @@
 package interfaces;
 
 import dominio.Empleado;
-import dto.SesionDTO;
 import org.bson.types.ObjectId;
 
 /**
@@ -20,5 +19,5 @@ public interface IEmpleadoDAO {
 
     Empleado obtenerPorId(ObjectId id);
 
-    Empleado obtenerSesion(SesionDTO sesion);
+    Empleado obtenerEmpleadoPorNombre(String usuario);
 }
