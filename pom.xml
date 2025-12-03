@@ -19,6 +19,7 @@
         <module>negocios_GestorBoletos</module>
         <module>negocios_GestorFunciones</module>
         <module>negocios_VenderBoleto</module>
+        <module>negocios_InicioSesion</module>
         <module>presentacion_SistemaCinema</module>
     </modules>
     <properties>
