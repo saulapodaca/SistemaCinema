@@ -8,6 +8,9 @@ public class SesionDTO {
     private String contrasenaHash;
     private char[] contrasena;
 
+    public SesionDTO() {
+    }
+    
     public SesionDTO(String usuario, char[] contrasena) {
         this.usuario = usuario;
         this.contrasena = contrasena;
