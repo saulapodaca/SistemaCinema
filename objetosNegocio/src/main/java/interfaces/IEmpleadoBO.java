@@ -16,7 +16,7 @@ import exceptions.SucursalNoExistenteException;
  */
 public interface IEmpleadoBO {
 
-    EmpleadoDTO obtenerSesionEmpleado(SesionDTO sesion) throws SesionEmpleadoNoExistenteException, SucursalNoExistenteException;
+    EmpleadoDTO obtenerSesionEmpleado(SesionDTO sesion) throws SesionEmpleadoNoExistenteException;
 
     EmpleadoDTO obtenerPorId(String id) throws EmpleadoNoEncontradoException, SucursalNoExistenteException;
 }

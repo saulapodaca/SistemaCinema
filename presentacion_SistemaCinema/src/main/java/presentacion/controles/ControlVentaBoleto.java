@@ -34,7 +34,7 @@ public class ControlVentaBoleto {
         this.facade = new VentaBoletoFacade(new GestorFactory()); 
     }
     
-    public static ControlVentaBoleto getInstance() {
+    public static synchronized ControlVentaBoleto getInstance() {
         if (instance == null) {
             instance = new ControlVentaBoleto();
         }

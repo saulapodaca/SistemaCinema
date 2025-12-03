@@ -6,7 +6,7 @@
         <artifactId>SistemaCinema</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>presentacion_SistemaCinema</artifactId>
+    <artifactId>negocios_InicioSesion</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -15,23 +15,13 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.toedter</groupId>
-            <artifactId>jcalendar</artifactId>
-            <version>1.4</version>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>negocios_VenderBoleto</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>negocios_InicioSesion</artifactId>
+            <artifactId>negocios_GestorEmpleados</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
     <properties>
         <maven.compiler.release>24</maven.compiler.release>
-        <exec.mainClass>itson.presentacion_sistemacinema.Presentacion_SistemaCinema</exec.mainClass>
+        <exec.mainClass>itson.negocios_iniciosesion.Negocios_InicioSesion</exec.mainClass>
     </properties>
 </project>

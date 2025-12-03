@@ -20,7 +20,7 @@ public class GestorEmpleados implements IGestorEmpleados {
     }
 
     @Override
-    public EmpleadoDTO obtenerSesionEmpleado(SesionDTO sesion) throws SesionEmpleadoNoExistenteException, SucursalNoExistenteException  {
+    public EmpleadoDTO obtenerSesionEmpleado(SesionDTO sesion) throws SesionEmpleadoNoExistenteException{
         return empleadoBO.obtenerSesionEmpleado(sesion);
     }
 
