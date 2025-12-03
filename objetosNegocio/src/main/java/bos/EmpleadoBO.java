@@ -15,6 +15,7 @@ import interfaces.IEmpleadoDAO;
 import interfaces.ISucursalBO;
 import mappers.EmpleadoMapper;
 import org.bson.types.ObjectId;
+import org.mindrot.jbcrypt.BCrypt;
 
 
 public class EmpleadoBO implements IEmpleadoBO {
@@ -39,21 +40,34 @@ public class EmpleadoBO implements IEmpleadoBO {
     }
 
     @Override
-    public EmpleadoDTO obtenerSesionEmpleado(SesionDTO sesion) throws SesionEmpleadoNoExistenteException, SucursalNoExistenteException {
+    public EmpleadoDTO obtenerSesionEmpleado(SesionDTO sesion) throws SesionEmpleadoNoExistenteException {
+        try {
+            Empleado empleado = empleadoDAO.obtenerEmpleadoPorNombre(sesion.getUsuario());
 
-        Empleado empleado = empleadoDAO.obtenerSesion(sesion);
+            if (empleado == null) {
+                throw new SesionEmpleadoNoExistenteException("No fue posible encontrar la sesión del empleado");
+            }
 
-        if (empleado == null) {
-            throw new SesionEmpleadoNoExistenteException(
-                    "No fue posible encontrar la sesión del empleado."
-            );
+            //
+            String hash = BCrypt.hashpw("1234", BCrypt.gensalt());
+            System.out.println("HASH = " + hash);
+            //
+
+            String contraseñaPlano = new String(sesion.getContrasena());
+            boolean contrasenaValida = BCrypt.checkpw(contraseñaPlano, empleado.getContrasena());
+
+            if (!contrasenaValida) {
+                throw new SesionEmpleadoNoExistenteException("La contraseña no coincide.");
+            }
+
+            SucursalDTO sucursalDTO = sucursalBO.obtenerPorId(empleado.getSucursalId().toHexString());
+
+            return empleadoMapper.toDTO(empleado, sucursalDTO);
+
+        } catch (SesionEmpleadoNoExistenteException | SucursalNoExistenteException e) {
+            throw new SesionEmpleadoNoExistenteException("Error al iniciar sesion:" + e.getMessage());
         }
 
-        SucursalDTO sucursalDTO = sucursalBO.obtenerPorId(
-                empleado.getSucursalId().toHexString()
-        );
-
-        return empleadoMapper.toDTO(empleado, sucursalDTO);
     }
 
     @Override
