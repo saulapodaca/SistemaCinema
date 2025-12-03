@@ -15,7 +15,9 @@ import exceptions.SucursalNoExistenteException;
  * @author saula
  */
 public interface IGestorEmpleados {
-    EmpleadoDTO obtenerSesionEmpleado (SesionDTO sesion) throws SesionEmpleadoNoExistenteException, SucursalNoExistenteException ;
+
+    EmpleadoDTO obtenerSesionEmpleado(SesionDTO sesion) throws SesionEmpleadoNoExistenteException;
+
+    EmpleadoDTO obtenerPorId(String idEmpleado) throws EmpleadoNoEncontradoException, SucursalNoExistenteException;
     
-    EmpleadoDTO obtenerPorId(String idEmpleado) throws EmpleadoNoEncontradoException, SucursalNoExistenteException ;
 }
