@@ -4,6 +4,14 @@
  */
 package presentacion;
 
+import dto.EmpleadoDTO;
+import dto.SesionDTO;
+import exceptions.SesionEmpleadoNoExistenteException;
+import javax.swing.JOptionPane;
+import presentacion.controles.ControlInicioSesion;
+import presentacion.controles.ControlPantallas;
+import presentacion.utilerias.GestorSesion;
+
 /**
  *
  * @author saula
@@ -31,7 +39,8 @@ public class InicioSesionPanel extends javax.swing.JPanel {
         pswdField = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        inicioSesionBtn = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(8, 17, 40));
 
@@ -47,11 +56,6 @@ public class InicioSesionPanel extends javax.swing.JPanel {
         pswdField.setForeground(new java.awt.Color(148, 163, 184));
         pswdField.setMinimumSize(new java.awt.Dimension(68, 35));
         pswdField.setPreferredSize(new java.awt.Dimension(412, 35));
-        pswdField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pswdFieldActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(241, 245, 249));
@@ -61,13 +65,13 @@ public class InicioSesionPanel extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(241, 245, 249));
         jLabel2.setText("Contraseña");
 
-        jButton1.setBackground(new java.awt.Color(37, 99, 235));
-        jButton1.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(241, 245, 249));
-        jButton1.setText("Iniciar Sesion");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        inicioSesionBtn.setBackground(new java.awt.Color(37, 99, 235));
+        inicioSesionBtn.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        inicioSesionBtn.setForeground(new java.awt.Color(241, 245, 249));
+        inicioSesionBtn.setText("Iniciar Sesion");
+        inicioSesionBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                inicioSesionBtnActionPerformed(evt);
             }
         });
 
@@ -78,7 +82,7 @@ public class InicioSesionPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inicioSesionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
                     .addComponent(pswdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -97,41 +101,57 @@ public class InicioSesionPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pswdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(inicioSesionBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
         );
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoCine.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(416, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(416, 416, 416))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(426, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(416, 416, 416))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(497, 497, 497))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(404, Short.MAX_VALUE)
+                .addContainerGap(136, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(90, 90, 90))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pswdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswdFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pswdFieldActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void inicioSesionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inicioSesionBtnActionPerformed
+        SesionDTO sesion = new SesionDTO();
+        sesion.setUsuario(usuarioTxt.getText());
+        sesion.setContrasena(pswdField.getPassword());
+        
+        try{
+            EmpleadoDTO empleado = ControlInicioSesion.getInstance().obtenerSesionEmpleado(sesion);
+            GestorSesion.setUsuario(empleado);
+            ControlPantallas.getInstance().abrirMenuPrincipal();
+        } catch (SesionEmpleadoNoExistenteException e){
+            JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_inicioSesionBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton inicioSesionBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField pswdField;
     private javax.swing.JTextField usuarioTxt;
