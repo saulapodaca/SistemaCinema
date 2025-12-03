@@ -64,17 +64,12 @@ public class EmpleadoDAO implements IEmpleadoDAO{
 
     /**
      *
-     * @param sesion
+     * @param usuario
      * @return
      */
     @Override
-    public Empleado obtenerSesion(SesionDTO sesion) {
-        return coleccion.find(
-                and(
-                        eq("usuario", sesion.getUsuario()),
-                        eq("contrasena", sesion.getContrasena())
-                )
-        ).first();
+    public Empleado obtenerEmpleadoPorNombre(String usuario) {
+        return coleccion.find(eq("usuario", usuario)).first();
     }
 
 }
