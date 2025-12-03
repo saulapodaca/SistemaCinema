@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JPanel;
 import presentacion.FormPrincipal;
+import presentacion.InicioSesionPanel;
 import presentacion.PanelInformacionBoleto;
 import presentacion.PanelInformacionEmpleado;
 import presentacion.PanelInformacionPago;
@@ -49,13 +50,20 @@ public class ControlPantallas {
      *
      * @return
      */
-    public static ControlPantallas getInstance() {
+    public static synchronized ControlPantallas getInstance() {
         if (instance == null) {
             instance = new ControlPantallas();
         }
         return instance;
     }
 
+    
+    public void abrirInicioSesion(){
+        this.formPrincipal.getContentPane().removeAll();
+        JPanel panelInicioSesion = new InicioSesionPanel();
+        agregarPanelNuevo(panelInicioSesion);
+        this.formPrincipal.setVisible(true);
+    }
     /**
      * Método que abre el menú principal en el frame, se agrega el panel de
      * información del empleado y las opciones del gerente
