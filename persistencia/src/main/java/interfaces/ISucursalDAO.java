@@ -18,4 +18,6 @@ public interface ISucursalDAO {
     Sucursal actualizar(Sucursal sucursal);
 
     Sucursal obtenerPorId(ObjectId id);
+    
+    Sucursal obtenerPorNombre(String nombre);
 }

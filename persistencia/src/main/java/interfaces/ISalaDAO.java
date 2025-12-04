@@ -18,4 +18,6 @@ public interface ISalaDAO {
     Sala actualizar(Sala sala);
 
     Sala obtenerPorId(ObjectId id);
+    
+    Sala obtenerPorNombre(String nombre);
 }
