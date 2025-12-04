@@ -21,6 +21,7 @@
         <module>negocios_VenderBoleto</module>
         <module>negocios_InicioSesion</module>
         <module>presentacion_SistemaCinema</module>
+        <module>negocios_InsertMasivo</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
