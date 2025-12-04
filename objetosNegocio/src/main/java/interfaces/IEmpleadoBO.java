@@ -7,6 +7,7 @@ package interfaces;
 import dto.EmpleadoDTO;
 import dto.SesionDTO;
 import exceptions.EmpleadoNoEncontradoException;
+import exceptions.NegocioException;
 import exceptions.SesionEmpleadoNoExistenteException;
 import exceptions.SucursalNoExistenteException;
 
@@ -16,6 +17,8 @@ import exceptions.SucursalNoExistenteException;
  */
 public interface IEmpleadoBO {
 
+    EmpleadoDTO insertarEmpleado(EmpleadoDTO empleado) throws SucursalNoExistenteException, NegocioException ;
+    
     EmpleadoDTO obtenerSesionEmpleado(SesionDTO sesion) throws SesionEmpleadoNoExistenteException;
 
     EmpleadoDTO obtenerPorId(String id) throws EmpleadoNoEncontradoException, SucursalNoExistenteException;

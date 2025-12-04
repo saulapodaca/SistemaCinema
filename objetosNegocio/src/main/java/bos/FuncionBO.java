@@ -10,13 +10,16 @@ import dto.PeliculaDTO;
 import dto.SalaDTO;
 import dto.enums.EstadoAsiento;
 import exceptions.FuncionNoEncontradaException;
+import exceptions.NegocioException;
 import exceptions.PeliculaNoExistenteException;
 import exceptions.SalaNoExistenteException;
 import interfaces.IFuncionBO;
 import interfaces.IPeliculaBO;
 import interfaces.ISalaBO;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -245,6 +248,59 @@ public class FuncionBO implements IFuncionBO {
         }
 
         return this.actualizar(funcion);
+    }
+
+    @Override
+    public FuncionDTO insertarFuncion(FuncionDTO funcionDTO) throws NegocioException, SalaNoExistenteException, PeliculaNoExistenteException {
+
+        if (funcionDTO.getFechaHora() == null) {
+            throw new NegocioException("Debe especificarse la fecha y hora de la función.");
+        }
+        if (funcionDTO.getSala() == null) {
+            throw new NegocioException("Debe especificarse la sala.");
+        }
+        if (funcionDTO.getPelicula() == null) {
+            throw new NegocioException("Debe especificarse la película.");
+        }
+
+        SalaDTO salaDTO = salaBO.obtenerPorId(funcionDTO.getSala().getId());
+
+        PeliculaDTO peliculaDTO = peliculaBO.obtenerPorId(funcionDTO.getPelicula().getId());
+
+        List<AsientoDTO> asientosGenerados = generarAsientos(salaDTO);
+        funcionDTO.setAsientos(asientosGenerados);
+
+        Funcion entidad = funcionMapper.toEntity(funcionDTO);
+
+        Funcion guardada = funcionDAO.insertar(entidad);
+
+        return funcionMapper.toDTO(guardada, salaDTO, peliculaDTO);
+    }
+
+    private List<AsientoDTO> generarAsientos(SalaDTO sala) {
+        List<AsientoDTO> asientos = new ArrayList<>();
+
+        int filas = sala.getFilas();
+        int columnas = sala.getColumnas();
+
+        for (int i = 0; i < filas; i++) {
+
+            char letraFila = (char) ('A' + i);
+
+            for (int j = 0; j < columnas; j++) {
+
+                AsientoDTO asiento = new AsientoDTO();
+                asiento.setFila(i);          // 0..filas-1
+                asiento.setColumna(j + 1);   // 1..columnas
+                asiento.setNombre(letraFila + String.valueOf(j + 1));
+                asiento.setEstado(EstadoAsiento.DISPONIBLE);
+                System.out.println(i);
+                System.out.println(j+1);
+                asientos.add(asiento);
+            }
+        }
+
+        return asientos;
     }
 
 }

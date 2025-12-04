@@ -5,6 +5,7 @@
 package interfaces;
 
 import dto.SucursalDTO;
+import exceptions.NegocioException;
 import exceptions.SucursalNoExistenteException;
 
 /**
@@ -12,5 +13,11 @@ import exceptions.SucursalNoExistenteException;
  * @author saula
  */
 public interface ISucursalBO {
+    
+    SucursalDTO insertarSucursal(SucursalDTO sucursalDTO) throws NegocioException;
+    
     SucursalDTO obtenerPorId (String id) throws SucursalNoExistenteException;
+    
+    SucursalDTO obtenerPorNombre (String nombre) throws NegocioException;
+    
 }
