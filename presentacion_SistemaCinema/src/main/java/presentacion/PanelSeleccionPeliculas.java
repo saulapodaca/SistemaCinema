@@ -31,6 +31,9 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
         panelBuscador1.setOnBusquedaChange((texto) -> {
             actualizarCartelera();
         });
+        panelPaginacion1.setOnPaginaChange(() -> {
+            actualizarCartelera(); // ESTE método está en el panel padre
+        });
         actualizarCartelera();
     }
 

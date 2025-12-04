@@ -324,7 +324,7 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
     
     private void aplicarInfoEtiqueta(JLabel etiqueta, String texto){
         etiqueta.setText(texto);
-        etiqueta.setForeground(new Color (204,204,204));
+        etiqueta.setForeground(new Color (205,205,205));
     }
     
     private void limpiarEtiquetas(){
@@ -340,7 +340,7 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
             int columna = asiento.getColumna();
             
             JToggleButton btn = crearBotonAsiento(asiento);
-            botones[fila][columna] = btn;
+            botones[fila][columna-1] = btn;
             pnlMapaAsientos.add(btn);
         }
     }
@@ -349,7 +349,7 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
         JToggleButton btn = new JToggleButton("");
         btn.setPreferredSize(new Dimension(50, 50));
         btn.setSize(new Dimension(50, 50));
-        btn.setText(String.valueOf(asiento.getColumna() + 1));
+        btn.setText(String.valueOf(asiento.getColumna()));
         btn.setForeground(Color.WHITE);
         btn.setHorizontalTextPosition(SwingConstants.CENTER);
         PintorAsientos.aplicarEstilo(btn, asiento.getEstado());
@@ -371,7 +371,7 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
     private List<AsientoDTO> obtenerAsientosSeleccionados(){
         return funcion.getAsientos().stream()
                 .filter(a ->{
-                    JToggleButton b = botones[a.getFila()][a.getColumna()];
+                    JToggleButton b = botones[a.getFila()][a.getColumna()-1];
                     return b.isSelected();
                 }).toList();
     }

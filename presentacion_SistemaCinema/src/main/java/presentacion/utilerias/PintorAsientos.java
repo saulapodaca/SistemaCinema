@@ -1,7 +1,6 @@
 package presentacion.utilerias;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
-import dto.AsientoDTO;
 import dto.enums.EstadoAsiento;
 import java.awt.Color;
 import java.awt.Image;
@@ -25,16 +24,24 @@ public class PintorAsientos {
             }
             case APARTADO, OCUPADO -> {
                 configurarImagenBoton(boton, URL_ASIENTO_OCUPADO);
-                boton.setEnabled(false); // bloqueado para otros
+                boton.setEnabled(false);
             }
         }
     }
 
     private static void configurarImagenBoton(JToggleButton boton, String rutaImagen) {
         URL url = PintorAsientos.class.getResource(rutaImagen);
+        if (url == null) {
+            System.out.println("NO SE ENCONTRÓ IMAGEN: " + rutaImagen);
+            return;
+        }
+
         ImageIcon icon = new ImageIcon(url);
         Image img = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        boton.setIcon(new ImageIcon(img));
+        ImageIcon finalIcon = new ImageIcon(img);
+
+        boton.setIcon(finalIcon);
+        boton.setDisabledIcon(finalIcon);
     }
 
     public static void aplicarSeleccion(JToggleButton boton, boolean seleccionado) {
@@ -50,11 +57,11 @@ public class PintorAsientos {
   
     private static void configurarBoton(JToggleButton boton) {
         boton.setContentAreaFilled(false);
-        boton.setOpaque(true);
+        boton.setOpaque(false);
         boton.setBorderPainted(false);
         boton.setFocusPainted(false);
         boton.setHorizontalAlignment(SwingConstants.CENTER);
 
-        boton.setBackground(new Color(18, 26, 60));
+        boton.setBackground(new Color(0, 0, 0, 0));
     }
 }

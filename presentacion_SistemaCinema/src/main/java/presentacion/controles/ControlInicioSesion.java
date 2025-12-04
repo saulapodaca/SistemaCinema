@@ -9,13 +9,13 @@ import itson.negocios_iniciosesion.IInicioSesionFachada;
 import itson.negocios_iniciosesion.InicioSesionFachada;
 
 
-
 public class ControlInicioSesion {
-/**
+
+    /**
      * Instancia única del control
      */
     private static ControlInicioSesion instance;
-    
+
     private final IInicioSesionFachada inicioSesionFachada;
 
     /**

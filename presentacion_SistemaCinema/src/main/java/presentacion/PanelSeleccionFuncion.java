@@ -44,6 +44,9 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
         inicializarReferencias();
         cargarInformacionPelicula(pelicula);
         cargarFunciones();
+        panelPaginacion1.setOnPaginaChange(() -> {
+            cargarFunciones();
+        });
     }
 
     /**

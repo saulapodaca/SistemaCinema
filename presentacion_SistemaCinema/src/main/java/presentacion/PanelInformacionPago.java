@@ -15,9 +15,8 @@ import dto.VentaDTO;
 import dto.enums.FormaPago;
 import itson.negocios_generadorqr.exceptions.QRGeneradorException;
 import java.awt.Color;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -551,21 +550,31 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         rbEfectivo.setSelected(true);
     }
     
-    private void cargarInformacion(List<AsientoDTO> asientos, FuncionDTO funcion){
+    private void cargarInformacion(List<AsientoDTO> asientos, FuncionDTO funcion) {
         cargarInformacionVenta(asientos, funcion);
         configurarPanelDescuentos();
         configurarPanelFormaPago();
-        configurarFechaFuncion(funcion.getFechaHora());
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yy");
+        lblFechaFuncion.setText(funcion.getFechaHora().format(formatoFecha));
+
+        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a");
+        lblHoraFuncion.setText(funcion.getFechaHora().toLocalTime().format(formatoHora));
     }
-    
-    private void cargarInformacionVenta(List<AsientoDTO> asientos, FuncionDTO funcion){
+
+    private void cargarInformacionVenta(List<AsientoDTO> asientos, FuncionDTO funcion) {
         configurarTituloPelicula(funcion.getPelicula().getTitulo());
-        configurarInformacionFuncion(lblNombreSala, funcion.getSala().getNombre());
-        configurarInformacionFuncion(lblTipoSala, funcion.getTipoSala());
-        configurarInformacionFuncion(lblFechaFuncion, funcion.getFechaHora().toString());
-        configurarInformacionFuncion(lblAsientos, asientos.toString());
-        configurarPrecios(asientos, null);
-    }
+    configurarInformacionFuncion(lblNombreSala, funcion.getSala().getNombre());
+    configurarInformacionFuncion(lblTipoSala, funcion.getTipoSala());
+    configurarInformacionFuncion(lblAsientos, asientos.toString());
+
+    DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yy");
+    lblFechaFuncion.setText(funcion.getFechaHora().format(formatoFecha));
+
+    DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a");
+    lblHoraFuncion.setText(funcion.getFechaHora().toLocalTime().format(formatoHora));
+
+    configurarPrecios(asientos, null);
+}
     
     private void configurarTituloPelicula(String titulo){
         lblTituloPelicula.setText(titulo);
@@ -584,24 +593,21 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         lblTotal.setText(String.format("$%.2f", detalle.getTotal()));   
     }
 
-    private void configurarFechaFuncion(LocalDateTime fecha) {
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yy");
-        String fechaFormateada = formatoFecha.format(fecha);
-
-        lblFechaFuncion.setText(fechaFormateada);
-    }
-
     private VentaDTO crearVenta(FormaPago tipoPago, PromocionDTO promo, DetallePrecioDTO detalle) {
         VentaDTO venta = new VentaDTO();
         venta.setFuncion(funcion);
         venta.setAsientos(asientos);
         venta.setEmpleado(GestorSesion.getUsuario());
-        venta.setPromocionId(promo.getId());
         venta.setSubtotal(detalle.getSubtotal());
         venta.setDescuento(detalle.getDescuento());
         venta.setTotal(detalle.getTotal());
         venta.setFecha(LocalDate.now());
         venta.setFormaPago(tipoPago);
+        
+        if (promo != null) {
+            venta.setPromocionId(promo.getId());
+        }
+        
         return venta;
     }
  

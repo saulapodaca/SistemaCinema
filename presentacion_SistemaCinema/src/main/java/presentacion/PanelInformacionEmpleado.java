@@ -209,10 +209,10 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
         lblFoto.setText("");
         lblFoto.setHorizontalAlignment(SwingConstants.CENTER);
 
-        URL url = getClass().getResource(urlImagen);
+        URL url = getClass().getResource("/ImagenesEmpleados/" + urlImagen);
         if (url != null) {
             ImageIcon icon = new ImageIcon(url);
-            Image img = icon.getImage().getScaledInstance(165, 229, Image.SCALE_SMOOTH);
+            Image img = icon.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
             lblFoto.setIcon(new ImageIcon(img));
         }
     }
