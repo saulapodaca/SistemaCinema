@@ -6,6 +6,7 @@ import daos.PeliculaDAO;
 import dominio.Pelicula;
 import dto.FiltroDTO;
 import dto.PeliculaDTO;
+import exceptions.NegocioException;
 import exceptions.PeliculaNoExistenteException;
 import interfaces.IPeliculaBO;
 import interfaces.IPeliculaDAO;
@@ -71,5 +72,51 @@ public class PeliculaBO implements IPeliculaBO {
         }
 
         return peliculaMapper.toDTO(pelicula);
+    }
+
+    @Override
+    public PeliculaDTO insertarPelicula(PeliculaDTO peliculaDTO) throws NegocioException {
+
+        if (peliculaDTO.getTitulo() == null || peliculaDTO.getTitulo().isBlank()) {
+            throw new NegocioException("El título de la película no puede estar vacío.");
+        }
+        
+        if (peliculaDTO.getIdioma() == null || peliculaDTO.getIdioma().isBlank()) {
+            throw new NegocioException("El idioma no puede estar vacío.");
+        }
+        
+        if (peliculaDTO.getDuracion()== null || peliculaDTO.getDuracion().isBlank()) {
+            throw new NegocioException("La duración no puede estar vacía.");
+        }
+
+        if (peliculaDTO.getRutaImagen() == null || peliculaDTO.getRutaImagen().isBlank()) {
+            throw new NegocioException("Debe proporcionar una ruta de imagen.");
+        }
+
+        if (!peliculaDTO.getRutaImagen().endsWith(".jpg")
+                && !peliculaDTO.getRutaImagen().endsWith(".png")) {
+            throw new NegocioException("La imagen debe ser JPG o PNG.");
+        }
+
+        Pelicula entidad = peliculaMapper.toEntity(peliculaDTO);
+
+        Pelicula guardada = peliculaDAO.insertar(entidad);
+
+        return peliculaMapper.toDTO(guardada);
+    }
+
+    @Override
+    public PeliculaDTO obtenerPorTitulo(String titulo) throws NegocioException{
+        if (titulo == null || titulo.isBlank()) {
+            throw new NegocioException("El título no puede estar vacío.");
+        }
+
+        Pelicula entidad = peliculaDAO.obtenerPorTitulo(titulo);
+
+        if (entidad == null) {
+            throw new NegocioException("No existe una película con el título: " + titulo);
+        }
+
+        return peliculaMapper.toDTO(entidad);
     }
 }

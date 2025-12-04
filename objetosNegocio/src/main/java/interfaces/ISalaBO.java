@@ -5,6 +5,7 @@
 package interfaces;
 
 import dto.SalaDTO;
+import exceptions.NegocioException;
 import exceptions.SalaNoExistenteException;
 
 /**
@@ -12,5 +13,11 @@ import exceptions.SalaNoExistenteException;
  * @author saula
  */
 public interface ISalaBO {
+    
+    SalaDTO insertarSala(SalaDTO salaDTO) throws NegocioException;
+    
     SalaDTO obtenerPorId(String id) throws SalaNoExistenteException;
+    
+    SalaDTO obtenerPorNombre(String nombre) throws NegocioException;
+    
 }

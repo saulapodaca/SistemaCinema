@@ -5,6 +5,7 @@ package bos;
 import daos.SalaDAO;
 import dominio.Sala;
 import dto.SalaDTO;
+import exceptions.NegocioException;
 import exceptions.SalaNoExistenteException;
 import interfaces.ISalaBO;
 import interfaces.ISalaDAO;
@@ -52,4 +53,38 @@ public class SalaBO implements ISalaBO {
 
         return salaMapper.toDTO(sala);
     }
+
+    @Override
+    public SalaDTO insertarSala(SalaDTO salaDTO) throws NegocioException {
+
+        if (salaDTO.getNombre() == null || salaDTO.getNombre().isBlank()) {
+            throw new NegocioException("El nombre de la sala no puede estar vacío.");
+        }
+
+        if (salaDTO.getFilas() <= 0 || salaDTO.getColumnas() <= 0) {
+            throw new NegocioException("Las filas y columnas deben ser mayores a cero.");
+        }
+
+        Sala entidad = salaMapper.toEntity(salaDTO);
+
+        Sala guardado = salaDAO.insertar(entidad);
+
+        return salaMapper.toDTO(guardado);
+    }
+
+    @Override
+    public SalaDTO obtenerPorNombre(String nombre) throws NegocioException{
+        if (nombre == null || nombre.isBlank()) {
+            throw new NegocioException("El nombre de la sala no puede estar vacío.");
+        }
+
+        Sala entidad = salaDAO.obtenerPorNombre(nombre);
+
+        if (entidad == null) {
+            throw new NegocioException("No existe una sala con el nombre: " + nombre);
+        }
+
+        return salaMapper.toDTO(entidad);
+    }
+
 }

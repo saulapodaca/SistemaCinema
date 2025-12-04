@@ -8,6 +8,7 @@ import dto.EmpleadoDTO;
 import dto.SesionDTO;
 import dto.SucursalDTO;
 import exceptions.EmpleadoNoEncontradoException;
+import exceptions.NegocioException;
 import exceptions.SesionEmpleadoNoExistenteException;
 import exceptions.SucursalNoExistenteException;
 import interfaces.IEmpleadoBO;
@@ -48,11 +49,6 @@ public class EmpleadoBO implements IEmpleadoBO {
                 throw new SesionEmpleadoNoExistenteException("No fue posible encontrar la sesión del empleado");
             }
 
-            //
-            String hash = BCrypt.hashpw("1234", BCrypt.gensalt());
-            System.out.println("HASH = " + hash);
-            //
-
             String contraseñaPlano = new String(sesion.getContrasena());
             boolean contrasenaValida = BCrypt.checkpw(contraseñaPlano, empleado.getContrasena());
 
@@ -81,10 +77,31 @@ public class EmpleadoBO implements IEmpleadoBO {
             );
         }
 
-        SucursalDTO sucursalDTO = sucursalBO.obtenerPorId(
-                empleado.getSucursalId().toHexString()
-        );
+        SucursalDTO sucursalDTO = sucursalBO.obtenerPorId(empleado.getSucursalId().toHexString());
 
         return empleadoMapper.toDTO(empleado, sucursalDTO);
+    }
+
+    @Override
+    public EmpleadoDTO insertarEmpleado(EmpleadoDTO empleado) throws SucursalNoExistenteException, NegocioException {
+
+        if (empleado.getUsuario() == null || empleado.getUsuario().isBlank()) {
+            throw new NegocioException("El usuario no puede estar vacío.");
+        }
+
+        if (empleado.getContrasena() == null || empleado.getContrasena().isBlank()) {
+            throw new NegocioException("La contraseña no puede estar vacía.");
+        }
+        
+        SucursalDTO sucursalDTO = sucursalBO.obtenerPorId(empleado.getSucursal().getId());
+        
+        Empleado entidad = empleadoMapper.toEntity(empleado);
+
+        String hash = BCrypt.hashpw(empleado.getContrasena(), BCrypt.gensalt());
+        entidad.setContrasena(hash);
+
+        Empleado empleadoGuardado = empleadoDAO.insertar(entidad);
+        
+        return empleadoMapper.toDTO(empleadoGuardado, sucursalDTO);
     }
 }
