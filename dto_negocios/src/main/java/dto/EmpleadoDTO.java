@@ -16,6 +16,7 @@ public class EmpleadoDTO {
     private String rutaImagen;
     private String usuario;
     private TipoEmpleado tipoEmpleado;
+    private String contrasena;
 
     public EmpleadoDTO(){
     }
@@ -52,6 +53,21 @@ public class EmpleadoDTO {
         this.usuario = usuario;
         this.tipoEmpleado = tipoEmpleado;
     }
+
+    public EmpleadoDTO(String id, String nombres, String apellidoPaterno, String apellidoMaterno, SucursalDTO sucursal, String puesto, String rutaImagen, String usuario, TipoEmpleado tipoEmpleado, String contrasena) {
+        this.id = id;
+        this.nombres = nombres;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.sucursal = sucursal;
+        this.puesto = puesto;
+        this.rutaImagen = rutaImagen;
+        this.usuario = usuario;
+        this.tipoEmpleado = tipoEmpleado;
+        this.contrasena = contrasena;
+    }
+    
+    
 
     public String getId() {
         return id;
@@ -123,6 +139,14 @@ public class EmpleadoDTO {
 
     public void setTipoEmpleado(TipoEmpleado tipoEmpleado) {
         this.tipoEmpleado = tipoEmpleado;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
     
 }

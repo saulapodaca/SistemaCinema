@@ -35,6 +35,16 @@ public class FuncionDTO {
         this.fechaHora = fechaHora;
     }
 
+    public FuncionDTO(String id, SalaDTO sala, PeliculaDTO pelicula, String tipoSala, LocalDateTime fechaHora) {
+        this.id = id;
+        this.sala = sala;
+        this.pelicula = pelicula;
+        this.tipoSala = tipoSala;
+        this.fechaHora = fechaHora;
+    }
+    
+    
+
     public LocalDateTime getFechaHora() {
         return fechaHora;
     }
