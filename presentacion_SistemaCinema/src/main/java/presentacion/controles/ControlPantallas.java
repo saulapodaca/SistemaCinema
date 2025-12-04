@@ -1,8 +1,8 @@
 package presentacion.controles;
 
-//@author SAUL ISAAC APODACA BALDENEGRO 00000252020
 import dto.AsientoDTO;
 import dto.BoletoDTO;
+import dto.EmpleadoDTO;
 import dto.FuncionDTO;
 import dto.PeliculaDTO;
 import java.awt.BorderLayout;
@@ -24,7 +24,8 @@ import presentacion.PanelSeleccionPeliculas;
  * sistemas Se implementa patrón singleton para garantizar una única instancia
  * del control
  *
- * @author saula
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandor Rodríguez Lugo - 00000251622
  */
 public class ControlPantallas {
 
@@ -57,26 +58,18 @@ public class ControlPantallas {
         return instance;
     }
 
-    
-    public void abrirInicioSesion(){
-        this.formPrincipal.getContentPane().removeAll();
-        JPanel panelInicioSesion = new InicioSesionPanel();
-        agregarPanelNuevo(panelInicioSesion);
-        this.formPrincipal.setVisible(true);
+    public void abrirInicioSesion() {
+        agregarPanelNuevo(new InicioSesionPanel());
+        formPrincipal.setVisible(true);
     }
+
     /**
      * Método que abre el menú principal en el frame, se agrega el panel de
      * información del empleado y las opciones del gerente
      */
     public void abrirMenuPrincipal() {
-        this.formPrincipal.getContentPane().removeAll();
-
-        JPanel panelEmpleado = new PanelInformacionEmpleado();
-        JPanel panelOpcionesGerente = new PanelOpcionesMenuGerente();
-
-        this.formPrincipal.getContentPane().add(panelEmpleado, BorderLayout.WEST);
-        agregarPanelNuevo(panelOpcionesGerente);
-        this.formPrincipal.setVisible(true);
+        cargarPanelEmpleado();
+        agregarPanelNuevo(new PanelOpcionesMenuGerente());
     }
 
     /**
@@ -87,44 +80,41 @@ public class ControlPantallas {
      * nuevo
      */
     public void abrirSeleccionPeliculas(JPanel panelAnterior) {
-        eliminarPanelAnterior(panelAnterior);
-        JPanel panelNuevo = new PanelSeleccionPeliculas();
-        agregarPanelNuevo(panelNuevo);
+        agregarPanelNuevo(new PanelSeleccionPeliculas());
     }
 
     public void abrirSeleccionFunciones(JPanel panelAnterior, PeliculaDTO pelicula) {
-        eliminarPanelAnterior(panelAnterior);
-        JPanel panelNuevo = new PanelSeleccionFuncion(pelicula);
-        agregarPanelNuevo(panelNuevo);
-    }
-    
-    public void abrirSeleccionAsientos(JPanel panelAnterior, FuncionDTO funcion){
-        eliminarPanelAnterior(panelAnterior);
-        JPanel panelNuevo = new PanelSeleccionAsientos(funcion);
-        agregarPanelNuevo(panelNuevo);
-    }
-    
-    public void abrirInformacionPago(JPanel panelAnterior, List<AsientoDTO> asientos, FuncionDTO funcion){
-        eliminarPanelAnterior(panelAnterior);
-        JPanel panelNuevo = new PanelInformacionPago(asientos, funcion);
-        agregarPanelNuevo(panelNuevo);
-    }
-    
-    public void abrirInformacionBoleto(JPanel panelAnterior, BoletoDTO boleto){
-        eliminarPanelAnterior(panelAnterior);
-        JPanel panelNuevo = new PanelInformacionBoleto(boleto);
-        agregarPanelNuevo(panelNuevo);
-    }
-    
-
-    private void agregarPanelNuevo(JPanel panelNuevo) {
-        this.formPrincipal.getContentPane().add(panelNuevo, BorderLayout.CENTER);
-        this.formPrincipal.revalidate();
-        this.formPrincipal.repaint();
+        agregarPanelNuevo(new PanelSeleccionFuncion(pelicula));
     }
 
-    private void eliminarPanelAnterior(JPanel panelAnterior) {
-        this.formPrincipal.getContentPane().remove(panelAnterior);
+    public void abrirSeleccionAsientos(JPanel panelAnterior, FuncionDTO funcion) {
+        agregarPanelNuevo(new PanelSeleccionAsientos(funcion));
+
     }
-    
+
+    public void abrirInformacionPago(JPanel panelAnterior, List<AsientoDTO> asientos, FuncionDTO funcion) {
+        agregarPanelNuevo(new PanelInformacionPago(asientos, funcion));
+
+    }
+
+    public void abrirInformacionBoleto(JPanel panelAnterior, BoletoDTO boleto) {
+        agregarPanelNuevo(new PanelInformacionBoleto(boleto));
+
+    }
+
+    private void agregarPanelNuevo(JPanel nuevo) {
+        JPanel centro = formPrincipal.getOpcMenu();
+        centro.removeAll();
+        centro.add(nuevo, BorderLayout.CENTER);
+        centro.revalidate();
+        centro.repaint();
+    }
+
+    private void cargarPanelEmpleado() {
+        JPanel lateral = formPrincipal.getPanelEmpleado();
+        lateral.removeAll();
+        lateral.add(new PanelInformacionEmpleado());
+        lateral.revalidate();
+        lateral.repaint();
+    }
 }
