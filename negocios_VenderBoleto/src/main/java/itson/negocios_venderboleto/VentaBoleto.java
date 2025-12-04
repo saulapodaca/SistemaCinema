@@ -44,9 +44,9 @@ public class VentaBoleto implements IVentaBoleto {
       * 
       * @param venta
       * @return
-      * @throws QRGeneradorException
-      * @throws Exception 
-      */
+     * @throws QRGeneradorException
+     * @throws Exception
+     */
     @Override
     public BoletoDTO venderBoleto(VentaDTO venta) throws QRGeneradorException, Exception {
         gestorFunciones.ocuparAsientos(venta.getFuncion(), venta.getAsientos());
