@@ -9,6 +9,7 @@ import dto.FiltroDTO;
 import dto.FuncionDTO;
 import dto.PeliculaDTO;
 import exceptions.FuncionNoEncontradaException;
+import exceptions.NegocioException;
 import exceptions.PeliculaNoExistenteException;
 import exceptions.SalaNoExistenteException;
 import java.util.List;
@@ -18,6 +19,8 @@ import java.util.List;
  * @author saula
  */
 public interface IFuncionBO {
+    
+    FuncionDTO insertarFuncion(FuncionDTO funcionDTO)  throws NegocioException, SalaNoExistenteException, PeliculaNoExistenteException ;
 
     List<FuncionDTO> obtenerFuncionesPorPelicula(PeliculaDTO peliculaDTO, FiltroDTO filtro) throws FuncionNoEncontradaException;
 

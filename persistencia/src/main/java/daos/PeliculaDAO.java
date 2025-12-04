@@ -98,4 +98,10 @@ public class PeliculaDAO implements IPeliculaDAO{
                 .limit(tamañoPagina)
                 .into(new ArrayList<>());
     }
+  
+    @Override
+    public Pelicula obtenerPorTitulo(String titulo) {
+        return coleccion.find(Filters.eq("titulo", titulo)).first();
+    }
+
 }

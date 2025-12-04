@@ -18,4 +18,6 @@ public interface IPeliculaDAO {
     Pelicula obtenerPorId(ObjectId id);
 
     List<Pelicula> obtenerTodas(FiltroDTO filtro);
+    
+    Pelicula obtenerPorTitulo(String titulo);
 }

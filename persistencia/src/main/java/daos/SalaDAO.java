@@ -55,11 +55,16 @@ public class SalaDAO implements ISalaDAO{
     /**
      * 
      * @param id
-     * @return 
+     * @return
      */
     @Override
     public Sala obtenerPorId(ObjectId id) {
         return coleccion.find(eq("_id", id)).first();
+    }
+
+    @Override
+    public Sala obtenerPorNombre(String nombre) {
+        return coleccion.find(eq("nombre", nombre)).first();
     }
 
 }

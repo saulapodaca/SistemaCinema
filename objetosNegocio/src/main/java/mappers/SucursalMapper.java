@@ -22,9 +22,17 @@ public class SucursalMapper {
 
     public Sucursal toEntity(SucursalDTO dto) {
 
+        if (dto == null) {
+            return null;
+        }
+
         Sucursal entidad = new Sucursal();
 
-        entidad.setId(new ObjectId(dto.getId()));
+        // SOLO convertir id si NO es null
+        if (dto.getId() != null && !dto.getId().isBlank()) {
+            entidad.setId(new ObjectId(dto.getId()));
+        }
+
         entidad.setNombre(dto.getNombre());
         entidad.setDireccion(dto.getDireccion());
 
