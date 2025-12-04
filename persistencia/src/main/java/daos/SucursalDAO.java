@@ -62,4 +62,9 @@ public class SucursalDAO implements ISucursalDAO{
         return coleccion.find(eq("_id", id)).first();
     }
 
+    @Override
+    public Sucursal obtenerPorNombre(String nombre) {
+        return coleccion.find(eq("nombre", nombre)).first();
+    }
+
 }
