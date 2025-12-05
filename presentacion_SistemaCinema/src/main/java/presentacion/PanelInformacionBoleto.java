@@ -150,8 +150,18 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
 
     private void btnEnviarBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarBoletoActionPerformed
         try {
+            if (txtCorreo.getText().isEmpty() || txtCorreo.getText().equals("") || txtCorreo.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Ingresa un correo.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            String correo = txtCorreo.getText().trim();
+            String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+            if (!correo.matches(regex)) {
+                JOptionPane.showMessageDialog(this, "El correo no tiene un formato válido.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
             byte[] pdfBytes = Files.readAllBytes(Paths.get("C:/Users/PC/Documents/prueba.pdf"));
-            ControlVentaBoleto.getInstance().mandarCorreo(txtCorreo.getText(), "Confirmación de boleto - " + boleto.getVenta().getFuncion().getPelicula().getTitulo(), estructuraMensaje(), pdfBytes);
+            ControlVentaBoleto.getInstance().mandarCorreo(txtCorreo.getText().strip(), "Confirmación de boleto - " + boleto.getVenta().getFuncion().getPelicula().getTitulo(), estructuraMensaje(), pdfBytes);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al enviar el boleto.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
