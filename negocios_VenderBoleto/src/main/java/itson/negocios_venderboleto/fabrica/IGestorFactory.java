@@ -13,19 +13,32 @@ import itson.negocios_gestormembresias.IGestorMembresias;
 import itson.negocios_gestorpeliculas.IGestorPeliculas;
 import itson.negocios_gestorpromociones.IGestorPromociones;
 import itson.negocios_gestorventas.IGestorVentas;
+import lectorQr.ILectorQR;
 
 /**
  *
  * @author saula
  */
 public interface IGestorFactory {
+
     IGestorPeliculas crearGestorPeliculas();
+
     IGestorFunciones crearGestorFunciones();
+
     IGestorEmpleados crearGestorEmpleados();
+
     IGestorMembresias crearGestorMembresias();
+
     IGestorVentas crearGestorVentas();
+
     IGestorBoletos crearGestorBoletos();
+
     IGeneradorQR crearGeneradorQR();
+
     ICorreoElectronico crearCorreoElectronico();
+
     IGestorPromociones crearGestorPromociones();
+
+    ILectorQR crearLectorQR();
+
 }

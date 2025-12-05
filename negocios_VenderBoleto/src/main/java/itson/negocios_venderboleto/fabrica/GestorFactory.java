@@ -1,7 +1,6 @@
 package itson.negocios_venderboleto.fabrica;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
-
 import itson.negocios_correoelectronico.ConfiguracionCorreoElectronico;
 import itson.negocios_correoelectronico.CorreoElectronico;
 import itson.negocios_correoelectronico.ICorreoElectronico;
@@ -21,6 +20,8 @@ import itson.negocios_gestorpromociones.GestorPromociones;
 import itson.negocios_gestorpromociones.IGestorPromociones;
 import itson.negocios_gestorventas.GestorVentas;
 import itson.negocios_gestorventas.IGestorVentas;
+import lectorQr.ILectorQR;
+import lectorQr.LectorQR;
 
 public class GestorFactory implements IGestorFactory {
 
@@ -61,11 +62,16 @@ public class GestorFactory implements IGestorFactory {
 
     @Override
     public ICorreoElectronico crearCorreoElectronico() {
-        return new CorreoElectronico( new ConfiguracionCorreoElectronico());
+        return new CorreoElectronico(new ConfiguracionCorreoElectronico());
     }
 
     @Override
-    public IGestorPromociones crearGestorPromociones(){
+    public IGestorPromociones crearGestorPromociones() {
         return new GestorPromociones();
+    }
+
+    @Override
+    public ILectorQR crearLectorQR() {
+        return new LectorQR();
     }
 }

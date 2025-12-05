@@ -11,12 +11,17 @@ import java.util.List;
 import javax.swing.JPanel;
 import presentacion.FormPrincipal;
 import presentacion.InicioSesionPanel;
+import presentacion.PanelEscanearQR;
 import presentacion.PanelInformacionBoleto;
+import presentacion.PanelInformacionBoletoReagenda;
 import presentacion.PanelInformacionEmpleado;
 import presentacion.PanelInformacionPago;
+import presentacion.PanelInformacionReagenda;
 import presentacion.PanelOpcionesMenuGerente;
 import presentacion.PanelSeleccionAsientos;
+import presentacion.PanelSeleccionAsientosReagenda;
 import presentacion.PanelSeleccionFuncion;
+import presentacion.PanelSeleccionFuncionReagenda;
 import presentacion.PanelSeleccionPeliculas;
 
 /**
@@ -99,7 +104,26 @@ public class ControlPantallas {
 
     public void abrirInformacionBoleto(JPanel panelAnterior, BoletoDTO boleto) {
         agregarPanelNuevo(new PanelInformacionBoleto(boleto));
+    }
 
+    public void abrirEscanearQR(JPanel panelAnterior) {
+        agregarPanelNuevo(new PanelEscanearQR());
+    }
+
+    public void abrirInformacionBoletoReagenda(JPanel panelAnterior, BoletoDTO boleto) {
+        agregarPanelNuevo(new PanelInformacionBoletoReagenda(boleto));
+    }
+
+    public void abrirSeleccionFuncionReagenda(JPanel panelAnterior, PeliculaDTO pelicula, BoletoDTO boleto) {
+        agregarPanelNuevo(new PanelSeleccionFuncionReagenda(pelicula, boleto));
+    }
+    
+    public void abrirSeleccionAsientosReagenda(JPanel panelAnterior, FuncionDTO funcion, BoletoDTO boleto){
+        agregarPanelNuevo(new PanelSeleccionAsientosReagenda(funcion, boleto));
+    }
+    
+    public void abrirInformacionReagenda(JPanel panelAnterior,BoletoDTO boleto, FuncionDTO funcion, List<AsientoDTO> asientos){
+        agregarPanelNuevo(new PanelInformacionReagenda(boleto, funcion, asientos));
     }
 
     private void agregarPanelNuevo(JPanel nuevo) {

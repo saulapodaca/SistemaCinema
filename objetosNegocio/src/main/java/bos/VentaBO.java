@@ -25,7 +25,7 @@ import mappers.VentaMapper;
 import org.bson.types.ObjectId;
 
 /**
- * 
+ *
  * @author saula
  */
 public class VentaBO implements IVentaBO {
@@ -38,13 +38,12 @@ public class VentaBO implements IVentaBO {
     private final IPromocionBO promocionBO;
     private final IFuncionBO funcionBO;
     private final IEmpleadoBO empleadoBO;
-    
 
     private final VentaMapper ventaMapper;
     private final AsientoMapper asientoMapper;
 
     /**
-     * 
+     *
      */
     private VentaBO() {
         this.ventaDAO = new VentaDAO();
@@ -53,12 +52,12 @@ public class VentaBO implements IVentaBO {
         this.promocionBO = PromocionBO.getInstancia();
         this.funcionBO = FuncionBO.getInstancia();
         this.empleadoBO = EmpleadoBO.getInstancia();
-        
+
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public static VentaBO getInstancia() {
         if (instance == null) {
@@ -68,10 +67,10 @@ public class VentaBO implements IVentaBO {
     }
 
     /**
-     * 
+     *
      * @param dto
-     * @return 
-     * @throws exceptions.EmpleadoNoEncontradoException 
+     * @return
+     * @throws exceptions.EmpleadoNoEncontradoException
      */
     @Override
     public VentaDTO registrarVenta(VentaDTO dto)
@@ -136,7 +135,7 @@ public class VentaBO implements IVentaBO {
      *
      * @param asientos
      * @param promo
-     * @return 
+     * @return
      */
     @Override
     public DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo) {
@@ -153,17 +152,17 @@ public class VentaBO implements IVentaBO {
     }
 
     /**
-     * 
-     * @param dto 
+     *
+     * @param dto
      */
-    private void calcularPreciosVenta(VentaDTO dto) throws PromocionNoExistenteException{
+    private void calcularPreciosVenta(VentaDTO dto) throws PromocionNoExistenteException {
 
         double subtotal = dto.getAsientos().size() * PRECIO_BOLETO;
 
         double descuento = 0;
         if (dto.getPromocionId() != null && !dto.getPromocionId().isBlank()) {
-            PromocionDTO promocion= promocionBO.obtenerPorId(dto.getPromocionId());
-       
+            PromocionDTO promocion = promocionBO.obtenerPorId(dto.getPromocionId());
+
             if (promocion != null) {
                 double porcentajeDescuento = promocion.getDescuento();
                 descuento = subtotal * porcentajeDescuento;
@@ -174,5 +173,23 @@ public class VentaBO implements IVentaBO {
         dto.setSubtotal(subtotal);
         dto.setDescuento(descuento);
         dto.setTotal(total);
+    }
+
+    public VentaDTO actualizarVenta(VentaDTO ventaDTO) throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException {
+        if (ventaDTO == null || ventaDTO.getId() == null || ventaDTO.getId().isBlank()) {
+            throw new IllegalArgumentException("El ventaDTO es inválido.");
+        }
+
+        Venta venta = ventaDAO.obtenerPorId(new ObjectId(ventaDTO.getId()));
+
+        if (venta == null) {
+            throw new VentaNoEncontradaException("No se encontró el boleto con ese ID.");
+        }
+
+        Venta entidadActualizada = ventaMapper.toEntity(ventaDTO);
+        FuncionDTO funcionDTO = funcionBO.obtenerPorId(entidadActualizada.getFuncionId().toHexString());
+        EmpleadoDTO empleadoDTO = empleadoBO.obtenerPorId(entidadActualizada.getEmpleadoId().toHexString());
+        entidadActualizada = ventaDAO.actualizar(entidadActualizada);
+        return ventaMapper.toDTO(entidadActualizada, funcionDTO, empleadoDTO);
     }
 }

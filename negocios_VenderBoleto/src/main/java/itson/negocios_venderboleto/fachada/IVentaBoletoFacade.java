@@ -4,6 +4,8 @@
  */
 package itson.negocios_venderboleto.fachada;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
 import dto.AsientoDTO;
 import dto.BoletoDTO;
 import dto.DetallePrecioDTO;
@@ -14,9 +16,11 @@ import dto.MembresiaDTO;
 import dto.PeliculaDTO;
 import dto.PromocionDTO;
 import dto.VentaDTO;
+import exceptions.BoletoNoExistenteException;
 import exceptions.EmpleadoNoEncontradoException;
 import exceptions.FuncionNoEncontradaException;
 import exceptions.PeliculaNoExistenteException;
+import exceptions.PromocionNoExistenteException;
 import exceptions.SalaNoExistenteException;
 import exceptions.SucursalNoExistenteException;
 import exceptions.VentaNoEncontradaException;
@@ -52,4 +56,14 @@ public interface IVentaBoletoFacade {
     DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo);
 
     PromocionDTO validarCupon(String codigoCupon);
+
+    VentaDTO actualizarVenta(VentaDTO ventaDTO) throws PromocionNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, IllegalArgumentException, SucursalNoExistenteException, VentaNoEncontradaException;
+
+    VentaDTO reagendarBoleto(VentaDTO ventaAntigua, VentaDTO ventaNueva, List<AsientoDTO> asientosLiberar, List<AsientoDTO> asientosNuevos) throws FuncionNoEncontradaException, PromocionNoExistenteException, EmpleadoNoEncontradoException, IllegalArgumentException, VentaNoEncontradaException, SucursalNoExistenteException;
+
+    String escanearQR(Webcam webcam);
+
+    WebcamPanel getPanelCamara();
+
+    BoletoDTO buscarBoletoPorId(String id) throws BoletoNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, SucursalNoExistenteException, VentaNoEncontradaException;
 }
