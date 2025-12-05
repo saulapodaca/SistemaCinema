@@ -31,25 +31,25 @@ public interface IVentaBoletoFacade {
 
     BoletoDTO venderBoleto(VentaDTO venta) throws QRGeneradorException;
 
-    void mandarBoletoCorreo(BoletoDTO boleto, String correo);
+    void mandarBoletoCorreo(String destino, String asunto, String mensajeHtml, byte[] jasper) throws Exception;
 
     List<PeliculaDTO> obtenerPeliculas(FiltroDTO filtro);
 
     List<FuncionDTO> listarFunciones(PeliculaDTO pelicula, FiltroDTO filtro) throws FuncionNoEncontradaException;
-    
+
     List<AsientoDTO> obtenerAsientos(FuncionDTO funcion) throws FuncionNoEncontradaException, PeliculaNoExistenteException, SalaNoExistenteException;
 
     EmpleadoDTO obtenerEmpleadoPorId(String idEmpleado) throws EmpleadoNoEncontradoException, SucursalNoExistenteException;
 
     List<PromocionDTO> listarPromocionesMembresia(MembresiaDTO membresia);
-    
+
     List<PromocionDTO> listarPromocionesGenerales();
 
     MembresiaDTO verificarMembresia(String codigo);
-    
+
     VentaDTO obtenerVentaPorId(String idVenta) throws EmpleadoNoEncontradoException, FuncionNoEncontradaException, SucursalNoExistenteException, VentaNoEncontradaException;
-    
+
     DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo);
-    
+
     PromocionDTO validarCupon(String codigoCupon);
 }

@@ -1,17 +1,26 @@
 package presentacion;
 
 import dto.BoletoDTO;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import presentacion.controles.ControlVentaBoleto;
 
 /**
  *
- * @author saula
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandor Rodríguez Lugo - 00000251622
  */
 public class PanelInformacionBoleto extends javax.swing.JPanel {
 
     private BoletoDTO boleto;
+
     /**
      * Creates new form PanelInformacionBoleto
+     *
      * @param boleto
      */
     public PanelInformacionBoleto(BoletoDTO boleto) {
@@ -140,11 +149,39 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarBoletoActionPerformed
-        ControlVentaBoleto.getInstance().mandarCorreo(boleto, txtCorreo.getText().trim());
+        try {
+            byte[] pdfBytes = Files.readAllBytes(Paths.get("C:/Users/PC/Documents/prueba.pdf"));
+            ControlVentaBoleto.getInstance().mandarCorreo(txtCorreo.getText(), "Confirmación de boleto - " + boleto.getVenta().getFuncion().getPelicula().getTitulo(), estructuraMensaje(), pdfBytes);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al enviar el boleto.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_btnEnviarBoletoActionPerformed
 
     private void cargarBoleto() {
-        
+
+    }
+
+    /**
+     * Método que da estructura al cuerpo del correo.
+     *
+     * @return Estructura del cuerpo que será enviado.
+     */
+    private String estructuraMensaje() {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        String fecha = boleto.getVenta().getFuncion().getFechaHora().format(fmt);
+        String asientos = String.join(", ", boleto.getVenta().getAsientos().stream().map(Object::toString).toList()
+        );
+        return """
+        <h2>Confirmación de compra</h2>
+        <p>Estos son los detalles de tu compra. ¡Disfruta tu experiencia!</p>
+        <p><b>Película:</b> %s</p>
+        <p><b>Fecha y horario:</b> %s</p>
+        <p><b>Sala:</b> %s</p>
+        <p><b>Asientos:</b> %s</p>
+        <p><b>Total:</b> $%.2f</p>""".formatted(boleto.getVenta().getFuncion().getPelicula().getTitulo(), fecha,
+                boleto.getVenta().getFuncion().getSala().getNombre(), asientos, boleto.getVenta().getTotal()
+        );
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

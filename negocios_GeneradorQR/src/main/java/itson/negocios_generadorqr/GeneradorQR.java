@@ -24,7 +24,7 @@ import java.nio.file.StandardCopyOption;
 public class GeneradorQR implements IGeneradorQR {
 
     private static final String ENDPOINT = "https://api.qrcode-monkey.com/qr/custom";
-    private static final String CARPETA_QR = "C:\\Users\\saula\\OneDrive\\Documentos\\NetBeansProjects\\SistemaCinema\\presentacion_SistemaCinema\\target\\classes\\ImagenesQr\\";
+    private static final String CARPETA_QR = "ImagenesQr/";
 
     /**
      * Genera un código QR a partir del contenido proporcionado.

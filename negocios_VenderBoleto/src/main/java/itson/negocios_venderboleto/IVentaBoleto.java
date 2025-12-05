@@ -8,5 +8,5 @@ public interface IVentaBoleto {
 
     public BoletoDTO venderBoleto(VentaDTO venta) throws QRGeneradorException, Exception;
 
-    void mandarBoletoCorreo(BoletoDTO boleto, String correo);
+    void mandarBoletoCorreo(String destino, String asunto, String mensajeHtml, byte[] jasper) throws Exception;
 }
