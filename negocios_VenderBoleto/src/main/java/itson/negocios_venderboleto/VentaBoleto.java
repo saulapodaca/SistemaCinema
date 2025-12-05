@@ -10,7 +10,7 @@ import itson.negocios_gestorfunciones.IGestorFunciones;
 import itson.negocios_gestorventas.IGestorVentas;
 
 /**
- * 
+ *
  * @author saula
  */
 public class VentaBoleto implements IVentaBoleto {
@@ -22,12 +22,12 @@ public class VentaBoleto implements IVentaBoleto {
     private final ICorreoElectronico correoElectronico;
 
     /**
-     * 
+     *
      * @param gestorVentas
      * @param gestorBoletos
      * @param gestorFunciones
      * @param generadorQR
-     * @param correoElectronico 
+     * @param correoElectronico
      */
     public VentaBoleto(IGestorVentas gestorVentas,
             IGestorBoletos gestorBoletos,
@@ -40,10 +40,11 @@ public class VentaBoleto implements IVentaBoleto {
         this.generadorQR = generadorQR;
         this.correoElectronico = correoElectronico;
     }
-     /**
-      * 
-      * @param venta
-      * @return
+
+    /**
+     *
+     * @param venta
+     * @return
      * @throws QRGeneradorException
      * @throws Exception
      */
@@ -61,13 +62,17 @@ public class VentaBoleto implements IVentaBoleto {
         }
     }
 
+
     /**
      * 
-     * @param boleto
-     * @param correo 
+     * @param destino
+     * @param asunto
+     * @param mensajeHtml
+     * @param jasper
+     * @throws Exception 
      */
     @Override
-    public void mandarBoletoCorreo(BoletoDTO boleto, String correo) {
-        correoElectronico.enviarBoleto(correo, boleto);
+    public void mandarBoletoCorreo(String destino, String asunto, String mensajeHtml, byte[] jasper) throws Exception {
+        correoElectronico.enviarBoleto(destino, asunto, mensajeHtml, jasper);
     }
 }

@@ -1,7 +1,6 @@
 package itson.negocios_venderboleto.fachada;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
-
 import dto.AsientoDTO;
 import dto.BoletoDTO;
 import dto.DetallePrecioDTO;
@@ -59,7 +58,7 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     }
 
     @Override
-    public BoletoDTO venderBoleto(VentaDTO venta) throws QRGeneradorException{
+    public BoletoDTO venderBoleto(VentaDTO venta) throws QRGeneradorException {
         try {
             return ventaBoleto.venderBoleto(venta);
         } catch (QRGeneradorException e) {
@@ -70,8 +69,8 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     }
 
     @Override
-    public void mandarBoletoCorreo(BoletoDTO boleto, String correo) {
-        ventaBoleto.mandarBoletoCorreo(boleto, correo);
+    public void mandarBoletoCorreo(String destino, String asunto, String mensajeHtml, byte[] jasper) throws Exception {
+        ventaBoleto.mandarBoletoCorreo(destino, asunto, mensajeHtml, jasper);
     }
 
     @Override
@@ -80,17 +79,17 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     }
 
     @Override
-    public List<FuncionDTO> listarFunciones(PeliculaDTO pelicula, FiltroDTO filtro) throws FuncionNoEncontradaException{
+    public List<FuncionDTO> listarFunciones(PeliculaDTO pelicula, FiltroDTO filtro) throws FuncionNoEncontradaException {
         return gestorFunciones.obtenerFuncionesPorPelícula(pelicula, filtro);
     }
 
     @Override
-    public List<AsientoDTO> obtenerAsientos(FuncionDTO funcion) throws FuncionNoEncontradaException, PeliculaNoExistenteException, SalaNoExistenteException{
+    public List<AsientoDTO> obtenerAsientos(FuncionDTO funcion) throws FuncionNoEncontradaException, PeliculaNoExistenteException, SalaNoExistenteException {
         return gestorFunciones.obtenerAsientos(funcion);
     }
 
     @Override
-    public EmpleadoDTO obtenerEmpleadoPorId(String idEmpleado) throws EmpleadoNoEncontradoException, SucursalNoExistenteException{
+    public EmpleadoDTO obtenerEmpleadoPorId(String idEmpleado) throws EmpleadoNoEncontradoException, SucursalNoExistenteException {
         return gestorEmpleados.obtenerPorId(idEmpleado);
     }
 
@@ -98,9 +97,9 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     public List<PromocionDTO> listarPromocionesMembresia(MembresiaDTO membresia) {
         return gestorPromociones.obtenerPromocionesMembresia(membresia.getCodigoMembresia());
     }
-    
+
     @Override
-    public List<PromocionDTO> listarPromocionesGenerales(){
+    public List<PromocionDTO> listarPromocionesGenerales() {
         return gestorPromociones.obtenerPromocionesGenerales();
     }
 
@@ -110,17 +109,17 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     }
 
     @Override
-    public VentaDTO obtenerVentaPorId(String idVenta) throws EmpleadoNoEncontradoException, FuncionNoEncontradaException, SucursalNoExistenteException, VentaNoEncontradaException{
+    public VentaDTO obtenerVentaPorId(String idVenta) throws EmpleadoNoEncontradoException, FuncionNoEncontradaException, SucursalNoExistenteException, VentaNoEncontradaException {
         return gestorVentas.obtenerVentaPorID(idVenta);
     }
-    
+
     @Override
-    public DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo){
+    public DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo) {
         return gestorVentas.calcularPrecios(asientos, promo);
     }
-    
+
     @Override
-    public PromocionDTO validarCupon(String codigoCupon){
+    public PromocionDTO validarCupon(String codigoCupon) {
         return gestorPromociones.validarCupon(codigoCupon);
     }
 }
