@@ -68,7 +68,8 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
                 factory.crearGestorBoletos(),
                 factory.crearGestorFunciones(),
                 factory.crearGeneradorQR(),
-                factory.crearCorreoElectronico()
+                factory.crearCorreoElectronico(), 
+                factory.crearGeneradorPDF()
         );
         this.ventaBoleto = venta;
     }

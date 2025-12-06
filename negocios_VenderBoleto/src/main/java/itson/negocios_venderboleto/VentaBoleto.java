@@ -14,6 +14,7 @@ import itson.negocios_generadorqr.exceptions.QRGeneradorException;
 import itson.negocios_gestorboletos.IGestorBoletos;
 import itson.negocios_gestorfunciones.IGestorFunciones;
 import itson.negocios_gestorventas.IGestorVentas;
+import itson.infraestructura_generadorpdf.IGeneradorPDF;
 import java.util.List;
 
 /**
@@ -27,6 +28,7 @@ public class VentaBoleto implements IVentaBoleto {
     private final IGestorFunciones gestorFunciones;
     private final IGeneradorQR generadorQR;
     private final ICorreoElectronico correoElectronico;
+    private final IGeneradorPDF generadorPDF;
 
     /**
      *
@@ -40,12 +42,13 @@ public class VentaBoleto implements IVentaBoleto {
             IGestorBoletos gestorBoletos,
             IGestorFunciones gestorFunciones,
             IGeneradorQR generadorQR,
-            ICorreoElectronico correoElectronico) {
+            ICorreoElectronico correoElectronico, IGeneradorPDF generadorPDF) {
         this.gestorVentas = gestorVentas;
         this.gestorBoletos = gestorBoletos;
         this.gestorFunciones = gestorFunciones;
         this.generadorQR = generadorQR;
         this.correoElectronico = correoElectronico;
+        this.generadorPDF = generadorPDF;
     }
 
     /**
@@ -61,8 +64,12 @@ public class VentaBoleto implements IVentaBoleto {
         VentaDTO ventaRegistrada = gestorVentas.registrarVenta(venta);
         BoletoDTO boleto = gestorBoletos.generarBoleto(ventaRegistrada);
         try {
-            boleto.setRutaQr(generadorQR.generarQR(boleto.getId()));
+            String rutaQr = generadorQR.generarQR(boleto.getId());
+            boleto.setRutaQr(rutaQr);
             BoletoDTO boletoActualizado = gestorBoletos.actualizar(boleto);
+            generadorPDF.generarPDFBoleto(boletoActualizado);
+            boletoActualizado.setRutaQr(rutaQr);
+            boletoActualizado = gestorBoletos.actualizar(boletoActualizado);
             return boletoActualizado;
         } catch (QRGeneradorException ex) {
             throw new QRGeneradorException(ex.getMessage());
