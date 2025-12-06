@@ -336,6 +336,7 @@ public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
 
     private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
         // TODO add your handling code here:
+        ControlPantallas.getInstance().abrirSeleccionPeliculasReporte(this);
     }//GEN-LAST:event_btnGenerarReporteActionPerformed
 
     private void btnGestionarPreciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarPreciosActionPerformed

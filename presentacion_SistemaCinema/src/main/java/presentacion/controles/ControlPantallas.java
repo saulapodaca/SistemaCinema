@@ -23,6 +23,7 @@ import presentacion.PanelSeleccionAsientosReagenda;
 import presentacion.PanelSeleccionFuncion;
 import presentacion.PanelSeleccionFuncionReagenda;
 import presentacion.PanelSeleccionPeliculas;
+import presentacion.PanelSeleccionPeliculasReporte;
 
 /**
  * Clase encargada de controlar la navegación entre las diferentes pantallas del
@@ -81,51 +82,60 @@ public class ControlPantallas {
      * Abre la pantalla de selección de películas, reemplazando el panel del
      * menú
      *
-     * @param panelAnterior El panel que debe ser removido antes de agregar el
-     * nuevo
+     * @param panelNuevo El panel nuevo que será establecido en el form
+     * principal.
      */
-    public void abrirSeleccionPeliculas(JPanel panelAnterior) {
+    public void abrirSeleccionPeliculas(JPanel panelNuevo) {
         agregarPanelNuevo(new PanelSeleccionPeliculas());
     }
 
-    public void abrirSeleccionFunciones(JPanel panelAnterior, PeliculaDTO pelicula) {
+    public void abrirSeleccionFunciones(JPanel panelNuevo, PeliculaDTO pelicula) {
         agregarPanelNuevo(new PanelSeleccionFuncion(pelicula));
     }
 
-    public void abrirSeleccionAsientos(JPanel panelAnterior, FuncionDTO funcion) {
+    public void abrirSeleccionAsientos(JPanel panelNuevo, FuncionDTO funcion) {
         agregarPanelNuevo(new PanelSeleccionAsientos(funcion));
 
     }
 
-    public void abrirInformacionPago(JPanel panelAnterior, List<AsientoDTO> asientos, FuncionDTO funcion) {
+    public void abrirInformacionPago(JPanel panelNuevo, List<AsientoDTO> asientos, FuncionDTO funcion) {
         agregarPanelNuevo(new PanelInformacionPago(asientos, funcion));
 
     }
 
-    public void abrirInformacionBoleto(JPanel panelAnterior, BoletoDTO boleto) {
+    public void abrirInformacionBoleto(JPanel panelNuevo, BoletoDTO boleto) {
         agregarPanelNuevo(new PanelInformacionBoleto(boleto));
     }
 
-    public void abrirEscanearQR(JPanel panelAnterior) {
+    public void abrirEscanearQR(JPanel panelNuevo) {
         agregarPanelNuevo(new PanelEscanearQR());
     }
 
-    public void abrirInformacionBoletoReagenda(JPanel panelAnterior, BoletoDTO boleto) {
+    public void abrirInformacionBoletoReagenda(JPanel panelNuevo, BoletoDTO boleto) {
         agregarPanelNuevo(new PanelInformacionBoletoReagenda(boleto));
     }
 
-    public void abrirSeleccionFuncionReagenda(JPanel panelAnterior, PeliculaDTO pelicula, BoletoDTO boleto) {
+    public void abrirSeleccionFuncionReagenda(JPanel panelNuevo, PeliculaDTO pelicula, BoletoDTO boleto) {
         agregarPanelNuevo(new PanelSeleccionFuncionReagenda(pelicula, boleto));
     }
-    
-    public void abrirSeleccionAsientosReagenda(JPanel panelAnterior, FuncionDTO funcion, BoletoDTO boleto){
+
+    public void abrirSeleccionAsientosReagenda(JPanel panelNuevo, FuncionDTO funcion, BoletoDTO boleto) {
         agregarPanelNuevo(new PanelSeleccionAsientosReagenda(funcion, boleto));
     }
-    
-    public void abrirInformacionReagenda(JPanel panelAnterior,BoletoDTO boleto, FuncionDTO funcion, List<AsientoDTO> asientos){
+
+    public void abrirInformacionReagenda(JPanel panelNuevo, BoletoDTO boleto, FuncionDTO funcion, List<AsientoDTO> asientos) {
         agregarPanelNuevo(new PanelInformacionReagenda(boleto, funcion, asientos));
     }
 
+    public void abrirSeleccionPeliculasReporte(JPanel panelNuevo) {
+        agregarPanelNuevo(new PanelSeleccionPeliculasReporte());
+    }
+
+    /**
+     * Agregar el panel nuevo en el contenedor central correspondiente.
+     *
+     * @param nuevo Panel nuevo a establecer.
+     */
     private void agregarPanelNuevo(JPanel nuevo) {
         JPanel centro = formPrincipal.getOpcMenu();
         centro.removeAll();
@@ -134,6 +144,10 @@ public class ControlPantallas {
         centro.repaint();
     }
 
+    /**
+     * Carga el panel de la información contextual del empleado en el contenedor
+     * lateral.
+     */
     private void cargarPanelEmpleado() {
         JPanel lateral = formPrincipal.getPanelEmpleado();
         lateral.removeAll();
