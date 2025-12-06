@@ -163,8 +163,8 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
         return gestorBoletos.buscarBoletoPorId(id);
     }
 
-    public byte[] generarPDFBoleto(String idBoleto) throws Exception{
-        return gestorGeneradorPDF.generarPDFBoleto(idBoleto);
+    public byte[] generarPDFBoleto(BoletoDTO boleto) throws Exception{
+        return gestorGeneradorPDF.generarPDFBoleto(boleto);
     }
 
 }

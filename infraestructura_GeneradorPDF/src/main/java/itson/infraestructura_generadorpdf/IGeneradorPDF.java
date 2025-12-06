@@ -4,11 +4,13 @@
  */
 package itson.infraestructura_generadorpdf;
 
+import dto.BoletoDTO;
+
 /**
  *
  * @author PC
  */
 public interface IGeneradorPDF {
 
-    byte[] generarPDFBoleto(String idBoleto) throws Exception;
+    byte[] generarPDFBoleto(BoletoDTO boleto) throws Exception;
 }

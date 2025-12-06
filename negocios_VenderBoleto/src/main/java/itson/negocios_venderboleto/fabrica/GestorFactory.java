@@ -4,6 +4,7 @@ package itson.negocios_venderboleto.fabrica;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import conexion.ManejadorConexion;
+import dto.BoletoDTO;
 import itson.negocios_correoelectronico.ConfiguracionCorreoElectronico;
 import itson.negocios_correoelectronico.CorreoElectronico;
 import itson.negocios_correoelectronico.ICorreoElectronico;
@@ -82,8 +83,6 @@ public class GestorFactory implements IGestorFactory {
     }
 
     public IGeneradorPDF crearGeneradorPDF() {
-        MongoDatabase db = ManejadorConexion.getInstancia().getBaseDatos();
-        MongoCollection<Document> coleccion = db.getCollection("boletos", Document.class);
-        return new GeneradorPDF(coleccion);
+        return new GeneradorPDF();
     }
 }

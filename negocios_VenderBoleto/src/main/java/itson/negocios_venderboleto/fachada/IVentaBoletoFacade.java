@@ -70,5 +70,5 @@ public interface IVentaBoletoFacade {
 
     BoletoDTO buscarBoletoPorId(String id) throws BoletoNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, SucursalNoExistenteException, VentaNoEncontradaException;
 
-    byte[] generarPDFBoleto(String idBoleto) throws Exception;
+    byte[] generarPDFBoleto(BoletoDTO boleto) throws Exception;
 }

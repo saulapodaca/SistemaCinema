@@ -87,7 +87,7 @@ public class ControlVentaBoleto {
         return facade.obtenerEmpleadoPorId(idEmpleado);
     }
 
-    public byte[] generarPDFBoleto(String idBoleto) throws Exception {
-        return facade.generarPDFBoleto(idBoleto);
+    public byte[] generarPDFBoleto(BoletoDTO boleto) throws Exception {
+        return facade.generarPDFBoleto(boleto);
     }
 }

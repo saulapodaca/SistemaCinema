@@ -169,7 +169,7 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "El correo no tiene un formato válido.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            byte[] pdfBytes = ControlVentaBoleto.getInstance().generarPDFBoleto(boleto.getId());
+            byte[] pdfBytes = ControlVentaBoleto.getInstance().generarPDFBoleto(boleto);
             if (pdfBytes == null) {
                 JOptionPane.showMessageDialog(this, "No se pudo generar el boleto.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -183,7 +183,7 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
 
     private void cargarBoleto() {
         try {
-            byte[] pdfBytes = ControlVentaBoleto.getInstance().generarPDFBoleto(boleto.getId());
+            byte[] pdfBytes = ControlVentaBoleto.getInstance().generarPDFBoleto(boleto);
             if (pdfBytes == null) {
                 return;
             }
