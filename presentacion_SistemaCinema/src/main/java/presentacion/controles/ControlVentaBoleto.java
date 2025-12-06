@@ -22,7 +22,7 @@ import itson.negocios_venderboleto.fachada.VentaBoletoFacade;
 import java.util.List;
 
 /**
- * 
+ *
  * @author Saul Isaac Apodaca Baldenegro - 00000252020
  * @author Alejandor Rodríguez Lugo - 00000251622
  */
@@ -87,4 +87,7 @@ public class ControlVentaBoleto {
         return facade.obtenerEmpleadoPorId(idEmpleado);
     }
 
+    public byte[] generarPDFBoleto(String idBoleto) throws Exception {
+        return facade.generarPDFBoleto(idBoleto);
+    }
 }

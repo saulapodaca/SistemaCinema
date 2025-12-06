@@ -75,7 +75,7 @@ public class VentaBoleto implements IVentaBoleto {
      * @param asunto
      * @param mensajeHtml
      * @param jasper
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void mandarBoletoCorreo(String destino, String asunto, String mensajeHtml, byte[] jasper) throws Exception {
@@ -83,7 +83,7 @@ public class VentaBoleto implements IVentaBoleto {
     }
 
     /**
-     * 
+     *
      * @param ventaAntigua
      * @param ventaNueva
      * @param asientosLiberar
@@ -94,7 +94,7 @@ public class VentaBoleto implements IVentaBoleto {
      * @throws EmpleadoNoEncontradoException
      * @throws IllegalArgumentException
      * @throws VentaNoEncontradaException
-     * @throws SucursalNoExistenteException 
+     * @throws SucursalNoExistenteException
      */
     @Override
     public VentaDTO reagendarBoleto(VentaDTO ventaAntigua, VentaDTO ventaNueva, List<AsientoDTO> asientosLiberar, List<AsientoDTO> asientosNuevos) throws FuncionNoEncontradaException, PromocionNoExistenteException, EmpleadoNoEncontradoException, IllegalArgumentException, VentaNoEncontradaException, SucursalNoExistenteException {

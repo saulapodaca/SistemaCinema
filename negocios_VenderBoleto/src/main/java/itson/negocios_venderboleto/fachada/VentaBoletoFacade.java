@@ -36,6 +36,7 @@ import itson.negocios_venderboleto.IVentaBoleto;
 import itson.negocios_venderboleto.VentaBoleto;
 import itson.negocios_venderboleto.fabrica.GestorFactory;
 import lectorQr.ILectorQR;
+import itson.infraestructura_generadorpdf.IGeneradorPDF;
 import java.util.List;
 
 public class VentaBoletoFacade implements IVentaBoletoFacade {
@@ -49,6 +50,7 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     private final IGestorPromociones gestorPromociones;
     private final ILectorQR gestorLectorQR;
     private final IGestorBoletos gestorBoletos;
+    private final IGeneradorPDF gestorGeneradorPDF;
 
     public VentaBoletoFacade(GestorFactory factory) {
         this.gestorPeliculas = factory.crearGestorPeliculas();
@@ -59,6 +61,7 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
         this.gestorPromociones = factory.crearGestorPromociones();
         this.gestorLectorQR = factory.crearLectorQR();
         this.gestorBoletos = factory.crearGestorBoletos();
+        this.gestorGeneradorPDF = factory.crearGeneradorPDF();
 
         IVentaBoleto venta = new VentaBoleto(
                 gestorVentas,
@@ -158,6 +161,10 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
 
     public BoletoDTO buscarBoletoPorId(String id) throws BoletoNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, SucursalNoExistenteException, VentaNoEncontradaException {
         return gestorBoletos.buscarBoletoPorId(id);
+    }
+
+    public byte[] generarPDFBoleto(String idBoleto) throws Exception{
+        return gestorGeneradorPDF.generarPDFBoleto(idBoleto);
     }
 
 }

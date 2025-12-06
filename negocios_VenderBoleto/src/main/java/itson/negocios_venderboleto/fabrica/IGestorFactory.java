@@ -14,7 +14,7 @@ import itson.negocios_gestorpeliculas.IGestorPeliculas;
 import itson.negocios_gestorpromociones.IGestorPromociones;
 import itson.negocios_gestorventas.IGestorVentas;
 import lectorQr.ILectorQR;
-
+import itson.infraestructura_generadorpdf.IGeneradorPDF;
 /**
  *
  * @author saula
@@ -40,5 +40,6 @@ public interface IGestorFactory {
     IGestorPromociones crearGestorPromociones();
 
     ILectorQR crearLectorQR();
-
+    
+    IGeneradorPDF crearGeneradorPDF();
 }

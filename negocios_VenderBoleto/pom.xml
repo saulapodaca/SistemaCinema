@@ -64,9 +64,14 @@
             <artifactId>objetosNegocio</artifactId>
             <version>${project.version}</version>
         </dependency>
-          <dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>infraestructura_LectorQR</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>infraestructura_GeneradorPDF</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

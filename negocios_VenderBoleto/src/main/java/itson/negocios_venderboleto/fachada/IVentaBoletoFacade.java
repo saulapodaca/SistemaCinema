@@ -69,4 +69,6 @@ public interface IVentaBoletoFacade {
     WebcamPanel getPanelCamara();
 
     BoletoDTO buscarBoletoPorId(String id) throws BoletoNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, SucursalNoExistenteException, VentaNoEncontradaException;
+
+    byte[] generarPDFBoleto(String idBoleto) throws Exception;
 }

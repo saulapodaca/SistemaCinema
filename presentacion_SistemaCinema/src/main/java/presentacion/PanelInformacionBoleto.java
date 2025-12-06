@@ -1,12 +1,21 @@
 package presentacion;
 
 import dto.BoletoDTO;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 import presentacion.controles.ControlVentaBoleto;
 
 /**
@@ -160,7 +169,11 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "El correo no tiene un formato válido.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            byte[] pdfBytes = Files.readAllBytes(Paths.get("C:/Users/PC/Documents/prueba.pdf"));
+            byte[] pdfBytes = ControlVentaBoleto.getInstance().generarPDFBoleto(boleto.getId());
+            if (pdfBytes == null) {
+                JOptionPane.showMessageDialog(this, "No se pudo generar el boleto.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             ControlVentaBoleto.getInstance().mandarCorreo(txtCorreo.getText().strip(), "Confirmación de boleto - " + boleto.getVenta().getFuncion().getPelicula().getTitulo(), estructuraMensaje(), pdfBytes);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al enviar el boleto.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -169,7 +182,40 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEnviarBoletoActionPerformed
 
     private void cargarBoleto() {
-
+        try {
+            byte[] pdfBytes = ControlVentaBoleto.getInstance().generarPDFBoleto(boleto.getId());
+            if (pdfBytes == null) {
+                return;
+            }
+            PDDocument doc = PDDocument.load(pdfBytes);
+            PDFRenderer renderer = new PDFRenderer(doc);
+            BufferedImage image = renderer.renderImageWithDPI(0, 150);
+            doc.close();
+            SwingUtilities.invokeLater(() -> {
+                try {
+                    int panelAncho = pnlVisorPDF.getWidth();
+                    int panelAlto = pnlVisorPDF.getHeight();
+                    if (panelAncho <= 0 || panelAlto <= 0) {
+                        panelAncho = image.getWidth();
+                        panelAlto = image.getHeight();
+                    }
+                    int recorteAncho = Math.min(panelAncho, image.getWidth());
+                    int recorteAlto = Math.min(panelAlto, image.getHeight());
+                    BufferedImage recortada = image.getSubimage(0, 0, recorteAncho, recorteAlto);
+                    JLabel label = new JLabel(new ImageIcon(recortada));
+                    pnlVisorPDF.removeAll();
+                    pnlVisorPDF.setLayout(new BorderLayout());
+                    pnlVisorPDF.add(label, BorderLayout.CENTER);
+                    pnlVisorPDF.revalidate();
+                    pnlVisorPDF.repaint();
+                } catch (Exception ex) {
+                    return;
+                }
+            });
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se pudo mostrar el PDF." + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }
 
     /**

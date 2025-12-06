@@ -1,6 +1,9 @@
 package itson.negocios_venderboleto.fabrica;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import conexion.ManejadorConexion;
 import itson.negocios_correoelectronico.ConfiguracionCorreoElectronico;
 import itson.negocios_correoelectronico.CorreoElectronico;
 import itson.negocios_correoelectronico.ICorreoElectronico;
@@ -20,8 +23,11 @@ import itson.negocios_gestorpromociones.GestorPromociones;
 import itson.negocios_gestorpromociones.IGestorPromociones;
 import itson.negocios_gestorventas.GestorVentas;
 import itson.negocios_gestorventas.IGestorVentas;
+import itson.infraestructura_generadorpdf.GeneradorPDF;
+import itson.infraestructura_generadorpdf.IGeneradorPDF;
 import lectorQr.ILectorQR;
 import lectorQr.LectorQR;
+import org.bson.Document;
 
 public class GestorFactory implements IGestorFactory {
 
@@ -73,5 +79,11 @@ public class GestorFactory implements IGestorFactory {
     @Override
     public ILectorQR crearLectorQR() {
         return new LectorQR();
+    }
+
+    public IGeneradorPDF crearGeneradorPDF() {
+        MongoDatabase db = ManejadorConexion.getInstancia().getBaseDatos();
+        MongoCollection<Document> coleccion = db.getCollection("boletos", Document.class);
+        return new GeneradorPDF(coleccion);
     }
 }

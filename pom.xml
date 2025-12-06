@@ -23,6 +23,7 @@
         <module>presentacion_SistemaCinema</module>
         <module>negocios_InsertMasivo</module>
         <module>infraestructura_LectorQR</module>
+        <module>infraestructura_GeneradorPDF</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
