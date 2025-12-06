@@ -15,28 +15,35 @@ public class MembresiaDTO {
     private String nombreCliente;
     private LocalDate fechaRegistro;
     private boolean activa;
+    private int saldo;
     private List<String> promocionesIds;
 
     public MembresiaDTO() {
     }
 
-    public MembresiaDTO(String id, String codigoMembresia, TipoMembresia tipoMembresia, String nombreCliente, LocalDate fechaRegistro, boolean activa, List<String> promocionesIds) {
+    public MembresiaDTO(String id, String codigoMembresia,int saldo, TipoMembresia tipoMembresia, String nombreCliente, LocalDate fechaRegistro, boolean activa, List<String> promocionesIds) {
         this.id = id;
         this.codigoMembresia = codigoMembresia;
         this.tipoMembresia = tipoMembresia;
+        this.saldo = saldo;
         this.nombreCliente = nombreCliente;
         this.fechaRegistro = fechaRegistro;
         this.activa = activa;
         this.promocionesIds = promocionesIds;
     }
 
-    public MembresiaDTO(String codigoMembresia, TipoMembresia tipoMembresia, String nombreCliente, LocalDate fechaRegistro, boolean activa, List<String> promocionesIds) {
+    public MembresiaDTO(String codigoMembresia,int saldo, TipoMembresia tipoMembresia, String nombreCliente, LocalDate fechaRegistro, boolean activa, List<String> promocionesIds) {
         this.codigoMembresia = codigoMembresia;
         this.tipoMembresia = tipoMembresia;
+        this.saldo = saldo;
         this.nombreCliente = nombreCliente;
         this.fechaRegistro = fechaRegistro;
         this.activa = activa;
         this.promocionesIds = promocionesIds;
+    }
+
+    public int getSaldo() {
+        return saldo;
     }
 
     public String getId() {

@@ -14,4 +14,14 @@ public class GestorMembresias implements IGestorMembresias {
     public MembresiaDTO buscarMembresia(String codigoMembresia) {
         return membresiaBO.buscarMembresia(codigoMembresia);
     }
+    
+    @Override
+    public boolean actualizarPuntos(String codigomembresia, int saldoNuevo){
+        return membresiaBO.actualizarSaldo(codigomembresia, saldoNuevo);
+    }
+    
+    
+    
+    
+    
 }

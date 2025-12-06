@@ -12,4 +12,10 @@ import dto.MembresiaDTO;
  */
 public interface IGestorMembresias {
     MembresiaDTO buscarMembresia (String codigoMembresia);
+    
+    boolean actualizarPuntos(String codigomembresia, int saldonuevo);
+    
+    
+    
+    
 }

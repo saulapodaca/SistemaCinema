@@ -13,4 +13,6 @@ import dto.MembresiaDTO;
 public interface IMembresiaBO {
 
     MembresiaDTO buscarMembresia(String codigoMembresia);
+    
+    boolean actualizarSaldo(String codigomembresia, int saldoNuevo);
 }

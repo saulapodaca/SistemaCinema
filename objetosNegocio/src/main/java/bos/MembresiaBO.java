@@ -42,5 +42,24 @@ public class MembresiaBO implements IMembresiaBO {
 
         return membresiaMapper.toDTO(entidad);
     }
+    
+    
+    @Override 
+    public boolean actualizarSaldo(String codigomembresia, int saldonuevo){
+        if(codigomembresia==null || codigomembresia.isBlank()|| saldonuevo <0){
+            return false;
+        }
+        
+        Membresia entidad = membresiaDAO.buscarPorCodigo(codigomembresia);
+
+        if (entidad == null) {
+            return false;
+        } 
+        
+        return membresiaDAO.actualizarSaldo(codigomembresia, saldonuevo);
+        
+     
+        
+    }
 
 }

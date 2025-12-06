@@ -20,4 +20,6 @@ public interface IMembresiaDAO {
     Membresia obtenerPorId(ObjectId id);
 
     Membresia buscarPorCodigo(String codigo);
+    
+    boolean actualizarSaldo(String codigo,int saldoNuevo);
 }

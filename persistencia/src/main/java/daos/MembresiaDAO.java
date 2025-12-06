@@ -68,5 +68,20 @@ public class MembresiaDAO implements IMembresiaDAO{
     public Membresia buscarPorCodigo(String codigo) {
         return coleccion.find(eq("codigoMembresia", codigo)).first();
     }
+    
+    @Override
+    public boolean actualizarSaldo(String codigo,int saldoNuevo){
+        
+        Membresia m= buscarPorCodigo(codigo);
+        
+        if(m==null){
+            return false;
+        } 
+        
+        
+        m.setSaldo(saldoNuevo);
+        
+        return true;
+    }
 
 }
