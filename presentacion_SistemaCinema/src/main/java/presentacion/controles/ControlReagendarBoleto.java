@@ -50,4 +50,8 @@ public class ControlReagendarBoleto {
     public WebcamPanel getPanelCamara() {
         return facade.getPanelCamara();
     }
+
+    public byte[] generarPDFBoleto(BoletoDTO boleto) throws Exception {
+        return facade.generarPDFBoleto(boleto);
+    }
 }

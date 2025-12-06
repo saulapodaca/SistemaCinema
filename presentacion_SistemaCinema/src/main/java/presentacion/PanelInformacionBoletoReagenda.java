@@ -1,19 +1,29 @@
 package presentacion;
 
-import bos.*;
-import daos.FuncionDAO;
 import dto.BoletoDTO;
-import dto.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import dto.PeliculaDTO;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.image.BufferedImage;
+import java.time.format.DateTimeFormatter;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import presentacion.controles.ControlVentaBoleto;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 import presentacion.controles.ControlPantallas;
+import presentacion.controles.ControlReagendarBoleto;
 
 /**
  *
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
  * @author Alejandor Rodríguez Lugo - 00000251622
  */
 public class PanelInformacionBoletoReagenda extends javax.swing.JPanel {
@@ -22,6 +32,8 @@ public class PanelInformacionBoletoReagenda extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelInformacionBoleto
+     *
+     * @param boleto
      */
     public PanelInformacionBoletoReagenda(BoletoDTO boleto) {
         this.boleto = boleto;
@@ -38,73 +50,13 @@ public class PanelInformacionBoletoReagenda extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlVisorPDF = new javax.swing.JPanel();
-        lblTitulo = new javax.swing.JLabel();
-        lblFuncion = new javax.swing.JLabel();
-        lblSala = new javax.swing.JLabel();
-        lblAsientos = new javax.swing.JLabel();
-        lblTotal = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         btnContinuar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
+        pnlVisorPDF = new javax.swing.JScrollPane();
+        lblPdf = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(8, 17, 40));
-
-        pnlVisorPDF.setBackground(new java.awt.Color(18, 26, 60));
-
-        lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("jLabel1");
-
-        lblFuncion.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblFuncion.setForeground(new java.awt.Color(255, 255, 255));
-        lblFuncion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblFuncion.setText("jLabel1");
-
-        lblSala.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblSala.setForeground(new java.awt.Color(255, 255, 255));
-        lblSala.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSala.setText("jLabel1");
-
-        lblAsientos.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblAsientos.setForeground(new java.awt.Color(255, 255, 255));
-        lblAsientos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAsientos.setText("jLabel1");
-
-        lblTotal.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblTotal.setForeground(new java.awt.Color(255, 255, 255));
-        lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTotal.setText("jLabel1");
-
-        javax.swing.GroupLayout pnlVisorPDFLayout = new javax.swing.GroupLayout(pnlVisorPDF);
-        pnlVisorPDF.setLayout(pnlVisorPDFLayout);
-        pnlVisorPDFLayout.setHorizontalGroup(
-            pnlVisorPDFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlVisorPDFLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlVisorPDFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblFuncion, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
-                    .addComponent(lblSala, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
-                    .addComponent(lblAsientos, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
-                    .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        pnlVisorPDFLayout.setVerticalGroup(
-            pnlVisorPDFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlVisorPDFLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblFuncion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblSala)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblAsientos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTotal)
-                .addContainerGap(347, Short.MAX_VALUE))
-        );
 
         btnContinuar.setBackground(new java.awt.Color(37, 99, 235));
         btnContinuar.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
@@ -126,31 +78,34 @@ public class PanelInformacionBoletoReagenda extends javax.swing.JPanel {
             }
         });
 
+        lblPdf.setText("jLabel1");
+        pnlVisorPDF.setViewportView(lblPdf);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(pnlVisorPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71))
+                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addComponent(pnlVisorPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(pnlVisorPDF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                .addGap(24, 24, 24)
+                .addComponent(pnlVisorPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnContinuar, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                    .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -164,21 +119,29 @@ public class PanelInformacionBoletoReagenda extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void cargarBoleto() {
-        lblTitulo.setText("BOLETO DE CINE");
-        lblFuncion.setText("Película: " + boleto.getVenta().getFuncion().getPelicula().getTitulo());
-        lblSala.setText("Sala: " + boleto.getVenta().getFuncion().getSala().getNombre());
-        lblAsientos.setText("Asientos: " + boleto.getVenta().getAsientos().toString());
-        lblTotal.setText(String.format("Total: $%.2f", boleto.getVenta().getTotal()));
+        try {
+            byte[] pdfBytes = ControlReagendarBoleto.getInstance().generarPDFBoleto(boleto);
+            if (pdfBytes == null) {
+                return;
+            }
+            PDDocument doc = PDDocument.load(pdfBytes);
+            PDFRenderer renderer = new PDFRenderer(doc);
+            BufferedImage image = renderer.renderImageWithDPI(0, 150);
+            doc.close();
+            lblPdf.setIcon(new ImageIcon(image));
+            pnlVisorPDF.setViewportView(lblPdf); 
+            pnlVisorPDF.revalidate();
+            pnlVisorPDF.repaint();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se pudo mostrar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JLabel lblAsientos;
-    private javax.swing.JLabel lblFuncion;
-    private javax.swing.JLabel lblSala;
-    private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblTotal;
-    private javax.swing.JPanel pnlVisorPDF;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblPdf;
+    private javax.swing.JScrollPane pnlVisorPDF;
     // End of variables declaration//GEN-END:variables
 }
