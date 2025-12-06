@@ -8,7 +8,8 @@ import presentacion.controles.ControlPantallas;
 
 /**
  *
- * @author saula
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandor Rodríguez Lugo - 00000251622
  */
 public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
 
@@ -359,6 +360,7 @@ public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
 
     private void btnReagendarBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReagendarBoletoActionPerformed
         // TODO add your handling code here:
+        ControlPantallas.getInstance().abrirEscanearQR(this);
     }//GEN-LAST:event_btnReagendarBoletoActionPerformed
 
     private void btnGestionarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarMembresiaActionPerformed

@@ -1,6 +1,8 @@
 package itson.negocios_venderboleto.fachada;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
 import dto.AsientoDTO;
 import dto.BoletoDTO;
 import dto.DetallePrecioDTO;
@@ -14,10 +16,16 @@ import dto.VentaDTO;
 import exceptions.EmpleadoNoEncontradoException;
 import exceptions.FuncionNoEncontradaException;
 import exceptions.PeliculaNoExistenteException;
+import exceptions.BoletoNoExistenteException;
+import exceptions.EmpleadoNoEncontradoException;
+import exceptions.FuncionNoEncontradaException;
+import exceptions.PeliculaNoExistenteException;
+import exceptions.PromocionNoExistenteException;
 import exceptions.SalaNoExistenteException;
 import exceptions.SucursalNoExistenteException;
 import exceptions.VentaNoEncontradaException;
 import itson.negocios_generadorqr.exceptions.QRGeneradorException;
+import itson.negocios_gestorboletos.IGestorBoletos;
 import itson.negocios_gestorempleados.IGestorEmpleados;
 import itson.negocios_gestorfunciones.IGestorFunciones;
 import itson.negocios_gestormembresias.IGestorMembresias;
@@ -27,6 +35,7 @@ import itson.negocios_gestorventas.IGestorVentas;
 import itson.negocios_venderboleto.IVentaBoleto;
 import itson.negocios_venderboleto.VentaBoleto;
 import itson.negocios_venderboleto.fabrica.GestorFactory;
+import lectorQr.ILectorQR;
 import java.util.List;
 
 public class VentaBoletoFacade implements IVentaBoletoFacade {
@@ -38,6 +47,8 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     private final IGestorMembresias gestorMembresias;
     private final IGestorVentas gestorVentas;
     private final IGestorPromociones gestorPromociones;
+    private final ILectorQR gestorLectorQR;
+    private final IGestorBoletos gestorBoletos;
 
     public VentaBoletoFacade(GestorFactory factory) {
         this.gestorPeliculas = factory.crearGestorPeliculas();
@@ -46,6 +57,8 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
         this.gestorMembresias = factory.crearGestorMembresias();
         this.gestorVentas = factory.crearGestorVentas();
         this.gestorPromociones = factory.crearGestorPromociones();
+        this.gestorLectorQR = factory.crearLectorQR();
+        this.gestorBoletos = factory.crearGestorBoletos();
 
         IVentaBoleto venta = new VentaBoleto(
                 gestorVentas,
@@ -122,4 +135,29 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     public PromocionDTO validarCupon(String codigoCupon) {
         return gestorPromociones.validarCupon(codigoCupon);
     }
+
+    @Override
+    public VentaDTO actualizarVenta(VentaDTO ventaDTO) throws PromocionNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, IllegalArgumentException, SucursalNoExistenteException, VentaNoEncontradaException {
+        return gestorVentas.actualizarVenta(ventaDTO);
+    }
+
+    @Override
+    public VentaDTO reagendarBoleto(VentaDTO ventaAntigua, VentaDTO ventaNueva, List<AsientoDTO> asientosLiberar, List<AsientoDTO> asientosNuevos) throws FuncionNoEncontradaException, PromocionNoExistenteException, EmpleadoNoEncontradoException, IllegalArgumentException, VentaNoEncontradaException, SucursalNoExistenteException {
+        return ventaBoleto.reagendarBoleto(ventaAntigua, ventaNueva, asientosLiberar, asientosNuevos);
+    }
+
+    @Override
+    public String escanearQR(Webcam webcam) {
+        return gestorLectorQR.escanearQR(webcam);
+    }
+
+    @Override
+    public WebcamPanel getPanelCamara() {
+        return gestorLectorQR.getPanelCamara();
+    }
+
+    public BoletoDTO buscarBoletoPorId(String id) throws BoletoNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, SucursalNoExistenteException, VentaNoEncontradaException {
+        return gestorBoletos.buscarBoletoPorId(id);
+    }
+
 }

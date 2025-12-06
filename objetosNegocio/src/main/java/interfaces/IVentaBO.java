@@ -26,4 +26,5 @@ public interface IVentaBO {
 
     DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo);
 
+    VentaDTO actualizarVenta(VentaDTO ventaDTO) throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException;
 }

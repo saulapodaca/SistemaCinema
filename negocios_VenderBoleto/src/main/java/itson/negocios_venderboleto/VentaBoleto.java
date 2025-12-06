@@ -1,13 +1,20 @@
 package itson.negocios_venderboleto;
 
+import dto.AsientoDTO;
 import dto.BoletoDTO;
 import dto.VentaDTO;
+import exceptions.EmpleadoNoEncontradoException;
+import exceptions.FuncionNoEncontradaException;
+import exceptions.PromocionNoExistenteException;
+import exceptions.SucursalNoExistenteException;
+import exceptions.VentaNoEncontradaException;
 import itson.negocios_correoelectronico.ICorreoElectronico;
 import itson.negocios_generadorqr.IGeneradorQR;
 import itson.negocios_generadorqr.exceptions.QRGeneradorException;
 import itson.negocios_gestorboletos.IGestorBoletos;
 import itson.negocios_gestorfunciones.IGestorFunciones;
 import itson.negocios_gestorventas.IGestorVentas;
+import java.util.List;
 
 /**
  *
@@ -62,9 +69,8 @@ public class VentaBoleto implements IVentaBoleto {
         }
     }
 
-
     /**
-     * 
+     *
      * @param destino
      * @param asunto
      * @param mensajeHtml
@@ -74,5 +80,27 @@ public class VentaBoleto implements IVentaBoleto {
     @Override
     public void mandarBoletoCorreo(String destino, String asunto, String mensajeHtml, byte[] jasper) throws Exception {
         correoElectronico.enviarBoleto(destino, asunto, mensajeHtml, jasper);
+    }
+
+    /**
+     * 
+     * @param ventaAntigua
+     * @param ventaNueva
+     * @param asientosLiberar
+     * @param asientosNuevos
+     * @return
+     * @throws FuncionNoEncontradaException
+     * @throws PromocionNoExistenteException
+     * @throws EmpleadoNoEncontradoException
+     * @throws IllegalArgumentException
+     * @throws VentaNoEncontradaException
+     * @throws SucursalNoExistenteException 
+     */
+    @Override
+    public VentaDTO reagendarBoleto(VentaDTO ventaAntigua, VentaDTO ventaNueva, List<AsientoDTO> asientosLiberar, List<AsientoDTO> asientosNuevos) throws FuncionNoEncontradaException, PromocionNoExistenteException, EmpleadoNoEncontradoException, IllegalArgumentException, VentaNoEncontradaException, SucursalNoExistenteException {
+        gestorFunciones.liberarAsientos(ventaAntigua.getFuncion(), asientosLiberar);
+        gestorFunciones.ocuparAsientos(ventaNueva.getFuncion(), asientosNuevos);
+        VentaDTO ventaActualizada = gestorVentas.actualizarVenta(ventaNueva);
+        return ventaActualizada;
     }
 }

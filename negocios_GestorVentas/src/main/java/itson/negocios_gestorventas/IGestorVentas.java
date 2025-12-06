@@ -22,7 +22,10 @@ public interface IGestorVentas {
 
     VentaDTO registrarVenta(VentaDTO venta) throws EmpleadoNoEncontradoException, Exception;
     
-    VentaDTO obtenerVentaPorID(String id)throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException;
-    
+    VentaDTO obtenerVentaPorID(String id) throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException;
+
     DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promoSeleccionada);
+
+    VentaDTO actualizarVenta(VentaDTO ventaDTO) throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException;
+
 }
