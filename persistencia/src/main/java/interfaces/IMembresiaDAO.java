@@ -21,5 +21,5 @@ public interface IMembresiaDAO {
 
     Membresia buscarPorCodigo(String codigo);
     
-    boolean actualizarSaldo(String codigo,int saldoNuevo);
+    boolean actualizarSaldo(Membresia membresia,int saldoNuevo);
 }

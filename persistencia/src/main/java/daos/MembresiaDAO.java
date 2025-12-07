@@ -3,6 +3,8 @@ package daos;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.UpdateResult;
 import conexion.ManejadorConexion;
 import dominio.Membresia;
 import interfaces.IMembresiaDAO;
@@ -11,7 +13,7 @@ import org.bson.types.ObjectId;
 
 /**
  * 
- * @author saula
+ * @author saula + elite
  */
 public class MembresiaDAO implements IMembresiaDAO{
 
@@ -70,18 +72,15 @@ public class MembresiaDAO implements IMembresiaDAO{
     }
     
     @Override
-    public boolean actualizarSaldo(String codigo,int saldoNuevo){
+    public boolean actualizarSaldo(Membresia m,int saldoNuevo){
+    
+      UpdateResult result = coleccion.updateOne(
+              
+        eq("codigoMembresia", m.getCodigoMembresia()),
+        Updates.set("saldo", saldoNuevo)
         
-        Membresia m= buscarPorCodigo(codigo);
-        
-        if(m==null){
-            return false;
-        } 
-        
-        
-        m.setSaldo(saldoNuevo);
-        
-        return true;
+      );
+        return result.getModifiedCount() > 0;
     }
 
 }

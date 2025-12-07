@@ -52,13 +52,13 @@ public class MembresiaBO implements IMembresiaBO {
         
         Membresia entidad = membresiaDAO.buscarPorCodigo(codigomembresia);
 
-        if (entidad == null) {
+        
+        if(entidad!=null && entidad.isActiva()==true){
+            return membresiaDAO.actualizarSaldo(entidad, saldonuevo);
+        }else{
             return false;
-        } 
+        }
         
-        return membresiaDAO.actualizarSaldo(codigomembresia, saldonuevo);
-        
-     
         
     }
 

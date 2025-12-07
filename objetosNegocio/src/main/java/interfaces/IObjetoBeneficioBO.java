@@ -6,19 +6,19 @@ package interfaces;
 
 import dominio.Membresia;
 import dominio.ObjetoBeneficio;
+import dto.ObjetoBeneficioDTO;
 import java.util.List;
 
 /**
  *
  * @author Elite
  */
-public interface IObjetoBeneficioDAO {
- 
+public interface IObjetoBeneficioBO {
+    
+    
     boolean actualizarStock(String idOB, int unidades_vendidas);
     
-    List<ObjetoBeneficio> obtenerObjetosDisponiblesPorMembresia(Membresia membresia);
-    
-    
+    List<ObjetoBeneficioDTO> obtenerObjetosDisponiblesPorMembresia(Membresia membresia);
     
     
     
