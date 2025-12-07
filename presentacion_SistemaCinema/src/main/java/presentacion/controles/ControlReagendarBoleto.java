@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  *
- * @author Alejandor Rodríguez Lugo - 00000251622
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class ControlReagendarBoleto {
 
@@ -53,5 +53,9 @@ public class ControlReagendarBoleto {
 
     public byte[] generarPDFBoleto(BoletoDTO boleto) throws Exception {
         return facade.generarPDFBoleto(boleto);
+    }
+
+    public BoletoDTO actualizar(BoletoDTO boleto) throws BoletoNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, IllegalArgumentException, SucursalNoExistenteException, VentaNoEncontradaException {
+        return facade.actualizar(boleto);
     }
 }

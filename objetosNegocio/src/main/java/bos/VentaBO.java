@@ -7,6 +7,7 @@ import dto.AsientoDTO;
 import dto.DetallePrecioDTO;
 import dto.EmpleadoDTO;
 import dto.FuncionDTO;
+import dto.PeliculaDTO;
 import dto.PromocionDTO;
 import dto.VentaDTO;
 import exceptions.EmpleadoNoEncontradoException;
@@ -19,6 +20,7 @@ import interfaces.IFuncionBO;
 import interfaces.IPromocionBO;
 import interfaces.IVentaBO;
 import interfaces.IVentaDAO;
+import java.util.ArrayList;
 import java.util.List;
 import mappers.AsientoMapper;
 import mappers.VentaMapper;
@@ -39,7 +41,7 @@ public class VentaBO implements IVentaBO {
     private final IVentaDAO ventaDAO;
     private final IPromocionBO promocionBO;
     private final IFuncionBO funcionBO;
-    private final IEmpleadoBO empleadoBO;    
+    private final IEmpleadoBO empleadoBO;
     private final VentaMapper ventaMapper;
     private final AsientoMapper asientoMapper;
 
@@ -56,7 +58,7 @@ public class VentaBO implements IVentaBO {
         this.ventaMapper = new VentaMapper(asientoMapper);
         this.promocionBO = PromocionBO.getInstancia();
         this.funcionBO = FuncionBO.getInstancia();
-        this.empleadoBO = EmpleadoBO.getInstancia();        
+        this.empleadoBO = EmpleadoBO.getInstancia();
     }
 
     /**
@@ -144,8 +146,8 @@ public class VentaBO implements IVentaBO {
     /**
      *
      * @param asientos
-     * @param promo 
-     * @return 
+     * @param promo
+     * @return
      */
     @Override
     public DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo) {
@@ -185,6 +187,7 @@ public class VentaBO implements IVentaBO {
         dto.setTotal(total);
     }
 
+    @Override
     public VentaDTO actualizarVenta(VentaDTO ventaDTO) throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException {
         if (ventaDTO == null || ventaDTO.getId() == null || ventaDTO.getId().isBlank()) {
             throw new IllegalArgumentException("El ventaDTO es inválido.");
@@ -201,5 +204,23 @@ public class VentaBO implements IVentaBO {
         EmpleadoDTO empleadoDTO = empleadoBO.obtenerPorId(entidadActualizada.getEmpleadoId().toHexString());
         entidadActualizada = ventaDAO.actualizar(entidadActualizada);
         return ventaMapper.toDTO(entidadActualizada, funcionDTO, empleadoDTO);
+    }
+
+    @Override
+    public List<VentaDTO> obtenerVentasPorPelicula(PeliculaDTO pelicula) throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException {
+        if (pelicula == null) {
+            return List.of();
+        }
+        List<Venta> ventas = ventaDAO.obtenerVentasPorPelicula(new ObjectId(pelicula.getId()));
+        List<VentaDTO> lista = new ArrayList<>();
+        for (Venta v : ventas) {
+            FuncionDTO funcionDTO = funcionBO.obtenerPorId(v.getFuncionId().toHexString());
+            EmpleadoDTO empleadoDTO = empleadoBO.obtenerPorId(v.getEmpleadoId().toHexString());
+
+            lista.add(ventaMapper.toDTO(v, funcionDTO, empleadoDTO));
+        }
+
+        return lista;
+
     }
 }

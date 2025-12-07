@@ -1,10 +1,12 @@
 package presentacion;
 
+import dto.AsientoDTO;
 import dto.BoletoDTO;
 import dto.FiltroDTO;
 import presentacion.controles.ControlPantallas;
 import dto.FuncionDTO;
 import dto.PeliculaDTO;
+import dto.enums.EstadoAsiento;
 import exceptions.FuncionNoEncontradaException;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -530,6 +532,23 @@ public class PanelSeleccionFuncionReagenda extends javax.swing.JPanel {
         panelFuncion.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
+                List<AsientoDTO> asientosOriginales = boleto.getVenta().getAsientos();
+                int cantidadOriginal = asientosOriginales.size();
+                int disponibles = 0;
+                for (AsientoDTO a : funcion.getAsientos()) {
+                    if (a.getEstado() == EstadoAsiento.DISPONIBLE) {
+                        disponibles++;
+                    }
+                }
+                if (disponibles < cantidadOriginal) {
+                    JOptionPane.showMessageDialog(null, "No hay suficientes asientos disponibles", "Aviso", JOptionPane.WARNING_MESSAGE
+                    );
+                    return;
+                }
+                if (!funcion.getTipoSala().equals(boleto.getVenta().getFuncion().getTipoSala())) {
+                    JOptionPane.showMessageDialog(null, "No es el mismo tipo de sala al boleto original.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 ControlPantallas.getInstance().abrirSeleccionAsientosReagenda(PanelSeleccionFuncionReagenda.this, funcion, boleto);
             }
         });

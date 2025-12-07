@@ -12,6 +12,7 @@ import dto.FuncionDTO;
 import dto.MembresiaDTO;
 import dto.PromocionDTO;
 import dto.VentaDTO;
+import dto.enums.EstadoBoleto;
 import dto.enums.FormaPago;
 import itson.negocios_generadorqr.exceptions.QRGeneradorException;
 import java.awt.Color;
@@ -25,14 +26,17 @@ import presentacion.utilerias.GestorSesion;
 
 /**
  *
- * @author saula
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class PanelInformacionPago extends javax.swing.JPanel {
 
     private FuncionDTO funcion;
     private List<AsientoDTO> asientos;
+
     /**
      * Creates new form PanelInformacionPago
+     *
      * @param asientos
      * @param funcion
      */
@@ -543,13 +547,13 @@ public class PanelInformacionPago extends javax.swing.JPanel {
             cbDescuentos.addItem(promo);
         }
     }
-    
-    private void configurarPanelFormaPago(){
+
+    private void configurarPanelFormaPago() {
         bgFormaPago.add(rbEfectivo);
         bgFormaPago.add(rbTarjeta);
         rbEfectivo.setSelected(true);
     }
-    
+
     private void cargarInformacion(List<AsientoDTO> asientos, FuncionDTO funcion) {
         cargarInformacionVenta(asientos, funcion);
         configurarPanelDescuentos();
@@ -563,25 +567,25 @@ public class PanelInformacionPago extends javax.swing.JPanel {
 
     private void cargarInformacionVenta(List<AsientoDTO> asientos, FuncionDTO funcion) {
         configurarTituloPelicula(funcion.getPelicula().getTitulo());
-    configurarInformacionFuncion(lblNombreSala, funcion.getSala().getNombre());
-    configurarInformacionFuncion(lblTipoSala, funcion.getTipoSala());
-    configurarInformacionFuncion(lblAsientos, asientos.toString());
+        configurarInformacionFuncion(lblNombreSala, funcion.getSala().getNombre());
+        configurarInformacionFuncion(lblTipoSala, funcion.getTipoSala());
+        configurarInformacionFuncion(lblAsientos, asientos.toString());
 
-    DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yy");
-    lblFechaFuncion.setText(funcion.getFechaHora().format(formatoFecha));
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yy");
+        lblFechaFuncion.setText(funcion.getFechaHora().format(formatoFecha));
 
-    DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a");
-    lblHoraFuncion.setText(funcion.getFechaHora().toLocalTime().format(formatoHora));
+        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a");
+        lblHoraFuncion.setText(funcion.getFechaHora().toLocalTime().format(formatoHora));
 
-    configurarPrecios(asientos, null);
-}
-    
-    private void configurarTituloPelicula(String titulo){
+        configurarPrecios(asientos, null);
+    }
+
+    private void configurarTituloPelicula(String titulo) {
         lblTituloPelicula.setText(titulo);
         lblTituloPelicula.setForeground(Color.WHITE);
     }
-    
-    private void configurarInformacionFuncion(JLabel etiqueta, String texto){
+
+    private void configurarInformacionFuncion(JLabel etiqueta, String texto) {
         etiqueta.setText(texto);
         etiqueta.setForeground(new Color(148, 163, 184));
     }
@@ -590,7 +594,7 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         DetallePrecioDTO detalle = ControlVentaBoleto.getInstance().calcularPrecios(asientos, promo);
         lblSubtotalPrecio.setText(String.format("$%.2f", detalle.getSubtotal()));
         lblDescuento.setText(String.format("$%.2f", detalle.getDescuento()));
-        lblTotal.setText(String.format("$%.2f", detalle.getTotal()));   
+        lblTotal.setText(String.format("$%.2f", detalle.getTotal()));
     }
 
     private VentaDTO crearVenta(FormaPago tipoPago, PromocionDTO promo, DetallePrecioDTO detalle) {
@@ -603,14 +607,14 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         venta.setTotal(detalle.getTotal());
         venta.setFecha(LocalDate.now());
         venta.setFormaPago(tipoPago);
-        
+
         if (promo != null) {
             venta.setPromocionId(promo.getId());
         }
-        
+
         return venta;
     }
- 
+
     private BoletoDTO procesarVenta(VentaDTO venta, DetallePrecioDTO detalle) throws QRGeneradorException {
         BoletoDTO boleto = ControlVentaBoleto.getInstance().registrarVenta(venta);
 

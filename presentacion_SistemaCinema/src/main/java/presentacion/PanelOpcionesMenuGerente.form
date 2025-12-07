@@ -21,37 +21,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnVentaAlimento" min="-2" pref="240" max="-2" attributes="0"/>
-                  <Component id="btnGenerarReporte" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-                  <Component id="btnGestionarPrecios" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-                  <Component id="btnVentaBoleto" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="75" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnGestionarPromos" min="-2" pref="240" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnGestionarPeliculas" min="-2" pref="240" max="-2" attributes="0"/>
-                          <Component id="btnEnviarPromociones" min="-2" pref="240" max="-2" attributes="0"/>
-                          <Component id="btnReagendarBoleto" min="-2" pref="240" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnEscaneoBoleto" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-                  <Component id="btnGestionarMembresia" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-                  <Component id="btnReembolsarBoleto" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-                  <Component id="btnGestionarEmpleados" min="-2" pref="240" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-          </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
               <Component id="lblVenderBoleto" min="-2" max="-2" attributes="0"/>
@@ -71,15 +40,6 @@
               <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-              <Component id="lblGenerarReportes" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="lblGestionarPeliculas" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
-              <Component id="lblGestionarMembresias" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
               <Component id="lblGestionarPrecios" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
@@ -87,6 +47,49 @@
               <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
               <Component id="lblGestionarEmpleados" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="lblGenerarReportes" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="lblGestionarPeliculas" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
+                      <Component id="lblGestionarMembresias" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnVentaAlimento" min="-2" pref="240" max="-2" attributes="0"/>
+                          <Component id="btnGenerarReporte" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                          <Component id="btnGestionarPrecios" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                          <Component id="btnVentaBoleto" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="75" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="btnGestionarPromos" min="-2" pref="240" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnGestionarPeliculas" min="-2" pref="240" max="-2" attributes="0"/>
+                                  <Component id="btnEnviarPromociones" min="-2" pref="240" max="-2" attributes="0"/>
+                                  <Component id="btnReagendarBoleto" min="-2" pref="240" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnEscaneoBoleto" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                          <Component id="btnGestionarMembresia" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                          <Component id="btnReembolsarBoleto" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                          <Component id="btnGestionarEmpleados" min="-2" pref="240" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -131,20 +134,13 @@
                   <Component id="btnGestionarPeliculas" min="-2" pref="150" max="-2" attributes="0"/>
                   <Component id="btnGestionarMembresia" min="-2" pref="150" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Component id="lblGenerarReportes" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblGestionarMembresias" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblGestionarPeliculas" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
+                  <Component id="lblGestionarMembresias" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblGestionarPeliculas" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblGenerarReportes" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnGestionarEmpleados" min="-2" pref="150" max="-2" attributes="0"/>
                   <Component id="btnGestionarPromos" min="-2" pref="150" max="-2" attributes="0"/>
@@ -428,7 +424,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="GENERAR REPORTES"/>
+        <Property name="text" type="java.lang.String" value="GENERAR REPORTES DE PELICULA"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblGestionarPeliculas">

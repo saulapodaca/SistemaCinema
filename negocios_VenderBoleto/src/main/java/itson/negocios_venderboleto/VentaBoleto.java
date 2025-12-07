@@ -16,6 +16,7 @@ import itson.negocios_gestorfunciones.IGestorFunciones;
 import itson.negocios_gestorventas.IGestorVentas;
 import itson.infraestructura_generadorpdf.IGeneradorPDF;
 import java.util.List;
+import dto.enums.EstadoBoleto;
 
 /**
  *

@@ -35,8 +35,10 @@ import itson.negocios_gestorventas.IGestorVentas;
 import itson.negocios_venderboleto.IVentaBoleto;
 import itson.negocios_venderboleto.VentaBoleto;
 import itson.negocios_venderboleto.fabrica.GestorFactory;
-import lectorQr.ILectorQR;
+import itson.infraestructura_lectorqr.LectorQR;
+import itson.infraestructura_lectorqr.ILectorQR;
 import itson.infraestructura_generadorpdf.IGeneradorPDF;
+import java.time.LocalDate;
 import java.util.List;
 
 public class VentaBoletoFacade implements IVentaBoletoFacade {
@@ -68,7 +70,7 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
                 factory.crearGestorBoletos(),
                 factory.crearGestorFunciones(),
                 factory.crearGeneradorQR(),
-                factory.crearCorreoElectronico(), 
+                factory.crearCorreoElectronico(),
                 factory.crearGeneradorPDF()
         );
         this.ventaBoleto = venta;
@@ -160,12 +162,27 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
         return gestorLectorQR.getPanelCamara();
     }
 
+    @Override
     public BoletoDTO buscarBoletoPorId(String id) throws BoletoNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, SucursalNoExistenteException, VentaNoEncontradaException {
         return gestorBoletos.buscarBoletoPorId(id);
     }
 
-    public byte[] generarPDFBoleto(BoletoDTO boleto) throws Exception{
+    @Override
+    public byte[] generarPDFBoleto(BoletoDTO boleto) throws Exception {
         return gestorGeneradorPDF.generarPDFBoleto(boleto);
     }
 
+    @Override
+//    public byte[] generarPDFPelicula(PeliculaDTO pelicula) throws Exception {
+//        return gestorGeneradorPDF.generarPDFPelicula(pelicula);
+//    }
+
+    public byte[] generarPDFPelicula(PeliculaDTO peliculaDTO, LocalDate fechaInicio, LocalDate fechaFin) throws Exception {
+        return gestorGeneradorPDF.generarPDFPelicula(peliculaDTO, fechaInicio, fechaFin);
+    }
+
+    @Override
+    public BoletoDTO actualizar(BoletoDTO boleto) throws BoletoNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, IllegalArgumentException, SucursalNoExistenteException, VentaNoEncontradaException {
+        return gestorBoletos.actualizar(boleto);
+    }
 }

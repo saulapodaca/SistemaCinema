@@ -28,6 +28,7 @@ import exceptions.SalaNoExistenteException;
 import exceptions.SucursalNoExistenteException;
 import exceptions.VentaNoEncontradaException;
 import itson.negocios_generadorqr.exceptions.QRGeneradorException;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -71,4 +72,9 @@ public interface IVentaBoletoFacade {
     BoletoDTO buscarBoletoPorId(String id) throws BoletoNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, SucursalNoExistenteException, VentaNoEncontradaException;
 
     byte[] generarPDFBoleto(BoletoDTO boleto) throws Exception;
+
+//    byte[] generarPDFPelicula(PeliculaDTO pelicula) throws Exception;
+     byte[] generarPDFPelicula(PeliculaDTO peliculaDTO, LocalDate fechaInicio, LocalDate fechaFin) throws Exception;
+
+    BoletoDTO actualizar(BoletoDTO boleto) throws BoletoNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, IllegalArgumentException, SucursalNoExistenteException, VentaNoEncontradaException;
 }

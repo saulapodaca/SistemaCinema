@@ -23,13 +23,14 @@ import presentacion.utilerias.PintorAsientos;
 
 /**
  *
- * @author saula
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class PanelSeleccionAsientos extends javax.swing.JPanel {
 
     private FuncionDTO funcion;
     private JToggleButton[][] botones;
-    
+
     /**
      * Creates new form PanelSeleccionAsientos
      *
@@ -278,14 +279,14 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         List<AsientoDTO> asientosSeleccionados = obtenerAsientosSeleccionados();
 
-    if (asientosSeleccionados == null || asientosSeleccionados.isEmpty()) {
-        JOptionPane.showMessageDialog(this,
-                "Debes seleccionar al menos un asiento para continuar.",
-                "Aviso",
-                JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-        
+        if (asientosSeleccionados == null || asientosSeleccionados.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Debes seleccionar al menos un asiento para continuar.",
+                    "Aviso",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         ControlPantallas.getInstance().abrirInformacionPago(this, asientosSeleccionados, funcion);
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
@@ -308,39 +309,39 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
         pnlMapaAsientos.repaint();
     }
 
-    private void configurarInformacionFuncion(){
+    private void configurarInformacionFuncion() {
         limpiarEtiquetas();
         aplicarInfoEtiqueta(lblNombrePelicula, funcion.getPelicula().getTitulo());
         aplicarInfoEtiqueta(lblNombreSalaFuncion, funcion.getSala().getNombre());
-        
+
         LocalDateTime fechaHora = funcion.getFechaHora();
         String hora = fechaHora.toLocalTime()
-        .format(DateTimeFormatter.ofPattern("hh:mm a")); 
+                .format(DateTimeFormatter.ofPattern("hh:mm a"));
         aplicarInfoEtiqueta(lblHoraFuncion, hora);
-        
+
         aplicarInfoEtiqueta(lblTipoSalaFuncion, funcion.getTipoSala());
-        lblTipoSalaFuncion.setForeground(new Color(148,163,184));
+        lblTipoSalaFuncion.setForeground(new Color(148, 163, 184));
     }
-    
-    private void aplicarInfoEtiqueta(JLabel etiqueta, String texto){
+
+    private void aplicarInfoEtiqueta(JLabel etiqueta, String texto) {
         etiqueta.setText(texto);
-        etiqueta.setForeground(new Color (205,205,205));
+        etiqueta.setForeground(new Color(205, 205, 205));
     }
-    
-    private void limpiarEtiquetas(){
+
+    private void limpiarEtiquetas() {
         lblNombrePelicula.setText("");
         lblNombreSalaFuncion.setText("");
         lblTipoSalaFuncion.setText("");
         lblHoraFuncion.setText("");
     }
-    
-    private void inicializarAsientos(){
-        for (AsientoDTO asiento : funcion.getAsientos()){
+
+    private void inicializarAsientos() {
+        for (AsientoDTO asiento : funcion.getAsientos()) {
             int fila = asiento.getFila();
             int columna = asiento.getColumna();
-            
+
             JToggleButton btn = crearBotonAsiento(asiento);
-            botones[fila][columna-1] = btn;
+            botones[fila][columna - 1] = btn;
             pnlMapaAsientos.add(btn);
         }
     }
@@ -361,17 +362,17 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
     private void configurarEventoSeleccion(JToggleButton btn) {
         btn.addActionListener(e -> {
             if (btn.isSelected()) {
-               PintorAsientos.aplicarSeleccion(btn, true);
+                PintorAsientos.aplicarSeleccion(btn, true);
             } else {
                 PintorAsientos.aplicarSeleccion(btn, false);
             }
         });
     }
 
-    private List<AsientoDTO> obtenerAsientosSeleccionados(){
+    private List<AsientoDTO> obtenerAsientosSeleccionados() {
         return funcion.getAsientos().stream()
-                .filter(a ->{
-                    JToggleButton b = botones[a.getFila()][a.getColumna()-1];
+                .filter(a -> {
+                    JToggleButton b = botones[a.getFila()][a.getColumna() - 1];
                     return b.isSelected();
                 }).toList();
     }
@@ -387,7 +388,7 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
             lblNumero.setForeground(Color.WHITE);
             lblNumero.setHorizontalAlignment(SwingConstants.CENTER);
             pnlNumerosFilas.add(lblNumero);
-            letra = (char) ( 'A' + i);
+            letra = (char) ('A' + i);
         }
 
         pnlNumerosFilas.revalidate();

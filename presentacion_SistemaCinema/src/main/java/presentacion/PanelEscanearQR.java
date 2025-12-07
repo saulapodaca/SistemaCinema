@@ -26,9 +26,10 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import presentacion.controles.ControlPantallas;
-import lectorQr.ILectorQR;
-import lectorQr.LectorQR;
+import itson.infraestructura_lectorqr.ILectorQR;
+import itson.infraestructura_lectorqr.LectorQR;
 import presentacion.controles.ControlReagendarBoleto;
+import dto.enums.EstadoBoleto;
 
 /**
  *
@@ -187,12 +188,19 @@ public class PanelEscanearQR extends javax.swing.JPanel {
         try {
             BoletoDTO boleto = control.buscarBoletoPorId(txtBuscadorFolio.getText());
             if (boleto.getVenta().getFuncion().getFechaHora().isBefore(LocalDateTime.now().minusHours(2))) {
-                JOptionPane.showMessageDialog(this, "El boleto ya no puede ser reagendado debido al margen de horas de reagenda.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El boleto ya no puede ser reagendado debido al margen de horas de reagenda.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (boleto.getEstado().equals(EstadoBoleto.REAGENDADO)) {
+                JOptionPane.showMessageDialog(this, "El boleto ya ha sido reagendado anteriormente.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            } else if (boleto.getEstado().equals(EstadoBoleto.USADO)) {
+                JOptionPane.showMessageDialog(this, "El boleto ya ha sido utilizado.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             ControlPantallas.getInstance().abrirInformacionBoletoReagenda(this, boleto);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "El folio correspondiente no corresponde a un boleto del sistema.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El folio correspondiente no corresponde a un boleto del sistema." + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
     }//GEN-LAST:event_btnSiguienteActionPerformed

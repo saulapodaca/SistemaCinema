@@ -9,6 +9,7 @@ import static com.mongodb.client.model.Filters.lte;
 import conexion.ManejadorConexion;
 import dominio.Funcion;
 import dto.FiltroDTO;
+import dto.PeliculaDTO;
 import interfaces.IFuncionDAO;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,15 +22,15 @@ import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
- * 
+ *
  * @author saula
  */
-public class FuncionDAO implements IFuncionDAO{
-    
+public class FuncionDAO implements IFuncionDAO {
+
     private final MongoCollection<Funcion> coleccion;
 
     /**
-     * 
+     *
      */
     public FuncionDAO() {
         MongoDatabase db = ManejadorConexion.getInstancia().getBaseDatos();
@@ -37,9 +38,9 @@ public class FuncionDAO implements IFuncionDAO{
     }
 
     /**
-     * 
-     * @param funcion 
-     * @return  
+     *
+     * @param funcion
+     * @return
      */
     @Override
     public Funcion insertar(Funcion funcion) {
@@ -49,9 +50,9 @@ public class FuncionDAO implements IFuncionDAO{
     }
 
     /**
-     * 
-     * @param funcion 
-     * @return  
+     *
+     * @param funcion
+     * @return
      */
     @Override
     public Funcion actualizar(Funcion funcion) {
@@ -61,9 +62,9 @@ public class FuncionDAO implements IFuncionDAO{
     }
 
     /**
-     * 
+     *
      * @param id
-     * @return 
+     * @return
      */
     @Override
     public Funcion obtenerPorId(ObjectId id) {
@@ -71,7 +72,7 @@ public class FuncionDAO implements IFuncionDAO{
     }
 
     /**
-     * 
+     *
      * @param peliculaId
      * @param filtro
      * @return
@@ -103,4 +104,11 @@ public class FuncionDAO implements IFuncionDAO{
                 .into(new ArrayList<>());
     }
 
+    @Override
+    public List<Funcion> obtenerPorPelicula(ObjectId pelicula) {
+        List<Funcion> funcionesPelicula = coleccion
+                .find(eq("peliculaId", pelicula))
+                .into(new ArrayList<>());
+        return funcionesPelicula;
+    }
 }

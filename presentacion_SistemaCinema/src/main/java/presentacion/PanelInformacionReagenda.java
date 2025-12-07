@@ -5,6 +5,7 @@ import daos.FuncionDAO;
 import dto.BoletoDTO;
 import dto.*;
 import dto.enums.EstadoAsiento;
+import dto.enums.EstadoBoleto;
 import dto.enums.FormaPago;
 import exceptions.EmpleadoNoEncontradoException;
 import exceptions.FuncionNoEncontradaException;
@@ -31,7 +32,7 @@ import presentacion.utilerias.GestorSesion;
 
 /**
  *
- * @author saula
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class PanelInformacionReagenda extends javax.swing.JPanel {
 
@@ -40,7 +41,6 @@ public class PanelInformacionReagenda extends javax.swing.JPanel {
     private List<AsientoDTO> asientos;
     private final BoletoBO instance = BoletoBO.getInstancia();
     private final PeliculaBO instance1 = PeliculaBO.getInstancia();
-    private final ControlReagendarBoleto control = ControlReagendarBoleto.getInstance();
     private ArrayList<AsientoDTO> asientosOriginales;
     private VentaDTO ventaOriginal;
 
@@ -255,7 +255,9 @@ public class PanelInformacionReagenda extends javax.swing.JPanel {
         try {
             venta.setFuncion(funcion);
             venta.setAsientos(asientosNuevos);
-            control.reagendarBoleto(ventaAntigua, ventaNueva, asientosAntiguos, asientosNuevos);
+            ControlReagendarBoleto.getInstance().reagendarBoleto(ventaAntigua, ventaNueva, asientosAntiguos, asientosNuevos);
+            boleto.setEstado(EstadoBoleto.REAGENDADO);
+            ControlReagendarBoleto.getInstance().actualizar(boleto);
             JOptionPane.showMessageDialog(this, "Se logro reagendar el boleto.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             ControlPantallas.getInstance().abrirInformacionBoleto(pnlVisorPDF, boleto);
         } catch (Exception ex) {

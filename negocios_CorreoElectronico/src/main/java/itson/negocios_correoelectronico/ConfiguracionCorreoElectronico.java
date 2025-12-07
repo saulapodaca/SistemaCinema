@@ -23,8 +23,8 @@ public class ConfiguracionCorreoElectronico {
      * crea la propiedad SMTP y su configuración.
      */
     public ConfiguracionCorreoElectronico() {
-        this.usuario = "rolua239@gmail.com";
-        this.contrasena = "lkdm mwjg qaph fwmm";
+        this.usuario = "sistemacinemac2@gmail.com";
+        this.contrasena = "scut wfgb dtrc iueg";
         props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");

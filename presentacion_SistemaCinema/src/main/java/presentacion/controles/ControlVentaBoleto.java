@@ -24,7 +24,7 @@ import java.util.List;
 /**
  *
  * @author Saul Isaac Apodaca Baldenegro - 00000252020
- * @author Alejandor Rodríguez Lugo - 00000251622
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class ControlVentaBoleto {
 

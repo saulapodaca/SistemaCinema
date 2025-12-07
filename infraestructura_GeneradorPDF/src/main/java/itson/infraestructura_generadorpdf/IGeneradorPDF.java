@@ -5,12 +5,18 @@
 package itson.infraestructura_generadorpdf;
 
 import dto.BoletoDTO;
+import dto.PeliculaDTO;
+import dto.VentaDTO;
+import java.time.LocalDate;
 
 /**
  *
- * @author PC
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public interface IGeneradorPDF {
 
     byte[] generarPDFBoleto(BoletoDTO boleto) throws Exception;
+
+    byte[] generarPDFPelicula(PeliculaDTO peliculaDTO, LocalDate fechaInicio, LocalDate fechaFin) throws Exception;
+
 }

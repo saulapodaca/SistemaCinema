@@ -17,10 +17,11 @@ import presentacion.utilerias.GestorSesion;
 
 /**
  *
- * @author saula
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class PanelInformacionEmpleado extends javax.swing.JPanel {
-    
+
     /**
      * Creates new form panelInformacionEmpleadoBien
      */
@@ -171,40 +172,40 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_lblCerrarSesionMouseClicked
 
-    private void cargarPanel(){
+    private void cargarPanel() {
         cargarInformacionEmpleado();
         mostrarFecha();
         iniciarReloj();
     }
-    
-    private void mostrarFecha(){
+
+    private void mostrarFecha() {
         LocalDate hoy = LocalDate.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
         lblFecha.setText(hoy.format(formato));
     }
-    
-    private void iniciarReloj(){
-         Timer timer = new Timer(1000, e -> {
+
+    private void iniciarReloj() {
+        Timer timer = new Timer(1000, e -> {
             LocalTime hora = LocalTime.now();
             DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
             lblHora.setText(hora.format(formatoHora));
         });
         timer.start();
     }
-    
-    private void cargarInformacionEmpleado(){
+
+    private void cargarInformacionEmpleado() {
         EmpleadoDTO empleado = GestorSesion.getUsuario();
         configurarImagen(empleado.getRutaImagen());
-        configurarInformacion(lblNombreEmpleado, empleado.getNombres()+" "+empleado.getApellidoPaterno());
+        configurarInformacion(lblNombreEmpleado, empleado.getNombres() + " " + empleado.getApellidoPaterno());
         configurarInformacion(lblPuestoEmpleado, empleado.getPuesto());
         configurarInformacion(lblNombreSucursal, empleado.getSucursal().getNombre());
     }
 
-    private void configurarInformacion(JLabel etiqueta, String texto){
+    private void configurarInformacion(JLabel etiqueta, String texto) {
         etiqueta.setText(texto.toUpperCase());
         etiqueta.setForeground(Color.WHITE);
     }
-    
+
     private void configurarImagen(String urlImagen) {
         lblFoto.setText("");
         lblFoto.setHorizontalAlignment(SwingConstants.CENTER);

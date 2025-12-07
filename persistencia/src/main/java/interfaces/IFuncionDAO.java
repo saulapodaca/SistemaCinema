@@ -6,6 +6,7 @@ package interfaces;
 
 import dominio.Funcion;
 import dto.FiltroDTO;
+import dto.PeliculaDTO;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -22,5 +23,7 @@ public interface IFuncionDAO {
     Funcion obtenerPorId(ObjectId id);
 
     List<Funcion> obtenerTodas(ObjectId peliculaId, FiltroDTO filtro);
+
+    List<Funcion> obtenerPorPelicula(ObjectId pelicula);
 
 }

@@ -5,19 +5,23 @@ import dto.BoletoDTO;
 import dto.EmpleadoDTO;
 import dto.FuncionDTO;
 import dto.PeliculaDTO;
+import dto.VentaDTO;
 import java.awt.BorderLayout;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JPanel;
 import presentacion.FormPrincipal;
 import presentacion.InicioSesionPanel;
 import presentacion.PanelEscanearQR;
+import presentacion.PanelFechasReporte;
 import presentacion.PanelInformacionBoleto;
 import presentacion.PanelInformacionBoletoReagenda;
 import presentacion.PanelInformacionEmpleado;
 import presentacion.PanelInformacionPago;
 import presentacion.PanelInformacionReagenda;
 import presentacion.PanelOpcionesMenuGerente;
+import presentacion.PanelReportePelicula;
 import presentacion.PanelSeleccionAsientos;
 import presentacion.PanelSeleccionAsientosReagenda;
 import presentacion.PanelSeleccionFuncion;
@@ -31,7 +35,7 @@ import presentacion.PanelSeleccionPeliculasReporte;
  * del control
  *
  * @author Saul Isaac Apodaca Baldenegro - 00000252020
- * @author Alejandor Rodríguez Lugo - 00000251622
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class ControlPantallas {
 
@@ -129,6 +133,14 @@ public class ControlPantallas {
 
     public void abrirSeleccionPeliculasReporte(JPanel panelNuevo) {
         agregarPanelNuevo(new PanelSeleccionPeliculasReporte());
+    }
+
+    public void abrirFechasReporte(JPanel panelNuevo, PeliculaDTO peli) {
+        agregarPanelNuevo(new PanelFechasReporte(peli));
+    }
+
+    public void abrirReportePelicula(JPanel panelNuevo, PeliculaDTO peli, LocalDate fechaDesde, LocalDate fechaHasta) {
+        agregarPanelNuevo(new PanelReportePelicula(peli, fechaDesde, fechaHasta));
     }
 
     /**

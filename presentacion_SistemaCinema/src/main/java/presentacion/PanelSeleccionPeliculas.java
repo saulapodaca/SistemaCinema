@@ -16,7 +16,8 @@ import presentacion.controles.ControlVentaBoleto;
 
 /**
  *
- * @author saula
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class PanelSeleccionPeliculas extends javax.swing.JPanel {
 

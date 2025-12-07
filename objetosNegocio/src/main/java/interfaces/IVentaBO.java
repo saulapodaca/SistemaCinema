@@ -6,6 +6,7 @@ package interfaces;
 
 import dto.AsientoDTO;
 import dto.DetallePrecioDTO;
+import dto.PeliculaDTO;
 import dto.PromocionDTO;
 import dto.VentaDTO;
 import exceptions.EmpleadoNoEncontradoException;
@@ -27,4 +28,6 @@ public interface IVentaBO {
     DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo);
 
     VentaDTO actualizarVenta(VentaDTO ventaDTO) throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException;
+
+    List<VentaDTO> obtenerVentasPorPelicula(PeliculaDTO pelicula) throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException;
 }

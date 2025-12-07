@@ -26,8 +26,8 @@ import itson.negocios_gestorventas.GestorVentas;
 import itson.negocios_gestorventas.IGestorVentas;
 import itson.infraestructura_generadorpdf.GeneradorPDF;
 import itson.infraestructura_generadorpdf.IGeneradorPDF;
-import lectorQr.ILectorQR;
-import lectorQr.LectorQR;
+import itson.infraestructura_lectorqr.ILectorQR;
+import itson.infraestructura_lectorqr.LectorQR;
 import org.bson.Document;
 
 public class GestorFactory implements IGestorFactory {

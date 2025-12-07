@@ -5,6 +5,9 @@
 package interfaces;
 
 import dominio.Venta;
+import dto.FuncionDTO;
+import dto.PeliculaDTO;
+import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
@@ -18,4 +21,8 @@ public interface IVentaDAO {
     Venta actualizar(Venta venta);
 
     Venta obtenerPorId(ObjectId id);
+
+//    List<Venta> obtenerTodasVentasPorFuncion(FuncionDTO funcion);
+
+    List<Venta> obtenerVentasPorPelicula(ObjectId pelicula);
 }

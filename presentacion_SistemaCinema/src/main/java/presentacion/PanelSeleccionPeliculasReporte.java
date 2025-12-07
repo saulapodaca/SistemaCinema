@@ -3,6 +3,7 @@ package presentacion;
 import dto.FiltroDTO;
 import presentacion.controles.ControlPantallas;
 import dto.PeliculaDTO;
+import dto.VentaDTO;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
@@ -22,7 +23,7 @@ import presentacion.controles.ControlVentaBoleto;
 
 /**
  *
- * @author saula
+ * @author Alejandor Rodríguez Lugo - 00000251622
  */
 public class PanelSeleccionPeliculasReporte extends javax.swing.JPanel {
 
@@ -39,7 +40,7 @@ public class PanelSeleccionPeliculasReporte extends javax.swing.JPanel {
             actualizarCartelera();
         });
         panelPaginacion1.setOnPaginaChange(() -> {
-            actualizarCartelera(); // ESTE método está en el panel padre
+            actualizarCartelera();
         });
         actualizarCartelera();
     }
@@ -310,26 +311,6 @@ public class PanelSeleccionPeliculasReporte extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-    public static Date[] seleccionarFechas() {
-        JSpinner desde = new JSpinner(new SpinnerDateModel());
-        JSpinner hasta = new JSpinner(new SpinnerDateModel());
-        desde.setEditor(new JSpinner.DateEditor(desde, "dd/MM/yyyy"));
-        hasta.setEditor(new JSpinner.DateEditor(hasta, "dd/MM/yyyy"));
-        JPanel panel = new JPanel();
-        panel.add(new JLabel("Desde:"));
-        panel.add(desde);
-        panel.add(Box.createHorizontalStrut(15));
-        panel.add(new JLabel("Hasta:"));
-        panel.add(desde);
-        int result = JOptionPane.showConfirmDialog(null, panel, "Selecciona fechas", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (result == JOptionPane.YES_OPTION) {
-            Date fechaDesde = (Date) desde.getValue();
-            Date fechaHasta = (Date) hasta.getValue();
-            return new Date[]{fechaDesde, fechaHasta};
-        } else {
-            return null;
-        }
-    }
 
     /**
      * Método que se encarga de cargar la pantalla con las películas
@@ -435,12 +416,11 @@ public class PanelSeleccionPeliculasReporte extends javax.swing.JPanel {
      * click
      * @param peli se envía el dto para posteriores configuraciones
      */
-    private void configurarEventoClick(JLabel lblImagen, PeliculaDTO pelicula) {
+    private void configurarEventoClick(JLabel lblImagen, PeliculaDTO peli) {
         lblImagen.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                seleccionarFechas();
-                ControlPantallas.getInstance().abrirSeleccionFunciones(PanelSeleccionPeliculasReporte.this, pelicula);
+                ControlPantallas.getInstance().abrirFechasReporte(PanelSeleccionPeliculasReporte.this, peli);
             }
         });
     }

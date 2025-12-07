@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lectorQr;
+package itson.infraestructura_lectorqr;
 
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
@@ -10,22 +10,18 @@ import com.github.sarxos.webcam.WebcamResolution;
 import com.google.zxing.*;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-
 import java.awt.image.BufferedImage;
 
 /**
  *
- * @author PC
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class LectorQR implements ILectorQR {
-
 
     @Override
     public String escanearQR(Webcam webcam) {
         try {
-            if (!webcam.isOpen()) {
-                webcam.open();
-            }
             while (true) {
                 BufferedImage image = webcam.getImage();
                 if (image != null) {
@@ -33,8 +29,6 @@ public class LectorQR implements ILectorQR {
                     BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
                     try {
                         Result result = new MultiFormatReader().decode(bitmap);
-                        webcam.close();
-                        Thread.sleep(300); 
                         return result.getText();
                     } catch (Exception e) {
                     }

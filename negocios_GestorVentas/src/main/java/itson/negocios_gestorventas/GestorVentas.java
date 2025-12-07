@@ -4,6 +4,7 @@ package itson.negocios_gestorventas;
 import bos.VentaBO;
 import dto.AsientoDTO;
 import dto.DetallePrecioDTO;
+import dto.PeliculaDTO;
 import dto.PromocionDTO;
 import dto.VentaDTO;
 import exceptions.EmpleadoNoEncontradoException;
@@ -35,5 +36,10 @@ public class GestorVentas implements IGestorVentas {
     @Override
     public VentaDTO actualizarVenta(VentaDTO ventaDTO) throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException {
         return ventaBO.actualizarVenta(ventaDTO);
+    }
+
+    @Override
+    public List<VentaDTO> obtenerVentas(PeliculaDTO pelicula) throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException {
+        return ventaBO.obtenerVentasPorPelicula(pelicula);
     }
 }

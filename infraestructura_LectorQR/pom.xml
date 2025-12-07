@@ -8,11 +8,6 @@
     </parent>
     <artifactId>infraestructura_LectorQR</artifactId>
     <packaging>jar</packaging>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>25</maven.compiler.release>
-        <exec.mainClass>com.mycompany.infraestructura_lectorqr.Infraestructura_LectorQR</exec.mainClass>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>com.google.zxing</groupId>
@@ -30,4 +25,8 @@
             <version>0.3.12</version>
         </dependency>
     </dependencies>
+    <properties>
+        <maven.compiler.release>25</maven.compiler.release>
+        <exec.mainClass>itson.infraestructura_lectorqr.Infraestructura_LectorQR</exec.mainClass>
+    </properties>
 </project>
