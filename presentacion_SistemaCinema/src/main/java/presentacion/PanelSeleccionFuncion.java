@@ -547,7 +547,9 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
                 pnlFuncion1, pnlFuncion2,
                 pnlFuncion3, pnlFuncion4
         );
-        dateChooser.setDate(new Date());
+        Date hoy = new Date();
+        dateChooser.setDate(hoy);
+        dateChooser.setMinSelectableDate(hoy);
     }
 
     /**
