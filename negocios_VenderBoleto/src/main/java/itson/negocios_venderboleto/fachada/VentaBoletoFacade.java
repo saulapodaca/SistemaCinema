@@ -173,10 +173,6 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     }
 
     @Override
-//    public byte[] generarPDFPelicula(PeliculaDTO pelicula) throws Exception {
-//        return gestorGeneradorPDF.generarPDFPelicula(pelicula);
-//    }
-
     public byte[] generarPDFPelicula(PeliculaDTO peliculaDTO, LocalDate fechaInicio, LocalDate fechaFin) throws Exception {
         return gestorGeneradorPDF.generarPDFPelicula(peliculaDTO, fechaInicio, fechaFin);
     }

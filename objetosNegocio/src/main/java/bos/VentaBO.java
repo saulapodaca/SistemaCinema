@@ -46,11 +46,8 @@ public class VentaBO implements IVentaBO {
     private final AsientoMapper asientoMapper;
 
     /**
-     * <<<<<<< HEAD
      *
-     * =======
      *
-     * >>>>>>> cu-reagendar-boleto
      */
     private VentaBO() {
         this.ventaDAO = new VentaDAO();
@@ -63,13 +60,12 @@ public class VentaBO implements IVentaBO {
 
     /**
      *
-     * @return =======
      *
-     * }
      *
-     * /**
      *
-     * @return >>>>>>> cu-reagendar-boleto
+     *
+     *
+     * @return
      */
     public static VentaBO getInstancia() {
         if (instance == null) {

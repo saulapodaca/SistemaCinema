@@ -40,7 +40,6 @@ public class PanelEscanearQR extends javax.swing.JPanel {
     private Thread hiloEscaneo;
     private Webcam webcam;
     private LectorQR lectorqr;
-    private final ControlReagendarBoleto control = ControlReagendarBoleto.getInstance();
 
     /**
      * Creates new form EscanearQR
@@ -156,7 +155,7 @@ public class PanelEscanearQR extends javax.swing.JPanel {
                 }
                 webcam = null;
             }
-            WebcamPanel camPanel = control.getPanelCamara();
+            WebcamPanel camPanel = ControlReagendarBoleto.getInstance().getPanelCamara();
             if (camPanel == null) {
                 JOptionPane.showMessageDialog(this, "No se encontró cámara.");
                 return;
@@ -168,7 +167,7 @@ public class PanelEscanearQR extends javax.swing.JPanel {
             panelCamara.revalidate();
             panelCamara.repaint();
             new Thread(() -> {
-                String folio = control.escanearQR(webcam);
+                String folio = ControlReagendarBoleto.getInstance().escanearQR(webcam);
                 if (folio != null) {
                     SwingUtilities.invokeLater(() -> txtBuscadorFolio.setText(folio));
                 }
@@ -186,7 +185,7 @@ public class PanelEscanearQR extends javax.swing.JPanel {
             return;
         }
         try {
-            BoletoDTO boleto = control.buscarBoletoPorId(txtBuscadorFolio.getText());
+            BoletoDTO boleto = ControlReagendarBoleto.getInstance().buscarBoletoPorId(txtBuscadorFolio.getText());
             if (boleto.getVenta().getFuncion().getFechaHora().isBefore(LocalDateTime.now().minusHours(2))) {
                 JOptionPane.showMessageDialog(this, "El boleto ya no puede ser reagendado debido al margen de horas de reagenda.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 return;

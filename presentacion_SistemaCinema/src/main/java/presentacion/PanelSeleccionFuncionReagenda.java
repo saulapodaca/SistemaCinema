@@ -549,6 +549,10 @@ public class PanelSeleccionFuncionReagenda extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "No es el mismo tipo de sala al boleto original.", "Aviso", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
+                if (funcion.getId().equals(boleto.getVenta().getFuncion().getId())) {
+                    JOptionPane.showMessageDialog(null, "Es la misma función original.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 ControlPantallas.getInstance().abrirSeleccionAsientosReagenda(PanelSeleccionFuncionReagenda.this, funcion, boleto);
             }
         });

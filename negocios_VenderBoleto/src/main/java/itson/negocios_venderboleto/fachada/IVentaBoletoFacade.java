@@ -73,8 +73,7 @@ public interface IVentaBoletoFacade {
 
     byte[] generarPDFBoleto(BoletoDTO boleto) throws Exception;
 
-//    byte[] generarPDFPelicula(PeliculaDTO pelicula) throws Exception;
-     byte[] generarPDFPelicula(PeliculaDTO peliculaDTO, LocalDate fechaInicio, LocalDate fechaFin) throws Exception;
+    byte[] generarPDFPelicula(PeliculaDTO peliculaDTO, LocalDate fechaInicio, LocalDate fechaFin) throws Exception;
 
     BoletoDTO actualizar(BoletoDTO boleto) throws BoletoNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, IllegalArgumentException, SucursalNoExistenteException, VentaNoEncontradaException;
 }
