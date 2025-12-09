@@ -84,7 +84,7 @@ public class InsertMasivo implements IInsertMasivo {
             empleadoBO.insertarEmpleado(new EmpleadoDTO(
                     null, "Alejandro", "Rodríguez", "Lugo",
                     obtenerSucursal("Nainari"),
-                    "Gerente",
+                    "Empleado",
                     "alther.png", "normal", TipoEmpleado.NORMAL, "1234"));
         } catch (NegocioException | SucursalNoExistenteException e) {
             System.out.println("Error insertando empleados: " + e.getMessage());

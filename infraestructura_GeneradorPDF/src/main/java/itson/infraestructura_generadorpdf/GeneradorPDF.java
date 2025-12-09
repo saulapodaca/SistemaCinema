@@ -40,6 +40,7 @@ public class GeneradorPDF implements IGeneradorPDF {
      * @return
      * @throws Exception
      */
+    @Override
     public byte[] generarPDFBoleto(BoletoDTO boleto) throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Document document = new Document();

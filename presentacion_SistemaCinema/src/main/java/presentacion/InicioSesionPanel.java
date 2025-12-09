@@ -12,6 +12,8 @@ import presentacion.controles.ControlInicioSesion;
 import presentacion.controles.ControlPantallas;
 import presentacion.utilerias.GestorSesion;
 
+import dto.enums.TipoEmpleado;
+
 /**
  *
  * @author Saul Isaac Apodaca Baldenegro - 00000252020
@@ -137,12 +139,14 @@ public class InicioSesionPanel extends javax.swing.JPanel {
         SesionDTO sesion = new SesionDTO();
         sesion.setUsuario(usuarioTxt.getText());
         sesion.setContrasena(pswdField.getPassword());
-
         try {
             EmpleadoDTO empleado = ControlInicioSesion.getInstance().obtenerSesionEmpleado(sesion);
             GestorSesion.setUsuario(empleado);
-            ControlPantallas.getInstance().setEmpleadoActual(empleado);
-            ControlPantallas.getInstance().abrirMenuPrincipal(empleado);
+            if (empleado.getTipoEmpleado().equals(TipoEmpleado.ADMINISTRADOR)) {
+                ControlPantallas.getInstance().abrirMenuPrincipal();
+            } else {
+                ControlPantallas.getInstance().abrirMenuPrincipalEmpleado();
+            }
         } catch (SesionEmpleadoNoExistenteException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }

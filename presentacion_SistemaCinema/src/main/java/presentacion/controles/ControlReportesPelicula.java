@@ -30,10 +30,6 @@ public class ControlReportesPelicula {
         }
         return instance;
     }
-
-//    public byte[] generarPDFPelicula(PeliculaDTO pelicula) throws Exception {
-//        return facade.generarPDFPelicula(pelicula);
-//    }
     
     public byte[] generarPDFPelicula(PeliculaDTO peliculaDTO, LocalDate fechaInicio, LocalDate fechaFin) throws Exception{
         return facade.generarPDFPelicula(peliculaDTO, fechaInicio, fechaFin);

@@ -168,7 +168,7 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-        ControlPantallas.getInstance().abrirMenuPrincipal(empleado);
+        ControlPantallas.getInstance().abrirMenuPrincipal();
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
 
     private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked

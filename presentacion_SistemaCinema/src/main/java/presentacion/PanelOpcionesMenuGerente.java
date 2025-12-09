@@ -16,14 +16,12 @@ import presentacion.controles.ControlPantallas;
  */
 public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
 
-    private EmpleadoDTO empleado;
 
     /**
      * Creates new form panelOpcionesMenu
      */
-    public PanelOpcionesMenuGerente(EmpleadoDTO empleado) {
+    public PanelOpcionesMenuGerente() {
         initComponents();
-        this.empleado = empleado;
     }
 
     /**
@@ -339,10 +337,6 @@ public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
 
     private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
         // TODO add your handling code here:
-        if (empleado.getTipoEmpleado() != TipoEmpleado.ADMINISTRADOR) {
-            JOptionPane.showMessageDialog(this, "El usuario no cuenta con los permisos para generar reportes.", "Aviso", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
         ControlPantallas.getInstance().abrirSeleccionPeliculasReporte(this);
     }//GEN-LAST:event_btnGenerarReporteActionPerformed
 
