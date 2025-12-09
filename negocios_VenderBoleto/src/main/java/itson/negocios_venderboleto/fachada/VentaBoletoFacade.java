@@ -1,6 +1,5 @@
 package itson.negocios_venderboleto.fachada;
 
-//@author SAUL ISAAC APODACA BALDENEGRO 00000252020
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import dto.AsientoDTO;
@@ -41,6 +40,11 @@ import itson.infraestructura_generadorpdf.IGeneradorPDF;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ *
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandro Rodríguez Lugo - 00000251622
+ */
 public class VentaBoletoFacade implements IVentaBoletoFacade {
 
     private final IVentaBoleto ventaBoleto;

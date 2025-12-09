@@ -441,6 +441,10 @@ public class PanelSeleccionFuncionReagenda extends javax.swing.JPanel {
         filtro.setTamanoPagina(TAMANO_PAGINA);
         try {
             List<FuncionDTO> funciones = ControlVentaBoleto.getInstance().obtenerFunciones(pelicula, filtro);
+            String tipoOriginal = boleto.getVenta().getFuncion().getTipoSala();
+            funciones = funciones.stream()
+                    .filter(f -> f.getTipoSala().equals(tipoOriginal))
+                    .toList();
             for (int i = 0; i < etiquetasNombreSala.size(); i++) {
                 JLabel lblNombreSala = etiquetasNombreSala.get(i);
                 JLabel lblHoraFuncion = etiquetasHoraFuncion.get(i);
@@ -551,6 +555,10 @@ public class PanelSeleccionFuncionReagenda extends javax.swing.JPanel {
                 }
                 if (funcion.getId().equals(boleto.getVenta().getFuncion().getId())) {
                     JOptionPane.showMessageDialog(null, "Es la misma función original.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                if (LocalDateTime.now().isAfter(funcion.getFechaHora().plusMinutes(20))) {
+                    JOptionPane.showMessageDialog(null, "Ya no es posible acceder a la función.", "Aviso", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
                 ControlPantallas.getInstance().abrirSeleccionAsientosReagenda(PanelSeleccionFuncionReagenda.this, funcion, boleto);

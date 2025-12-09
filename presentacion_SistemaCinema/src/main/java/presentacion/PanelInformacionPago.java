@@ -509,9 +509,18 @@ public class PanelInformacionPago extends javax.swing.JPanel {
     }//GEN-LAST:event_btnConfirmarPagoActionPerformed
 
     private void btnVerificarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarMembresiaActionPerformed
-        MembresiaDTO membresia = ControlVentaBoleto.getInstance()
-                .buscarMembresia(txtMembresia.getText().trim());
-        actualizarDescuentos(membresia);
+        if (txtMembresia.getText().isEmpty() || txtMembresia.getText().isBlank() || txtMembresia.getText() == null) {
+            JOptionPane.showMessageDialog(this, "Ingresa una membresía.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            MembresiaDTO membresia = ControlVentaBoleto.getInstance()
+                    .buscarMembresia(txtMembresia.getText().trim());
+            actualizarDescuentos(membresia);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "La membresía no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         PromocionDTO promo = (PromocionDTO) cbDescuentos.getSelectedItem();
         configurarPrecios(asientos, promo);
@@ -524,7 +533,17 @@ public class PanelInformacionPago extends javax.swing.JPanel {
             promo = (PromocionDTO) cbDescuentos.getSelectedItem();
         } else if (rbCanjearCupon.isSelected()) {
             String codigo = txtCupon.getText().trim();
-            promo = ControlVentaBoleto.getInstance().validarCupon(codigo);
+            if (codigo.isBlank() || codigo.isEmpty() || codigo == null) {
+                JOptionPane.showMessageDialog(this, "Ingresa un cupón.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            try {
+                promo = ControlVentaBoleto.getInstance().validarCupon(codigo);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "El cupón no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
         }
 
         configurarPrecios(asientos, promo);

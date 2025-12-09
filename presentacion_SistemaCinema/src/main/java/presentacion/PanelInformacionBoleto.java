@@ -119,13 +119,15 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
                 return;
             }
             ControlVentaBoleto.getInstance().mandarCorreo(txtCorreo.getText().strip(), "Confirmación de boleto - " + boleto.getVenta().getFuncion().getPelicula().getTitulo(), estructuraMensaje(), pdfBytes);
+            JOptionPane.showMessageDialog(this, "El correo ha sido enviado.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            return;
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al enviar el boleto.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
     }//GEN-LAST:event_btnEnviarBoletoActionPerformed
 
-     private void cargarBoleto() {
+    private void cargarBoleto() {
         try {
             byte[] pdfBytes = ControlVentaBoleto.getInstance().generarPDFBoleto(boleto);
             if (pdfBytes == null) {
@@ -136,7 +138,7 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
             BufferedImage image = renderer.renderImageWithDPI(0, 150);
             doc.close();
             lblPdf.setIcon(new ImageIcon(image));
-            pnlVisorPDF.setViewportView(lblPdf); 
+            pnlVisorPDF.setViewportView(lblPdf);
             pnlVisorPDF.revalidate();
             pnlVisorPDF.repaint();
         } catch (Exception e) {

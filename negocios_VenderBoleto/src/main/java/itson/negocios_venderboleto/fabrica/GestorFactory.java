@@ -1,8 +1,5 @@
 package itson.negocios_venderboleto.fabrica;
 
-//@author SAUL ISAAC APODACA BALDENEGRO 00000252020
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import conexion.ManejadorConexion;
 import dto.BoletoDTO;
 import itson.negocios_correoelectronico.ConfiguracionCorreoElectronico;
@@ -28,8 +25,12 @@ import itson.infraestructura_generadorpdf.GeneradorPDF;
 import itson.infraestructura_generadorpdf.IGeneradorPDF;
 import itson.infraestructura_lectorqr.ILectorQR;
 import itson.infraestructura_lectorqr.LectorQR;
-import org.bson.Document;
 
+/**
+ *
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandro Rodríguez Lugo - 00000251622
+ */
 public class GestorFactory implements IGestorFactory {
 
     @Override
@@ -82,6 +83,7 @@ public class GestorFactory implements IGestorFactory {
         return new LectorQR();
     }
 
+    @Override
     public IGeneradorPDF crearGeneradorPDF() {
         return new GeneradorPDF();
     }

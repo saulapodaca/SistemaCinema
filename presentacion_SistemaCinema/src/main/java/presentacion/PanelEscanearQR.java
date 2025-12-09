@@ -186,7 +186,7 @@ public class PanelEscanearQR extends javax.swing.JPanel {
         }
         try {
             BoletoDTO boleto = ControlReagendarBoleto.getInstance().buscarBoletoPorId(txtBuscadorFolio.getText());
-            if (boleto.getVenta().getFuncion().getFechaHora().isBefore(LocalDateTime.now().minusHours(2))) {
+            if (boleto.getVenta().getFuncion().getFechaHora().isBefore(LocalDateTime.now().plusHours(2))) {
                 JOptionPane.showMessageDialog(this, "El boleto ya no puede ser reagendado debido al margen de horas de reagenda.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 return;
             }

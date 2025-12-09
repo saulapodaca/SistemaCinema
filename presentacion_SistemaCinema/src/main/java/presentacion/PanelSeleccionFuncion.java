@@ -521,6 +521,10 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
         panelFuncion.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (LocalDateTime.now().isAfter(funcion.getFechaHora().plusMinutes(20))) {
+                    JOptionPane.showMessageDialog(null, "Ya no es posible acceder a la función.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 ControlPantallas.getInstance().abrirSeleccionAsientos(PanelSeleccionFuncion.this, funcion);
             }
         });
