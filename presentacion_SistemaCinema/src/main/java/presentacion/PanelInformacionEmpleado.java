@@ -22,11 +22,14 @@ import presentacion.utilerias.GestorSesion;
  */
 public class PanelInformacionEmpleado extends javax.swing.JPanel {
 
+    private EmpleadoDTO empleado;
+
     /**
      * Creates new form panelInformacionEmpleadoBien
      */
     public PanelInformacionEmpleado() {
         initComponents();
+        this.empleado = empleado;
         cargarPanel();
     }
 
@@ -165,11 +168,12 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-        ControlPantallas.getInstance().abrirMenuPrincipal();
+        ControlPantallas.getInstance().abrirMenuPrincipal(empleado);
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
 
     private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
         // TODO add your handling code here:
+        ControlPantallas.getInstance().abrirInicioSesion();
     }//GEN-LAST:event_lblCerrarSesionMouseClicked
 
     private void cargarPanel() {

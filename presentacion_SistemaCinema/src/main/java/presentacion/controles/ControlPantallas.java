@@ -48,6 +48,8 @@ public class ControlPantallas {
      */
     private final FormPrincipal formPrincipal;
 
+    private EmpleadoDTO empleado;
+
     /**
      * Constructor privado que inicializa el frame principal
      */
@@ -69,6 +71,7 @@ public class ControlPantallas {
     }
 
     public void abrirInicioSesion() {
+        limpiarPanelEmpleado();
         agregarPanelNuevo(new InicioSesionPanel());
         formPrincipal.setVisible(true);
     }
@@ -77,9 +80,9 @@ public class ControlPantallas {
      * Método que abre el menú principal en el frame, se agrega el panel de
      * información del empleado y las opciones del gerente
      */
-    public void abrirMenuPrincipal() {
+    public void abrirMenuPrincipal(EmpleadoDTO empleado) {
         cargarPanelEmpleado();
-        agregarPanelNuevo(new PanelOpcionesMenuGerente());
+        agregarPanelNuevo(new PanelOpcionesMenuGerente(ControlPantallas.getInstance().getEmpleadoActual()));
     }
 
     /**
@@ -166,5 +169,31 @@ public class ControlPantallas {
         lateral.add(new PanelInformacionEmpleado());
         lateral.revalidate();
         lateral.repaint();
+    }
+
+    /**
+     *
+     */
+    private void limpiarPanelEmpleado() {
+        JPanel lateral = formPrincipal.getPanelEmpleado();
+        lateral.removeAll();
+        lateral.revalidate();
+        lateral.repaint();
+    }
+
+    /**
+     *
+     * @param empleado
+     */
+    public void setEmpleadoActual(EmpleadoDTO empleado) {
+        this.empleado = empleado;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public EmpleadoDTO getEmpleadoActual() {
+        return empleado;
     }
 }
