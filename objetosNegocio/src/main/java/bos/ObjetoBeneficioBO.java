@@ -59,7 +59,7 @@ public class ObjetoBeneficioBO implements IObjetoBeneficioBO {
             List<ObjetoBeneficio> entidades = OBJBENDAO.obtenerObjetosDisponiblesPorMembresia(membresia);
             List<ObjetoBeneficioDTO> dtos = new ArrayList<>();
 
-            // Convertir cada entidad a DTO usando un bucle clásico
+            // Convertir cada entidad a DTO 
             for (ObjetoBeneficio entidad : entidades) {
                 ObjetoBeneficioDTO dto = OBJBENMapper.toDTO(entidad);
                 dtos.add(dto);

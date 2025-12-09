@@ -4,18 +4,23 @@ package presentacion.controles;
 import dto.AsientoDTO;
 import dto.BoletoDTO;
 import dto.FuncionDTO;
+import dto.MembresiaDTO;
+import dto.ObjetoBeneficioDTO;
 import dto.PeliculaDTO;
 import java.awt.BorderLayout;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JPanel;
 import presentacion.FormPrincipal;
+import presentacion.IngresarMembresiaPanel;
 import presentacion.InicioSesionPanel;
 import presentacion.PanelInformacionBoleto;
 import presentacion.PanelInformacionEmpleado;
+import presentacion.PanelInformacionObjetoBeneficio;
 import presentacion.PanelInformacionPago;
 import presentacion.PanelOpcionesMenuGerente;
 import presentacion.PanelSeleccionAsientos;
+import presentacion.PanelSeleccionBeneficio;
 import presentacion.PanelSeleccionFuncion;
 import presentacion.PanelSeleccionPeliculas;
 
@@ -116,6 +121,27 @@ public class ControlPantallas {
         agregarPanelNuevo(panelNuevo);
     }
     
+    public void abrirIngresarMembresia(JPanel panelAnterior){
+        eliminarPanelAnterior(panelAnterior);
+        JPanel panelNuevo = new IngresarMembresiaPanel();
+        agregarPanelNuevo(panelNuevo);
+        
+        
+    }
+    
+    public void abrirPanelSeleccionBeneficio(JPanel panelAnterior, MembresiaDTO membresia){
+        eliminarPanelAnterior(panelAnterior);
+        JPanel panelNuevo = new PanelSeleccionBeneficio(membresia);
+        agregarPanelNuevo(panelNuevo);
+    }
+    
+    public void abrirPanelInformacionObjetoBeneficio(JPanel panelAnterior, ObjetoBeneficioDTO objeto, MembresiaDTO membresia){
+        eliminarPanelAnterior(panelAnterior);
+        JPanel panelNuevo = new PanelInformacionObjetoBeneficio(objeto, membresia);
+        agregarPanelNuevo(panelNuevo);
+    }
+    
+    
 
     private void agregarPanelNuevo(JPanel panelNuevo) {
         this.formPrincipal.getContentPane().add(panelNuevo, BorderLayout.CENTER);
@@ -126,5 +152,8 @@ public class ControlPantallas {
     private void eliminarPanelAnterior(JPanel panelAnterior) {
         this.formPrincipal.getContentPane().remove(panelAnterior);
     }
+    
+    
+    
     
 }
