@@ -34,7 +34,6 @@ public class PanelOpcionesMenuEmpleado extends javax.swing.JPanel {
 
         btnVentaAlimento = new javax.swing.JButton();
         btnVentaBoleto = new javax.swing.JButton();
-        btnEnviarPromociones = new javax.swing.JButton();
         btnReagendarBoleto = new javax.swing.JButton();
         btnEscaneoBoleto = new javax.swing.JButton();
         btnReembolsarBoleto = new javax.swing.JButton();
@@ -42,7 +41,6 @@ public class PanelOpcionesMenuEmpleado extends javax.swing.JPanel {
         lblReagendarBoleto = new javax.swing.JLabel();
         lblReembolsarBoleto = new javax.swing.JLabel();
         lblVenderAlimento = new javax.swing.JLabel();
-        lblEnviarPromociones = new javax.swing.JLabel();
         lblEscanearBoleto = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(8, 17, 40));
@@ -62,15 +60,6 @@ public class PanelOpcionesMenuEmpleado extends javax.swing.JPanel {
         btnVentaBoleto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVentaBoletoActionPerformed(evt);
-            }
-        });
-
-        btnEnviarPromociones.setBackground(new java.awt.Color(18, 31, 55));
-        btnEnviarPromociones.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        btnEnviarPromociones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/canjearAlimentos.png"))); // NOI18N
-        btnEnviarPromociones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEnviarPromocionesActionPerformed(evt);
             }
         });
 
@@ -117,10 +106,6 @@ public class PanelOpcionesMenuEmpleado extends javax.swing.JPanel {
         lblVenderAlimento.setForeground(new java.awt.Color(255, 255, 255));
         lblVenderAlimento.setText("VENDER ALIMENTO");
 
-        lblEnviarPromociones.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblEnviarPromociones.setForeground(new java.awt.Color(255, 255, 255));
-        lblEnviarPromociones.setText("ENVIAR PROMOCIONES");
-
         lblEscanearBoleto.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         lblEscanearBoleto.setForeground(new java.awt.Color(255, 255, 255));
         lblEscanearBoleto.setText("ESCANEAR BOLETO");
@@ -146,20 +131,18 @@ public class PanelOpcionesMenuEmpleado extends javax.swing.JPanel {
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnVentaBoleto, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
-                            .addComponent(btnReembolsarBoleto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnVentaAlimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnReembolsarBoleto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnEscaneoBoleto, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
-                            .addComponent(btnReagendarBoleto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEnviarPromociones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnReagendarBoleto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(251, 251, 251)
+                        .addComponent(btnVentaAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(320, 320, 320)
+                        .addComponent(lblVenderAlimento)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(lblVenderAlimento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblEnviarPromociones)
-                .addGap(182, 182, 182))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,14 +164,10 @@ public class PanelOpcionesMenuEmpleado extends javax.swing.JPanel {
                     .addComponent(lblReembolsarBoleto)
                     .addComponent(lblEscanearBoleto))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnVentaAlimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEnviarPromociones, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblVenderAlimento)
-                    .addComponent(lblEnviarPromociones))
-                .addGap(105, 105, 105))
+                .addComponent(btnVentaAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblVenderAlimento)
+                .addGap(111, 111, 111))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -199,10 +178,6 @@ public class PanelOpcionesMenuEmpleado extends javax.swing.JPanel {
     private void btnVentaBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaBoletoActionPerformed
         ControlPantallas.getInstance().abrirSeleccionPeliculas(this);
     }//GEN-LAST:event_btnVentaBoletoActionPerformed
-
-    private void btnEnviarPromocionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarPromocionesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEnviarPromocionesActionPerformed
 
     private void btnReagendarBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReagendarBoletoActionPerformed
         // TODO add your handling code here:
@@ -219,13 +194,11 @@ public class PanelOpcionesMenuEmpleado extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEnviarPromociones;
     private javax.swing.JButton btnEscaneoBoleto;
     private javax.swing.JButton btnReagendarBoleto;
     private javax.swing.JButton btnReembolsarBoleto;
     private javax.swing.JButton btnVentaAlimento;
     private javax.swing.JButton btnVentaBoleto;
-    private javax.swing.JLabel lblEnviarPromociones;
     private javax.swing.JLabel lblEscanearBoleto;
     private javax.swing.JLabel lblReagendarBoleto;
     private javax.swing.JLabel lblReembolsarBoleto;
