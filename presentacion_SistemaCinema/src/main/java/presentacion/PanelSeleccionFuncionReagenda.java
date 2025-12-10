@@ -444,6 +444,7 @@ public class PanelSeleccionFuncionReagenda extends javax.swing.JPanel {
             String tipoOriginal = boleto.getVenta().getFuncion().getTipoSala();
             funciones = funciones.stream()
                     .filter(f -> f.getTipoSala().equals(tipoOriginal))
+                    .filter(f -> !f.getId().equals(boleto.getVenta().getFuncion().getId()))
                     .toList();
             for (int i = 0; i < etiquetasNombreSala.size(); i++) {
                 JLabel lblNombreSala = etiquetasNombreSala.get(i);
