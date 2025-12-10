@@ -13,19 +13,35 @@ import itson.negocios_gestormembresias.IGestorMembresias;
 import itson.negocios_gestorpeliculas.IGestorPeliculas;
 import itson.negocios_gestorpromociones.IGestorPromociones;
 import itson.negocios_gestorventas.IGestorVentas;
+import itson.infraestructura_lectorqr.ILectorQR;
+import itson.infraestructura_generadorpdf.IGeneradorPDF;
 
 /**
  *
- * @author saula
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public interface IGestorFactory {
+
     IGestorPeliculas crearGestorPeliculas();
+
     IGestorFunciones crearGestorFunciones();
+
     IGestorEmpleados crearGestorEmpleados();
+
     IGestorMembresias crearGestorMembresias();
+
     IGestorVentas crearGestorVentas();
+
     IGestorBoletos crearGestorBoletos();
+
     IGeneradorQR crearGeneradorQR();
+
     ICorreoElectronico crearCorreoElectronico();
+
     IGestorPromociones crearGestorPromociones();
+
+    ILectorQR crearLectorQR();
+
+    IGeneradorPDF crearGeneradorPDF();
 }

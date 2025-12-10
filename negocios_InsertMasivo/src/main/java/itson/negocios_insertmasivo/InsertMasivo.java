@@ -1,7 +1,6 @@
 package itson.negocios_insertmasivo;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
-
 import bos.EmpleadoBO;
 import bos.FuncionBO;
 import bos.PeliculaBO;
@@ -26,8 +25,7 @@ import interfaces.ISucursalBO;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
-public class InsertMasivo implements IInsertMasivo{
+public class InsertMasivo implements IInsertMasivo {
 
     private final ISucursalBO sucursalBO;
     private final ISalaBO salaBO;
@@ -63,31 +61,43 @@ public class InsertMasivo implements IInsertMasivo{
             System.out.println("Error insertando sucursales: " + e.getMessage());
         }
     }
-    
+
     private void insertarSalas() {
         try {
             // SalaDTO(id, nombre, filas, columnas, sucursalId)
             salaBO.insertarSala(new SalaDTO(null, "Sala 1", 7, 8));
             salaBO.insertarSala(new SalaDTO(null, "Sala 2", 8, 9));
-            salaBO.insertarSala(new SalaDTO(null, "Sala 1", 5,5));
+            salaBO.insertarSala(new SalaDTO(null, "Sala 1", 5, 5));
         } catch (NegocioException e) {
             System.out.println("Error insertando salas: " + e.getMessage());
         }
     }
-    
+
     private void insertarEmpleados() {
         try {
             
             empleadoBO.insertarEmpleado(new EmpleadoDTO(
-                    null, "Saul", "Apodaca", "Baldenegro", 
-                    obtenerSucursal("Nainari"), 
-                    "Gerente", 
+                    null, "Héctor", "Alonso", "Zaragoza",
+                    obtenerSucursal("Nainari"),
+                    "Empleado",
+                    "red.png", "kai", TipoEmpleado.NORMAL, "1234"));
+            
+            empleadoBO.insertarEmpleado(new EmpleadoDTO(
+                    null, "Saul", "Apodaca", "Baldenegro",
+                    obtenerSucursal("Nainari"),
+                    "Gerente",
                     "SaulApodaca.png", "admin", TipoEmpleado.ADMINISTRADOR, "1234"));
+            empleadoBO.insertarEmpleado(new EmpleadoDTO(
+                    null, "Alejandro", "Rodríguez", "Lugo",
+                    obtenerSucursal("Nainari"),
+                    "Empleado",
+                    "alther.png", "normal", TipoEmpleado.NORMAL, "1234"));
+            
         } catch (NegocioException | SucursalNoExistenteException e) {
             System.out.println("Error insertando empleados: " + e.getMessage());
         }
     }
-    
+
     private void insertarPeliculas() {
         try {
             peliculaBO.insertarPelicula(new PeliculaDTO(null, "Spider-man 3", "spiderman.png", "182min", "Español"));
@@ -101,48 +111,48 @@ public class InsertMasivo implements IInsertMasivo{
             System.out.println("Error insertando películas: " + e.getMessage());
         }
     }
-    
+
     private void insertarFunciones() {
         try {
-            funcionBO.insertarFuncion(new FuncionDTO(null, 
-                    obtenerSala("Sala 1"), 
-                    obtenerPelicula("Spider-man 3"), 
-                    " Sala Tradicional", 
-                     LocalDateTime.of(2025, 12, 5, 16, 0)));
-            
             funcionBO.insertarFuncion(new FuncionDTO(null,
                     obtenerSala("Sala 1"),
                     obtenerPelicula("Spider-man 3"),
                     " Sala Tradicional",
-                    LocalDateTime.of(2025, 12, 5, 19, 0)));
+                    LocalDateTime.of(2025, 12, 9, 16, 0)));
+
+            funcionBO.insertarFuncion(new FuncionDTO(null,
+                    obtenerSala("Sala 1"),
+                    obtenerPelicula("Spider-man 3"),
+                    " Sala Tradicional",
+                    LocalDateTime.of(2025, 12, 9, 19, 0)));
 
             funcionBO.insertarFuncion(new FuncionDTO(
                     null,
-                    obtenerSala("Sala 2"),
+                    obtenerSala("Sala 7"),
                     obtenerPelicula("Spider-man 3"),
-                    "Sala Tradicional",
-                    LocalDateTime.of(2025, 12, 5, 22, 0)));
-            
+                    "Sala VIP",
+                    LocalDateTime.of(2025, 12, 9, 20, 0)));
+
             funcionBO.insertarFuncion(new FuncionDTO(null,
                     obtenerSala("Sala 2"),
                     obtenerPelicula("Spider-man 3"),
                     " Sala Tradicional",
-                    LocalDateTime.of(2025, 12, 5, 19, 0)));
+                    LocalDateTime.of(2025, 12, 9, 19, 0)));
         } catch (NegocioException | PeliculaNoExistenteException | SalaNoExistenteException e) {
             System.out.println("Error insertando funciones: " + e.getMessage());
         }
     }
-    
-    private SucursalDTO obtenerSucursal(String nombre) throws NegocioException{
+
+    private SucursalDTO obtenerSucursal(String nombre) throws NegocioException {
         return sucursalBO.obtenerPorNombre(nombre);
     }
 
-    private SalaDTO obtenerSala(String nombre) throws NegocioException{
+    private SalaDTO obtenerSala(String nombre) throws NegocioException {
         return salaBO.obtenerPorNombre(nombre);
     }
 
-    private PeliculaDTO obtenerPelicula(String titulo) throws NegocioException{
+    private PeliculaDTO obtenerPelicula(String titulo) throws NegocioException {
         return peliculaBO.obtenerPorTitulo(titulo);
     }
-    
+
 }

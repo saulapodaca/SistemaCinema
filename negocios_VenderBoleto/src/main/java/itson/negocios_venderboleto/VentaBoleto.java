@@ -1,17 +1,27 @@
 package itson.negocios_venderboleto;
 
+import dto.AsientoDTO;
 import dto.BoletoDTO;
 import dto.VentaDTO;
+import exceptions.EmpleadoNoEncontradoException;
+import exceptions.FuncionNoEncontradaException;
+import exceptions.PromocionNoExistenteException;
+import exceptions.SucursalNoExistenteException;
+import exceptions.VentaNoEncontradaException;
 import itson.negocios_correoelectronico.ICorreoElectronico;
 import itson.negocios_generadorqr.IGeneradorQR;
 import itson.negocios_generadorqr.exceptions.QRGeneradorException;
 import itson.negocios_gestorboletos.IGestorBoletos;
 import itson.negocios_gestorfunciones.IGestorFunciones;
 import itson.negocios_gestorventas.IGestorVentas;
+import itson.infraestructura_generadorpdf.IGeneradorPDF;
+import java.util.List;
+import dto.enums.EstadoBoleto;
 
 /**
- * 
- * @author saula
+ *
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class VentaBoleto implements IVentaBoleto {
 
@@ -20,30 +30,33 @@ public class VentaBoleto implements IVentaBoleto {
     private final IGestorFunciones gestorFunciones;
     private final IGeneradorQR generadorQR;
     private final ICorreoElectronico correoElectronico;
+    private final IGeneradorPDF generadorPDF;
 
     /**
-     * 
+     *
      * @param gestorVentas
      * @param gestorBoletos
      * @param gestorFunciones
      * @param generadorQR
-     * @param correoElectronico 
+     * @param correoElectronico
      */
     public VentaBoleto(IGestorVentas gestorVentas,
             IGestorBoletos gestorBoletos,
             IGestorFunciones gestorFunciones,
             IGeneradorQR generadorQR,
-            ICorreoElectronico correoElectronico) {
+            ICorreoElectronico correoElectronico, IGeneradorPDF generadorPDF) {
         this.gestorVentas = gestorVentas;
         this.gestorBoletos = gestorBoletos;
         this.gestorFunciones = gestorFunciones;
         this.generadorQR = generadorQR;
         this.correoElectronico = correoElectronico;
+        this.generadorPDF = generadorPDF;
     }
-     /**
-      * 
-      * @param venta
-      * @return
+
+    /**
+     *
+     * @param venta
+     * @return
      * @throws QRGeneradorException
      * @throws Exception
      */
@@ -53,8 +66,12 @@ public class VentaBoleto implements IVentaBoleto {
         VentaDTO ventaRegistrada = gestorVentas.registrarVenta(venta);
         BoletoDTO boleto = gestorBoletos.generarBoleto(ventaRegistrada);
         try {
-            boleto.setRutaQr(generadorQR.generarQR(boleto.getId()));
+            String rutaQr = generadorQR.generarQR(boleto.getId());
+            boleto.setRutaQr(rutaQr);
             BoletoDTO boletoActualizado = gestorBoletos.actualizar(boleto);
+            generadorPDF.generarPDFBoleto(boletoActualizado);
+            boletoActualizado.setRutaQr(rutaQr);
+            boletoActualizado = gestorBoletos.actualizar(boletoActualizado);
             return boletoActualizado;
         } catch (QRGeneradorException ex) {
             throw new QRGeneradorException(ex.getMessage());
@@ -62,12 +79,37 @@ public class VentaBoleto implements IVentaBoleto {
     }
 
     /**
-     * 
-     * @param boleto
-     * @param correo 
+     *
+     * @param destino
+     * @param asunto
+     * @param mensajeHtml
+     * @param jasper
+     * @throws Exception
      */
     @Override
-    public void mandarBoletoCorreo(BoletoDTO boleto, String correo) {
-        correoElectronico.enviarBoleto(correo, boleto);
+    public void mandarBoletoCorreo(String destino, String asunto, String mensajeHtml, byte[] jasper) throws Exception {
+        correoElectronico.enviarBoleto(destino, asunto, mensajeHtml, jasper);
+    }
+
+    /**
+     *
+     * @param ventaAntigua
+     * @param ventaNueva
+     * @param asientosLiberar
+     * @param asientosNuevos
+     * @return
+     * @throws FuncionNoEncontradaException
+     * @throws PromocionNoExistenteException
+     * @throws EmpleadoNoEncontradoException
+     * @throws IllegalArgumentException
+     * @throws VentaNoEncontradaException
+     * @throws SucursalNoExistenteException
+     */
+    @Override
+    public VentaDTO reagendarBoleto(VentaDTO ventaAntigua, VentaDTO ventaNueva, List<AsientoDTO> asientosLiberar, List<AsientoDTO> asientosNuevos) throws FuncionNoEncontradaException, PromocionNoExistenteException, EmpleadoNoEncontradoException, IllegalArgumentException, VentaNoEncontradaException, SucursalNoExistenteException {
+        gestorFunciones.liberarAsientos(ventaAntigua.getFuncion(), asientosLiberar);
+        gestorFunciones.ocuparAsientos(ventaNueva.getFuncion(), asientosNuevos);
+        VentaDTO ventaActualizada = gestorVentas.actualizarVenta(ventaNueva);
+        return ventaActualizada;
     }
 }

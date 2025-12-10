@@ -16,7 +16,6 @@ public class Membresia {
     private String nombreCliente;
     private Date fechaRegistro;
     private boolean activa;
-    private int saldo;
     private List<ObjectId> promocionesIds;
 
     public Membresia() {
@@ -66,14 +65,6 @@ public class Membresia {
 
     public Date getFechaRegistro() {
         return fechaRegistro;
-    }
-
-    public int getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(int saldo) {
-        this.saldo = saldo;
     }
 
     public void setFechaRegistro(Date fechaRegistro) {

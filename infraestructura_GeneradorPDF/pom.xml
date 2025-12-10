@@ -6,28 +6,32 @@
         <artifactId>SistemaCinema</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>objetosNegocio</artifactId>
+    <artifactId>infraestructura_GeneradorPDF</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
-            <groupId>org.mindrot</groupId>
-            <artifactId>jbcrypt</artifactId>
-            <version>0.4</version>
-            <type>jar</type>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13.4</version>
         </dependency>
         <dependency>
-            <groupId>itson</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>dto_negocios</artifactId>
-            <version>1.0</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>itson</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>persistencia</artifactId>
-            <version>1.0</version>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>negocios_GestorVentas</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <properties>
         <maven.compiler.release>24</maven.compiler.release>
-        <exec.mainClass>itson.objetosnegocio.ObjetosNegocio</exec.mainClass>
+        <exec.mainClass>itson.infraestructura_generadorpdf.Infraestructura_GeneradorPDF</exec.mainClass>
     </properties>
 </project>

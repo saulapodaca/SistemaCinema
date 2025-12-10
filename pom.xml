@@ -6,24 +6,26 @@
     <version>1.0</version>
     <packaging>pom</packaging>
     <modules>
-        <module>persistencia</module>
-        <module>objetosNegocio</module>
-        <module>negocios_GestorEmpleados</module>
-        <module>negocios_GestorPromociones</module>
-        <module>negocios_GestorVentas</module>
-        <module>negocios_GestorPeliculas</module>
         <module>negocios_GestorMembresias</module>
-        <module>negocios_CorreoElectronico</module>
-        <module>negocios_GeneradorQR</module>
-        <module>negocios_GestorBoletos</module>
-        <module>negocios_GestorFunciones</module>
-        <module>negocios_VenderBoleto</module>
-        <module>negocios_InicioSesion</module>
         <module>presentacion_SistemaCinema</module>
-        <module>negocios_InsertMasivo</module>
         <module>dto_negocios</module>
         <module>negocios_GestorObjetosBeneficio</module>
         <module>negocios_GestorCanjearBeneficios</module>
+        <module>infraestructura_GeneradorPDF</module>
+        <module>infraestructuraLectorQr</module>
+        <module>negocios_CorreoElectronico</module>
+        <module>negocios_GeneradorQR</module>
+        <module>negocios_GestorBoletos</module>
+        <module>negocios_GestorEmpleados</module>
+        <module>negocios_GestorFunciones</module>
+        <module>negocios_GestorPeliculas</module>
+        <module>negocios_GestorPromociones</module>
+        <module>negocios_GestorVentas</module>
+        <module>negocios_InicioSesion</module>
+        <module>negocios_VenderBoleto</module>
+        <module>negocios_InsertMasivo</module>
+        <module>objetosNegocio</module>
+        <module>persistencia</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

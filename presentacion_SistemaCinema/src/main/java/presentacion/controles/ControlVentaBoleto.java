@@ -70,7 +70,7 @@ public class ControlVentaBoleto {
     }
     
     public void mandarCorreo(BoletoDTO boleto, String correo){
-        facade.mandarBoletoCorreo(boleto, correo);
+        //facade.mandarBoletoCorreo(boleto, correo);
     }
 
     public DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promo){

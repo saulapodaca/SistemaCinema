@@ -6,28 +6,28 @@
         <artifactId>SistemaCinema</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>objetosNegocio</artifactId>
+    <artifactId>infraestructuraLectorQr</artifactId>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
-            <groupId>org.mindrot</groupId>
-            <artifactId>jbcrypt</artifactId>
-            <version>0.4</version>
-            <type>jar</type>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.5.4</version>
         </dependency>
         <dependency>
-            <groupId>itson</groupId>
-            <artifactId>dto_negocios</artifactId>
-            <version>1.0</version>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.5.4</version>
         </dependency>
         <dependency>
-            <groupId>itson</groupId>
-            <artifactId>persistencia</artifactId>
-            <version>1.0</version>
+            <groupId>com.github.sarxos</groupId>
+            <artifactId>webcam-capture</artifactId>
+            <version>0.3.12</version>
         </dependency>
     </dependencies>
     <properties>
         <maven.compiler.release>24</maven.compiler.release>
-        <exec.mainClass>itson.objetosnegocio.ObjetosNegocio</exec.mainClass>
+        <exec.mainClass>itson.infraestructuralectorqr.InfraestructuraLectorQr</exec.mainClass>
     </properties>
+    <name>infraestructura_LectorQr</name>
 </project>

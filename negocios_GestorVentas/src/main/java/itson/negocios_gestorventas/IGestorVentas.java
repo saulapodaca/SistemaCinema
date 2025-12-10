@@ -6,6 +6,7 @@ package itson.negocios_gestorventas;
 
 import dto.AsientoDTO;
 import dto.DetallePrecioDTO;
+import dto.PeliculaDTO;
 import dto.PromocionDTO;
 import dto.VentaDTO;
 import exceptions.EmpleadoNoEncontradoException;
@@ -21,8 +22,13 @@ import java.util.List;
 public interface IGestorVentas {
 
     VentaDTO registrarVenta(VentaDTO venta) throws EmpleadoNoEncontradoException, Exception;
-    
-    VentaDTO obtenerVentaPorID(String id)throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException;
-    
+
+    VentaDTO obtenerVentaPorID(String id) throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException;
+
     DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promoSeleccionada);
+
+    VentaDTO actualizarVenta(VentaDTO ventaDTO) throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException;
+
+    List<VentaDTO> obtenerVentas(PeliculaDTO pelicula) throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException;
+
 }
