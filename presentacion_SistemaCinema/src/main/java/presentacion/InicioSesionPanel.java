@@ -143,9 +143,9 @@ public class InicioSesionPanel extends javax.swing.JPanel {
             EmpleadoDTO empleado = ControlInicioSesion.getInstance().obtenerSesionEmpleado(sesion);
             GestorSesion.setUsuario(empleado);
             if (empleado.getTipoEmpleado().equals(TipoEmpleado.ADMINISTRADOR)) {
-                ControlPantallas.getInstance().abrirMenuPrincipal();
+                ControlPantallas.getInstance().abrirMenuPrincipal(empleado);
             } else {
-                ControlPantallas.getInstance().abrirMenuPrincipalEmpleado();
+                ControlPantallas.getInstance().abrirMenuPrincipalEmpleado(empleado);
             }
         } catch (SesionEmpleadoNoExistenteException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);

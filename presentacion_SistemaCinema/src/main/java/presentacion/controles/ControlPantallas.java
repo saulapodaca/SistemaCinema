@@ -69,7 +69,7 @@ public class ControlPantallas {
         }
         return instance;
     }
-    
+
     public void abrirInicioSesion() {
         limpiarPanelEmpleado();
         agregarPanelNuevo(new InicioSesionPanel());
@@ -80,14 +80,14 @@ public class ControlPantallas {
      * Método que abre el menú principal en el frame, se agrega el panel de
      * información del empleado y las opciones del gerente
      */
-    public void abrirMenuPrincipal() {
-        cargarPanelEmpleado();
-        agregarPanelNuevo(new PanelOpcionesMenuGerente());
+    public void abrirMenuPrincipal(EmpleadoDTO empleado) {
+        cargarPanelEmpleado(empleado);
+        agregarPanelNuevo(new PanelOpcionesMenuGerente(empleado));
     }
-    
-    public void abrirMenuPrincipalEmpleado() {
-        cargarPanelEmpleado();
-        agregarPanelNuevo(new PanelOpcionesMenuEmpleado());
+
+    public void abrirMenuPrincipalEmpleado(EmpleadoDTO empleado) {
+        cargarPanelEmpleado(empleado);
+        agregarPanelNuevo(new PanelOpcionesMenuEmpleado(empleado));
     }
 
     /**
@@ -100,53 +100,53 @@ public class ControlPantallas {
     public void abrirSeleccionPeliculas(JPanel panelNuevo) {
         agregarPanelNuevo(new PanelSeleccionPeliculas());
     }
-    
+
     public void abrirSeleccionFunciones(JPanel panelNuevo, PeliculaDTO pelicula) {
         agregarPanelNuevo(new PanelSeleccionFuncion(pelicula));
     }
-    
+
     public void abrirSeleccionAsientos(JPanel panelNuevo, FuncionDTO funcion) {
         agregarPanelNuevo(new PanelSeleccionAsientos(funcion));
-        
+
     }
-    
+
     public void abrirInformacionPago(JPanel panelNuevo, List<AsientoDTO> asientos, FuncionDTO funcion) {
         agregarPanelNuevo(new PanelInformacionPago(asientos, funcion));
-        
+
     }
-    
+
     public void abrirInformacionBoleto(JPanel panelNuevo, BoletoDTO boleto) {
         agregarPanelNuevo(new PanelInformacionBoleto(boleto));
     }
-    
+
     public void abrirEscanearQR(JPanel panelNuevo) {
         agregarPanelNuevo(new PanelEscanearQR());
     }
-    
+
     public void abrirInformacionBoletoReagenda(JPanel panelNuevo, BoletoDTO boleto) {
         agregarPanelNuevo(new PanelInformacionBoletoReagenda(boleto));
     }
-    
+
     public void abrirSeleccionFuncionReagenda(JPanel panelNuevo, PeliculaDTO pelicula, BoletoDTO boleto) {
         agregarPanelNuevo(new PanelSeleccionFuncionReagenda(pelicula, boleto));
     }
-    
+
     public void abrirSeleccionAsientosReagenda(JPanel panelNuevo, FuncionDTO funcion, BoletoDTO boleto) {
         agregarPanelNuevo(new PanelSeleccionAsientosReagenda(funcion, boleto));
     }
-    
+
     public void abrirInformacionReagenda(JPanel panelNuevo, BoletoDTO boleto, FuncionDTO funcion, List<AsientoDTO> asientos) {
         agregarPanelNuevo(new PanelInformacionReagenda(boleto, funcion, asientos));
     }
-    
+
     public void abrirSeleccionPeliculasReporte(JPanel panelNuevo) {
         agregarPanelNuevo(new PanelSeleccionPeliculasReporte());
     }
-    
+
     public void abrirFechasReporte(JPanel panelNuevo, PeliculaDTO peli) {
         agregarPanelNuevo(new PanelFechasReporte(peli));
     }
-    
+
     public void abrirReportePelicula(JPanel panelNuevo, PeliculaDTO peli, LocalDate fechaDesde, LocalDate fechaHasta) {
         agregarPanelNuevo(new PanelReportePelicula(peli, fechaDesde, fechaHasta));
     }
@@ -168,10 +168,10 @@ public class ControlPantallas {
      * Carga el panel de la información contextual del empleado en el contenedor
      * lateral.
      */
-    private void cargarPanelEmpleado() {
+    private void cargarPanelEmpleado(EmpleadoDTO empleado) {
         JPanel lateral = formPrincipal.getPanelEmpleado();
         lateral.removeAll();
-        lateral.add(new PanelInformacionEmpleado());
+        lateral.add(new PanelInformacionEmpleado(empleado));
         lateral.revalidate();
         lateral.repaint();
     }
@@ -185,19 +185,4 @@ public class ControlPantallas {
         lateral.revalidate();
         lateral.repaint();
     }
-
-    /**
-     *
-     * @param empleado
-     */
-//    public void setEmpleadoActual(EmpleadoDTO empleado) {
-//        this.empleado = empleado;
-//    }
-    /**
-     *
-     * @return
-     */
-//    public EmpleadoDTO getEmpleadoActual() {
-//        return empleado;
-//    }
 }

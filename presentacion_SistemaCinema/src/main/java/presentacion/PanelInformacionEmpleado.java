@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import presentacion.utilerias.GestorSesion;
+import dto.enums.TipoEmpleado;
 
 /**
  *
@@ -27,7 +28,7 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
     /**
      * Creates new form panelInformacionEmpleadoBien
      */
-    public PanelInformacionEmpleado() {
+    public PanelInformacionEmpleado(EmpleadoDTO empleado) {
         initComponents();
         this.empleado = empleado;
         cargarPanel();
@@ -168,7 +169,11 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-        ControlPantallas.getInstance().abrirMenuPrincipal();
+        if (empleado.getTipoEmpleado().equals(TipoEmpleado.ADMINISTRADOR)) {
+            ControlPantallas.getInstance().abrirMenuPrincipal(empleado);
+        } else {
+            ControlPantallas.getInstance().abrirMenuPrincipalEmpleado(empleado);
+        }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
 
     private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked

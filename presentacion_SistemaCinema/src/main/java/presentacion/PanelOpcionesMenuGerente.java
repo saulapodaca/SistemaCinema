@@ -16,12 +16,14 @@ import presentacion.controles.ControlPantallas;
  */
 public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
 
+    public EmpleadoDTO empleado;
 
     /**
      * Creates new form panelOpcionesMenu
      */
-    public PanelOpcionesMenuGerente() {
+    public PanelOpcionesMenuGerente(EmpleadoDTO empleado) {
         initComponents();
+        this.empleado = empleado;
     }
 
     /**
