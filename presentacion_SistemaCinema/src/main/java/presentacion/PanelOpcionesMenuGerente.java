@@ -330,7 +330,7 @@ public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVentaAlimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaAlimentoActionPerformed
-        // TODO add your handling code here:
+        ControlPantallas.getInstance().abrirSeleccionCombos();
     }//GEN-LAST:event_btnVentaAlimentoActionPerformed
 
     private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
@@ -342,7 +342,7 @@ public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGestionarPreciosActionPerformed
 
     private void btnVentaBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaBoletoActionPerformed
-        ControlPantallas.getInstance().abrirSeleccionPeliculas(this);
+        ControlPantallas.getInstance().abrirSeleccionPeliculas();
     }//GEN-LAST:event_btnVentaBoletoActionPerformed
 
     private void btnEnviarPromocionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarPromocionesActionPerformed

@@ -1,23 +1,26 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
 package presentacion;
 
-import dto.BoletoDTO;
-import presentacion.controles.ControlVentaBoleto;
+import dto.ReciboAlimentoDTO;
+import presentacion.controles.ControlVentaCombo;
 
 /**
  *
  * @author saula
  */
-public class PanelInformacionBoleto extends javax.swing.JPanel {
+public class PanelInformacionRecibo extends javax.swing.JPanel {
 
-    private BoletoDTO boleto;
+    private ReciboAlimentoDTO recibo;
+    
     /**
-     * Creates new form PanelInformacionBoleto
-     * @param boleto
+     * Creates new form PanelInformacionRecibo
      */
-    public PanelInformacionBoleto(BoletoDTO boleto) {
-        this.boleto = boleto;
+    public PanelInformacionRecibo(ReciboAlimentoDTO recibo) {
         initComponents();
-        cargarBoleto();
+        this.recibo = recibo;
     }
 
     /**
@@ -29,26 +32,11 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtCorreo = new javax.swing.JTextField();
-        btnEnviarBoleto = new javax.swing.JButton();
         pnlVisorPDF = new javax.swing.JPanel();
+        btnEnviarBoleto = new javax.swing.JButton();
+        txtCorreo = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(8, 17, 40));
-
-        txtCorreo.setBackground(new java.awt.Color(31, 41, 55));
-        txtCorreo.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        txtCorreo.setForeground(new java.awt.Color(255, 255, 255));
-        txtCorreo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-
-        btnEnviarBoleto.setBackground(new java.awt.Color(37, 99, 235));
-        btnEnviarBoleto.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        btnEnviarBoleto.setForeground(new java.awt.Color(26, 51, 83));
-        btnEnviarBoleto.setText("ENVIAR BOLETO");
-        btnEnviarBoleto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEnviarBoletoActionPerformed(evt);
-            }
-        });
 
         pnlVisorPDF.setBackground(new java.awt.Color(18, 26, 60));
 
@@ -60,8 +48,23 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
         );
         pnlVisorPDFLayout.setVerticalGroup(
             pnlVisorPDFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 527, Short.MAX_VALUE)
+            .addGap(0, 639, Short.MAX_VALUE)
         );
+
+        btnEnviarBoleto.setBackground(new java.awt.Color(37, 99, 235));
+        btnEnviarBoleto.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        btnEnviarBoleto.setForeground(new java.awt.Color(26, 51, 83));
+        btnEnviarBoleto.setText("ENVIAR BOLETO");
+        btnEnviarBoleto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarBoletoActionPerformed(evt);
+            }
+        });
+
+        txtCorreo.setBackground(new java.awt.Color(31, 41, 55));
+        txtCorreo.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        txtCorreo.setForeground(new java.awt.Color(255, 255, 255));
+        txtCorreo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,7 +78,7 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
                         .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addComponent(btnEnviarBoleto)))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,12 +94,9 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarBoletoActionPerformed
-        ControlVentaBoleto.getInstance().mandarCorreo(boleto, txtCorreo.getText().trim());
+        ControlVentaCombo.getInstance().mandarCorreo(recibo, txtCorreo.getText().trim());
     }//GEN-LAST:event_btnEnviarBoletoActionPerformed
 
-    private void cargarBoleto() {
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviarBoleto;

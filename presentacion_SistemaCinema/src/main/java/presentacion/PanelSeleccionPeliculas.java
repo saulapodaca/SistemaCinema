@@ -409,7 +409,7 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
         lblImagen.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                ControlPantallas.getInstance().abrirSeleccionFunciones(PanelSeleccionPeliculas.this, pelicula);
+                ControlPantallas.getInstance().abrirSeleccionFunciones(pelicula);
             }
         });
     }

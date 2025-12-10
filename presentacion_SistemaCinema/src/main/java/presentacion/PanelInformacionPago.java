@@ -31,8 +31,10 @@ public class PanelInformacionPago extends javax.swing.JPanel {
 
     private FuncionDTO funcion;
     private List<AsientoDTO> asientos;
+
     /**
      * Creates new form PanelInformacionPago
+     *
      * @param asientos
      * @param funcion
      */
@@ -91,6 +93,7 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         setBackground(new java.awt.Color(8, 17, 40));
 
         pnlInformacionPago.setBackground(new java.awt.Color(18, 26, 60));
+        pnlInformacionPago.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 65, 85), 1, true));
 
         lblTituloPelicula.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         lblTituloPelicula.setForeground(new java.awt.Color(255, 255, 255));
@@ -179,15 +182,15 @@ public class PanelInformacionPago extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblSubtotalPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(pnlInformacionPagoLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addContainerGap(46, Short.MAX_VALUE)
                         .addGroup(pnlInformacionPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlInformacionPagoLayout.createSequentialGroup()
                                 .addComponent(tituloTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblAsientos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 26, Short.MAX_VALUE)))
+                            .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(57, 57, 57)))
                 .addContainerGap())
         );
         pnlInformacionPagoLayout.setVerticalGroup(
@@ -219,10 +222,11 @@ public class PanelInformacionPago extends javax.swing.JPanel {
                     .addComponent(lblTotal))
                 .addGap(18, 18, 18)
                 .addComponent(lblAsientos)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlMembresia.setBackground(new java.awt.Color(18, 26, 60));
+        pnlMembresia.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 65, 85), 1, true));
 
         tituloVerificarMembresia.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         tituloVerificarMembresia.setForeground(new java.awt.Color(255, 255, 255));
@@ -250,17 +254,13 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         pnlMembresiaLayout.setHorizontalGroup(
             pnlMembresiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMembresiaLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnlMembresiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlMembresiaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(tituloVerificarMembresia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlMembresiaLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(txtMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(txtMembresia)
+                    .addComponent(tituloVerificarMembresia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(pnlMembresiaLayout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(113, 113, 113)
                 .addComponent(btnVerificarMembresia)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -277,6 +277,7 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         );
 
         pnlDescuentos.setBackground(new java.awt.Color(18, 26, 60));
+        pnlDescuentos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 65, 85), 1, true));
 
         tituloDescuentos.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         tituloDescuentos.setForeground(new java.awt.Color(255, 255, 255));
@@ -331,10 +332,10 @@ public class PanelInformacionPago extends javax.swing.JPanel {
                     .addComponent(rbCanjearCupon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtCupon))
                 .addContainerGap())
-            .addGroup(pnlDescuentosLayout.createSequentialGroup()
-                .addGap(104, 104, 104)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDescuentosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAplicarDescuento)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(123, 123, 123))
         );
         pnlDescuentosLayout.setVerticalGroup(
             pnlDescuentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,12 +350,13 @@ public class PanelInformacionPago extends javax.swing.JPanel {
                 .addComponent(rbCanjearCupon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCupon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(btnAplicarDescuento)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         pnlFormaPago.setBackground(new java.awt.Color(18, 26, 60));
+        pnlFormaPago.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 65, 85), 1, true));
 
         tituloFormaPago.setFont(new java.awt.Font("Comic Sans MS", 1, 20)); // NOI18N
         tituloFormaPago.setForeground(new java.awt.Color(255, 255, 255));
@@ -390,32 +392,34 @@ public class PanelInformacionPago extends javax.swing.JPanel {
                 .addComponent(tituloFormaPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormaPagoLayout.createSequentialGroup()
-                .addGap(0, 40, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(pnlFormaPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rbEfectivo, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(imgEfectivo, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(pnlFormaPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rbTarjeta)
                     .addGroup(pnlFormaPagoLayout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(imgTarjeta)))
-                .addGap(40, 40, 40))
+                .addGap(32, 32, 32))
         );
         pnlFormaPagoLayout.setVerticalGroup(
             pnlFormaPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFormaPagoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tituloFormaPago)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(pnlFormaPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(imgEfectivo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(imgTarjeta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlFormaPagoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbTarjeta)
-                    .addComponent(rbEfectivo))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormaPagoLayout.createSequentialGroup()
+                        .addComponent(imgEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbEfectivo))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormaPagoLayout.createSequentialGroup()
+                        .addComponent(imgTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbTarjeta)))
+                .addGap(21, 21, 21))
         );
 
         btnVolver.setBackground(new java.awt.Color(37, 99, 235));
@@ -442,9 +446,9 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(95, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -453,24 +457,24 @@ public class PanelInformacionPago extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pnlMembresia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnlInformacionPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(58, 58, 58)
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pnlDescuentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnlFormaPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlDescuentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlInformacionPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlInformacionPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlDescuentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlMembresia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlFormaPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                    .addComponent(pnlFormaPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnConfirmarPago, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -479,7 +483,7 @@ public class PanelInformacionPago extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        ControlPantallas.getInstance().abrirSeleccionAsientos(this, funcion);
+        ControlPantallas.getInstance().abrirSeleccionAsientos(funcion);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnConfirmarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPagoActionPerformed
@@ -497,7 +501,7 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         try {
             boleto = procesarVenta(venta, detalle);
             if (boleto != null) {
-                ControlPantallas.getInstance().abrirInformacionBoleto(this, boleto);
+                ControlPantallas.getInstance().abrirInformacionBoleto(boleto);
             }
         } catch (QRGeneradorException ex) {
             System.getLogger(PanelInformacionPago.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
@@ -543,13 +547,13 @@ public class PanelInformacionPago extends javax.swing.JPanel {
             cbDescuentos.addItem(promo);
         }
     }
-    
-    private void configurarPanelFormaPago(){
+
+    private void configurarPanelFormaPago() {
         bgFormaPago.add(rbEfectivo);
         bgFormaPago.add(rbTarjeta);
         rbEfectivo.setSelected(true);
     }
-    
+
     private void cargarInformacion(List<AsientoDTO> asientos, FuncionDTO funcion) {
         cargarInformacionVenta(asientos, funcion);
         configurarPanelDescuentos();
@@ -563,25 +567,25 @@ public class PanelInformacionPago extends javax.swing.JPanel {
 
     private void cargarInformacionVenta(List<AsientoDTO> asientos, FuncionDTO funcion) {
         configurarTituloPelicula(funcion.getPelicula().getTitulo());
-    configurarInformacionFuncion(lblNombreSala, funcion.getSala().getNombre());
-    configurarInformacionFuncion(lblTipoSala, funcion.getTipoSala());
-    configurarInformacionFuncion(lblAsientos, asientos.toString());
+        configurarInformacionFuncion(lblNombreSala, funcion.getSala().getNombre());
+        configurarInformacionFuncion(lblTipoSala, funcion.getTipoSala());
+        configurarInformacionFuncion(lblAsientos, asientos.toString());
 
-    DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yy");
-    lblFechaFuncion.setText(funcion.getFechaHora().format(formatoFecha));
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yy");
+        lblFechaFuncion.setText(funcion.getFechaHora().format(formatoFecha));
 
-    DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a");
-    lblHoraFuncion.setText(funcion.getFechaHora().toLocalTime().format(formatoHora));
+        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a");
+        lblHoraFuncion.setText(funcion.getFechaHora().toLocalTime().format(formatoHora));
 
-    configurarPrecios(asientos, null);
-}
-    
-    private void configurarTituloPelicula(String titulo){
+        configurarPrecios(asientos, null);
+    }
+
+    private void configurarTituloPelicula(String titulo) {
         lblTituloPelicula.setText(titulo);
         lblTituloPelicula.setForeground(Color.WHITE);
     }
-    
-    private void configurarInformacionFuncion(JLabel etiqueta, String texto){
+
+    private void configurarInformacionFuncion(JLabel etiqueta, String texto) {
         etiqueta.setText(texto);
         etiqueta.setForeground(new Color(148, 163, 184));
     }
@@ -590,7 +594,7 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         DetallePrecioDTO detalle = ControlVentaBoleto.getInstance().calcularPrecios(asientos, promo);
         lblSubtotalPrecio.setText(String.format("$%.2f", detalle.getSubtotal()));
         lblDescuento.setText(String.format("$%.2f", detalle.getDescuento()));
-        lblTotal.setText(String.format("$%.2f", detalle.getTotal()));   
+        lblTotal.setText(String.format("$%.2f", detalle.getTotal()));
     }
 
     private VentaDTO crearVenta(FormaPago tipoPago, PromocionDTO promo, DetallePrecioDTO detalle) {
@@ -603,14 +607,14 @@ public class PanelInformacionPago extends javax.swing.JPanel {
         venta.setTotal(detalle.getTotal());
         venta.setFecha(LocalDate.now());
         venta.setFormaPago(tipoPago);
-        
+
         if (promo != null) {
             venta.setPromocionId(promo.getId());
         }
-        
+
         return venta;
     }
- 
+
     private BoletoDTO procesarVenta(VentaDTO venta, DetallePrecioDTO detalle) throws QRGeneradorException {
         BoletoDTO boleto = ControlVentaBoleto.getInstance().registrarVenta(venta);
 
