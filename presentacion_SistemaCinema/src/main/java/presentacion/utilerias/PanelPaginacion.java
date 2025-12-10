@@ -13,7 +13,7 @@ public class PanelPaginacion extends javax.swing.JPanel {
     private int paginaActual = 1;
     private int tamanoPagina = 6; // por defecto
     private Runnable onPaginaChange;
-    
+
     /**
      * Creates new form PanelPaginacion
      */
@@ -123,7 +123,7 @@ public class PanelPaginacion extends javax.swing.JPanel {
             onPaginaChange.run();
         }
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;

@@ -5,12 +5,13 @@
 package itson.negocios_gestorObjetosBeneficio;
 
 import dominio.Membresia;
+import dto.MembresiaDTO;
 import dto.ObjetoBeneficioDTO;
 import java.util.List;
 
 /**
  *
- * @author Elite
+ * @author Héctor Javier Alonso Zaragoza - 00000252039
  */
 public interface IGestorObjetosBeneficio {
     

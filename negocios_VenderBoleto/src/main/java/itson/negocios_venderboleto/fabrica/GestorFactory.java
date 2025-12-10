@@ -25,6 +25,8 @@ import itson.infraestructura_generadorpdf.GeneradorPDF;
 import itson.infraestructura_generadorpdf.IGeneradorPDF;
 import itson.infraestructura_lectorqr.ILectorQR;
 import itson.infraestructura_lectorqr.LectorQR;
+import itson.negocios_gestorcanjearbeneficiosk.GestorCanjearBeneficios;
+import itson.negocios_gestorcanjearbeneficiosk.IGestorCanjearBeneficiosK;
 
 /**
  *
@@ -87,4 +89,10 @@ public class GestorFactory implements IGestorFactory {
     public IGeneradorPDF crearGeneradorPDF() {
         return new GeneradorPDF();
     }
+    
+    @Override
+    public IGestorCanjearBeneficiosK crearGestorCanjearBeneficiosK(){
+        return new GestorCanjearBeneficios();
+    }
+    
 }

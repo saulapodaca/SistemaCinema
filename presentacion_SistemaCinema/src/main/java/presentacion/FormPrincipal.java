@@ -1,16 +1,29 @@
 package presentacion;
 
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+
 /**
  *
- * @author saula
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class FormPrincipal extends javax.swing.JFrame {
-    
+
+    private JPanel panelEmpleado;
+    private JPanel panelOpcMenu;
+
     /**
      * Creates new form formMenuPrincipal
      */
     public FormPrincipal() {
-        initComponents();
+        setLayout(new BorderLayout());
+        setSize(1397, 788);
+        panelEmpleado = new JPanel(new BorderLayout());
+        add(panelEmpleado, BorderLayout.WEST);
+        panelOpcMenu = new JPanel(new BorderLayout());
+        add(panelOpcMenu, BorderLayout.CENTER);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     /**
@@ -31,6 +44,13 @@ public class FormPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JPanel getOpcMenu() {
+        return panelOpcMenu;
+    }
+
+    public JPanel getPanelEmpleado() {
+        return panelEmpleado;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private presentacion.InicioSesionPanel inicioSesionPanel2;

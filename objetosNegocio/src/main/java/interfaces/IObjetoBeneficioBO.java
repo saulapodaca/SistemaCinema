@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author Elite
+ * @author Héctor Javier Alonso Zaragoza - 00000252039
  */
 public interface IObjetoBeneficioBO {
     

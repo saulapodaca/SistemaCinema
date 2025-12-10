@@ -4,12 +4,13 @@
  */
 package presentacion.controles;
 
-import com.mycompany.negocios_gestorcanjearbeneficios.GestorCanjearBeneficios;
-import com.mycompany.negocios_gestorcanjearbeneficios.IGestorCanjearBeneficios;
+
 import dominio.Membresia;
 import dto.MembresiaDTO;
 import dto.ObjetoBeneficioDTO;
 import java.util.List;
+import itson.negocios_gestorcanjearbeneficiosk.IGestorCanjearBeneficiosK;
+import itson.negocios_gestorcanjearbeneficiosk.GestorCanjearBeneficios;
 
 /**
  *
@@ -22,7 +23,7 @@ public class ControlCanjearBeneficios {
      */
     private static ControlCanjearBeneficios instance;
     
-    private final IGestorCanjearBeneficios canjearbeneficiosfachada;
+    private final IGestorCanjearBeneficiosK canjearbeneficiosfachada;
     
     private ControlCanjearBeneficios(){
         this.canjearbeneficiosfachada = new GestorCanjearBeneficios();

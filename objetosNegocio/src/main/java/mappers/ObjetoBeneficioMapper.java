@@ -10,7 +10,7 @@ import java.util.HashSet;
 
 /**
  *
- * @author Elite
+ * @author Héctor Javier Alonso Zaragoza - 00000252039
  */
 public class ObjetoBeneficioMapper {
     

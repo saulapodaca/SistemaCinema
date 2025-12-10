@@ -6,7 +6,9 @@ import dto.FuncionDTO;
 import dto.PeliculaDTO;
 import exceptions.FuncionNoEncontradaException;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Image;
+import java.awt.event.MouseListener;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -22,7 +24,8 @@ import presentacion.controles.ControlVentaBoleto;
 
 /**
  *
- * @author saula
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class PanelSeleccionFuncion extends javax.swing.JPanel {
 
@@ -31,7 +34,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
     private List<JLabel> etiquetasTipoSala;
     private List<JPanel> panelesFunciones;
     private PeliculaDTO pelicula;
-    private final int TAMANO_PAGINA = 4; 
+    private final int TAMANO_PAGINA = 4;
 
     /**
      * Creates new form PanelSeleccionFuncion
@@ -433,7 +436,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
                 JLabel lblTipoSala = etiquetasTipoSala.get(i);
                 JPanel pnlFuncion = panelesFunciones.get(i);
 
-                limpiarEtiquetas(lblNombreSala, lblHoraFuncion, lblTipoSala);
+                limpiarEtiquetas(pnlFuncion, lblNombreSala, lblHoraFuncion, lblTipoSala);
 
                 if (i < funciones.size()) {
                     FuncionDTO funcion = funciones.get(i);
@@ -442,8 +445,8 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
                 }
             }
 
-        }catch (FuncionNoEncontradaException e){
-            JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR",JOptionPane.ERROR_MESSAGE);
+        } catch (FuncionNoEncontradaException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -463,12 +466,12 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
      */
     private void mostrarFuncionEtiqueta(FuncionDTO funcion, JLabel lblNombreSala, JLabel lblHoraFuncion, JLabel lblTipoSala, JPanel panelFuncion) {
         configurarNombreSala(lblNombreSala, funcion.getSala().getNombre());
-        
+
         LocalDateTime fechaHora = funcion.getFechaHora();
         String hora = fechaHora.toLocalTime()
-        .format(DateTimeFormatter.ofPattern("hh:mm a")); 
+                .format(DateTimeFormatter.ofPattern("hh:mm a"));
         configurarHoraFuncion(lblHoraFuncion, hora);
-        
+
         configurarTipoSala(lblTipoSala, funcion.getTipoSala());
         configurarEventoClick(panelFuncion, funcion);
     }
@@ -518,6 +521,10 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
         panelFuncion.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (LocalDateTime.now().isAfter(funcion.getFechaHora().plusMinutes(20))) {
+                    JOptionPane.showMessageDialog(null, "Ya no es posible acceder a la función.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 ControlPantallas.getInstance().abrirSeleccionAsientos(PanelSeleccionFuncion.this, funcion);
             }
         });
@@ -544,7 +551,9 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
                 pnlFuncion1, pnlFuncion2,
                 pnlFuncion3, pnlFuncion4
         );
-        dateChooser.setDate(new Date());
+        Date hoy = new Date();
+        dateChooser.setDate(hoy);
+        dateChooser.setMinSelectableDate(hoy);
     }
 
     /**
@@ -555,10 +564,14 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
      * @param lblHoraFuncion etiqueta dónde va ala hora de la función
      * @param lblTipoSala etiqueta dónde va el tipo de sala de la función
      */
-    private void limpiarEtiquetas(JLabel lblNombreSala, JLabel lblHoraFuncion, JLabel lblTipoSala) {
+    private void limpiarEtiquetas(JPanel panelFuncion, JLabel lblNombreSala, JLabel lblHoraFuncion, JLabel lblTipoSala) {
         lblNombreSala.setText("");
         lblHoraFuncion.setText("");
         lblTipoSala.setText("");
+        for (MouseListener ml : panelFuncion.getMouseListeners()) {
+            panelFuncion.removeMouseListener(ml);
+        }
+        panelFuncion.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,6 +6,7 @@ import dto.PeliculaDTO;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
+import java.awt.event.MouseListener;
 import java.net.URL;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -15,7 +16,8 @@ import presentacion.controles.ControlVentaBoleto;
 
 /**
  *
- * @author saula
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class PanelSeleccionPeliculas extends javax.swing.JPanel {
 
@@ -350,6 +352,10 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
         lblImagen.setIcon(null);
         lblImagen.setText("");
         lblTitulo.setText("");
+        for (MouseListener ml : lblImagen.getMouseListeners()) {
+            lblImagen.removeMouseListener(ml);
+        }
+        lblImagen.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
 
     /**
@@ -415,8 +421,8 @@ public class PanelSeleccionPeliculas extends javax.swing.JPanel {
 
     private void actualizarCartelera() {
         String busqueda = panelBuscador1.getTextoBusqueda();
-        int pagina = panelPaginacion1.getPaginaActual();  
-        int tamano = panelPaginacion1.getTamanoPagina();     
+        int pagina = panelPaginacion1.getPaginaActual();
+        int tamano = panelPaginacion1.getTamanoPagina();
 
         FiltroDTO filtro = new FiltroDTO(pagina, tamano, busqueda);
 

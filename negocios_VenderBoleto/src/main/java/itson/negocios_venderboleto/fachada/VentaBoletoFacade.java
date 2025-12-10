@@ -39,6 +39,7 @@ import itson.infraestructura_lectorqr.ILectorQR;
 import itson.infraestructura_generadorpdf.IGeneradorPDF;
 import java.time.LocalDate;
 import java.util.List;
+import itson.negocios_gestorcanjearbeneficiosk.IGestorCanjearBeneficiosK;
 
 /**
  *
@@ -57,6 +58,7 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
     private final ILectorQR gestorLectorQR;
     private final IGestorBoletos gestorBoletos;
     private final IGeneradorPDF gestorGeneradorPDF;
+    private final IGestorCanjearBeneficiosK gestorCanjearBeneficios;
 
     public VentaBoletoFacade(GestorFactory factory) {
         this.gestorPeliculas = factory.crearGestorPeliculas();
@@ -68,6 +70,7 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
         this.gestorLectorQR = factory.crearLectorQR();
         this.gestorBoletos = factory.crearGestorBoletos();
         this.gestorGeneradorPDF = factory.crearGeneradorPDF();
+        this.gestorCanjearBeneficios = factory.crearGestorCanjearBeneficiosK();
 
         IVentaBoleto venta = new VentaBoleto(
                 gestorVentas,
@@ -75,7 +78,8 @@ public class VentaBoletoFacade implements IVentaBoletoFacade {
                 factory.crearGestorFunciones(),
                 factory.crearGeneradorQR(),
                 factory.crearCorreoElectronico(),
-                factory.crearGeneradorPDF()
+                factory.crearGeneradorPDF(),
+                factory.crearGestorCanjearBeneficiosK()
         );
         this.ventaBoleto = venta;
     }

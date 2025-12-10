@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.mycompany</groupId>
-    <artifactId>negocios_GestorObjetosBeneficio</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <parent>
+        <groupId>itson</groupId>
+        <artifactId>SistemaCinema</artifactId>
+        <version>1.0</version>
+    </parent>
+    <artifactId>negocios_GestorObjetosBeneficioK</artifactId>
     <packaging>jar</packaging>
     <dependencies>
-        <dependency>
-            <groupId>itson</groupId>
-            <artifactId>objetosNegocio</artifactId>
-            <version>1.0</version>
-        </dependency>
         <dependency>
             <groupId>itson</groupId>
             <artifactId>dto_negocios</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>itson</groupId>
+            <artifactId>objetosNegocio</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>24</maven.compiler.release>
-        <exec.mainClass>com.mycompany.negocios_gestorobjetosbeneficio.Negocios_GestorObjetosBeneficio</exec.mainClass>
+        <exec.mainClass>itson.negocios_gestorobjetosbeneficiok.Negocios_GestorObjetosBeneficioK</exec.mainClass>
     </properties>
 </project>

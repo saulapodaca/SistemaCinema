@@ -1,17 +1,35 @@
 package presentacion;
 
 import dto.BoletoDTO;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.time.format.DateTimeFormatter;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 import presentacion.controles.ControlVentaBoleto;
 
 /**
  *
- * @author saula
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class PanelInformacionBoleto extends javax.swing.JPanel {
 
     private BoletoDTO boleto;
+
     /**
      * Creates new form PanelInformacionBoleto
+     *
      * @param boleto
      */
     public PanelInformacionBoleto(BoletoDTO boleto) {
@@ -31,12 +49,8 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
 
         txtCorreo = new javax.swing.JTextField();
         btnEnviarBoleto = new javax.swing.JButton();
-        pnlVisorPDF = new javax.swing.JPanel();
-        lblTitulo = new javax.swing.JLabel();
-        lblFuncion = new javax.swing.JLabel();
-        lblSala = new javax.swing.JLabel();
-        lblAsientos = new javax.swing.JLabel();
-        lblTotal = new javax.swing.JLabel();
+        pnlVisorPDF = new javax.swing.JScrollPane();
+        lblPdf = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(8, 17, 40));
 
@@ -55,83 +69,31 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
             }
         });
 
-        pnlVisorPDF.setBackground(new java.awt.Color(18, 26, 60));
-
-        lblTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("jLabel1");
-
-        lblFuncion.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblFuncion.setForeground(new java.awt.Color(255, 255, 255));
-        lblFuncion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblFuncion.setText("jLabel1");
-
-        lblSala.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblSala.setForeground(new java.awt.Color(255, 255, 255));
-        lblSala.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSala.setText("jLabel1");
-
-        lblAsientos.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblAsientos.setForeground(new java.awt.Color(255, 255, 255));
-        lblAsientos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAsientos.setText("jLabel1");
-
-        lblTotal.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
-        lblTotal.setForeground(new java.awt.Color(255, 255, 255));
-        lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTotal.setText("jLabel1");
-
-        javax.swing.GroupLayout pnlVisorPDFLayout = new javax.swing.GroupLayout(pnlVisorPDF);
-        pnlVisorPDF.setLayout(pnlVisorPDFLayout);
-        pnlVisorPDFLayout.setHorizontalGroup(
-            pnlVisorPDFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlVisorPDFLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlVisorPDFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblFuncion, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
-                    .addComponent(lblSala, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
-                    .addComponent(lblAsientos, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
-                    .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        pnlVisorPDFLayout.setVerticalGroup(
-            pnlVisorPDFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlVisorPDFLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblFuncion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblSala)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblAsientos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTotal)
-                .addContainerGap(343, Short.MAX_VALUE))
-        );
+        lblPdf.setText("jLabel1");
+        pnlVisorPDF.setViewportView(lblPdf);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlVisorPDF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
                         .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
-                        .addComponent(btnEnviarBoleto)))
-                .addContainerGap(109, Short.MAX_VALUE))
+                        .addComponent(btnEnviarBoleto))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(pnlVisorPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(pnlVisorPDF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGap(36, 36, 36)
+                .addComponent(pnlVisorPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtCorreo)
                     .addComponent(btnEnviarBoleto, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
@@ -140,21 +102,76 @@ public class PanelInformacionBoleto extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarBoletoActionPerformed
-        ControlVentaBoleto.getInstance().mandarCorreo(boleto, txtCorreo.getText().trim());
+        try {
+            if (txtCorreo.getText().isEmpty() || txtCorreo.getText().equals("") || txtCorreo.getText().isBlank()) {
+                JOptionPane.showMessageDialog(this, "Ingresa un correo.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            String correo = txtCorreo.getText().trim();
+            String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+            if (!correo.matches(regex)) {
+                JOptionPane.showMessageDialog(this, "El correo no tiene un formato válido.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            byte[] pdfBytes = ControlVentaBoleto.getInstance().generarPDFBoleto(boleto);
+            if (pdfBytes == null) {
+                JOptionPane.showMessageDialog(this, "No se pudo generar el boleto.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            ControlVentaBoleto.getInstance().mandarCorreo(txtCorreo.getText().strip(), "Confirmación de boleto - " + boleto.getVenta().getFuncion().getPelicula().getTitulo(), estructuraMensaje(), pdfBytes);
+            JOptionPane.showMessageDialog(this, "El correo ha sido enviado.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al enviar el boleto.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_btnEnviarBoletoActionPerformed
 
     private void cargarBoleto() {
-        
+        try {
+            byte[] pdfBytes = ControlVentaBoleto.getInstance().generarPDFBoleto(boleto);
+            if (pdfBytes == null) {
+                return;
+            }
+            PDDocument doc = PDDocument.load(pdfBytes);
+            PDFRenderer renderer = new PDFRenderer(doc);
+            BufferedImage image = renderer.renderImageWithDPI(0, 150);
+            doc.close();
+            lblPdf.setIcon(new ImageIcon(image));
+            pnlVisorPDF.setViewportView(lblPdf);
+            pnlVisorPDF.revalidate();
+            pnlVisorPDF.repaint();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No se pudo mostrar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Método que da estructura al cuerpo del correo.
+     *
+     * @return Estructura del cuerpo que será enviado.
+     */
+    private String estructuraMensaje() {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        String fecha = boleto.getVenta().getFuncion().getFechaHora().format(fmt);
+        String asientos = String.join(", ", boleto.getVenta().getAsientos().stream().map(Object::toString).toList()
+        );
+        return """
+        <h2>Confirmación de compra</h2>
+        <p>Estos son los detalles de tu compra. ¡Disfruta tu experiencia!</p>
+        <p><b>Película:</b> %s</p>
+        <p><b>Fecha y horario:</b> %s</p>
+        <p><b>Sala:</b> %s</p>
+        <p><b>Asientos:</b> %s</p>
+        <p><b>Total:</b> $%.2f</p>""".formatted(boleto.getVenta().getFuncion().getPelicula().getTitulo(), fecha,
+                boleto.getVenta().getFuncion().getSala().getNombre(), asientos, boleto.getVenta().getTotal()
+        );
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviarBoleto;
-    private javax.swing.JLabel lblAsientos;
-    private javax.swing.JLabel lblFuncion;
-    private javax.swing.JLabel lblSala;
-    private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblTotal;
-    private javax.swing.JPanel pnlVisorPDF;
+    private javax.swing.JLabel lblPdf;
+    private javax.swing.JScrollPane pnlVisorPDF;
     private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }

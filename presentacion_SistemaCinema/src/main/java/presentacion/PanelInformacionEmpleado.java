@@ -3,6 +3,7 @@ package presentacion;
 import presentacion.controles.ControlPantallas;
 import dto.EmpleadoDTO;
 import java.awt.Color;
+import dto.enums.TipoEmpleado;
 import java.awt.Image;
 import java.net.URL;
 import java.time.LocalDate;
@@ -17,15 +18,19 @@ import presentacion.utilerias.GestorSesion;
 
 /**
  *
- * @author saula
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ * @author Alejandro Rodríguez Lugo - 00000251622
  */
 public class PanelInformacionEmpleado extends javax.swing.JPanel {
-    
+
+    private EmpleadoDTO empleado;
+
     /**
      * Creates new form panelInformacionEmpleadoBien
      */
-    public PanelInformacionEmpleado() {
+    public PanelInformacionEmpleado(EmpleadoDTO empleado) {
         initComponents();
+        this.empleado = empleado;
         cargarPanel();
     }
 
@@ -164,47 +169,52 @@ public class PanelInformacionEmpleado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
-        ControlPantallas.getInstance().abrirMenuPrincipal();
+        if (empleado.getTipoEmpleado().equals(TipoEmpleado.ADMINISTRADOR)) {
+            ControlPantallas.getInstance().abrirMenuPrincipal(empleado);
+        } else{
+            ControlPantallas.getInstance().abrirMenuPrincipalEmpleado(empleado);
+        }
     }//GEN-LAST:event_btnMenuPrincipalActionPerformed
 
     private void lblCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarSesionMouseClicked
         // TODO add your handling code here:
+        ControlPantallas.getInstance().abrirInicioSesion();
     }//GEN-LAST:event_lblCerrarSesionMouseClicked
 
-    private void cargarPanel(){
+    private void cargarPanel() {
         cargarInformacionEmpleado();
         mostrarFecha();
         iniciarReloj();
     }
-    
-    private void mostrarFecha(){
+
+    private void mostrarFecha() {
         LocalDate hoy = LocalDate.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
         lblFecha.setText(hoy.format(formato));
     }
-    
-    private void iniciarReloj(){
-         Timer timer = new Timer(1000, e -> {
+
+    private void iniciarReloj() {
+        Timer timer = new Timer(1000, e -> {
             LocalTime hora = LocalTime.now();
             DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
             lblHora.setText(hora.format(formatoHora));
         });
         timer.start();
     }
-    
-    private void cargarInformacionEmpleado(){
+
+    private void cargarInformacionEmpleado() {
         EmpleadoDTO empleado = GestorSesion.getUsuario();
         configurarImagen(empleado.getRutaImagen());
-        configurarInformacion(lblNombreEmpleado, empleado.getNombres()+" "+empleado.getApellidoPaterno());
+        configurarInformacion(lblNombreEmpleado, empleado.getNombres() + " " + empleado.getApellidoPaterno());
         configurarInformacion(lblPuestoEmpleado, empleado.getPuesto());
         configurarInformacion(lblNombreSucursal, empleado.getSucursal().getNombre());
     }
 
-    private void configurarInformacion(JLabel etiqueta, String texto){
+    private void configurarInformacion(JLabel etiqueta, String texto) {
         etiqueta.setText(texto.toUpperCase());
         etiqueta.setForeground(Color.WHITE);
     }
-    
+
     private void configurarImagen(String urlImagen) {
         lblFoto.setText("");
         lblFoto.setHorizontalAlignment(SwingConstants.CENTER);

@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
  *
  * @author Saul Isaac Apodaca Baldenegro - 00000252020
  * @author Alejandro Rodríguez Lugo - 00000251622
+ * @author Héctor Javier Alonso Zaragoza - 00000252039
  */
 public class LectorQR implements ILectorQR {
 

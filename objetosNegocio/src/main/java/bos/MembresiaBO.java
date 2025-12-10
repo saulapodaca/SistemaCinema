@@ -1,6 +1,10 @@
 package bos;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
+/**
+ * @author Héctor Javier Alonso Zaragoza - 00000252039
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ */
 
 import daos.MembresiaDAO;
 import dominio.Membresia;

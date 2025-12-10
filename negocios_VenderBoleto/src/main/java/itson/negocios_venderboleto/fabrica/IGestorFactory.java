@@ -15,11 +15,15 @@ import itson.negocios_gestorpromociones.IGestorPromociones;
 import itson.negocios_gestorventas.IGestorVentas;
 import itson.infraestructura_lectorqr.ILectorQR;
 import itson.infraestructura_generadorpdf.IGeneradorPDF;
+import itson.negocios_gestorcanjearbeneficiosk.IGestorCanjearBeneficiosK;
+
+
 
 /**
  *
  * @author Saul Isaac Apodaca Baldenegro - 00000252020
  * @author Alejandro Rodríguez Lugo - 00000251622
+ * @author Héctor Javier Alonso Zaragoza - 00000252039
  */
 public interface IGestorFactory {
 
@@ -44,4 +48,6 @@ public interface IGestorFactory {
     ILectorQR crearLectorQR();
 
     IGeneradorPDF crearGeneradorPDF();
+    
+    IGestorCanjearBeneficiosK crearGestorCanjearBeneficiosK();
 }

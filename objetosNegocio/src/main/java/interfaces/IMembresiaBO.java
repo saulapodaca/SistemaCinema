@@ -8,7 +8,8 @@ import dto.MembresiaDTO;
 
 /**
  *
- * @author saula
+ * @author Héctor Javier Alonso Zaragoza - 00000252039
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
  */
 public interface IMembresiaBO {
 

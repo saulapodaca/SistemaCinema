@@ -17,11 +17,13 @@ import itson.negocios_gestorventas.IGestorVentas;
 import itson.infraestructura_generadorpdf.IGeneradorPDF;
 import java.util.List;
 import dto.enums.EstadoBoleto;
+import itson.negocios_gestorcanjearbeneficiosk.IGestorCanjearBeneficiosK;
 
 /**
  *
  * @author Saul Isaac Apodaca Baldenegro - 00000252020
  * @author Alejandro Rodríguez Lugo - 00000251622
+ * @author Héctor Javier Alonso Zaragoza - 00000252039
  */
 public class VentaBoleto implements IVentaBoleto {
 
@@ -31,6 +33,7 @@ public class VentaBoleto implements IVentaBoleto {
     private final IGeneradorQR generadorQR;
     private final ICorreoElectronico correoElectronico;
     private final IGeneradorPDF generadorPDF;
+    private final IGestorCanjearBeneficiosK gestorBeneficios;
 
     /**
      *
@@ -39,18 +42,22 @@ public class VentaBoleto implements IVentaBoleto {
      * @param gestorFunciones
      * @param generadorQR
      * @param correoElectronico
+     * @param generadorPDF
+     * @param gestorBeneficios
      */
     public VentaBoleto(IGestorVentas gestorVentas,
             IGestorBoletos gestorBoletos,
             IGestorFunciones gestorFunciones,
             IGeneradorQR generadorQR,
-            ICorreoElectronico correoElectronico, IGeneradorPDF generadorPDF) {
+            ICorreoElectronico correoElectronico, IGeneradorPDF generadorPDF, IGestorCanjearBeneficiosK gestorBeneficios) {
         this.gestorVentas = gestorVentas;
         this.gestorBoletos = gestorBoletos;
         this.gestorFunciones = gestorFunciones;
         this.generadorQR = generadorQR;
         this.correoElectronico = correoElectronico;
         this.generadorPDF = generadorPDF;
+        this.gestorBeneficios = gestorBeneficios;
+        
     }
 
     /**
