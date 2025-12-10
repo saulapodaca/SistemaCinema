@@ -5,9 +5,12 @@
 package itson.negocios_gestorventas;
 
 import dto.AsientoDTO;
+import dto.ComboDTO;
 import dto.DetallePrecioDTO;
 import dto.PromocionDTO;
+import dto.VentaAlimentoDTO;
 import dto.VentaDTO;
+import exceptions.ComboException;
 import exceptions.EmpleadoNoEncontradoException;
 import exceptions.FuncionNoEncontradaException;
 import exceptions.SucursalNoExistenteException;
@@ -25,4 +28,8 @@ public interface IGestorVentas {
     VentaDTO obtenerVentaPorID(String id)throws VentaNoEncontradaException, FuncionNoEncontradaException, EmpleadoNoEncontradoException, SucursalNoExistenteException;
     
     DetallePrecioDTO calcularPrecios(List<AsientoDTO> asientos, PromocionDTO promoSeleccionada);
+    
+    VentaAlimentoDTO registrarVentaCombo(VentaAlimentoDTO venta) throws ComboException;
+    
+    DetallePrecioDTO calcularPreciosCombo (ComboDTO combo);
 }

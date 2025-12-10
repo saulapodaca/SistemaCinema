@@ -272,7 +272,7 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        ControlPantallas.getInstance().abrirSeleccionFunciones(this, funcion.getPelicula());
+        ControlPantallas.getInstance().abrirSeleccionFunciones(funcion.getPelicula());
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
@@ -286,7 +286,7 @@ public class PanelSeleccionAsientos extends javax.swing.JPanel {
         return;
     }
         
-        ControlPantallas.getInstance().abrirInformacionPago(this, asientosSeleccionados, funcion);
+        ControlPantallas.getInstance().abrirInformacionPago( asientosSeleccionados, funcion);
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void configurarMapaAsientos(SalaDTO sala) {

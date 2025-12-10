@@ -347,7 +347,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
      * @param evt el evento que hará
      */
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        ControlPantallas.getInstance().abrirSeleccionPeliculas(this);
+        ControlPantallas.getInstance().abrirSeleccionPeliculas();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void dateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateChooserPropertyChange
@@ -518,7 +518,7 @@ public class PanelSeleccionFuncion extends javax.swing.JPanel {
         panelFuncion.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                ControlPantallas.getInstance().abrirSeleccionAsientos(PanelSeleccionFuncion.this, funcion);
+                ControlPantallas.getInstance().abrirSeleccionAsientos(funcion);
             }
         });
     }

@@ -2,6 +2,7 @@ package itson.negocios_correoelectronico;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
 import dto.BoletoDTO;
+import dto.ReciboAlimentoDTO;
 
 public class CorreoElectronico implements ICorreoElectronico {
 
@@ -13,6 +14,11 @@ public class CorreoElectronico implements ICorreoElectronico {
         System.out.println("   Asientos: " + boleto.getVenta().getAsientos().size());
         System.out.println("   Costo: $" + boleto.getVenta().getTotal());
         System.out.println("   QR: " + boleto.getRutaQr());
+    }
+
+    @Override
+    public void enviarRecibo(String correoDestino, ReciboAlimentoDTO recibo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
 
