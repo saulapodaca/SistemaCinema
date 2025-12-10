@@ -49,7 +49,6 @@ public class ControlPantallas {
      */
     private final FormPrincipal formPrincipal;
 
-//    private EmpleadoDTO empleado;
     /**
      * Constructor privado que inicializa el frame principal
      */

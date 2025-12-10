@@ -66,6 +66,7 @@ public class InsertMasivo implements IInsertMasivo {
         try {
             // SalaDTO(id, nombre, filas, columnas, sucursalId)
             salaBO.insertarSala(new SalaDTO(null, "Sala 1", 7, 8));
+            salaBO.insertarSala(new SalaDTO(null, "Sala 3", 7, 8));
             salaBO.insertarSala(new SalaDTO(null, "Sala 2", 8, 9));
             salaBO.insertarSala(new SalaDTO(null, "Sala 1", 5, 5));
         } catch (NegocioException e) {
@@ -111,26 +112,26 @@ public class InsertMasivo implements IInsertMasivo {
                     obtenerSala("Sala 1"),
                     obtenerPelicula("Spider-man 3"),
                     " Sala Tradicional",
-                    LocalDateTime.of(2025, 12, 9, 16, 0)));
+                    LocalDateTime.of(2025, 12, 10, 16, 0)));
 
             funcionBO.insertarFuncion(new FuncionDTO(null,
-                    obtenerSala("Sala 1"),
+                    obtenerSala("Sala 3"),
                     obtenerPelicula("Spider-man 3"),
-                    " Sala Tradicional",
-                    LocalDateTime.of(2025, 12, 9, 19, 0)));
+                    " Sala VIP",
+                    LocalDateTime.of(2025, 12, 10, 19, 0)));
 
             funcionBO.insertarFuncion(new FuncionDTO(
                     null,
                     obtenerSala("Sala 2"),
                     obtenerPelicula("Spider-man 3"),
-                    "Sala Tradicional",
-                    LocalDateTime.of(2025, 12, 9, 22, 0)));
+                    " Sala Tradicional",
+                    LocalDateTime.of(2025, 12, 10, 22, 0)));
 
             funcionBO.insertarFuncion(new FuncionDTO(null,
                     obtenerSala("Sala 2"),
                     obtenerPelicula("Spider-man 3"),
                     " Sala Tradicional",
-                    LocalDateTime.of(2025, 12, 9, 19, 0)));
+                    LocalDateTime.of(2025, 12, 10, 20, 0)));
         } catch (NegocioException | PeliculaNoExistenteException | SalaNoExistenteException e) {
             System.out.println("Error insertando funciones: " + e.getMessage());
         }
