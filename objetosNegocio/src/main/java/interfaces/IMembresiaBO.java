@@ -5,6 +5,7 @@
 package interfaces;
 
 import dto.MembresiaDTO;
+import exceptions.NegocioException;
 
 /**
  *
@@ -16,4 +17,8 @@ public interface IMembresiaBO {
     MembresiaDTO buscarMembresia(String codigoMembresia);
     
     boolean actualizarSaldo(String codigomembresia, int saldoNuevo);
+    
+    MembresiaDTO insertarMembresia(MembresiaDTO membresiaDTO) throws NegocioException;
+    
+    void insertarMock() throws NegocioException;
 }

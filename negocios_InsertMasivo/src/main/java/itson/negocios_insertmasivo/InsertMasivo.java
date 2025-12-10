@@ -1,27 +1,36 @@
 package itson.negocios_insertmasivo;
 
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
+/**
+ * @author Héctor Javier Alonso Zaragoza - 00000252039
+ * @author Saul Isaac Apodaca Baldenegro - 00000252020
+ */
 import bos.EmpleadoBO;
 import bos.FuncionBO;
+import bos.MembresiaBO;
 import bos.PeliculaBO;
 import bos.SalaBO;
 import bos.SucursalBO;
 import dto.EmpleadoDTO;
 import dto.FiltroDTO;
 import dto.FuncionDTO;
+import dto.MembresiaDTO;
 import dto.PeliculaDTO;
 import dto.SalaDTO;
 import dto.SucursalDTO;
 import dto.enums.TipoEmpleado;
+import dto.enums.TipoMembresia;
 import exceptions.NegocioException;
 import exceptions.PeliculaNoExistenteException;
 import exceptions.SalaNoExistenteException;
 import exceptions.SucursalNoExistenteException;
 import interfaces.IEmpleadoBO;
 import interfaces.IFuncionBO;
+import interfaces.IMembresiaBO;
 import interfaces.IPeliculaBO;
 import interfaces.ISalaBO;
 import interfaces.ISucursalBO;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,6 +41,7 @@ public class InsertMasivo implements IInsertMasivo {
     private final IEmpleadoBO empleadoBO;
     private final IPeliculaBO peliculaBO;
     private final IFuncionBO funcionBO;
+    private final IMembresiaBO membo;
 
     public InsertMasivo() {
         this.sucursalBO = SucursalBO.getInstancia();
@@ -39,6 +49,7 @@ public class InsertMasivo implements IInsertMasivo {
         this.empleadoBO = EmpleadoBO.getInstancia();
         this.peliculaBO = PeliculaBO.getInstancia();
         this.funcionBO = FuncionBO.getInstancia();
+        this.membo = MembresiaBO.getInstancia();
     }
 
     @Override
@@ -50,6 +61,9 @@ public class InsertMasivo implements IInsertMasivo {
             insertarEmpleados();
             insertarPeliculas();
             insertarFunciones();
+            
+          
+            
         }
     }
 
@@ -67,7 +81,7 @@ public class InsertMasivo implements IInsertMasivo {
             // SalaDTO(id, nombre, filas, columnas, sucursalId)
             salaBO.insertarSala(new SalaDTO(null, "Sala 1", 7, 8));
             salaBO.insertarSala(new SalaDTO(null, "Sala 2", 8, 9));
-            salaBO.insertarSala(new SalaDTO(null, "Sala 1", 5, 5));
+            salaBO.insertarSala(new SalaDTO(null, "Sala 7", 5, 5));
         } catch (NegocioException e) {
             System.out.println("Error insertando salas: " + e.getMessage());
         }
@@ -117,27 +131,27 @@ public class InsertMasivo implements IInsertMasivo {
             funcionBO.insertarFuncion(new FuncionDTO(null,
                     obtenerSala("Sala 1"),
                     obtenerPelicula("Spider-man 3"),
-                    " Sala Tradicional",
-                    LocalDateTime.of(2025, 12, 9, 16, 0)));
+                    "Sala Tradicional",
+                    LocalDateTime.of(2025, 12, 10, 13, 0))); // Hoy 1:00 pm
 
             funcionBO.insertarFuncion(new FuncionDTO(null,
                     obtenerSala("Sala 1"),
                     obtenerPelicula("Spider-man 3"),
-                    " Sala Tradicional",
-                    LocalDateTime.of(2025, 12, 9, 19, 0)));
+                    "Sala Tradicional",
+                    LocalDateTime.of(2025, 12, 10, 18, 0))); // Hoy 6:00 pm
 
             funcionBO.insertarFuncion(new FuncionDTO(
                     null,
                     obtenerSala("Sala 7"),
                     obtenerPelicula("Spider-man 3"),
                     "Sala VIP",
-                    LocalDateTime.of(2025, 12, 9, 20, 0)));
+                    LocalDateTime.of(2025, 12, 10, 22, 0))); // Hoy 10:00 pm
 
             funcionBO.insertarFuncion(new FuncionDTO(null,
                     obtenerSala("Sala 2"),
                     obtenerPelicula("Spider-man 3"),
-                    " Sala Tradicional",
-                    LocalDateTime.of(2025, 12, 9, 19, 0)));
+                    "Sala Tradicional",
+                    LocalDateTime.of(2025, 12, 11, 10, 0))); // Mañana 10:00 am
         } catch (NegocioException | PeliculaNoExistenteException | SalaNoExistenteException e) {
             System.out.println("Error insertando funciones: " + e.getMessage());
         }
@@ -154,5 +168,12 @@ public class InsertMasivo implements IInsertMasivo {
     private PeliculaDTO obtenerPelicula(String titulo) throws NegocioException {
         return peliculaBO.obtenerPorTitulo(titulo);
     }
+    
+    private MembresiaDTO crearMembresia(){
+        MembresiaDTO m = new MembresiaDTO("AAA-111", 0, TipoMembresia.ESTUDIANTE, null, LocalDate.MIN, true, null);
+        return m;
+    }
+    
+   
 
 }

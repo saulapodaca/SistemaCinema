@@ -4,13 +4,19 @@
  */
 package presentacion;
 
+import dominio.Membresia;
 import dto.EmpleadoDTO;
+import dto.MembresiaDTO;
+import dto.ObjetoBeneficioDTO;
 import dto.SesionDTO;
 import exceptions.SesionEmpleadoNoExistenteException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import presentacion.controles.ControlInicioSesion;
 import presentacion.controles.ControlPantallas;
 import presentacion.utilerias.GestorSesion;
+import presentacion.controles.ControlCanjearBeneficios;
 
 /**
  *
@@ -116,7 +122,51 @@ public class IngresarMembresiaPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VerificarMemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerificarMemBtnActionPerformed
-        
+        String nummem = numeroMemTxt.getText();
+        System.out.println("=== INICIO FLUJO ===");
+        System.out.println("1. JPanel - Código ingresado: '" + nummem + "'");
+
+        try {
+            // Validar formato AAA-000
+            if (!nummem.matches("^[A-Z]{3}-\\d{3}$")) {
+                System.out.println("1. JPanel - Formato inválido");
+                javax.swing.JOptionPane.showMessageDialog(
+                        this,
+                        "El código de membresía debe tener el formato AAA-000 (3 letras mayúsculas, guion y 3 números).",
+                        "Error de formato",
+                        javax.swing.JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+
+            System.out.println("1. JPanel - Formato válido, llamando al control...");
+            MembresiaDTO m = ControlCanjearBeneficios.getInstance().buscarMembresia(nummem);
+
+            System.out.println("1. JPanel - Resultado recibido: " + (m != null ? "Encontrado" : "NULL"));
+
+            if (m == null) {
+                System.out.println("1. JPanel - Membresía no encontrada");
+                javax.swing.JOptionPane.showMessageDialog(
+                        this,
+                        "No se encontró una membresía con el código: " + nummem,
+                        "Membresía no encontrada",
+                        javax.swing.JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+
+            ControlPantallas.getInstance().abrirPanelSeleccionBeneficio(jPanel1, m);
+
+        } catch (Exception e) {
+            System.out.println("1. JPanel - ERROR CAPTURADO:");
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Ocurrió un error al verificar la membresía: " + e.getMessage(),
+                    "Error",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+        }
     }//GEN-LAST:event_VerificarMemBtnActionPerformed
 
 

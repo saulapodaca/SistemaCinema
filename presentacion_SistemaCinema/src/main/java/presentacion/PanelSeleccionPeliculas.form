@@ -486,7 +486,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="presentacion.utilerias.PanelBuscador" name="panelBuscador1">
+    <Component class="org.netbeans.modules.form.InvalidComponent" name="panelBuscador1">
     </Component>
     <Component class="presentacion.utilerias.PanelPaginacion" name="panelPaginacion1">
     </Component>

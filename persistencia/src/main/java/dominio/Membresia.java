@@ -16,6 +16,15 @@ public class Membresia {
     private String nombreCliente;
     private Date fechaRegistro;
     private boolean activa;
+
+    public int getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
+    }
+    private int saldo;
     private List<ObjectId> promocionesIds;
 
     public Membresia() {

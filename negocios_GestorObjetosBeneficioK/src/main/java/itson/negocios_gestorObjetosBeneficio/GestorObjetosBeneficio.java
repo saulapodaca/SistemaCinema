@@ -6,6 +6,7 @@ package itson.negocios_gestorObjetosBeneficio;
 
 import bos.ObjetoBeneficioBO;
 import dominio.Membresia;
+import dto.MembresiaDTO;
 import dto.ObjetoBeneficioDTO;
 import interfaces.IObjetoBeneficioBO;
 import java.util.List;
@@ -24,7 +25,7 @@ public class GestorObjetosBeneficio implements IGestorObjetosBeneficio {
     }
     
     @Override
-    public List<ObjetoBeneficioDTO> obtenerObjetosDisponiblesPorMembresia(Membresia membresia){
+    public List<ObjetoBeneficioDTO> obtenerObjetosDisponiblesPorMembresia(MembresiaDTO membresia){
         return OBJBENBO.obtenerObjetosDisponiblesPorMembresia(membresia);
     }
     

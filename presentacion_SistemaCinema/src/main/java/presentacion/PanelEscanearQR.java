@@ -30,6 +30,7 @@ import itson.infraestructura_lectorqr.ILectorQR;
 import itson.infraestructura_lectorqr.LectorQR;
 import presentacion.controles.ControlReagendarBoleto;
 import dto.enums.EstadoBoleto;
+import presentacion.controles.ControlEscanearQr;
 
 /**
  *

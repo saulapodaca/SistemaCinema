@@ -16,7 +16,16 @@ public class GestorMembresias implements IGestorMembresias {
     
     @Override
     public MembresiaDTO buscarMembresia(String codigoMembresia) {
-        return membresiaBO.buscarMembresia(codigoMembresia);
+        System.out.println("4. GestorMembresias - Buscando: '" + codigoMembresia + "'");
+    try {
+        MembresiaDTO resultado = membresiaBO.buscarMembresia(codigoMembresia);
+        System.out.println("4. GestorMembresias - Resultado: " + (resultado != null ? "Encontrado" : "NULL"));
+        return resultado;
+    } catch (Exception e) {
+        System.out.println("4. GestorMembresias - ERROR:");
+        e.printStackTrace();
+        throw e;
+    }
     }
     
     @Override

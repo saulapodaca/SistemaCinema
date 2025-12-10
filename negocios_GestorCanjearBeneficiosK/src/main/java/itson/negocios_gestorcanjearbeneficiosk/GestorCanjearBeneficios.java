@@ -27,7 +27,16 @@ public class GestorCanjearBeneficios implements IGestorCanjearBeneficiosK {
     
     @Override
     public MembresiaDTO buscarMembresia (String codigoMembresia){
-       return fachadaMem.buscarMembresia(codigoMembresia);
+       System.out.println("3. GestorCanjearBeneficios - Buscando: '" + codigoMembresia + "'");
+    try {
+        MembresiaDTO resultado = fachadaMem.buscarMembresia(codigoMembresia);
+        System.out.println("3. GestorCanjearBeneficios - Resultado: " + (resultado != null ? "Encontrado" : "NULL"));
+        return resultado;
+    } catch (Exception e) {
+        System.out.println("3. GestorCanjearBeneficios - ERROR:");
+        e.printStackTrace();
+        throw e;
+    }
     }
     
     @Override
@@ -41,7 +50,7 @@ public class GestorCanjearBeneficios implements IGestorCanjearBeneficiosK {
      }
     
     @Override
-    public List<ObjetoBeneficioDTO> obtenerObjetosDisponiblesPorMembresia(Membresia membresia){
+    public List<ObjetoBeneficioDTO> obtenerObjetosDisponiblesPorMembresia(MembresiaDTO membresia){
         return fachadaObj.obtenerObjetosDisponiblesPorMembresia(membresia);
     }
     

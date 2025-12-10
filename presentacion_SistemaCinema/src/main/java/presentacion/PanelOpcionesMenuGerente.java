@@ -206,7 +206,7 @@ public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
 
         lblGestionarPrecios.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         lblGestionarPrecios.setForeground(new java.awt.Color(255, 255, 255));
-        lblGestionarPrecios.setText("GESTIONAR PRECIOS");
+        lblGestionarPrecios.setText("CANJEAR BENEFICIOS");
 
         lblGestionarPromociones.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         lblGestionarPromociones.setForeground(new java.awt.Color(255, 255, 255));
@@ -342,6 +342,7 @@ public class PanelOpcionesMenuGerente extends javax.swing.JPanel {
 
     private void btnGestionarPreciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarPreciosActionPerformed
         // TODO add your handling code here:
+        ControlPantallas.getInstance().abrirIngresarMembresia(this);
     }//GEN-LAST:event_btnGestionarPreciosActionPerformed
 
     private void btnVentaBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaBoletoActionPerformed

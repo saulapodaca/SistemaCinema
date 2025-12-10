@@ -5,6 +5,13 @@
 package presentacion.controles;
 
 import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import dto.BoletoDTO;
+import exceptions.BoletoNoExistenteException;
+import exceptions.EmpleadoNoEncontradoException;
+import exceptions.FuncionNoEncontradaException;
+import exceptions.SucursalNoExistenteException;
+import exceptions.VentaNoEncontradaException;
 import itson.negocios_venderboleto.fabrica.GestorFactory;
 import itson.negocios_venderboleto.fachada.IVentaBoletoFacade;
 import itson.negocios_venderboleto.fachada.VentaBoletoFacade;
@@ -34,4 +41,19 @@ public class ControlEscanearQr {
      public String escanearQR(Webcam webcam) {
         return facade.escanearQR(webcam);
     }
+     
+      public WebcamPanel getPanelCamara() {
+        return facade.getPanelCamara();
+    }
+      
+    public BoletoDTO buscarBoletoPorId(String id) throws BoletoNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, SucursalNoExistenteException, VentaNoEncontradaException {
+        return facade.buscarBoletoPorId(id);
+    }
+    
+    public BoletoDTO actualizar(BoletoDTO boleto) throws BoletoNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, IllegalArgumentException, SucursalNoExistenteException, VentaNoEncontradaException {
+        return facade.actualizar(boleto);
+    }
+     
+     
+     
 }

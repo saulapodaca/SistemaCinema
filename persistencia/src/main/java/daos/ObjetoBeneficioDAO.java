@@ -15,6 +15,7 @@ import dominio.ObjetoBeneficio;
 import interfaces.IObjetoBeneficioDAO;
 import java.util.ArrayList;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -29,9 +30,31 @@ public class ObjetoBeneficioDAO implements IObjetoBeneficioDAO {
     public ObjetoBeneficioDAO(){
         
          MongoDatabase db = ManejadorConexion.getInstancia().getBaseDatos();
-         this.coleccion = db.getCollection("beneficios", ObjetoBeneficio.class);
+         this.coleccion = db.getCollection("objetosbeneficio", ObjetoBeneficio.class);
          
     }
+    
+    
+    /**
+     * Inserta un nuevo objeto de beneficio en la colección.
+     *
+     * @param beneficio Entidad ObjetoBeneficio a insertar
+     * @return La entidad insertada con su nuevo ObjectId
+     */
+    
+    public ObjetoBeneficio insertar(ObjetoBeneficio beneficio) {
+    // Generar un nuevo ObjectId y guardarlo como String
+    ObjectId nuevoId = new ObjectId();
+    beneficio.setId(nuevoId.toHexString()); // 🔹 convertir a String
+    
+    coleccion.insertOne(beneficio);
+    return beneficio;
+   }
+    
+   
+    
+    
+    
     
     @Override
     public List<ObjetoBeneficio> obtenerObjetosDisponiblesPorMembresia(Membresia membresia){

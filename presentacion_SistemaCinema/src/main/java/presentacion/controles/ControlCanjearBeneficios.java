@@ -26,7 +26,9 @@ public class ControlCanjearBeneficios {
     private final IGestorCanjearBeneficiosK canjearbeneficiosfachada;
     
     private ControlCanjearBeneficios(){
+        System.out.println("Inicializando ControlCanjearBeneficios...");
         this.canjearbeneficiosfachada = new GestorCanjearBeneficios();
+        System.out.println("ControlCanjearBeneficios inicializado");
     }
     
     public static synchronized ControlCanjearBeneficios getInstance() {
@@ -37,7 +39,17 @@ public class ControlCanjearBeneficios {
     }
     
     public MembresiaDTO buscarMembresia(String codigoMembresia){
-        return canjearbeneficiosfachada.buscarMembresia(codigoMembresia);
+        System.out.println("2. ControlCanjearBeneficios - Buscando: '" + codigoMembresia + "'");
+    try {
+        MembresiaDTO resultado = canjearbeneficiosfachada.buscarMembresia(codigoMembresia);
+        System.out.println("2. ControlCanjearBeneficios - Resultado: " + (resultado != null ? "Encontrado" : "NULL"));
+        return resultado;
+    } catch (Exception e) {
+        System.out.println("2. ControlCanjearBeneficios - ERROR:");
+        e.printStackTrace();
+        throw e;
+    }
+        
     }
     
     public boolean actualizarPuntos(String codigoMembresia, int saldoNuevo){
@@ -48,7 +60,7 @@ public class ControlCanjearBeneficios {
         return canjearbeneficiosfachada.actualizarStock(idOB, unidades_vendidas);
     }
     
-    public List<ObjetoBeneficioDTO> obtenerObjetosDisponiblesPorMembresia(Membresia membresia){
+    public List<ObjetoBeneficioDTO> obtenerObjetosDisponiblesPorMembresia(MembresiaDTO membresia){
         return canjearbeneficiosfachada.obtenerObjetosDisponiblesPorMembresia(membresia);
     } 
     

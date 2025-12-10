@@ -68,9 +68,37 @@ public class MembresiaDAO implements IMembresiaDAO{
      */
     @Override
     public Membresia buscarPorCodigo(String codigo) {
-        return coleccion.find(eq("codigoMembresia", codigo)).first();
-    }
+        System.out.println("6. MembresiaDAO - ¡LLEGÓ AL DAO!");
+        System.out.println("6. MembresiaDAO - Buscando código: '" + codigo + "'");
+
+     try {
+         System.out.println("6. MembresiaDAO - Ejecutando consulta MongoDB...");
+         Membresia resultado = coleccion.find(eq("codigoMembresia", codigo)).first();
+
+         if (resultado == null) {
+             System.out.println("6. MembresiaDAO - ❌ NO ENCONTRADO");
+             long total = coleccion.countDocuments();
+             System.out.println("6. MembresiaDAO - Total documentos: " + total);
+
+             // Listar todos
+             System.out.println("6. MembresiaDAO - Listando todos:");
+             coleccion.find().forEach(m -> 
+                 System.out.println("   - '" + m.getCodigoMembresia() + "'")
+             );
+         } else {
+             System.out.println("6. MembresiaDAO - ✓ ENCONTRADO: " + resultado.getCodigoMembresia());
+         }
+
+         return resultado;
+
+     } catch (Exception e) {
+         System.out.println("6. MembresiaDAO - ERROR:");
+         e.printStackTrace();
+         throw e;
+     }
+
     
+    }
     @Override
     public boolean actualizarSaldo(Membresia m,int saldoNuevo){
     

@@ -58,6 +58,14 @@ public class MembresiaDTO {
         return codigoMembresia;
     }
 
+    public void setPromocionesIds(List<String> promocionesIds) {
+        this.promocionesIds = promocionesIds;
+    }
+
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
+    }
+
     public void setCodigoMembresia(String codigoMembresia) {
         this.codigoMembresia = codigoMembresia;
     }

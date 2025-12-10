@@ -6,6 +6,7 @@ package itson.negocios_venderboleto.fachada;
 
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
+import dominio.Membresia;
 import dto.AsientoDTO;
 import dto.BoletoDTO;
 import dto.DetallePrecioDTO;
@@ -13,6 +14,7 @@ import dto.EmpleadoDTO;
 import dto.FiltroDTO;
 import dto.FuncionDTO;
 import dto.MembresiaDTO;
+import dto.ObjetoBeneficioDTO;
 import dto.PeliculaDTO;
 import dto.PromocionDTO;
 import dto.VentaDTO;
@@ -77,4 +79,12 @@ public interface IVentaBoletoFacade {
     byte[] generarPDFPelicula(PeliculaDTO peliculaDTO, LocalDate fechaInicio, LocalDate fechaFin) throws Exception;
 
     BoletoDTO actualizar(BoletoDTO boleto) throws BoletoNoExistenteException, EmpleadoNoEncontradoException, FuncionNoEncontradaException, IllegalArgumentException, SucursalNoExistenteException, VentaNoEncontradaException;
+
+    boolean actualizarPuntos(String codigoMembresia, int saldonuevo);
+    
+    boolean actualizarStock(String idOB, int unidades_vendidas);
+    
+    List<ObjetoBeneficioDTO> obtenerObjetosDisponiblesPorMembresia(MembresiaDTO embresia);
+
+
 }

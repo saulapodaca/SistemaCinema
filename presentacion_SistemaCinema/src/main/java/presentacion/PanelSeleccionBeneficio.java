@@ -2,16 +2,22 @@ package presentacion;
 
 import dto.FiltroDTO;
 import dto.MembresiaDTO;
-import presentacion.controles.ControlPantallas;
+import dto.ObjetoBeneficioDTO;
 import dto.PeliculaDTO;
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.Image;
-import java.net.URL;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.MouseListener;
 import java.util.List;
-import javax.swing.ImageIcon;
+import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import presentacion.controles.ControlCanjearBeneficios;
+import presentacion.controles.ControlPantallas;
 import presentacion.controles.ControlVentaBoleto;
 
 /**
@@ -29,16 +35,142 @@ public class PanelSeleccionBeneficio extends javax.swing.JPanel {
      * @param membresia
      */
     public PanelSeleccionBeneficio(MembresiaDTO membresia) {
-        initComponents();
-        this.membresia = membresia;
+        this.membresia=membresia;
         inicializarReferencias();
-//        panelPaginacion1.setOnPaginaChange(() -> {
-////            actualizarCartelera(); // ESTE método está en el panel padre
-////        });
-////        actualizarCartelera();
-//        }
-//                
+        
+        
+       inicializarReferencias();
+
+        // 🔹 Eliminado panelBuscador1
+        panelPaginacion1.setOnPaginaChange(() -> {
+            actualizarCartelera(); // método en panel padre
+        });
+
+        actualizarCartelera();
     }            
+    
+    private void cargarBeneficios(List<ObjetoBeneficioDTO> beneficios) {
+        for (int i = 0; i < etiquetasImagenes.size(); i++) {
+            JLabel lblImagen = etiquetasImagenes.get(i);
+            JLabel lblTitulo = etiquetasTitulo.get(i);
+
+            limpiarEtiquetas(lblImagen, lblTitulo);
+
+            if (i < beneficios.size()) {
+                ObjetoBeneficioDTO beneficio = beneficios.get(i);
+                mostrarBeneficioEnEtiqueta(beneficio, lblImagen, lblTitulo);
+            }
+        }
+    }
+    
+    
+    private void inicializarReferencias() {
+        etiquetasImagenes = List.of(
+                lblImagenPeli1, lblImagenPeli2, lblImagenPeli3,
+                lblImagenPeli4, lblImagenPeli5, lblImagenPeli6
+        );
+
+        etiquetasTitulo = List.of(
+                lblTituloPeli1, lblTituloPeli2, lblTituloPeli3,
+                lblTituloPeli4, lblTituloPeli5, lblTituloPeli6
+        );
+    }
+    
+    private void limpiarEtiquetas(JLabel lblImagen, JLabel lblTitulo) {
+     lblImagen.setIcon(null);
+        lblImagen.setText("");
+        lblTitulo.setText("");
+        for (MouseListener ml : lblImagen.getMouseListeners()) {
+            lblImagen.removeMouseListener(ml);
+        }
+        lblImagen.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }
+    
+    private void mostrarBeneficioEnEtiqueta(ObjetoBeneficioDTO beneficio, JLabel lblImagen, JLabel lblTitulo) {
+        configurarTitulo(lblTitulo, beneficio.getNombre(), beneficio.getCosto());
+        configurarImagen(lblImagen);
+        configurarEventoClick(lblImagen, beneficio);
+    }
+    
+   private void configurarTitulo(JLabel lblTitulo, String nombre, double costo) {
+        lblTitulo.setText(nombre.toUpperCase() + " - Costo: " + costo);
+        lblTitulo.setForeground(new Color(204, 204, 204));
+        lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+    }
+    
+    private void configurarImagen(JLabel lblImagen) {
+        lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
+        lblImagen.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // Usar ícono genérico dibujado en lugar de resources
+        Icon iconoGenerico = new IconoBeneficioGenerico(64, 64);
+        lblImagen.setIcon(iconoGenerico);
+    }
+    
+    private void configurarEventoClick(JLabel lblImagen, ObjetoBeneficioDTO objeto) {
+        lblImagen.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                ControlPantallas.getInstance().abrirPanelInformacionObjetoBeneficio(pnlPeli1, objeto, membresia);
+            }
+        });
+    }
+    
+    // Ícono genérico dibujado
+    private static class IconoBeneficioGenerico implements Icon {
+        private final int w, h;
+
+        public IconoBeneficioGenerico(int w, int h) {
+            this.w = w;
+            this.h = h;
+        }
+        
+         @Override public int getIconWidth() { return w; }
+        @Override public int getIconHeight() { return h; }
+
+        @Override
+        public void paintIcon(Component c, Graphics g, int x, int y) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            int pad = 6;
+            int boxW = w - 2 * pad;
+            int boxH = h - 2 * pad - 12;
+            int boxX = x + pad;
+            int boxY = y + pad + 12;
+
+            g2.setColor(new Color(230, 230, 230));
+            g2.fillRoundRect(boxX, boxY - 12, boxW, 12, 6, 6);
+
+            g2.setColor(new Color(240, 240, 240));
+            g2.fillRoundRect(boxX, boxY, boxW, boxH, 8, 8);
+
+            g2.setColor(new Color(60, 120, 220));
+            g2.fillRect(boxX + boxW / 2 - 6, boxY - 12, 12, boxH + 12);
+            g2.fillRect(boxX, boxY + boxH / 2 - 6, boxW, 12);
+
+            g2.setStroke(new BasicStroke(2f));
+            g2.setColor(new Color(60, 120, 220));
+            int centerX = boxX + boxW / 2;
+            int centerY = boxY - 6;
+            g2.drawOval(centerX - 10, centerY - 10, 10, 10);
+            g2.drawOval(centerX, centerY - 10, 10, 10);
+
+            g2.dispose();
+        }
+    }
+    
+   private void actualizarCartelera() {
+    List<ObjetoBeneficioDTO> beneficios = ControlCanjearBeneficios.getInstance()
+        .obtenerObjetosDisponiblesPorMembresia(membresia);
+
+    cargarBeneficios(beneficios);
+    }
+   
+
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -299,127 +431,29 @@ public class PanelSeleccionBeneficio extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Método que se encarga de cargar la pantalla con las películas
-     */
-    private void cargarObjetos(List<PeliculaDTO> peliculas) {
-        //TO DO: AQUÍ ES DONDE NOS COMUNICAMOS AL CONTROL PARA OBTENER LAS PELICULAS DEL SUBSISTEMA DE GESTION DE PELICULAS
-
-        for (int i = 0; i < etiquetasImagenes.size(); i++) {
-            JLabel lblImagen = etiquetasImagenes.get(i);
-            JLabel lblTitulo = etiquetasTitulo.get(i);
-
-            limpiarEtiquetas(lblImagen, lblTitulo);
-
-            if (i < peliculas.size()) {
-                PeliculaDTO peli = peliculas.get(i);
-                mostrarPeliculaEnEtiqueta(peli, lblImagen, lblTitulo);
-            }
-        }
-    }
-
-    /**
-     * Método que inicializa las referencias de dónde se mostrar la información
-     * de la película
-     */
-    private void inicializarReferencias() {
-        etiquetasImagenes = List.of(
-                lblImagenPeli1, lblImagenPeli2, lblImagenPeli3,
-                lblImagenPeli4, lblImagenPeli5, lblImagenPeli6
-        );
-
-        etiquetasTitulo = List.of(
-                lblTituloPeli1, lblTituloPeli2, lblTituloPeli3,
-                lblTituloPeli4, lblTituloPeli5, lblTituloPeli6
-        );
-    }
-
-    /**
-     * Método para limpiar las etiquetas dónde irá la información de las
-     * peliculas
-     *
-     * @param lblImagen etiqueta dónde va la imagen de la película
-     * @param lblTitulo etiqueta donde va el título de la película
-     */
-    private void limpiarEtiquetas(JLabel lblImagen, JLabel lblTitulo) {
-        lblImagen.setIcon(null);
-        lblImagen.setText("");
-        lblTitulo.setText("");
-    }
-
-    /**
-     * Configura el título, imagen y eventos del click sobre una película
-     *
-     * @param peli la dto de la película a configurar
-     * @param lblImagen etiqueta en dónde se configurará la imagen
-     * @param lblTitulo etiqueta en dónde se configurará el título
-     */
-    private void mostrarPeliculaEnEtiqueta(PeliculaDTO peli, JLabel lblImagen, JLabel lblTitulo) {
-        configurarTitulo(lblTitulo, peli.getTitulo());
-        configurarImagen(lblImagen, peli.getRutaImagen());
-        configurarEventoClick(lblImagen, peli);
-    }
-
-    /**
-     * Formatea el título de las películas en las etiquetas
-     *
-     * @param lblTitulo etiqueta dónde va el título de la película
-     * @param titulo el título que se pondrá en la etiqueta
-     */
-    private void configurarTitulo(JLabel lblTitulo, String titulo) {
-        lblTitulo.setText(titulo.toUpperCase());
-        lblTitulo.setForeground(new Color(204, 204, 204));
-    }
-
-    /**
-     * Carga y escala la imagen de las guardadas en recursos
-     *
-     * @param lblImagen etiqueta dónde va la imagen de la película
-     * @param rutaImagen path del nombre del archivo de la imagen
-     */
-    private void configurarImagen(JLabel lblImagen, String rutaImagen) {
-        lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
-        lblImagen.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        URL url = getClass().getResource("/ImagenesPeliculas/" + rutaImagen);
-        if (url != null) {
-            ImageIcon icon = new ImageIcon(url);
-            Image img = icon.getImage().getScaledInstance(165, 229, Image.SCALE_SMOOTH);
-            lblImagen.setIcon(new ImageIcon(img));
-        } else {
-            lblImagen.setText("🎬");
-            lblImagen.setForeground(new Color(204, 204, 204));
-        }
-    }
-
-    /**
-     * Asocia evento de los clicks sobre la imagen de la película electa
-     *
-     * @param lblImagen etiqueta de la película que es de donde escuchará el
-     * click
-     * @param peli se envía el dto para posteriores configuraciones
-     */
-    private void configurarEventoClick(JLabel lblImagen, PeliculaDTO pelicula) {
-        lblImagen.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                ControlPantallas.getInstance().abrirSeleccionFunciones(PanelSeleccionBeneficio.this, pelicula);
-            }
-        });
-    }
+    
+    
+    
     
 
+//            // Cargar ícono genérico
+//            ImageIcon icono = new ImageIcon(new URL(
+//                "https://copilot.microsoft.com/th/id/BCO.e3ffa59c-d729-4b56-b00d-e13355e9d361.png"
+           
+   
 
-    private void actualizarObjetosMostrados() {
-        
-//        int pagina = panelPaginacion1.getPaginaActual();  
-//        int tamano = panelPaginacion1.getTamanoPagina();     
-//
-//        
-//
-//        List<PeliculaDTO> peliculas = ControlVentaBoleto.getInstance().obtenerCartelera(filtro);
-//        cargarObjetos(peliculas);
-    }
+
+
+
+
+
+
+
+
+   
+
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblImagenPeli1;
@@ -450,3 +484,8 @@ public class PanelSeleccionBeneficio extends javax.swing.JPanel {
     private javax.swing.JPanel pnlPeli6;
     // End of variables declaration//GEN-END:variables
 }
+
+
+
+
+

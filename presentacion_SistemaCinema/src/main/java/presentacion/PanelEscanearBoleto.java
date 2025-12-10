@@ -30,6 +30,7 @@ import itson.infraestructura_lectorqr.ILectorQR;
 import itson.infraestructura_lectorqr.LectorQR;
 import presentacion.controles.ControlReagendarBoleto;
 import dto.enums.EstadoBoleto;
+import presentacion.controles.ControlEscanearQr;
 
 /**
  *
@@ -155,7 +156,7 @@ public class PanelEscanearBoleto extends javax.swing.JPanel {
                 }
                 webcam = null;
             }
-            WebcamPanel camPanel = ControlReagendarBoleto.getInstance().getPanelCamara();
+            WebcamPanel camPanel = ControlEscanearQr.getInstance().getPanelCamara();
             if (camPanel == null) {
                 JOptionPane.showMessageDialog(this, "No se encontró cámara.");
                 return;
@@ -185,14 +186,14 @@ public class PanelEscanearBoleto extends javax.swing.JPanel {
             return;
         }
         try {
-            BoletoDTO boleto = ControlReagendarBoleto.getInstance().buscarBoletoPorId(txtBuscadorFolio.getText());
+            BoletoDTO boleto = ControlEscanearQr.getInstance().buscarBoletoPorId(txtBuscadorFolio.getText());
             
             if (boleto.getEstado().equals(EstadoBoleto.USADO)) {
                 JOptionPane.showMessageDialog(this, "El boleto ya ha sido escaneado anteriormente.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 return;
             } 
             boleto.setEstado(EstadoBoleto.USADO);
-            ControlReagendarBoleto.getInstance().actualizar(boleto);
+            ControlEscanearQr.getInstance().actualizar(boleto);
             JOptionPane.showMessageDialog(this, "Boleto escaneado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             return;
         } catch (Exception e) {

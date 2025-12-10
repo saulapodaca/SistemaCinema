@@ -17,7 +17,7 @@ public interface IGestorObjetosBeneficio {
     
     boolean actualizarStock(String idOB, int unidades_vendidas);
     
-    List<ObjetoBeneficioDTO> obtenerObjetosDisponiblesPorMembresia(Membresia membresia);
+    List<ObjetoBeneficioDTO> obtenerObjetosDisponiblesPorMembresia(MembresiaDTO membresia);
     
     
 }

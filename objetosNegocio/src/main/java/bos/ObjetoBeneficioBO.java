@@ -7,11 +7,16 @@ package bos;
 import daos.ObjetoBeneficioDAO;
 import dominio.Membresia;
 import dominio.ObjetoBeneficio;
+import dto.MembresiaDTO;
 import dto.ObjetoBeneficioDTO;
+import dto.enums.TipoMembresia;
+import exceptions.NegocioException;
 import interfaces.IObjetoBeneficioBO;
 import interfaces.IObjetoBeneficioDAO;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import mappers.MembresiaMapper;
 import mappers.ObjetoBeneficioMapper;
 
 
@@ -24,13 +29,15 @@ public class ObjetoBeneficioBO implements IObjetoBeneficioBO {
     
     public static ObjetoBeneficioBO instancia;
     
+    
     private final IObjetoBeneficioDAO OBJBENDAO;
     private final ObjetoBeneficioMapper OBJBENMapper;
-    
+    private final MembresiaMapper memmapper;
     
     private ObjetoBeneficioBO(){
         this.OBJBENDAO = new ObjetoBeneficioDAO();
         this.OBJBENMapper = new ObjetoBeneficioMapper();
+        this.memmapper = new MembresiaMapper();
     }
     
     
@@ -40,6 +47,14 @@ public class ObjetoBeneficioBO implements IObjetoBeneficioBO {
         }
         return instancia;
     }
+    
+   
+    
+    
+    
+    
+    
+    
     
     @Override
      public boolean actualizarStock(String idOB, int unidades_vendidas){
@@ -53,10 +68,12 @@ public class ObjetoBeneficioBO implements IObjetoBeneficioBO {
      }
     
     @Override
-     public List<ObjetoBeneficioDTO> obtenerObjetosDisponiblesPorMembresia(Membresia membresia){
+     public List<ObjetoBeneficioDTO> obtenerObjetosDisponiblesPorMembresia(MembresiaDTO membresia){
         
+         
         if (membresia != null && membresia.isActiva()) {
-            List<ObjetoBeneficio> entidades = OBJBENDAO.obtenerObjetosDisponiblesPorMembresia(membresia);
+            Membresia m = memmapper.toEntity(membresia);
+            List<ObjetoBeneficio> entidades = OBJBENDAO.obtenerObjetosDisponiblesPorMembresia(m);
             List<ObjetoBeneficioDTO> dtos = new ArrayList<>();
 
             // Convertir cada entidad a DTO 
