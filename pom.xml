@@ -6,7 +6,6 @@
     <version>1.0</version>
     <packaging>pom</packaging>
     <modules>
-        <module>dto_negocios</module>
         <module>persistencia</module>
         <module>objetosNegocio</module>
         <module>negocios_GestorEmpleados</module>
@@ -22,7 +21,9 @@
         <module>negocios_InicioSesion</module>
         <module>presentacion_SistemaCinema</module>
         <module>negocios_InsertMasivo</module>
-        <module>../../NetBeansProjects/negocios_GestorObjetosBeneficio</module>
+        <module>dto_negocios</module>
+        <module>negocios_GestorObjetosBeneficio</module>
+        <module>negocios_GestorCanjearBeneficios</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

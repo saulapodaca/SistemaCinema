@@ -28,6 +28,7 @@ import presentacion.utilerias.GestorSesion;
  *
  * @author saula
  */
+
 public class PanelInformacionObjetoBeneficio extends javax.swing.JPanel {
 
     private ObjetoBeneficioDTO objeto;
