@@ -19,13 +19,22 @@ import itson.negocios_gestorventas.IGestorVentas;
  * @author saula
  */
 public interface IGestorFactory {
+
     IGestorPeliculas crearGestorPeliculas();
+
     IGestorFunciones crearGestorFunciones();
+
     IGestorEmpleados crearGestorEmpleados();
+
     IGestorMembresias crearGestorMembresias();
+
     IGestorVentas crearGestorVentas();
+
     IGestorBoletos crearGestorBoletos();
+
     IGeneradorQR crearGeneradorQR();
+
     ICorreoElectronico crearCorreoElectronico();
+
     IGestorPromociones crearGestorPromociones();
 }
