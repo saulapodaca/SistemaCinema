@@ -20,8 +20,11 @@
         <module>negocios_GestorFunciones</module>
         <module>negocios_VenderBoleto</module>
         <module>negocios_InicioSesion</module>
-        <module>presentacion_SistemaCinema</module>
         <module>negocios_InsertMasivo</module>
+        <module>negocios_VenderCombos</module>
+        <module>negocios_GestorCombos</module>
+        <module>negocios_GestorRecibosCombos</module>
+        <module>presentacion_SistemaCinema</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
