@@ -5,11 +5,15 @@
 package itson.negocios_correoelectronico;
 
 import dto.BoletoDTO;
+import dto.ReciboAlimentoDTO;
 
 /**
  *
  * @author saula
  */
 public interface ICorreoElectronico {
+    
     void enviarBoleto(String correoDestino, BoletoDTO boleto);
+    
+    void enviarRecibo(String correoDestino, ReciboAlimentoDTO recibo);
 }
